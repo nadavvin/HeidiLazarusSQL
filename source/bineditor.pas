@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Classes, Graphics, Forms, Controls, StdCtrls, VirtualTrees,
-  ComCtrls, ToolWin, Dialogs, SysUtils, gnugettext, extra_controls;
+  ComCtrls, ToolWin, Dialogs, SysUtils, {gnugettext, }extra_controls;
 
 {$I const.inc}
 

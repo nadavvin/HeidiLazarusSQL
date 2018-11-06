@@ -5,12 +5,16 @@ interface
 uses
   Windows, Classes, Graphics, Forms, Controls, StdCtrls, VirtualTrees,
   ComCtrls, ToolWin, Dialogs, SysUtils, Menus, ExtDlgs,
-  apphelpers, gnugettext, ActnList, StdActns, extra_controls, System.Actions,
-  Vcl.ExtCtrls;
+  apphelpers, {gnugettext, }ActnList, StdActns, extra_controls, {System.Actions,}
+  {Vcl.}ExtCtrls;
 
 {$I const.inc}
 
 type
+  TLineNormalizingMemo = class
+
+  end;
+
   TfrmTextEditor = class(TFormWithSizeGrip)
     Panel1: TPanel;
     tlbStandard: TToolBar;

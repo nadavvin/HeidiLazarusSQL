@@ -12,7 +12,7 @@ uses
   Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ComCtrls, ExtCtrls, SynEditHighlighter, SynHighlighterSQL,
   SynEdit, SynMemo, VirtualTrees, SynEditKeyCmds, ActnList, SynEditMiscClasses, StdActns, Menus,
-  mysql_structures, gnugettext, Vcl.Themes, Vcl.Styles;
+  mysql_structures, {gnugettext, Vcl.}Themes{, Vcl.Styles};
 
 type
   TShortcutItemData = record
@@ -21,6 +21,13 @@ type
     Shortcut1, Shortcut2: TShortcut;
   end;
   PShortcutItemData = ^TShortcutItemData;
+
+  TSynHotKey = class
+
+  end;
+
+  TButtonedEdit = TButton;
+  TColorBox = TColorButton;
 
   Toptionsform = class(TForm)
     pagecontrolMain: TPageControl;
@@ -198,7 +205,7 @@ type
   end;
 
 
-function EnumFixedProc(lpelf: PEnumLogFont; lpntm: PNewTextMetric; FontType: Integer; Data: LPARAM): Integer; stdcall;
+{function EnumFixedProc(lpelf: PEnumLogFont; lpntm: PNewTextMetric; FontType: Integer; Data: LPARAM): Integer; stdcall;}
 
 
 implementation

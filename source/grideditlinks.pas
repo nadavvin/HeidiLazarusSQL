@@ -6,11 +6,12 @@ interface
 
 uses
   Windows, Forms, Graphics, Messages, VirtualTrees, ComCtrls, SysUtils, Classes,
-  StdCtrls, ExtCtrls, CheckLst, Controls, Types, Dialogs, Menus, Mask, DateUtils, Math,
-  dbconnection, mysql_structures, apphelpers, texteditor, bineditor, gnugettext,
-  StrUtils, System.UITypes, SynRegExpr;
+  StdCtrls, ExtCtrls, CheckLst, Controls, Types, Dialogs, Menus, Masks, DateUtils, Math,
+  dbconnection, mysql_structures, apphelpers, texteditor, bineditor, {gnugettext,}
+  StrUtils, {System.}UITypes{, SynRegExpr}, MaskEdit, EditBtn, gettext, LCLType;
 
 type
+  TButtonedEdit = TEditButton;
   // Radio buttons and checkboxes which do not pass <Enter> key to their parent control
   // so a OnKeyDown event using <Enter> has the chance to end editing.
   TAllKeysRadioButton = class(TRadioButton)
@@ -197,6 +198,8 @@ type
     procedure SetBounds(R: TRect); override;
   end;
 
+  const DLGC_WANTALLKEYS=0;
+
 
 
 implementation
@@ -218,7 +221,7 @@ end;
 
 constructor TBaseGridEditorLink.Create;
 begin
-  raise Exception.CreateFmt(_('Wrong constructor called: %s.%s. Instead, please call the overloaded version %s.%s.'),
+  raise Exception.CreateFmt('Wrong constructor called: %s.%s. Instead, please call the overloaded version %s.%s.',
     [Self.ClassName, 'Create', Self.ClassName, 'Create(VirtualStringTree)']);
 end;
 
@@ -231,7 +234,7 @@ begin
   FParentForm := GetParentForm(FTree);
   // Avoid flicker
   FParentForm.Repaint;
-  SendMessage(FParentForm.Handle, WM_SETREDRAW, 0, 0);
+  {SendMessage(FParentForm.Handle, WM_SETREDRAW, 0, 0);}
   FModified := False;
 end;
 
@@ -297,13 +300,13 @@ begin
   end;
   // Adjust editor position and allow repainting mainform  
   SetBounds(FCellTextBounds);
-  SendMessage(FParentForm.Handle, WM_SETREDRAW, 1, 0);
+  {SendMessage(FParentForm.Handle, WM_SETREDRAW, 1, 0);}
 end;
 
 function TBaseGridEditorLink.BeginEdit: Boolean;
 begin
   Result := not FStopping;
-  FBeginEditTime := GetTickCount;
+  {FBeginEditTime := GetTickCount;}
 end;
 
 function TBaseGridEditorLink.CancelEdit: Boolean;

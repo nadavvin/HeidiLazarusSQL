@@ -4,8 +4,8 @@ interface
 
 uses
   Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, StdCtrls,
-  ComCtrls, ToolWin, VirtualTrees, SynRegExpr, ActiveX, ExtCtrls, SynEdit,
-  SynMemo, Menus, Clipbrd, Math, System.UITypes,
+  ComCtrls, ToolWin, VirtualTrees, SynRegExpr, {ActiveX, }ExtCtrls, SynEdit,
+  SynMemo, Menus, Clipbrd, Math, {System.}UITypes,
   grideditlinks, mysql_structures, dbconnection, apphelpers, gnugettext;
 
 type

@@ -3,12 +3,13 @@ unit event_editor;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, EditBtn,
   Dialogs, StdCtrls, SynEdit, SynMemo, SynRegExpr, ComCtrls, ExtCtrls, WideStrUtils,
   apphelpers, dbconnection{, gnugettext};
 
 type
   TFrame = TDBObjectEditor;
+  TDateTimePicker = TDateEdit;
   TfrmEventEditor = class(TFrame)
     SynMemoBody: TSynMemo;
     btnHelp: TButton;
