@@ -3,9 +3,9 @@ unit trigger_editor;
 interface
 
 uses
-  Windows, SysUtils, Classes, Controls, Forms, Dialogs, StdCtrls, SynEdit, SynMemo,
-  SynCompletionProposal, SynRegExpr,
-  dbconnection, mysql_structures, apphelpers, gnugettext, ComCtrls;
+  Windows, SysUtils, Classes, Controls, Forms, Graphics, Dialogs, StdCtrls, SynEdit, SynMemo,
+  SynCompletion{Proposal, SynRegExpr},
+  dbconnection, mysql_structures, apphelpers, {gnugettext,} ComCtrls;
 
 type
   TFrame = TDBObjectEditor;
@@ -15,7 +15,7 @@ type
     btnDiscard: TButton;
     btnSave: TButton;
     lblBody: TLabel;
-    SynCompletionProposalStatement: TSynCompletionProposal;
+    SynCompletionProposalStatement: TSynCompletion{Proposal};
     PageControlMain: TPageControl;
     tabOptions: TTabSheet;
     tabCreateCode: TTabSheet;
@@ -33,8 +33,8 @@ type
     procedure btnDiscardClick(Sender: TObject);
     procedure Modification(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
-    procedure SynCompletionProposalStatementExecute(Kind: SynCompletionType; Sender: TObject;
-      var CurrentInput: String; var x, y: Integer; var CanExecute: Boolean);
+    {procedure SynCompletionProposalStatementExecute(Kind: SynCompletionType; Sender: TObject;
+      var CurrentInput: String; var x, y: Integer; var CanExecute: Boolean);}
     procedure comboDefinerDropDown(Sender: TObject);
     procedure comboChange(Sender: TObject);
   private
