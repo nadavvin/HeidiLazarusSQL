@@ -11,9 +11,10 @@ interface
 uses
   Windows, SysUtils, Classes, Controls, Forms, Dialogs, StdCtrls, ComCtrls, CheckLst,
   SynRegExpr, Buttons, ExtCtrls, ToolWin, ExtDlgs, Math, extra_controls,
-  dbconnection, mysql_structures, gnugettext;
+  dbconnection, mysql_structures, gnugettext2, EditBtn;
 
 type
+  TButtonedEdit = TEditButton;
   Tloaddataform = class(TFormWithSizeGrip)
     btnImport: TButton;
     btnCancel: TButton;

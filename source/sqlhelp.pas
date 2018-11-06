@@ -4,15 +4,16 @@ interface
 
 uses
   Windows, SysUtils, Classes, Controls, Forms, Dialogs, StdCtrls, ComCtrls, ExtCtrls,
-  Buttons, SynMemo, SynEditHighlighter, SynHighlighterURI, extra_controls,
-  SynURIOpener, SynEdit, VirtualTrees, Graphics,
-  dbconnection, gnugettext;
+  Buttons, SynMemo, SynEditHighlighter, {SynHighlighterURI,} extra_controls,
+  {SynURIOpener,} SynEdit, VirtualTrees, Graphics,
+  dbconnection, gnugettext2, EditBtn;
 
 type
+  TButtonedEdit = TEditButton;
   TfrmSQLhelp = class(TFormWithSizeGrip)
-    URIOpenerDescription: TSynURIOpener;
-    URIHighlighter: TSynURISyn;
-    URIOpenerExample: TSynURIOpener;
+    {URIOpenerDescription: TSynURIOpener;
+    {URIHighlighter: TSynURISyn;
+    URIOpenerExample: TSynURIOpener;}
     btnSearchOnline: TButton;
     ButtonClose: TButton;
     pnlMain: TPanel;

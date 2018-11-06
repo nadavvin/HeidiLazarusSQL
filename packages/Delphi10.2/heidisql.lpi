@@ -44,7 +44,7 @@
         <PackageName Value="LCL"/>
       </Item5>
     </RequiredPackages>
-    <Units Count="39">
+    <Units Count="40">
       <Unit0>
         <Filename Value="heidisql.dpr"/>
         <IsPartOfProject Value="True"/>
@@ -232,6 +232,10 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="SynRegExpr"/>
       </Unit38>
+      <Unit39>
+        <Filename Value="../../source/gnugettext2.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit39>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

@@ -10,10 +10,11 @@ interface
 
 uses
   Windows, SysUtils, Classes, Controls, Forms, Dialogs, StdCtrls, ExtCtrls, ComCtrls,
-  VirtualTrees, Menus, Graphics, Generics.Collections, ActiveX, extra_controls, Messages,
-  dbconnection, gnugettext;
+  VirtualTrees, Menus, Graphics, Generics.Collections, {ActiveX,} extra_controls, Messages,
+  dbconnection, gnugettext2, EditBtn;
 
 type
+  TButtonedEdit = TEditButton;
   Tconnform = class(TFormWithSizeGrip)
     btnCancel: TButton;
     btnOpen: TButton;
@@ -157,9 +158,9 @@ type
     procedure ListSessionsDragOver(Sender: TBaseVirtualTree; Source: TObject;
       Shift: TShiftState; State: TDragState; Pt: TPoint; Mode: TDropMode;
       var Effect: Integer; var Accept: Boolean);
-    procedure ListSessionsDragDrop(Sender: TBaseVirtualTree; Source: TObject;
+    {procedure ListSessionsDragDrop(Sender: TBaseVirtualTree; Source: TObject;
       DataObject: IDataObject; Formats: TFormatArray; Shift: TShiftState;
-      Pt: TPoint; var Effect: Integer; Mode: TDropMode);
+      Pt: TPoint; var Effect: Integer; Mode: TDropMode);}
     procedure btnMoreClick(Sender: TObject);
     procedure menuRenameClick(Sender: TObject);
   private
@@ -177,8 +178,8 @@ type
     procedure ValidateControls;
     function NodeSessionNames(Node: PVirtualNode; var RegKey: String): TStringList;
     procedure MenuDatabasesClick(Sender: TObject);
-    procedure WMNCLBUTTONDOWN(var Msg: TWMNCLButtonDown) ; message WM_NCLBUTTONDOWN;
-    procedure WMNCLBUTTONUP(var Msg: TWMNCLButtonUp) ; message WM_NCLBUTTONUP;
+    {procedure WMNCLBUTTONDOWN(var Msg: TWMNCLButtonDown) ; message WM_NCLBUTTONDOWN;
+    procedure WMNCLBUTTONUP(var Msg: TWMNCLButtonUp) ; message WM_NCLBUTTONUP;}
   public
     { Public declarations }
   end;

@@ -5,7 +5,7 @@ interface
 
 uses
   Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, StdCtrls, extra_controls,
-  dbconnection, VirtualTrees, SynEdit, SynMemo, Menus, gnugettext;
+  dbconnection, VirtualTrees, SynEdit, SynMemo, Menus, gnugettext2;
 
 type
   TCopyTableForm = class(TFormWithSizeGrip)

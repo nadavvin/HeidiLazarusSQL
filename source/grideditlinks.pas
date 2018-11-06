@@ -7,8 +7,8 @@ interface
 uses
   Windows, Forms, Graphics, Messages, VirtualTrees, ComCtrls, SysUtils, Classes,
   StdCtrls, ExtCtrls, CheckLst, Controls, Types, Dialogs, Menus, Masks, DateUtils, Math,
-  dbconnection, mysql_structures, apphelpers, texteditor, bineditor, {gnugettext,}
-  StrUtils, {System.}UITypes{, SynRegExpr}, MaskEdit, EditBtn, gettext, LCLType;
+  dbconnection, mysql_structures, apphelpers, texteditor, bineditor, gnugettext2,
+  StrUtils, {System.}UITypes{, SynRegExpr}, RegExpr ,MaskEdit, EditBtn, gettext, LCLType;
 
 type
   TButtonedEdit = TEditButton;
@@ -514,7 +514,8 @@ begin
 
   FUpDown := TUpDown.Create(FPanel);
   FUpDown.Parent := FPanel;
-  FUpDown.OnChangingEx := UpDownChangingEx;
+  {FUpDown.OnChangingEx := UpDownChangingEx;}
+  {grideditlinks.pas(517,27) Error: Incompatible types: got "TDateTimeEditorLink.UpDownChangingEx(TObject;var Boolean;LongInt;TUpDownDirection);" expected "<procedure variable type of procedure(TObject;var Boolean;SmallInt;TUpDownDirection) of object;Register>"}
   FUpDown.OnMouseUp := UpDownMouseUp;
 
   FTimer := TTimer.Create(FMaskEdit);
@@ -1180,7 +1181,7 @@ begin
   FPanel.Width := 200;
   FPanel.ParentBackground := False;
   FPanel.Color := GetThemeColor(clWindow);
-  FPanel.BevelKind := bkFlat;
+  {FPanel.BevelKind := bkFlat;}
   FPanel.BevelOuter := bvNone;
   FMainControl := FPanel;
 
@@ -1211,8 +1212,8 @@ begin
   FCustomEdit.Width := FCustomEdit.Parent.Width - FCustomEdit.Left - m;
   FCustomEdit.OnChange := CustomEditChange;
   FCustomEdit.Images := Tree.Images;
-  FCustomEdit.RightButton.ImageIndex := 75; // Drop down arrow
-  FCustomEdit.RightButton.DropDownMenu := FCustomDropDown;
+  {FCustomEdit.RightButton.ImageIndex := 75; // Drop down arrow
+  FCustomEdit.RightButton.DropDownMenu := FCustomDropDown;}
 
   FRadioNull := TAllKeysRadioButton.Create(FPanel);
   FRadioNull.Parent := FPanel;
@@ -1318,7 +1319,7 @@ begin
 
   // Provide items with a check mark for ENUM and SET columns
   if FTableColumn.DataType.Index in [dtEnum, dtSet] then begin
-    FCustomEdit.RightButton.Visible := True;
+    {FCustomEdit.RightButton.Visible := True;}
     ValueList := FTableColumn.ValueList;
     SelectedValues := Explode(',', FCustomEdit.Text);
 
@@ -1477,8 +1478,8 @@ begin
   FTreeSelect.Parent := FParentForm;
   FTreeSelect.TextMargin := 0;
   FTreeSelect.BorderStyle := bsNone;
-  FTreeSelect.BevelKind := bkFlat;
-  FTreeSelect.BevelInner := bvNone;
+  {FTreeSelect.BevelKind := bkFlat;
+  FTreeSelect.BevelInner := bvNone;}
   FTreeSelect.IncrementalSearch := isAll;
   FTreeSelect.RootNodeCount := Length(DatatypeCategories);
   FTreeSelect.OnGetText := DoTreeSelectGetText;
@@ -1498,8 +1499,8 @@ begin
   FMemoHelp.Color := GetThemeColor(clInfoBk);
   FMemoHelp.Font.Color := GetThemeColor(clInfoText);
   FMemoHelp.BorderStyle := bsNone;
-  FMemoHelp.BevelKind := bkFlat;
-  FMemoHelp.BevelInner := bvNone;
+  {FMemoHelp.BevelKind := bkFlat;
+  FMemoHelp.BevelInner := bvNone;}
 end;
 
 
@@ -1581,7 +1582,7 @@ begin
   TreeHeight := Min(250, FParentForm.ClientHeight-CellRect.Top-10);
   FTreeSelect.SetBounds(CellRect.Left,
     CellRect.Top,
-    FTreeSelect.Header.Columns[0].Width + GetSystemMetrics(SM_CXVSCROLL) + 5,
+    FTreeSelect.Header.Columns[0].Width {+ GetSystemMetrics(SM_CXVSCROLL)} + 5,
     TreeHeight);
 end;
 
@@ -1653,7 +1654,7 @@ begin
     bmp := TBitMap.Create;
     bmp.Canvas.Font.Assign(FMemoHelp.Font);
     R := Rect(0, 0, FMemoHelp.Width-10, 0);
-    DrawText(bmp.Canvas.Handle, PChar(FMemoHelp.Text), Length(FMemoHelp.Text), R, DT_WORDBREAK or DT_CALCRECT);
+    {DrawText(bmp.Canvas.Handle, PChar(FMemoHelp.Text), Length(FMemoHelp.Text), R, DT_WORDBREAK or DT_CALCRECT);}
     FreeAndNil(bmp);
     FMemoHelp.Height := R.Bottom + 2;
     FMemoHelp.Show;

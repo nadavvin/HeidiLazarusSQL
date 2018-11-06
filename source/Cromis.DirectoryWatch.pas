@@ -104,7 +104,7 @@ type
     FWatchSubTree : Boolean;
     FWatchThread  : TThread;
     FBufferSize   : Integer;
-    FWndHandle    : HWND;
+    {FWndHandle    : HWND;}
     FDirectory    : string;
     FAbortEvent   : THandle;
     FOnError      : TOnError;
@@ -115,7 +115,7 @@ type
     procedure SetWatchOptions(const Value: TWatchOptions);
     procedure SetWatchActions(const Value: TWatchActions);
     procedure SetWatchSubTree(const Value: Boolean);
-    procedure DeallocateHWnd(Wnd: HWND);
+    {procedure DeallocateHWnd(Wnd: HWND);}
     function MakeFilter: Integer;
   protected
     procedure Change; virtual;
@@ -157,6 +157,7 @@ type
   end;
 
 const
+  WM_USER = 1234;
   WM_DIRWATCH_ERROR    = WM_USER + 137;
   WM_DIRWATCH_NOTIFY   = WM_USER + 138;
 
@@ -174,7 +175,7 @@ type
     FAbortEvent   : THandle;
     FChangeEvent  : THandle;
     FBufferSize   : Integer;
-    FWndHandle    : HWND;
+    {FWndHandle    : HWND;}
     FDirHandle    : THandle;
     FDirectory    : string;
     FIOResult     : Pointer;
@@ -184,7 +185,7 @@ type
     procedure Execute; override;
   public
     constructor Create(const Directory: string;
-                       const WndHandle: HWND;
+                       {const WndHandle: HWND;}
                        const BufferSize: Integer;
                        const AbortEvent: THandle;
                        const TypeFilter: Cardinal;

@@ -4,8 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Controls, Forms, Dialogs, StdCtrls,
-  ShellApi, Math, Graphics, ComCtrls, ToolWin, extra_controls,
-  dbconnection, mysql_structures, VirtualTrees, grideditlinks, SynRegExpr, gnugettext, apphelpers;
+  {ShellApi, }Math, Graphics, ComCtrls, ToolWin, extra_controls,
+  dbconnection, mysql_structures, VirtualTrees, grideditlinks, {SynRegExpr,} gnugettext2, apphelpers;
 
 type
   TColInfo = class

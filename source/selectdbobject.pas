@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Classes, Controls, Forms, StdCtrls, VirtualTrees, Graphics, extra_controls,
-  dbconnection, gnugettext;
+  dbconnection, gnugettext2;
 
 type
   TfrmSelectDBObject = class(TFormWithSizeGrip)

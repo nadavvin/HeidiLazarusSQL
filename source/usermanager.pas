@@ -6,13 +6,14 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, ComCtrls, StdCtrls,
   ExtCtrls, ToolWin, ClipBrd, Generics.Collections, Generics.Defaults, SynRegExpr, extra_controls,
-  dbconnection, apphelpers, VirtualTrees, Menus, gnugettext;
+  dbconnection, apphelpers, VirtualTrees, Menus, gnugettext2, EditBtn;
 
 {$I const.inc}
 
 
 type
   TUserProblem = (upNone, upEmptyPassword, upInvalidPasswordLen, upSkipNameResolve, upUnknown);
+  TButtonedEdit = TEditButton;
 
   TUser = class(TObject)
     Username, Host, Password, Cipher, Issuer, Subject: String;
@@ -34,9 +35,10 @@ type
       destructor Destroy; override;
   end;
   TPrivObjList = TObjectList<TPrivObj>;
-  TPrivComparer = class(TComparer<TPrivObj>)
+  {TPrivComparer = class(TComparer<TPrivObj>)
     function Compare(const Left, Right: TPrivObj): Integer; override;
-  end;
+  end;}
+  {usermanager.pas(38,14) Error: function header doesn't match the previous declaration "Compare(const TPrivObj;const TPrivObj):LongInt;"}
 
   EInputError = class(Exception);
 

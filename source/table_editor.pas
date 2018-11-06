@@ -6,7 +6,7 @@ uses
   Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, StdCtrls,
   ComCtrls, ToolWin, VirtualTrees, SynRegExpr, {ActiveX, }ExtCtrls, SynEdit,
   SynMemo, Menus, Clipbrd, Math, {System.}UITypes,
-  grideditlinks, mysql_structures, dbconnection, apphelpers, gnugettext;
+  grideditlinks, mysql_structures, dbconnection, apphelpers, gnugettext2;
 
 type
   TFrame = TDBObjectEditor;
@@ -100,8 +100,8 @@ type
     procedure btnMoveDownColumnClick(Sender: TObject);
     procedure listColumnsDragOver(Sender: TBaseVirtualTree; Source: TObject; Shift: TShiftState; State: TDragState;
 		  Pt: TPoint; Mode: TDropMode; var Effect: Integer; var Accept: Boolean);
-    procedure listColumnsDragDrop(Sender: TBaseVirtualTree; Source: TObject; DataObject: IDataObject; Formats: TFormatArray;
-		  Shift: TShiftState; Pt: TPoint; var Effect: Integer; Mode: TDropMode);
+    {procedure listColumnsDragDrop(Sender: TBaseVirtualTree; Source: TObject; DataObject: IDataObject; Formats: TFormatArray;
+		  Shift: TShiftState; Pt: TPoint; var Effect: Integer; Mode: TDropMode);}
     procedure listColumnsPaintText(Sender: TBaseVirtualTree; const TargetCanvas: TCanvas; Node: PVirtualNode;
 		  Column: TColumnIndex; TextType: TVSTTextType);
     procedure listColumnsCreateEditor(Sender: TBaseVirtualTree; Node: PVirtualNode; Column: TColumnIndex; out EditLink: IVTEditLink);
@@ -127,9 +127,9 @@ type
     procedure treeIndexesDragOver(Sender: TBaseVirtualTree; Source: TObject;
       Shift: TShiftState; State: TDragState; Pt: TPoint; Mode: TDropMode;
       var Effect: Integer; var Accept: Boolean);
-    procedure treeIndexesDragDrop(Sender: TBaseVirtualTree; Source: TObject;
+    {procedure treeIndexesDragDrop(Sender: TBaseVirtualTree; Source: TObject;
       DataObject: IDataObject; Formats: TFormatArray; Shift: TShiftState;
-      Pt: TPoint; var Effect: Integer; Mode: TDropMode);
+      Pt: TPoint; var Effect: Integer; Mode: TDropMode);}
     procedure treeIndexesNewText(Sender: TBaseVirtualTree; Node: PVirtualNode; Column: TColumnIndex; NewText: String);
     procedure treeIndexesEditing(Sender: TBaseVirtualTree; Node: PVirtualNode; Column: TColumnIndex; var Allowed: Boolean);
     procedure treeIndexesFocusChanged(Sender: TBaseVirtualTree; Node: PVirtualNode; Column: TColumnIndex);

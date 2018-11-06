@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Controls, Forms, Dialogs, StdCtrls,
-  ExtCtrls, SynMemo, SynEditTypes, gnugettext, VirtualTrees, SynRegExpr,
+  ExtCtrls, SynMemo, SynEditTypes, gnugettext2, VirtualTrees, SynRegExpr,
   SynEditRegexSearch, SynEditMiscClasses, SynEditSearch, extra_controls;
 
 type
