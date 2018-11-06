@@ -17,3 +17,10 @@ __recovery
 *.mo
 *.po
 *.res
+components/synedit/
+components/virtualtreeview/
+*.log
+packages/Delphi10.2/ConverterBackup/
+packages/Delphi10.2/backup/
+packages/Delphi10.2/lib/
+source/backup/
