@@ -1,11 +1,12 @@
+{$Mode delphi}
 unit dbconnection;
 
 interface
 
 uses
-  Classes, SysUtils, windows, mysql_structures, SynRegExpr, Generics.Collections, Generics.Defaults,
-  DateUtils, Types, Math, Dialogs, ADODB, DB, DBCommon, ComObj, Graphics, ExtCtrls, StrUtils,
-  gnugettext, AnsiStrings, Controls, Forms;
+  Classes, SysUtils, windows, mysql_structures, {SynRegExpr, }Generics.Collections, Generics.Defaults,
+  DateUtils, Types, Math, Dialogs, {ADODB,} DB, {DBCommon, ComObj,} Graphics, ExtCtrls, StrUtils, sqldb,
+  {gnugettext, AnsiStrings,} Controls, Forms;
 
 
 type
@@ -76,12 +77,12 @@ type
       property OnlyNodeType: TListNodeType read FOnlyNodeType;
   end;
   TDatabaseCache = class(TObjectList<TDBObjectList>); // A list of db object lists, used for caching
-  TDBObjectComparer = class(TComparer<TDBObject>)
+  {TDBObjectComparer = class(TComparer<TDBObject>)
     function Compare(const Left, Right: TDBObject): Integer; override;
   end;
   TDBObjectDropComparer = class(TComparer<TDBObject>)
     function Compare(const Left, Right: TDBObject): Integer; override;
-  end;
+  end;}
 
   // General purpose editing status flag
   TEditingStatus = (esUntouched, esModified, esDeleted, esAddedUntouched, esAddedModified, esAddedDeleted);
@@ -168,6 +169,13 @@ type
 
   // Custom exception class for any connection or database related error
   EDatabaseError = class(Exception);
+
+  //
+  TProcessInformation = class
+
+  end;
+
+  ///
 
   // PLink.exe related
   TProcessPipe = class(TObject)
@@ -450,6 +458,13 @@ type
   end;
   TDBConnectionList = TObjectList<TDBConnection>;
 
+  ////
+
+  FARPROC = class
+
+  end;
+
+  ////
 
   { TMySQLConnection }
 
@@ -486,6 +501,16 @@ type
       function MaxAllowedPacket: Int64; override;
       function ExplainAnalyzer(SQL, DatabaseName: String): Boolean; override;
   end;
+
+  ///
+  _RecordSet = record
+
+  end;
+
+  TAdoConnection = record
+
+  end;
+  ///
 
   TAdoRawResults = Array of _RecordSet;
   TAdoDBConnection = class(TDBConnection)
@@ -658,6 +683,10 @@ type
       function TableName: String; override;
   end;
 
+  TAdoQuery = class
+
+  end;
+
   TAdoDBQuery = class(TDBQuery)
     private
       FCurrentResults: TAdoQuery;
@@ -705,8 +734,8 @@ function mysql_authentication_dialog_ask(
     buf_len: Integer
     ): PAnsiChar; cdecl;
 
-exports
-  mysql_authentication_dialog_ask;
+{exports
+  mysql_authentication_dialog_ask;}
 
 {$I const.inc}
 

@@ -7,7 +7,7 @@ unit About;
 interface
 
 uses
-  Windows, Classes, Graphics, Forms, Controls, StdCtrls, ExtCtrls, SysUtils, ComCtrls, pngimage, gnugettext,
+  {Windows,} Classes, Graphics, Forms, Controls, StdCtrls, ExtCtrls, SysUtils, ComCtrls, pngimage, gnugettext,
   Dialogs, SynRegExpr, Vcl.Menus, ClipBrd;
 
 type

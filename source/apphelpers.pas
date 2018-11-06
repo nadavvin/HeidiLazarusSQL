@@ -9,12 +9,12 @@ unit apphelpers;
 interface
 
 uses
-  Classes, SysUtils, Graphics, GraphUtil, ClipBrd, Dialogs, Forms, Controls, ShellApi,
-  Windows, ShlObj, ActiveX, VirtualTrees, SynRegExpr, Messages, Math,
-  Registry, DateUtils, Generics.Collections, StrUtils, AnsiStrings, TlHelp32, Types,
-  dbconnection, mysql_structures, SynMemo, Menus, WinInet, gnugettext, Themes,
-  Character, ImgList, System.UITypes, ActnList, WinSock, IOUtils, StdCtrls, ComCtrls,
-  CommCtrl, Vcl.Imaging.pngimage;
+  Classes, SysUtils, Graphics, GraphUtil, ClipBrd, Dialogs, Forms, Controls{, ShellApi},
+  {Windows, ShlObj, ActiveX,} VirtualTrees, {SynRegExpr,} Messages, Math,
+  Registry, DateUtils, Generics.Collections, StrUtils, {AnsiStrings, TlHelp32,} Types,
+  dbconnection, mysql_structures, SynMemo, Menus, {WinInet, gnugettext,} Themes,
+  Character, ImgList, {System.}UITypes, ActnList, {WinSock, IOUtils,} StdCtrls, ComCtrls{,}
+  {CommCtrl,} {Vcl.Imaging.pngimage};
 
 type
 
@@ -343,9 +343,9 @@ type
   procedure Help(Sender: TObject; Anchor: String);
   function PortOpen(Port: Word): Boolean;
   function IsValidFilePath(FilePath: String): Boolean;
-  function GetProductInfo(dwOSMajorVersion, dwOSMinorVersion, dwSpMajorVersion, dwSpMinorVersion: DWORD; out pdwReturnedProductType: DWORD): BOOL stdcall; external kernel32 delayed;
+  {function GetProductInfo(dwOSMajorVersion, dwOSMinorVersion, dwSpMajorVersion, dwSpMinorVersion: DWORD; out pdwReturnedProductType: DWORD): BOOL stdcall; external kernel32 delayed;}
   function RunningOnWindows10S: Boolean;
-  function GetCurrentPackageFullName(out Len: Cardinal; Name: PWideChar): Integer; stdcall; external kernel32 delayed;
+  {function GetCurrentPackageFullName(out Len: Cardinal; Name: PWideChar): Integer; stdcall; external kernel32 delayed;}
   function GetUwpFullName: String;
   function RunningAsUwp: Boolean;
   procedure ScaleImageList(const ImgList: TImageList; ScaleFactor: Real);

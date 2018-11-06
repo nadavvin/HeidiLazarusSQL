@@ -1,11 +1,12 @@
 program heidisql;
 
 uses
-  madExcept,
+  {madExcept,}
   Forms,
   SysUtils,
-  Dialogs,
-  Windows,
+  Dialogs, Interfaces,
+  Windows in '..\..\source\Windows.pas',
+  Libc in '..\..\source\Libc.pas',
   main in '..\..\source\main.pas' {MainForm},
   about in '..\..\source\about.pas' {AboutBox},
   connections in '..\..\source\connections.pas' {connform},
@@ -31,7 +32,7 @@ uses
   grideditlinks in '..\..\source\grideditlinks.pas',
   routine_editor in '..\..\source\routine_editor.pas' {frmRoutineEditor},
   table_editor in '..\..\source\table_editor.pas' {frmTableEditor},
-  dbconnection in '..\..\source\dbconnection.pas',
+  dbconnection in '..\..\source\my\dbconnection.pas',
   trigger_editor in '..\..\source\trigger_editor.pas' {frmTriggerEditor: TFrame},
   searchreplace in '..\..\source\searchreplace.pas' {frmSearchReplace},
   event_editor in '..\..\source\event_editor.pas' {frmEventEditor: TFrame},
@@ -39,13 +40,14 @@ uses
   Cromis.DirectoryWatch in '..\..\source\Cromis.DirectoryWatch.pas',
   exportgrid in '..\..\source\exportgrid.pas' {frmExportGrid},
   syncdb in '..\..\source\syncdb.pas' {frmSyncDB},
-  gnugettext in '..\..\source\gnugettext.pas',
+  {gnugettext in '..\..\source\gnugettext.pas',}
   JumpList in '..\..\source\JumpList.pas',
   extra_controls in '..\..\source\extra_controls.pas',
   change_password in '..\..\source\change_password.pas' {frmPasswordChange},
   Vcl.FormsFix in '..\..\source\Vcl.FormsFix.pas',
   Vcl.Themes,
-  Vcl.Styles;
+  Vcl.Styles,
+  Generics.Collections;
 
 {.$R *.RES}
 {$R ..\..\res\icon.RES}

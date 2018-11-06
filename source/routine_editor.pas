@@ -3,9 +3,9 @@ unit routine_editor;
 interface
 
 uses
-  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, SynEdit, SynMemo, StdCtrls,
-  ComCtrls, ToolWin, VirtualTrees, SynRegExpr,
-  dbconnection, apphelpers, gnugettext, Vcl.Menus, Vcl.ExtCtrls;
+  {Windows, }SysUtils, Classes, Graphics, Controls, Forms, Dialogs, SynEdit, SynMemo, StdCtrls,
+  ComCtrls, ToolWin, VirtualTrees, {SynRegExpr,}
+  dbconnection, apphelpers, VirtualTrees, VirtualTrees.TVirtualStringTree, Menus, ExtCtrls;
 
 type
   TFrame = TDBObjectEditor;

@@ -8,12 +8,12 @@
 interface
 
 uses
-  Windows, SysUtils, Classes, Graphics, GraphUtil, Forms, Controls, Menus, StdCtrls, Dialogs, Buttons,
+  {Windows, }SysUtils, Classes, Graphics, GraphUtil, Forms, Controls, Menus, StdCtrls, Dialogs, Buttons,
   Messages, ExtCtrls, ComCtrls, StdActns, ActnList, ImgList, ToolWin, Clipbrd, SynMemo,
   SynEdit, SynEditTypes, SynEditKeyCmds, VirtualTrees, DateUtils,
-  ShlObj, SynEditMiscClasses, SynEditSearch, SynEditRegexSearch, SynCompletionProposal, SynEditHighlighter,
-  SynHighlighterSQL, Tabs, SynUnicode, SynRegExpr, ExtActns, IOUtils, Types, Themes, ComObj,
-  CommCtrl, Contnrs, Generics.Collections, Generics.Defaults, SynEditExport, SynExportHTML, SynExportRTF, Math, ExtDlgs, Registry, AppEvnts,
+  {ShlObj,} SynEditMiscClasses, SynEditSearch, SynEditRegexSearch, {SynCompletionProposal, }SynEditHighlighter,
+  SynHighlighterSQL{, Tabs}, {SynUnicode, SynRegExpr, ExtActns, IOUtils,} Types, Themes, {ComObj,}
+  {CommCtrl,} Contnrs, Generics.Collections, Generics.Defaults, {SynEditExport,} SynExportHTML, {SynExportRTF,} Math, ExtDlgs, Registry, {AppEvnts,}
   routine_editor, trigger_editor, event_editor, options, EditVar, apphelpers, createdatabase, table_editor,
   TableTools, View, Usermanager, SelectDBObject, connections, sqlhelp, dbconnection,
   insertfiles, searchreplace, loaddata, copytable, VTHeaderPopup, Cromis.DirectoryWatch, SyncDB, gnugettext,
@@ -543,7 +543,7 @@ type
     Run1: TMenuItem;
     RunSelection1: TMenuItem;
     Runcurrentquery1: TMenuItem;
-    ApplicationEvents1: TApplicationEvents;
+    {ApplicationEvents1: TApplicationEvents;}	
     actDisconnect: TAction;
     Copylinetonewquerytab1: TMenuItem;
     menuLogHorizontalScrollbar: TMenuItem;
@@ -926,7 +926,7 @@ type
     procedure treeQueryHelpersFocusChanging(Sender: TBaseVirtualTree; OldNode,
       NewNode: PVirtualNode; OldColumn, NewColumn: TColumnIndex; var Allowed: Boolean);
     procedure treeQueryHelpersResize(Sender: TObject);
-    procedure ApplicationEvents1Deactivate(Sender: TObject);
+    {procedure ApplicationEvents1Deactivate(Sender: TObject);}
     procedure actDisconnectExecute(Sender: TObject);
     procedure menuEditObjectClick(Sender: TObject);
     procedure Copylinetonewquerytab1Click(Sender: TObject);
@@ -990,7 +990,7 @@ type
     procedure actPreviousResultExecute(Sender: TObject);
     procedure actNextResultExecute(Sender: TObject);
     procedure actSaveSynMemoToTextfileExecute(Sender: TObject);
-    procedure ApplicationEvents1Idle(Sender: TObject; var Done: Boolean);
+    {procedure ApplicationEvents1Idle(Sender: TObject; var Done: Boolean);}
     procedure editDatabaseTableFilterRightButtonClick(Sender: TObject);
     procedure menuDoubleClickInsertsNodeTextClick(Sender: TObject);
     procedure DBtreeDblClick(Sender: TObject);
@@ -12095,14 +12095,14 @@ begin
 end;
 
 
-procedure TMainForm.ApplicationEvents1Deactivate(Sender: TObject);
+{procedure TMainForm.ApplicationEvents1Deactivate(Sender: TObject);
 begin
   // Force result tab balloon hint to disappear. Does not do so when mouse was moved too fast.
   tabsetQueryMouseLeave(Sender);
-end;
+end;}
 
 
-procedure TMainForm.ApplicationEvents1Idle(Sender: TObject; var Done: Boolean);
+{procedure TMainForm.ApplicationEvents1Idle(Sender: TObject; var Done: Boolean);
 begin
   if AppSettings.PortableMode and (FLastPortableSettingsSave < GetTickCount-60000) then begin
     if AppSettings.Writes > FLastAppSettingsWrites then begin
@@ -12119,7 +12119,7 @@ begin
     ListTables.SortTree(ListTables.Header.SortColumn, ListTables.Header.SortDirection);
     FListTablesSorted := True;
   end;
-end;
+end;}
 
 
 procedure TMainForm.ApplicationDeActivate(Sender: TObject);
