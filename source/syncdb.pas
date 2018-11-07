@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Generics.Collections, VirtualTrees, extra_controls,
-  dbconnection, gnugettext;
+  dbconnection, gnugettext2;
 
 type
   TfrmSyncDB = class(TFormWithSizeGrip)

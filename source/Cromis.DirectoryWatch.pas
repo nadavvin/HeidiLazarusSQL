@@ -227,17 +227,17 @@ var
   WaitResult: DWORD;
   NextEntry: Cardinal;
   FileName: PWideChar;
-  Overlap: TOverlapped;
+  {Overlap: TOverlapped;}
   ResSize: Cardinal;
 begin
-  FillChar(Overlap, SizeOf(TOverlapped), 0);
-  Overlap.hEvent := FChangeEvent;
+  {FillChar(Overlap, SizeOf(TOverlapped), 0);
+  Overlap.hEvent := FChangeEvent;}
 
   // set the array of events
   Events[0] := FChangeEvent;
   Events[1] := FAbortEvent;
 
-  while not Terminated do
+  {while not Terminated do
   try
     if ReadDirectoryChangesW(FDirHandle, FIOResult, FBufferSize, FWatchSubtree, FFilter, @ResSize, @Overlap, nil) then
     begin
@@ -294,7 +294,7 @@ begin
       ErrorMessage := E.Message;
       SignalError(ErrorMessage);
     end;
-  end;
+  end;}
 end;
 
 procedure TDirWatchThread.SignalError(const ErrorMessage: string; ErrorCode: Cardinal);
@@ -302,7 +302,7 @@ var
   ErrorMsg: PChar;
   MessageSize: Integer;
 begin
-  if ErrorCode = 0 then
+  {if ErrorCode = 0 then
     ErrorCode := GetLastError;
 
   // calculate the size of the error message buffer
@@ -310,11 +310,11 @@ begin
 
   GetMem(ErrorMsg, MessageSize);
   StrPCopy(ErrorMsg, ErrorMessage);
-  PostMessage(FWndHandle, WM_DIRWATCH_ERROR, ErrorCode, LPARAM(ErrorMsg));
+  PostMessage(FWndHandle, WM_DIRWATCH_ERROR, ErrorCode, LPARAM(ErrorMsg));}
 end;
 
 constructor TDirWatchThread.Create(const Directory: string;
-                                   const WndHandle: HWND;
+                                   {const WndHandle: HWND;}
                                    const BufferSize: Integer;
                                    const AbortEvent: THandle;
                                    const TypeFilter: Cardinal;
@@ -327,7 +327,7 @@ begin
    // create (that calls BeginThread) so any exception
    // will be still raised in caller's thread)
    //
-   FDirHandle := CreateFile(PChar(Directory),
+   {FDirHandle := CreateFile(PChar(Directory),
                             FILE_LIST_DIRECTORY,
                             FILE_SHARE_READ OR
                             FILE_SHARE_DELETE OR
@@ -352,27 +352,27 @@ begin
    FDirectory := Directory;
    FFilter := TypeFilter;
 
-   inherited Create(False);
+   inherited Create(False);}
 end;
 
 
 destructor TDirWatchThread.Destroy;
 begin
-   CloseHandle(FChangeEvent);
+   {CloseHandle(FChangeEvent);
 
    if FDirHandle <> INVALID_HANDLE_VALUE  then
      CloseHandle(FDirHandle);
    if Assigned(FIOResult) then
      FreeMem(FIOResult);
 
-   inherited Destroy;
+   inherited Destroy;}
 end;
 
 { TFnugryDirWatch }
 
 procedure TDirectoryWatch.AllocWatchThread;
 begin
-  if FWatchThread = nil then
+  {if FWatchThread = nil then
   begin
     FAbortEvent := CreateEvent(nil, FALSE, FALSE, nil);
     FWatchThread := TDirWatchThread.Create(Directory,
@@ -381,7 +381,7 @@ begin
                                            FAbortEvent,
                                            MakeFilter,
                                            WatchSubtree);
-  end;
+  end;}
 end;
 
 procedure TDirectoryWatch.ReleaseWatchThread;
@@ -389,7 +389,7 @@ var
   AResult: Cardinal;
   ThreadHandle: THandle;
 begin
-  if FWatchThread <> nil then
+  {if FWatchThread <> nil then
   begin
     ThreadHandle := FWatchThread.Handle;
     // set and close event
@@ -404,7 +404,7 @@ begin
 
     FreeAndNil(FWatchThread);
     CloseHandle(FAbortEvent);
-  end;
+  end;}
 
 end;
 
@@ -419,34 +419,34 @@ begin
   Result := FWatchThread <> nil;
 end;
 
-procedure TDirectoryWatch.DeallocateHWnd(Wnd: HWND);
+{procedure TDirectoryWatch.DeallocateHWnd(Wnd: HWND);
 var
   Instance: Pointer;
 begin
   Instance := Pointer(GetWindowLong(Wnd, GWL_WNDPROC));
 
   if Instance <> @DefWindowProc then
-  begin
+  begin}
     { make sure we restore the default
       windows procedure before freeing memory }
-    SetWindowLong(Wnd, GWL_WNDPROC, Longint(@DefWindowProc));
+    {SetWindowLong(Wnd, GWL_WNDPROC, Longint(@DefWindowProc));
     FreeObjectInstance(Instance);
   end;
 
   DestroyWindow(Wnd);
-end;
+end;}
 
 destructor TDirectoryWatch.Destroy;
 begin
   Stop;
-  DeallocateHWnd(FWndHandle);
+  {DeallocateHWnd(FWndHandle);}
 
   inherited Destroy;
 end;
 
 constructor TDirectoryWatch.Create;
 begin
-   FWndHandle := AllocateHWnd(WatchWndProc);
+   {FWndHandle := AllocateHWnd(WatchWndProc);}
    FWatchSubtree := True;
    FBufferSize := 32;
 
@@ -528,7 +528,7 @@ begin
      //
      else
      begin
-       Msg.Result := DefWindowProc(FWndHandle, Msg.Msg, Msg.wParam, Msg.lParam);
+       {Msg.Result := DefWindowProc(FWndHandle, Msg.Msg, Msg.wParam, Msg.lParam);}
        Exit;
      end;
    end;

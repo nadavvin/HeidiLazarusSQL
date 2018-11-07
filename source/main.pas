@@ -16,9 +16,9 @@ uses
   {CommCtrl,} Contnrs, Generics.Collections, Generics.Defaults, {SynEditExport,} SynExportHTML, {SynExportRTF,} Math, ExtDlgs, Registry, {AppEvnts,}
   routine_editor, trigger_editor, event_editor, options, EditVar, apphelpers, createdatabase, table_editor,
   TableTools, View, Usermanager, SelectDBObject, connections, sqlhelp, dbconnection,
-  insertfiles, searchreplace, loaddata, copytable, VTHeaderPopup, Cromis.DirectoryWatch, SyncDB, gnugettext,
-  JumpList, System.Actions, System.UITypes, pngimage, Vcl.FormsFix,
-  System.ImageList;
+  insertfiles, searchreplace, loaddata, copytable, VTHeaderPopup, Cromis.DirectoryWatch, SyncDB, gnugettext2,
+  JumpList, {System.Actions, System.}UITypes{, pngimage, Vcl.FormsFix,}
+  {System.ImageList};
 
 
 type
@@ -35,9 +35,9 @@ type
       function FindParameter(Param: String) : Integer;
       procedure CleanToKeep;
   end;
-  TBindParamItemComparer = class(TComparer<TBindParamItem>)
+  {TBindParamItemComparer = class(TComparer<TBindParamItem>)
     function Compare(const Left, Right: TBindParamItem): Integer; override;
-  end;
+  end;}
 
   TQueryTab = class;
   TResultTab = class(TObject)

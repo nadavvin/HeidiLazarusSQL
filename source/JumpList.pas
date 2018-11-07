@@ -15,11 +15,11 @@ unit JumpList;
 interface
 
 uses
-  Windows, SysUtils, Classes, ShellApi, ShlObj, ActiveX,
-  Generics.Collections, Generics.Defaults,
-  IOUtils, PropSys, PropKey, SHLwAPI, ObjectArray;
+  Windows, SysUtils, Classes, {ShellApi, ShlObj, ActiveX,}
+  Generics.Collections, Generics.Defaults{,
+  IOUtils, PropSys, PropKey, SHLwAPI, ObjectArray};
 
-type
+{type
 
   ICustomDestinationList = interface(IUnknown)
     [SID_ICustomDestinationList]
@@ -110,13 +110,13 @@ type
     property ShowRecentCategory : boolean read FShowRecentCategory write FShowRecentCategory;
     property JumpItems : TList<TJumpItem> read FJumpItems;
     property ApplicationId : string read FApplicationId write SetApplicationId;
-  end;
+  end;}
 
 implementation
 
 { TJumpList }
 
-function PropVariantClear(ppval : PPropVariant) : HRESULT; stdcall; external 'ole32.dll';
+{function PropVariantClear(ppval : PPropVariant) : HRESULT; stdcall; external 'ole32.dll';
 
 procedure TJumpList.AddToRecentCategory(ItemPath: string);
 var
@@ -602,6 +602,6 @@ begin
             CoTaskMemFree(appId);
         end;
     end;
-end;
+end;}
 
 end.

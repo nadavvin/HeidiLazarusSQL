@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, StdCtrls, SynEdit, SynMemo,
-  dbconnection{, gnugettext, SynRegExpr};
+  dbconnection, gnugettext2{, SynRegExpr};
 
 type
   TCreateDatabaseForm = class(TForm)
