@@ -197,17 +197,20 @@ procedure WaitForFileReady(const FileName: string; const Timeout: Cardinal);
 var
   hFile: THandle;
   StartTime: TDateTime;
+  const INVALID_HANDLE_VALUE = -1;
 begin
   StartTime := Now;
 
   // wait to close
   while (MilliSecondsBetween(Now, StartTime) < Timeout) or (Timeout = 0) do
   begin
-    hFile := CreateFile(PChar(FileName), GENERIC_READ, 0, nil, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+    {hFile := CreateFile(PChar(FileName), GENERIC_READ, 0, nil, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);}
+    hFile := FileCreate(PChar(FileName));
 
     if hFile <> INVALID_HANDLE_VALUE then
     begin
-      CloseHandle(hFile);
+      {CloseHandle(hFile);}
+      FileClose(hFile);
       Break;
     end;
 
