@@ -17,7 +17,7 @@ type
     btnConfigure: TButton;
     btnCancel: TButton;
     btnPrint: TButton;
-    PrinterSetup: TPrinterSetupDialog;
+    {PrinterSetup: TPrinterSetupDialog;}
     lblSelect: TLabel;
     chkPrintHeader: TCheckBox;
     procedure btnConfigureClick(Sender: TObject);
@@ -56,7 +56,7 @@ end;
 procedure TprintlistForm.btnConfigureClick(Sender: TObject);
 begin
   Screen.Cursor := crHourglass;
-  printerSetup.Execute;
+  {printerSetup.Execute;}
   comboPrinters.ItemIndex := Printer.PrinterIndex;
   Screen.Cursor := crDefault;
 end;
@@ -87,7 +87,7 @@ begin
     else list := Mainform.ActiveGrid;
   end;
   if Assigned(list) then
-    list.Print(Printer, chkPrintHeader.Checked);
+    {list.Print(Printer, chkPrintHeader.Checked);}
   Screen.Cursor := crDefault;
 end;
 
