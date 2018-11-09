@@ -7,8 +7,8 @@ unit About;
 interface
 
 uses
-  {Windows,} Classes, Graphics, Forms, Controls, StdCtrls, ExtCtrls, SysUtils, ComCtrls, pngimage, gnugettext,
-  Dialogs, SynRegExpr, Vcl.Menus, ClipBrd;
+  {Windows,} Classes, Graphics, Forms, Controls, StdCtrls, ExtCtrls, SysUtils, ComCtrls, {pngimage, }gnugettext2,
+  Dialogs, SynRegExpr, {Vcl.}Menus, ClipBrd;
 
 type
   TAboutBox = class(TForm)
@@ -122,7 +122,7 @@ end;
 
 procedure TAboutBox.FormCreate(Sender: TObject);
 begin
-  TranslateComponent(Self);
+  {TranslateComponent(Self);}
   lblAppName.Font.Size := Round(lblAppName.Font.Size * 1.5);
   lblAppName.Font.Style := [fsBold];
   lblAppWebpage.Font.Color := clBlue;
@@ -148,14 +148,14 @@ begin
   lblEnvironment.Caption := _('Environment:');
   if RunningAsUwp then begin
     lblEnvironment.Caption := lblEnvironment.Caption +
-      ' Windows v'+IntToStr(Win32MajorVersion)+'.'+IntToStr(Win32MinorVersion) +
+      {' Windows v'+IntToStr(Win32MajorVersion)+'.'+IntToStr(Win32MinorVersion) +}
       ', Store Package ' + GetUwpFullName;
   end else if MainForm.IsWine then begin
     lblEnvironment.Caption := lblEnvironment.Caption +
       ' Linux/Wine';
   end else begin
-    lblEnvironment.Caption := lblEnvironment.Caption +
-      ' Windows v'+IntToStr(Win32MajorVersion)+'.'+IntToStr(Win32MinorVersion);
+    lblEnvironment.Caption := lblEnvironment.Caption{ +
+      ' Windows v'+IntToStr(Win32MajorVersion)+'.'+IntToStr(Win32MinorVersion)};
   end;
 
   Screen.Cursor := crDefault;

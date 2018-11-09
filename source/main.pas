@@ -11,7 +11,7 @@ uses
   {Windows, }SysUtils, Classes, Graphics, GraphUtil, Forms, Controls, Menus, StdCtrls, Dialogs, Buttons,
   Messages, ExtCtrls, ComCtrls, StdActns, ActnList, ImgList, ToolWin, Clipbrd, SynMemo,
   SynEdit, SynEditTypes, SynEditKeyCmds, VirtualTrees, DateUtils,
-  {ShlObj,} SynEditMiscClasses, SynEditSearch, SynEditRegexSearch, {SynCompletionProposal, }SynEditHighlighter,
+  {ShlObj,} SynEditMiscClasses, SynEditSearch, SynEditRegexSearch, SynCompletion, {SynCompletionProposal, }SynEditHighlighter,
   SynHighlighterSQL{, Tabs}, {SynUnicode, SynRegExpr, ExtActns, IOUtils,} Types, Themes, {ComObj,}
   {CommCtrl,} Contnrs, Generics.Collections, Generics.Defaults, {SynEditExport,} SynExportHTML, {SynExportRTF,} Math, ExtDlgs, Registry, {AppEvnts,}
   routine_editor, trigger_editor, event_editor, options, EditVar, apphelpers, createdatabase, table_editor,
@@ -49,6 +49,7 @@ type
       destructor Destroy; override;
   end;
   TResultTabs = TObjectList<TResultTab>;
+  TTabSet = TTabControl;
   TQueryTab = class(TComponent)
     private
       FMemo: TSynMemo;
@@ -113,13 +114,13 @@ type
       constructor Create(SessionPath: String);
       property MaxDuration: Cardinal read FMaxDuration;
   end;
-  TQueryHistoryItemComparer = class(TComparer<TQueryHistoryItem>)
+  {TQueryHistoryItemComparer = class(TComparer<TQueryHistoryItem>)
     function Compare(const Left, Right: TQueryHistoryItem): Integer; override;
-  end;
+  end;}
 
   TThreeStateBoolean = (nbUnset, nbFalse, nbTrue);
 
-  ITaskbarList = interface(IUnknown)
+  {ITaskbarList = interface(IUnknown)
     [SID_ITaskbarList]
     function HrInit: HRESULT; stdcall;
     function AddTab(hwnd: HWND): HRESULT; stdcall;
@@ -145,8 +146,9 @@ type
     function SetOverlayIcon(hwnd: HWND; hIcon: HICON; pszDescription: LPCWSTR): HRESULT; stdcall;
     function SetThumbnailTooltip(hwnd: HWND; pszTip: LPCWSTR): HRESULT; stdcall;
     function SetThumbnailClip(hwnd: HWND; var prcClip: TRect): HRESULT; stdcall;
-  end;
+  end;}
 
+  TSynCompletionProposal = TSynCompletion;
   TMainForm = class(TForm)
     MainMenu1: TMainMenu;
     MainMenuFile: TMenuItem;
@@ -430,8 +432,8 @@ type
     DataPost1: TMenuItem;
     menuShowSizeColumn: TMenuItem;
     menuSelectBGColor: TMenuItem;
-    actPreviousTab: TPreviousTab;
-    actNextTab: TNextTab;
+    {actPreviousTab: TPreviousTab;
+    actNextTab: TNextTab;}
     Nexttab1: TMenuItem;
     Previoustab1: TMenuItem;
     menuConnectTo: TMenuItem;
@@ -525,7 +527,7 @@ type
     actCreateEvent: TAction;
     Event1: TMenuItem;
     tabsetQuery: TTabSet;
-    BalloonHint1: TBalloonHint;
+    {BalloonHint1: TBalloonHint;}
     actDataSetNull: TAction;
     pnlPreview: TPanel;
     spltPreview: TSplitter;
@@ -639,8 +641,8 @@ type
     procedure actCreateDBObjectExecute(Sender: TObject);
     procedure menuConnectionsPopup(Sender: TObject);
     procedure actExitApplicationExecute(Sender: TObject);
-    procedure WMCopyData(var Msg: TWMCopyData); message WM_COPYDATA;
-    procedure CMStyleChanged(var Msg: TMessage); message CM_STYLECHANGED;
+    {procedure WMCopyData(var Msg: TWMCopyData); message WM_COPYDATA;
+    procedure CMStyleChanged(var Msg: TMessage); message CM_STYLECHANGED;}
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure AfterFormCreate;
@@ -696,9 +698,9 @@ type
       const Value: String; Shift: TShiftState; Index: Integer; EndToken: Char);
     procedure SynCompletionProposalCodeCompletion(Sender: TObject;
       var Value: String; Shift: TShiftState; Index: Integer; EndToken: Char);
-    procedure SynCompletionProposalExecute(Kind: SynCompletionType;
+    {procedure SynCompletionProposalExecute(Kind: SynCompletionType;
       Sender: TObject; var CurrentInput: String; var x, y: Integer;
-      var CanExecute: Boolean);
+      var CanExecute: Boolean);}
     procedure PageControlMainChange(Sender: TObject);
     procedure PageControlMainChanging(Sender: TObject; var AllowChange: Boolean);
     procedure PageControlHostChange(Sender: TObject);
@@ -865,8 +867,8 @@ type
     procedure actBlobAsTextExecute(Sender: TObject);
     procedure SynMemoQueryReplaceText(Sender: TObject; const ASearch,
       AReplace: string; Line, Column: Integer; var Action: TSynReplaceAction);
-    procedure SynMemoQueryPaintTransient(Sender: TObject; Canvas: TCanvas;
-      TransientType: TTransientType);
+    {procedure SynMemoQueryPaintTransient(Sender: TObject; Canvas: TCanvas;
+      TransientType: TTransientType);}
     procedure actQueryFindAgainExecute(Sender: TObject);
     procedure AnyGridScroll(Sender: TBaseVirtualTree; DeltaX, DeltaY: Integer);
     procedure lblExplainProcessClick(Sender: TObject);
@@ -1019,7 +1021,7 @@ type
     FLastMouseUpOnPageControl: Cardinal;
     FLastTabNumberOnMouseUp: Integer;
     FLastMouseDownCloseButton: TObject;
-    FJumpList: TJumpList;
+    {FJumpList: TJumpList;}
     // Filter text per tab for filter panel
     FFilterTextDatabases,
     FFilterTextEditor,
@@ -1121,10 +1123,10 @@ type
     MatchingBraceBackgroundColor: TColor;
 
     // Task button interface
-    TaskbarList: ITaskbarList;
+    {TaskbarList: ITaskbarList;
     TaskbarList2: ITaskbarList2;
     TaskbarList3: ITaskbarList3;
-    TaskbarList4: ITaskbarList4;
+    TaskbarList4: ITaskbarList4;}
 
     property AppVerRevision: Integer read FAppVerRevision;
     property AppVersion: String read FAppVersion;
@@ -1173,7 +1175,7 @@ type
     procedure DisableProgress;
     procedure SetProgressPosition(Value: Integer);
     procedure ProgressStep;
-    procedure SetProgressState(State: TProgressbarState);
+    {procedure SetProgressState(State: TProgressbarState);}
     procedure TaskDialogHyperLinkClicked(Sender: TObject);
     function HasDonated(ForceCheck: Boolean): TThreeStateBoolean;
     procedure ApplyVTFilter(FromTimer: Boolean);
@@ -1183,7 +1185,7 @@ end;
 
 var
   MainForm: TMainForm;
-  SecondInstMsgId: UINT = 0;
+  SecondInstMsgId: UInt16 = 0;
 
 const
   CheckedStates = [csCheckedNormal, csCheckedPressed, csMixedNormal, csMixedPressed];
