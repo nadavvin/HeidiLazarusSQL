@@ -12,13 +12,13 @@ uses
   Messages, ExtCtrls, ComCtrls, StdActns, ActnList, ImgList, ToolWin, Clipbrd, SynMemo,
   SynEdit, SynEditTypes, SynEditKeyCmds, VirtualTrees, DateUtils,
   {ShlObj,} SynEditMiscClasses, SynEditSearch, SynEditRegexSearch, SynCompletion, {SynCompletionProposal, }SynEditHighlighter,
-  SynHighlighterSQL{, Tabs}, {SynUnicode, SynRegExpr, ExtActns, IOUtils,} Types, Themes, {ComObj,}
+  SynHighlighterSQL{, Tabs}, RegExpr, {SynUnicode, SynRegExpr, ExtActns, IOUtils,} Types, Themes, {ComObj,}
   {CommCtrl,} Contnrs, Generics.Collections, Generics.Defaults, {SynEditExport,} SynExportHTML, {SynExportRTF,} Math, ExtDlgs, Registry, {AppEvnts,}
   routine_editor, trigger_editor, event_editor, options, EditVar, apphelpers, createdatabase, table_editor,
   TableTools, View, Usermanager, SelectDBObject, connections, sqlhelp, dbconnection,
   insertfiles, searchreplace, loaddata, copytable, VTHeaderPopup, Cromis.DirectoryWatch, SyncDB, gnugettext2,
   JumpList, {System.Actions, System.}UITypes{, pngimage, Vcl.FormsFix,}
-  {System.ImageList};
+  {System.ImageList}, FileUtil;
 
 
 type
@@ -99,6 +99,7 @@ type
       constructor Create(AOwner: TComponent); override;
       destructor Destroy; override;
   end;
+  TPngImage = TPortableNetworkGraphic;
 
   TQueryHistoryItem = class(TObject)
     Time: TDateTime;
@@ -1586,7 +1587,7 @@ var
   {TZI: TTimeZoneInformation;}
   wine_nt_to_unix_file_name: procedure(p1:pointer; p2:pointer); stdcall;
   OldSnippetsDir, CurrentSnippetsDir, TargetSnippet: String;
-  Files: TStringDynArray;
+  Files: TStrings; //TStringDynArray exists but cause Incompatible
   DpiScaleFactor: Double;
 begin
   caption := APPNAME;
@@ -1654,7 +1655,7 @@ begin
   // Move files from old default snippets directory, see issue #159
   if not AppSettings.PortableMode then begin
     // This was the default folder up to r5244 / 8b2966c52efb685b00189037a0507157ed03a368
-    OldSnippetsDir := GetShellFolder(CSIDL_COMMON_APPDATA) + '\' + APPNAME + '\Snippets\';
+    {OldSnippetsDir := GetShellFolder(CSIDL_COMMON_APPDATA) + '\' + APPNAME + '\Snippets\';}
     CurrentSnippetsDir := DirnameSnippets;
     if not DirectoryExists(CurrentSnippetsDir) then
       ForceDirectories(CurrentSnippetsDir);
@@ -1663,18 +1664,19 @@ begin
         and DirectoryExists(OldSnippetsDir) and DirectoryExists(CurrentSnippetsDir)
         and (CompareText(OldSnippetsDir, CurrentSnippetsDir) <> 0)
         then begin
-      Files := TDirectory.GetFiles(OldSnippetsDir, '*.sql');
-      if Length(Files) > 0 then begin
+      //Files := TDirectory.GetFiles(OldSnippetsDir, '*.sql');
+      FindAllFiles(Files, OldSnippetsDir, '*.sql');
+      {if Files.count() > 0 then begin //TODO: Why if not valid?
         LogSQL(f_('Migrating snippet files to new folder: %s', [CurrentSnippetsDir]));
-        for i:=Low(Files) to High(Files) do begin
+        for i:=0 to Files.count()-1 do begin
           TargetSnippet := CurrentSnippetsDir + ExtractFileName(Files[i]);
-          if MoveFile(PChar(Files[i]), PChar(TargetSnippet)) then begin
+          if RenameFile(PChar(Files[i]), PChar(TargetSnippet)) then begin
             LogSQL(f_('Successfully moved "%s" to "%s"', [Files[i], TargetSnippet]));
           end else begin
-            LogSQL(f_('Error: Could not move "%s" to "%s" (Error: %s)', [Files[i], TargetSnippet, SysErrorMessage(GetLastError())]), lcError);
+            LogSQL(f_('Error: Could not move "%s" to "%s" (Error: %s)', [Files[i], TargetSnippet, ''{SysErrorMessage(GetLastError())}{]), lcError);
           end;
         end;
-      end;
+      end;}
     end;
   end;
 
@@ -1726,7 +1728,7 @@ begin
 
   Delimiter := AppSettings.ReadString(asDelimiter);
 
-  InheritFont(SynCompletionProposal.Font);
+  {InheritFont(SynCompletionProposal.Font);}
   // Simulated link label, has non inherited blue font color
   lblExplainProcess.Font.Color := clBlue;
   lblExplainProcessAnalyzer.Font.Color := clBlue;
@@ -1888,7 +1890,7 @@ begin
 
   // Set up connections list
   FConnections := TDBConnectionList.Create;
-  FConnections.OnNotify := ConnectionsNotify;
+  {FConnections.OnNotify := ConnectionsNotify;} //Error: Incompatible types
 
   FTreeRefreshInProgress := False;
   FGridCopying := False;
@@ -1897,27 +1899,27 @@ begin
   FileEncodings := Explode(',', _('Auto detect (may fail)')+',ANSI,ASCII,Unicode,Unicode Big Endian,UTF-8,UTF-7');
 
   // Detect timezone offset in seconds, once
-  case GetTimeZoneInformation(TZI) of
+  {case GetTimeZoneInformation(TZI) of
     TIME_ZONE_ID_STANDARD: FTimeZoneOffset := (TZI.Bias + TZI.StandardBias);
     TIME_ZONE_ID_DAYLIGHT: FTimeZoneOffset := (TZI.Bias + TZI.DaylightBias);
     TIME_ZONE_ID_UNKNOWN: FTimeZoneOffset := TZI.Bias;
     else RaiseLastOSError;
-  end;
+  end;}
   FTimeZoneOffset := FTimeZoneOffset * 60;
 
   // Set noderoot for query helpers box
   treeQueryHelpers.RootNodeCount := 7;
 
   // Initialize taskbar jump list
-  if not FIsWine then begin
+  {if not FIsWine then begin
     FJumpList := TJumpList.Create;
     FJumpList.ApplicationId := APPNAME + IntToStr(GetExecutableBits);
-  end;
+  end;}
 
   FLastCaptionChange := 0;
   FLastPortableSettingsSave := 0;
   FLastAppSettingsWrites := 0;
-  FFormatSettings := TFormatSettings.Create('en-US');
+  {FFormatSettings := TFormatSettings.Create('en-US');}
 
   if RunningAsUwp then begin
     actUpdateCheck.Enabled := False;
@@ -2011,7 +2013,7 @@ begin
     end;
   end;
 
-  ParseCommandLine(Windows.GetCommandLine, ConnectionParams, FileNames);
+  {ParseCommandLine(Windows.GetCommandLine, ConnectionParams, FileNames);}
   if Assigned(ConnectionParams) then begin
     // Minimal parameter for command line mode is hostname
     InitConnection(ConnectionParams, True, Connection);
@@ -2229,7 +2231,7 @@ begin
     inc(room, Statusbar.Panels[i].Width);
   StatusBar.Panels[0].Width := Statusbar.Width - room;
   // Retreive the rectancle of the statuspanel (in our case the fifth panel)
-  SendMessage(StatusBar.Handle, SB_GETRECT, 5, Integer(@PanelRect));
+  {SendMessage(StatusBar.Handle, SB_GETRECT, 5, Integer(@PanelRect));}
   // Position the progressbar over the panel on the statusbar
   with PanelRect do
     ProgressBarStatus.SetBounds(Left, Top, Right-Left, Bottom-Top);
@@ -2283,7 +2285,7 @@ begin
     m := ActiveQueryMemo
   end else if Sender = actClearQueryLog then begin
     m := SynMemoSQLLog;
-    m.Gutter.LineNumberStart := m.Gutter.LineNumberStart + m.Lines.Count;
+    {m.Gutter.LineNumberStart := m.Gutter.LineNumberStart + m.Lines.Count;}
   end else begin
     m := SynMemoFilter;
     editFilterSearch.Clear;
@@ -2772,7 +2774,7 @@ var
       ErrorPos := Pos(ErroneousSQL, Copy(Tab.Memo.Text, SelStart, SIZE_KB));
       if ErrorPos > 0 then
         Inc(SelStart, ErrorPos-1);
-      Tab.Memo.SelLength := 0;
+      {Tab.Memo.SelLength := 0;}
       Tab.Memo.SelStart := SelStart;
     end;
   end;
@@ -2783,7 +2785,7 @@ begin
 
   // Error handling
   if IsNotEmpty(Thread.ErrorMessage) then begin
-    SetProgressState(pbsError);
+    {SetProgressState(pbsError);}
     GoToErrorPos(Thread.ErrorMessage);
     ErrorDialog(Thread.ErrorMessage);
   end;
