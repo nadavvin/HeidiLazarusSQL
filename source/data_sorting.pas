@@ -123,7 +123,7 @@ begin
     labelNumber.Width := 15;
     labelNumber.Height := LINE_HEIGHT;
     labelNumber.Alignment := taRightJustify;
-    labelNumber.Layout := tlCenter;
+    {labelNumber.Layout := tlCenter;}
     labelNumber.Caption := IntToStr(i+1) + '.';
     labelNumber.Tag := i+1;
     Inc( xPosition, labelNumber.Width + MARGIN );

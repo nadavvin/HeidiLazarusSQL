@@ -3,12 +3,12 @@ unit exportgrid;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, EditBtn,
   Dialogs, StdCtrls, ExtCtrls, Menus, ComCtrls, VirtualTrees, SynExportHTML, gnugettext, ActnList;
 
 type
   TGridExportFormat = (efExcel, efCSV, efHTML, efXML, efSQLInsert, efSQLReplace, efSQLDeleteInsert, efLaTeX, efWiki, efPHPArray, efMarkDown, efJSON);
-
+  TButtonedEdit = TEditButton;
   TfrmExportGrid = class(TForm)
     btnOK: TButton;
     btnCancel: TButton;
@@ -215,16 +215,16 @@ begin
   Enable := ExportFormat = efCSV;
   lblSeparator.Enabled := Enable;
   editSeparator.Enabled := Enable;
-  editSeparator.RightButton.Enabled := Enable;
+  {editSeparator.RightButton.Enabled := Enable;}
   lblEncloser.Enabled := Enable;
   editEncloser.Enabled := Enable;
-  editEncloser.RightButton.Enabled := Enable;
+  {editEncloser.RightButton.Enabled := Enable;}
   lblTerminator.Enabled := Enable;
   editTerminator.Enabled := Enable;
-  editTerminator.RightButton.Enabled := Enable;
+  {editTerminator.RightButton.Enabled := Enable;}
   lblNull.Enabled := ExportFormat in [efExcel, efCSV, efMarkDown];
   editNull.Enabled := lblNull.Enabled;
-  editNull.RightButton.Enabled := lblNull.Enabled;
+  {editNull.RightButton.Enabled := lblNull.Enabled;}
   btnOK.Enabled := radioOutputCopyToClipboard.Checked or (radioOutputFile.Checked and (editFilename.Text <> ''));
   if radioOutputFile.Checked then
     editFilename.Font.Color := GetThemeColor(clWindowText)
@@ -542,7 +542,7 @@ begin
       for i:=FRecentFiles.Count-1 downto 10 do
         FRecentFiles.Delete(i);
     end;
-    S := TStringStream.Create(Header, Encoding);
+    S := TStringStream.Create(Header{, Encoding}); //Create get only one paramerter
     Header := '';
     case ExportFormat of
       efHTML: begin
@@ -970,7 +970,7 @@ begin
       end;
       StreamToClipboard(S, HTML, (ExportFormat=efHTML) and (HTML <> nil));
     end else begin
-      try
+      {try
         S.SaveToFile(Filename);
       except
         on E:EFCreateError do begin
@@ -979,7 +979,7 @@ begin
           MainForm.SetProgressState(pbsError);
           ErrorDialog(E.Message);
         end;
-      end;
+      end;}
     end;
     Mainform.ShowStatusMsg(_('Freeing data...'));
     FreeAndNil(S);

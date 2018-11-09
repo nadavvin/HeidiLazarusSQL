@@ -4,9 +4,10 @@ interface
 
 uses
   Windows, Classes, Controls, Forms, StdCtrls, CheckLst, ExtCtrls, SysUtils,
-  apphelpers, gnugettext, extra_controls;
+  apphelpers, gnugettext, extra_controls, EditBtn;
 
 type
+  TButtonedEdit = TEditButton;
   TColumnSelectionForm = class(TFormWithSizeGrip)
     btnCancel: TButton;
     btnOK: TButton;

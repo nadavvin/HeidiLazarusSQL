@@ -1197,7 +1197,7 @@ implementation
 
 uses
   About, printlist, mysql_structures, UpdateCheck,
-  column_selection, data_sorting, grideditlinks, ExportGrid, jpeg, GIFImg;
+  column_selection, data_sorting, grideditlinks, ExportGrid{, jpeg, GIFImg};
 
 
 
@@ -1216,7 +1216,7 @@ begin
     if PanelNr = 6 then begin
       // Immediately repaint this special panel, as it holds critical update messages,
       // while avoiding StatusBar.Repaint which refreshes all panels
-      SendMessage(StatusBar.Handle, SB_GETRECT, PanelNr, Integer(@PanelRect));
+      {SendMessage(StatusBar.Handle, SB_GETRECT, PanelNr, Integer(@PanelRect));}
       StatusBar.OnDrawPanel(StatusBar, StatusBar.Panels[PanelNr], PanelRect);
     end;
   end;
@@ -1234,7 +1234,7 @@ begin
   // Handle click events on specific statusbar panels
   Click := StatusBar.ScreenToClient(Mouse.CursorPos);
   for i:=0 to StatusBar.Panels.Count-1 do begin
-    SendMessage(StatusBar.Handle, SB_GETRECT, i, Integer(@PanelRect));
+    {SendMessage(StatusBar.Handle, SB_GETRECT, i, Integer(@PanelRect));}
     if PtInRect(PanelRect, Click) then begin
       // We found the clicked panel
       case i of
@@ -1284,7 +1284,7 @@ begin
     ImageListMain.Draw(StatusBar.Canvas, PanelRect.Left, PanelRect.Top, ImageIndex, true);
     OffsetRect(PanelRect, ImageListMain.Width+2, 0);
   end;
-  DrawText(StatusBar.Canvas.Handle, PChar(Panel.Text), -1, PanelRect, DT_SINGLELINE or DT_VCENTER);
+  {DrawText(StatusBar.Canvas.Handle, PChar(Panel.Text), -1, PanelRect, DT_SINGLELINE or DT_VCENTER);}
 end;
 
 
@@ -1305,7 +1305,7 @@ begin
   Inc(MouseP.Y, Y);
   Bar := Sender as TStatusBar;
   for i:=0 to Bar.Panels.Count-1 do begin
-    SendMessage(Bar.Handle, SB_GETRECT, i, Integer(@PanelRect));
+    {SendMessage(Bar.Handle, SB_GETRECT, i, Integer(@PanelRect));}
     if PtInRect(PanelRect, FLastHintMousepos) then
       break;
   end;
@@ -1314,12 +1314,12 @@ begin
   FLastHintControlIndex := i;
   if FLastHintControlIndex = 3 then begin
     Infos := ActiveConnection.ConnectionInfo;
-    BalloonHint1.Description := '';
+    {BalloonHint1.Description := '';}
     for i:=0 to Infos.Count-1 do
-      BalloonHint1.Description := BalloonHint1.Description + Infos.Names[i] + ': ' + sstr(Infos.ValueFromIndex[i],100) + CRLF;
-    BalloonHint1.Description := Trim(BalloonHint1.Description);
+      {BalloonHint1.Description := BalloonHint1.Description + Infos.Names[i] + ': ' + sstr(Infos.ValueFromIndex[i],100) + CRLF;
+    BalloonHint1.Description := Trim(BalloonHint1.Description);}
     OffsetRect(PanelRect, Bar.ClientOrigin.X, Bar.ClientOrigin.Y);
-    BalloonHint1.ShowHint(PanelRect);
+    {BalloonHint1.ShowHint(PanelRect);}
   end else
     Bar.OnMouseLeave(Sender);
 end;
@@ -1327,7 +1327,7 @@ end;
 
 procedure TMainForm.StatusBarMouseLeave(Sender: TObject);
 begin
-  BalloonHint1.HideHint;
+  {BalloonHint1.HideHint;}
   FLastHintControlIndex := -1;
 end;
 
@@ -1442,7 +1442,7 @@ procedure TMainForm.StoreLastSessions;
 var
   OpenSessions, SessionPaths, SortedSessions: TStringList;
   Connection: TDBConnection;
-  JumpTask: TJumpTask;
+  {JumpTask: TJumpTask;}
   SessionPath: String;
   i: Integer;
   LastConnect, DummyDate: TDateTime;
@@ -1457,7 +1457,7 @@ begin
     AppSettings.WriteString(asLastActiveSession, ActiveConnection.Parameters.SessionPath);
 
   // Recreate Win7 taskbar jump list with sessions used in the last month, ordered by the number of connects
-  if Assigned(FJumpList) then try
+  {if Assigned(FJumpList) then try
     FJumpList.Clear;
     SessionPaths := TStringList.Create;
     SortedSessions := TStringList.Create;
@@ -1487,7 +1487,7 @@ begin
   except
     on E:Exception do
       LogSQL(E.Message, lcError);
-  end;
+  end;}
 end;
 
 
@@ -1578,12 +1578,12 @@ var
   dwInfoSize,           // Size of VERSIONINFO structure
   dwVerSize,            // Size of Version Info Data
   dwWnd: DWORD;         // Handle for the size call.
-  FI: PVSFixedFileInfo; // Delphi structure; see WINDOWS.PAS
+  {FI: PVSFixedFileInfo; // Delphi structure; see WINDOWS.PAS}
   ptrVerBuf: Pointer;
   FunctionCategories: TStringList;
   miGroup, miFilterGroup, miFunction, miFilterFunction: TMenuItem;
   NTHandle: THandle;
-  TZI: TTimeZoneInformation;
+  {TZI: TTimeZoneInformation;}
   wine_nt_to_unix_file_name: procedure(p1:pointer; p2:pointer); stdcall;
   OldSnippetsDir, CurrentSnippetsDir, TargetSnippet: String;
   Files: TStringDynArray;
@@ -1595,8 +1595,8 @@ begin
   // Issue #3064: Ignore TFont, so "Default" on mainform for WinXP users does not get broken.
   // Issue #557: Apply images *after* translating main menu, so top items don't get unused
   // space left besides them.
-  TP_GlobalIgnoreClass(TFont);
-  TranslateComponent(Self);
+  {TP_GlobalIgnoreClass(TFont);
+  TranslateComponent(Self);}
   FixDropDownButtons(Self);
   DpiScaleFactor := Monitor.PixelsPerInch / PixelsPerInch;
   ScaleImageList(ImageListMain, DpiScaleFactor);
@@ -1608,26 +1608,26 @@ begin
   menuQueryHelpersGenerateDelete.Caption := f_('Generate %s ...', ['DELETE']);
 
   // Detect version
-  dwInfoSize := GetFileVersionInfoSize(PChar(Application.ExeName), dwWnd);
+  {dwInfoSize := GetFileVersionInfoSize(PChar(Application.ExeName), dwWnd);}
   GetMem(ptrVerBuf, dwInfoSize);
-  GetFileVersionInfo(PChar(Application.ExeName), dwWnd, dwInfoSize, ptrVerBuf);
+  {GetFileVersionInfo(PChar(Application.ExeName), dwWnd, dwInfoSize, ptrVerBuf);
   VerQueryValue(ptrVerBuf, '\', Pointer(FI), dwVerSize );
   FAppVerMajor := HiWord(FI.dwFileVersionMS);
   FAppVerMinor := LoWord(FI.dwFileVersionMS);
   FAppVerRelease := HiWord(FI.dwFileVersionLS);
-  FAppVerRevision := LoWord(FI.dwFileVersionLS);
+  FAppVerRevision := LoWord(FI.dwFileVersionLS);}
   FAppVersion := Format('%d.%d.%d.%d', [FAppVerMajor, FAppVerMinor, FAppVerRelease, FAppVerRevision]);
   FreeMem(ptrVerBuf);
 
   // Detect if we're running on Wine, not on native Windows
   // Idea taken from http://ruminatedrumblings.blogspot.com/2008/04/detecting-virtualized-environment.html
-  NTHandle := LoadLibrary('NTDLL.DLL');
+  {NTHandle := LoadLibrary('NTDLL.DLL');
   if NTHandle>32 then
     wine_nt_to_unix_file_name := GetProcAddress(NTHandle, 'wine_nt_to_unix_file_name')
   else
-    wine_nt_to_unix_file_name := nil;
+    wine_nt_to_unix_file_name := nil;}
   FIsWine := Assigned(wine_nt_to_unix_file_name);
-  FreeLibrary(NTHandle);
+  {FreeLibrary(NTHandle);
 
   // Taskbar button interface for Windows 7
   // Possibly fails. See http://www.heidisql.com/forum.php?t=22451
@@ -1645,7 +1645,7 @@ begin
   // Reduce flicker on Windows 10
   if CheckWin32Version(6, 2) then begin
     DoubleBuffered := True;
-  end;
+  end;}
 
 
   // Ensure directory exists
