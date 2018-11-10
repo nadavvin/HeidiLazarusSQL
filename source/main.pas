@@ -1191,6 +1191,7 @@ var
 
 const
   CheckedStates = [csCheckedNormal, csCheckedPressed, csMixedNormal, csMixedPressed];
+  MaxCustomColors = 16;
 
 {$I const.inc}
 
@@ -3481,7 +3482,7 @@ end;
 
 procedure TMainForm.RunQueryFile(FileName: String; Encoding: TEncoding);
 var
-  Dialog: IProgressDialog;
+  {Dialog: IProgressDialog;} //TODO use TProgressBar
   Dummy: Pointer;
   Stream: TFileStream;
   Lines, LinesRemain, ErrorNotice: String;
@@ -3491,20 +3492,20 @@ var
 
   procedure StopProgress;
   begin
-    Dialog.SetLine(1, PChar(_('Clean up ...')), False, Dummy);
+    {Dialog.SetLine(1, PChar(_('Clean up ...')), False, Dummy);}
     Queries.Free;
     Stream.Free;
-    Dialog.StopProgressDialog;
+    {Dialog.StopProgressDialog;}
     // BringToFront; // Not sure why I added this initially, but it steals focus from other applications
     SetFocus;
   end;
 
 begin
   // Import single SQL file and display progress dialog
-  Dialog := CreateComObject(CLSID_ProgressDialog) as IProgressDialog;
-  Dialog.SetTitle(PChar(f_('Importing file %s', [ExtractFileName(FileName)])));
+  {Dialog := CreateComObject(CLSID_ProgressDialog) as IProgressDialog;
+  Dialog.SetTitle(PChar(f_('Importing file %s', [ExtractFileName(FileName)])));}
   Dummy := nil;
-  Dialog.StartProgressDialog(Handle, nil, PROGDLG_MODAL or PROGDLG_NOMINIMIZE or PROGDLG_AUTOTIME, Dummy);
+  {Dialog.StartProgressDialog(Handle, nil, PROGDLG_MODAL or PROGDLG_NOMINIMIZE or PROGDLG_AUTOTIME, Dummy);}
 
   Lines := '';
   ErrorNotice := '';
@@ -3521,24 +3522,24 @@ begin
 
     OpenTextfile(FileName, Stream, Encoding);
     while Stream.Position < Stream.Size do begin
-      if Dialog.HasUserCancelled then
-        Break;
+      {if Dialog.HasUserCancelled then
+        Break;}
 
       // Read lines from SQL file until buffer reaches a limit of some MB
       // This strategy performs vastly better than looping through each line
-      Dialog.SetLine(1, PChar(_('Reading next chunk from file...')), False, Dummy);
+      {Dialog.SetLine(1, PChar(_('Reading next chunk from file...')), False, Dummy);}
       Lines := ReadTextfileChunk(Stream, Encoding, 20*SIZE_MB);
 
       // Split buffer into single queries
-      Dialog.SetLine(1, PChar(_('Splitting queries...')), False, Dummy);
+      {Dialog.SetLine(1, PChar(_('Splitting queries...')), False, Dummy);}
       Queries.SQL := LinesRemain + Lines;
       Lines := '';
       LinesRemain := '';
 
       // Execute detected queries
       for i:=0 to Queries.Count-1 do begin
-        if Dialog.HasUserCancelled then
-          Break;
+        {if Dialog.HasUserCancelled then
+          Break;}
         // Last line has to be processed in next loop if end of file is not reached
         if (i = Queries.Count-1) and (Stream.Position < Stream.Size) then begin
           LinesRemain := Queries[i].SQL;
@@ -3548,7 +3549,7 @@ begin
         Position := Position + Encoding.GetByteCount(Queries[i].SQL);
         if ErrorCount > 0 then
           ErrorNotice := '(' + FormatNumber(ErrorCount) + ' ' + _('Errors') + ')';
-        Dialog.SetLine(1,
+        {Dialog.SetLine(1,
           PChar(f_('Processing query #%s. %s', [FormatNumber(QueryCount), ErrorNotice])),
           False,
           Dummy
@@ -3558,7 +3559,7 @@ begin
           False,
           Dummy
           );
-        Dialog.SetProgress64(Position, FileSize);
+        Dialog.SetProgress64(Position, FileSize);}
         Application.ProcessMessages;
 
         // Execute single query
@@ -3586,11 +3587,11 @@ begin
     end;
 
   except
-    on E:EFileStreamError do begin
+    {on E:EFileStreamError do begin
       StopProgress;
       ErrorDialog(f_('Error while reading file "%s"', [FileName]), E.Message);
       AddOrRemoveFromQueryLoadHistory(FileName, False, True);
-    end;
+    end;}
     on E:EDatabaseError do begin
       StopProgress;
       ErrorDialog(E.Message + CRLF + CRLF +
@@ -3796,7 +3797,7 @@ begin
       ValidateControls(Sender);
     end;
   except on E:EDatabaseError do begin
-      SetProgressState(pbsError);
+      {SetProgressState(pbsError);}
       ErrorDialog(_('Grid editing error'), E.Message);
     end;
   end;
@@ -3869,7 +3870,7 @@ begin
         actRefresh.Execute;
       except
         on E:EDatabaseError do begin
-          SetProgressState(pbsError);
+          {SetProgressState(pbsError);}
           ErrorDialog(E.Message);
         end;
       end;
@@ -4114,11 +4115,11 @@ begin
   keyword := '';
 
   // Query-Tab
-  if ActiveControl is TSynMemo then
+  {if ActiveControl is TSynMemo then
     keyword := TSynMemo(ActiveControl).WordAtCursor
 
   // Data-Tab
-  else if (PageControlMain.ActivePage = tabData)
+  else }if (PageControlMain.ActivePage = tabData)
     and Assigned(DataGrid.FocusedNode) then begin
     keyword := SelectedTableColumns[DataGrid.FocusedColumn].DataType.Name;
 
@@ -4725,11 +4726,11 @@ begin
       Inc(i);
     end;
     // Increase first displayed number in gutter so it doesn't lie about the log entries
-    if i > 0 then
-      SynMemoSQLLog.Gutter.LineNumberStart := SynMemoSQLLog.Gutter.LineNumberStart + i;
+    {if i > 0 then
+      SynMemoSQLLog.Gutter.LineNumberStart := SynMemoSQLLog.Gutter.LineNumberStart + i;}
 
     // Scroll to last line and repaint
-    SynMemoSQLLog.GotoLineAndCenter(SynMemoSQLLog.Lines.Count);
+    {SynMemoSQLLog.GotoLineAndCenter(SynMemoSQLLog.Lines.Count);}
     SynMemoSQLLog.Repaint;
 
     // Log to file?
@@ -4960,7 +4961,7 @@ begin
       rx := TRegExpr.Create;
       rx.ModifierI := True;
       rx.Expression := '^\s*WHERE\s+';
-      SynMemoFilter.Text := rx.Replace(SynMemoFilter.Text, '');
+      {SynMemoFilter.Text := rx.Replace(SynMemoFilter.Text, '');}
       rx.Free;
       Select := Select + ' WHERE ' + SynMemoFilter.Text + CRLF;
       tbtnDataFilter.ImageIndex := 108;
@@ -5181,7 +5182,7 @@ begin
         DataGrid.SetFocus;
     end else if IsQueryTab(tab.PageIndex, True) then begin
       ActiveQueryMemo.SetFocus;
-      ActiveQueryMemo.WordWrap := actQueryWordWrap.Checked;
+      {ActiveQueryMemo.WordWrap := actQueryWordWrap.Checked;}
       SynMemoQueryStatusChange(ActiveQueryMemo, []);
     end;
   end;
@@ -5558,7 +5559,7 @@ begin
     end;
   end;
   rx.Free;
-  Proposal.Form.CurrentEditor.UndoList.AddGroupBreak;
+  {Proposal.Form.CurrentEditor.UndoList.AddGroupBreak;}
 end;
 
 
@@ -5568,9 +5569,9 @@ var
   Proposal: TSynCompletionProposal;
 begin
   Proposal := Sender as TSynCompletionProposal;
-  Proposal.Form.CurrentEditor.UndoList.AddGroupBreak;
+  {Proposal.Form.CurrentEditor.UndoList.AddGroupBreak;
   // Explicitly set focus again to work around a bug in Ultramon, see issue #2396
-  Proposal.Form.CurrentEditor.SetFocus;
+  Proposal.Form.CurrentEditor.SetFocus;}
 end;
 
 
