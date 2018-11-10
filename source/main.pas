@@ -1188,6 +1188,8 @@ end;
 var
   MainForm: TMainForm;
   SecondInstMsgId: UInt16 = 0;
+  rx : TRegExpr;
+  Ident: String;
 
 const
   CheckedStates = [csCheckedNormal, csCheckedPressed, csMixedNormal, csMixedPressed];
@@ -5576,7 +5578,7 @@ end;
 
 
 { Proposal-Combobox pops up }
-procedure TMainForm.SynCompletionProposalExecute(Kind: SynCompletionType;
+{procedure TMainForm.SynCompletionProposalExecute(Kind: SynCompletionType;
   Sender: TObject; var CurrentInput: String; var x, y: Integer;
   var CanExecute: Boolean);
 var
@@ -5621,7 +5623,7 @@ var
     DisplayText := Format(SYNCOMPLETION_PATTERN,
       [Obj.ImageIndex, LowerCase(_(Obj.ObjType)), Obj.Name, FunctionDeclaration]);
     Proposal.AddItem(DisplayText, Obj.Name+FunctionDeclaration);
-  end;
+  end;}
 
   procedure AddColumns(const LeftToken: String);
   var
@@ -5629,6 +5631,8 @@ var
     Columns: TTableColumnList;
     Col: TTableColumn;
     Obj: TDBObject;
+    Conn: TDBConnection; //Add by me, need to check why missing
+    DBObjects: TDBObjectList; //Add by me, need to check why missing
   begin
     dbname := '';
     tblname := LeftToken;
@@ -5651,10 +5655,10 @@ var
           lntView:
             Conn.ParseViewStructure(Obj.CreateCode, Obj, Columns, Dummy, Dummy, Dummy, Dummy, Dummy);
         end;
-        for Col in Columns do begin
+        {for Col in Columns do begin
           Proposal.InsertList.Add(Col.Name);
           Proposal.ItemList.Add(Format(SYNCOMPLETION_PATTERN, [ICONINDEX_FIELD, LowerCase(Col.DataType.Name), Col.Name, '']) );
-        end;
+        end;}
         Columns.Free;
         break;
       end;
@@ -5662,7 +5666,7 @@ var
   end;
 
 begin
-  Proposal := Sender as TSynCompletionProposal;
+  {Proposal := Sender as TSynCompletionProposal;
   Proposal.ClearList;
   Conn := ActiveConnection;
   Editor := Proposal.Form.CurrentEditor;
@@ -5673,7 +5677,7 @@ begin
     Exit;
 
   // Work around for issue #2640. See ApplicationDeActivate
-  Proposal.Form.Enabled := True;
+  Proposal.Form.Enabled := True;}
 
   rx := TRegExpr.Create;
 
