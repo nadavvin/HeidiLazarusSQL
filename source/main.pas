@@ -38,6 +38,7 @@ type
   {TBindParamItemComparer = class(TComparer<TBindParamItem>)
     function Compare(const Left, Right: TBindParamItem): Integer; override;
   end;}
+  TOpenTextFileDialog = TOpenDialog;
 
   TQueryTab = class;
   TResultTab = class(TObject)
@@ -3196,7 +3197,7 @@ var
 begin
   Conn := ActiveConnection;
 
-  ObjectList := TDBobjectList.Create(TDBObjectDropComparer.Create, False);
+  {ObjectList := TDBobjectList.Create(TDBObjectDropComparer.Create, False);}
 
   if DBTreeClicked(Sender) then begin
     // drop table selected in tree view.
@@ -3294,7 +3295,7 @@ begin
     path := AppSettings.ReadString(asMySQLBinaries);
     if (Length(path)>0) and (path[Length(path)] <> sep) then
       path := path + sep;
-    if not FileExists(path+cmd, true) then begin
+    if not FileExists(path+cmd{, true}) then begin
       ErrorDialog(f_('You need to tell %s where your MySQL binaries reside, in %s > %s > %s.', [APPNAME, _('Tools'), _('Preferences'), _('General')])+
         CRLF+CRLF+f_('Current setting is: "%s"', [path]));
     end else begin
@@ -3362,10 +3363,11 @@ begin
   Dialog.Options := Dialog.Options + [ofAllowMultiSelect];
   Dialog.Filter := _('SQL files')+' (*.sql)|*.sql|'+_('All files')+' (*.*)|*.*';
   Dialog.DefaultExt := 'sql';
-  Dialog.Encodings.Assign(FileEncodings);
-  Dialog.EncodingIndex := AppSettings.ReadInt(asFileDialogEncoding, Self.Name);
+  {Dialog.Encodings.Assign(FileEncodings);
+  Dialog.EncodingIndex := AppSettings.ReadInt(asFileDialogEncoding, Self.Name);}
   if Dialog.Execute then begin
-    Encoding := GetEncodingByName(Dialog.Encodings[Dialog.EncodingIndex]);
+    //Encoding := GetEncodingByName(Dialog.Encodings[Dialog.EncodingIndex]);
+    Encoding := Nil;
     if not RunQueryFiles(Dialog.Files, Encoding, Sender=actRunSQL) then begin
       ConsiderActiveTab := True;
       for i:=0 to Dialog.Files.Count-1 do begin
@@ -3376,7 +3378,7 @@ begin
           SetMainTab(Tab.TabSheet);
       end;
     end;
-    AppSettings.WriteInt(asFileDialogEncoding, Dialog.EncodingIndex, Self.Name);
+    //AppSettings.WriteInt(asFileDialogEncoding, Dialog.EncodingIndex, Self.Name);
   end;
   Dialog.Free;
 end;
@@ -3421,7 +3423,7 @@ begin
     if ForceRun then begin
       // Don't ask, just run files
       DialogResult := mrYes;
-    end else if (Win32MajorVersion >= 6) and StyleServices.Enabled then begin
+    end else {if (Win32MajorVersion >= 6) and StyleServices.Enabled then} begin
       Dialog := TTaskDialog.Create(Self);
       Dialog.Caption := _('Opening large files');
       Dialog.Text := f_('Selected files have a size of %s', [FormatByteNumber(FilesizeSum, 1)]);
@@ -3432,11 +3434,11 @@ begin
       Dialog.MainIcon := tdiWarning;
       Btn := TTaskDialogButtonItem(Dialog.Buttons.Add);
       Btn.Caption := _('Run file(s) directly');
-      Btn.CommandLinkHint := _('... without loading into the editor');
+      //Btn.CommandLinkHint := _('... without loading into the editor');
       Btn.ModalResult := mrYes;
       Btn := TTaskDialogButtonItem(Dialog.Buttons.Add);
       Btn.Caption := _('Load file(s) into the editor');
-      Btn.CommandLinkHint := _('Can cause large memory usage');
+      //Btn.CommandLinkHint := _('Can cause large memory usage');
       Btn.ModalResult := mrNo;
       Btn := TTaskDialogButtonItem(Dialog.Buttons.Add);
       Btn.Caption := _('Cancel');
@@ -3444,7 +3446,7 @@ begin
       Dialog.Execute;
       DialogResult := Dialog.ModalResult;
       Dialog.Free;
-    end else begin
+    {end else begin
       msgtext := f_('One or more of the selected files are larger than %s:', [FormatByteNumber(RunFileSize, 0)]) + CRLF +
         ImplodeStr(CRLF, PopupFileList) + CRLF + CRLF +
         _('Just run these files to avoid loading them into the query-editor (= memory)?') + CRLF + CRLF +
@@ -3452,7 +3454,7 @@ begin
         _('  [Yes] to run file(s) without loading it into the editor') + CRLF +
         _('  [No] to load file(s) into the query editor') + CRLF +
         _('  [Cancel] to cancel file opening.');
-      DialogResult := MessageDialog(_('Execute query file(s)?'), msgtext, mtWarning, [mbYes, mbNo, mbCancel]);
+      DialogResult := MessageDialog(_('Execute query file(s)?'), msgtext, mtWarning, [mbYes, mbNo, mbCancel]);}
     end;
 
     case DialogResult of
