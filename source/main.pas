@@ -1587,7 +1587,7 @@ var
   {TZI: TTimeZoneInformation;}
   wine_nt_to_unix_file_name: procedure(p1:pointer; p2:pointer); stdcall;
   OldSnippetsDir, CurrentSnippetsDir, TargetSnippet: String;
-  Files: TStrings; //TStringDynArray exists but cause Incompatible
+  Files: TStringList; //TStringDynArray exists but cause Incompatible
   DpiScaleFactor: Double;
 begin
   caption := APPNAME;
@@ -1666,17 +1666,17 @@ begin
         then begin
       //Files := TDirectory.GetFiles(OldSnippetsDir, '*.sql');
       FindAllFiles(Files, OldSnippetsDir, '*.sql');
-      {if Files.count() > 0 then begin //TODO: Why if not valid?
+      if Files.count > 0 then begin //TODO: Why if not valid?
         LogSQL(f_('Migrating snippet files to new folder: %s', [CurrentSnippetsDir]));
-        for i:=0 to Files.count()-1 do begin
+        for i:=0 to Files.count - 1 do begin
           TargetSnippet := CurrentSnippetsDir + ExtractFileName(Files[i]);
           if RenameFile(PChar(Files[i]), PChar(TargetSnippet)) then begin
             LogSQL(f_('Successfully moved "%s" to "%s"', [Files[i], TargetSnippet]));
           end else begin
-            LogSQL(f_('Error: Could not move "%s" to "%s" (Error: %s)', [Files[i], TargetSnippet, ''{SysErrorMessage(GetLastError())}{]), lcError);
+            LogSQL(f_('Error: Could not move "%s" to "%s" (Error: %s)', [Files[i], TargetSnippet, ''{SysErrorMessage(GetLastError())}]), lcError);
           end;
         end;
-      end;}
+      end;
     end;
   end;
 
