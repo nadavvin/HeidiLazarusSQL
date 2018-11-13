@@ -46,8 +46,7 @@ uses
   change_password in '..\..\source\change_password.pas' {frmPasswordChange},
   Vcl.FormsFix in '..\..\source\Vcl.FormsFix.pas',
   Vcl.Themes,
-  Vcl.Styles,
-  Generics.Collections;
+  Vcl.Styles;
 
 {.$R *.RES}
 {$R ..\..\res\icon.RES}

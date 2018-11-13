@@ -29,10 +29,10 @@
     </RunParams>
     <RequiredPackages Count="5">
       <Item1>
-        <PackageName Value="SQLDBLaz"/>
+        <PackageName Value="Generics.Collections"/>
       </Item1>
       <Item2>
-        <PackageName Value="Generics.Collections"/>
+        <PackageName Value="SQLDBLaz"/>
       </Item2>
       <Item3>
         <PackageName Value="virtualtreeview_package"/>
@@ -44,7 +44,7 @@
         <PackageName Value="LCL"/>
       </Item5>
     </RequiredPackages>
-    <Units Count="40">
+    <Units Count="42">
       <Unit0>
         <Filename Value="heidisql.dpr"/>
         <IsPartOfProject Value="True"/>
@@ -59,6 +59,7 @@
         <Filename Value="../../source/about.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
+        <UnitName Value="About"/>
       </Unit2>
       <Unit3>
         <Filename Value="../../source/connections.pas"/>
@@ -236,6 +237,16 @@
         <Filename Value="../../source/gnugettext2.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit39>
+      <Unit40>
+        <Filename Value="../../source/sqldbconnection.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SQLDBConnection"/>
+      </Unit40>
+      <Unit41>
+        <Filename Value="../../source/missingandconversions.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="MissingAndConversions"/>
+      </Unit41>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
