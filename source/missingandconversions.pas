@@ -5,18 +5,24 @@ unit MissingAndConversions;
 interface
 
 uses
-    Classes, SysUtils, SynCompletion;
+    Classes, SysUtils, SynCompletion, ComCtrls, EditBtn;
 
 type
     TSynCompletionProposalInsertList = class
         procedure Add(str: String);
     end;
+    TTabSet = TTabControl;
+    TButtonedEdit = TEditButton;
 
     TCustomSynEdit = class
+        var
+           PrevWordPos: Int64;
         procedure GetHighlighterAttriAtRowColEx();
     end;
 
     TSynCompletionProposalForm = class
+        var
+           Enabled: Boolean;
         function CurrentEditor() : TCustomSynEdit;
     end;
 
@@ -31,6 +37,10 @@ type
     procedure AddItem(str: String; str2: String);
     procedure ClearList();
   end;
+
+   TApplicationEvents = class
+
+   end;
 
 implementation
 

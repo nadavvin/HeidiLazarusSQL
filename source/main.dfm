@@ -6,7 +6,6 @@ object MainForm: TMainForm
   Color = clBtnFace
   ParentFont = True
   Menu = MainMenu1
-  OldCreateOrder = True
   Position = poDesigned
   ShowHint = True
   OnCloseQuery = FormCloseQuery
@@ -15,7 +14,6 @@ object MainForm: TMainForm
   OnMouseWheel = FormMouseWheel
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 13
   object spltTopBottom: TSplitter
     Left = 0
     Top = 363
@@ -31,7 +29,6 @@ object MainForm: TMainForm
     Top = 367
     Width = 824
     Height = 80
-    SingleLineMode = True
     Align = alBottom
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -40,28 +37,13 @@ object MainForm: TMainForm
     Font.Style = []
     PopupMenu = popupSqlLog
     TabOrder = 1
-    CodeFolding.GutterShapeSize = 11
-    CodeFolding.CollapsedLineColor = clGrayText
-    CodeFolding.FolderBarLinesColor = clGrayText
-    CodeFolding.IndentGuidesColor = clGray
-    CodeFolding.IndentGuides = True
-    CodeFolding.ShowCollapsedLine = False
-    CodeFolding.ShowHintMark = True
-    UseCodeFolding = False
     Gutter.AutoSize = True
-    Gutter.Font.Charset = DEFAULT_CHARSET
-    Gutter.Font.Color = clGrayText
-    Gutter.Font.Height = -11
-    Gutter.Font.Name = 'Terminal'
-    Gutter.Font.Style = []
     Gutter.LeftOffset = 2
-    Gutter.ShowLineNumbers = True
     Highlighter = SynSQLSyn1
     Options = [eoAutoIndent, eoDragDropEditing, eoHideShowScrollbars, eoShowScrollHint, eoSmartTabs, eoTabsToSpaces]
     ReadOnly = True
     RightEdge = 0
     ScrollBars = ssVertical
-    FontSmoothing = fsmNone
   end
   object StatusBar: TStatusBar
     Left = 0
@@ -69,7 +51,6 @@ object MainForm: TMainForm
     Width = 824
     Height = 19
     AutoHint = True
-    DoubleBuffered = True
     Panels = <
       item
         Width = 150
@@ -96,7 +77,6 @@ object MainForm: TMainForm
         Style = psOwnerDraw
         Width = 250
       end>
-    ParentDoubleBuffered = False
     ParentFont = True
     UseSystemFont = False
     OnClick = StatusBarClick
@@ -182,21 +162,6 @@ object MainForm: TMainForm
         OnInitChildren = DBtreeInitChildren
         OnInitNode = DBtreeInitNode
         OnMouseUp = DBtreeMouseUp
-        Columns = <
-          item
-            Position = 0
-            Width = 165
-            WideText = 'Name'
-          end
-          item
-            Alignment = taRightJustify
-            MinWidth = 0
-            Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus]
-            Position = 1
-            Width = 55
-            WideText = 'Size'
-          end>
-        WideDefaultText = ''
       end
       object pnlPreview: TPanel
         Left = 0
@@ -207,19 +172,11 @@ object MainForm: TMainForm
         BevelOuter = bvNone
         TabOrder = 1
         Visible = False
-        DesignSize = (
-          169
-          100)
         object imgPreview: TImage
-          AlignWithMargins = True
           Left = 0
           Top = 25
           Width = 169
           Height = 75
-          Margins.Left = 0
-          Margins.Top = 25
-          Margins.Right = 0
-          Margins.Bottom = 0
           Align = alClient
           Center = True
           Proportional = True
@@ -233,7 +190,6 @@ object MainForm: TMainForm
           Anchors = [akLeft, akTop, akRight]
           AutoSize = False
           Caption = 'Preview ...'
-          EllipsisPosition = epEndEllipsis
           ParentShowHint = False
           ShowAccelChar = False
           ShowHint = True
@@ -281,44 +237,6 @@ object MainForm: TMainForm
         ShowHint = True
         TabOrder = 2
         Wrapable = False
-        object editDatabaseFilter: TButtonedEdit
-          Left = 0
-          Top = 0
-          Width = 50
-          Height = 22
-          Hint = 
-            'Database filter|A list of databases, separated by semicolon. Can' +
-            ' contain regular expressions, e.g. "mydb;test.*;project\d+".'
-          Images = ImageListMain
-          LeftButton.ImageIndex = 191
-          LeftButton.Visible = True
-          RightButton.ImageIndex = 26
-          TabOrder = 0
-          TextHint = 'Database filter'
-          OnChange = editDatabaseTableFilterChange
-          OnExit = editDatabaseTableFilterExit
-          OnKeyPress = editDatabaseTableFilterKeyPress
-          OnLeftButtonClick = editDatabaseTableFilterLeftButtonClick
-          OnRightButtonClick = editDatabaseTableFilterRightButtonClick
-        end
-        object editTableFilter: TButtonedEdit
-          Left = 50
-          Top = 0
-          Width = 50
-          Height = 22
-          Hint = 'Table filter|Can contain regular expressions, e.g. "phpbb_\d"'
-          Images = ImageListMain
-          LeftButton.ImageIndex = 192
-          LeftButton.Visible = True
-          RightButton.ImageIndex = 26
-          TabOrder = 1
-          TextHint = 'Table filter'
-          OnChange = editDatabaseTableFilterChange
-          OnExit = editDatabaseTableFilterExit
-          OnKeyPress = editDatabaseTableFilterKeyPress
-          OnLeftButtonClick = editDatabaseTableFilterLeftButtonClick
-          OnRightButtonClick = editDatabaseTableFilterRightButtonClick
-        end
         object btnTreeFavorites: TToolButton
           Left = 100
           Top = 0
@@ -366,20 +284,6 @@ object MainForm: TMainForm
           Flat = True
           OnClick = actFilterPanelExecute
         end
-        object editFilterVT: TButtonedEdit
-          Left = 70
-          Top = 3
-          Width = 154
-          Height = 21
-          Images = ImageListMain
-          RightButton.Hint = 'Clear filter'
-          RightButton.ImageIndex = 26
-          RightButton.Visible = True
-          TabOrder = 0
-          TextHint = 'Regular expression'
-          OnChange = editFilterVTChange
-          OnRightButtonClick = editFilterVTRightButtonClick
-        end
       end
       object PageControlMain: TPageControl
         Left = 0
@@ -388,7 +292,6 @@ object MainForm: TMainForm
         Height = 311
         ActivePage = tabHost
         Align = alClient
-        HotTrack = True
         Images = ImageListMain
         MultiLine = True
         PopupMenu = popupMainTabs
@@ -407,7 +310,6 @@ object MainForm: TMainForm
             Height = 282
             ActivePage = tabDatabases
             Align = alClient
-            HotTrack = True
             Images = ImageListMain
             TabOrder = 0
             OnChange = PageControlHostChange
@@ -443,54 +345,6 @@ object MainForm: TMainForm
                 OnHeaderClick = AnyGridHeaderClick
                 OnHeaderDraggedOut = AnyGridHeaderDraggedOut
                 OnInitNode = ListDatabasesInitNode
-                Columns = <
-                  item
-                    Position = 0
-                    Width = 150
-                    WideText = 'Database'
-                  end
-                  item
-                    Position = 1
-                    Width = 80
-                    WideText = 'Size'
-                  end
-                  item
-                    Position = 2
-                    WideText = 'Items'
-                  end
-                  item
-                    Position = 3
-                    WideText = 'Last modification'
-                  end
-                  item
-                    Position = 4
-                    WideText = 'Tables'
-                  end
-                  item
-                    Position = 5
-                    WideText = 'Views'
-                  end
-                  item
-                    Position = 6
-                    WideText = 'Functions'
-                  end
-                  item
-                    Position = 7
-                    WideText = 'Procedures'
-                  end
-                  item
-                    Position = 8
-                    WideText = 'Triggers'
-                  end
-                  item
-                    Position = 9
-                    WideText = 'Events'
-                  end
-                  item
-                    Position = 10
-                    Width = 120
-                    WideText = 'Default collation'
-                  end>
               end
             end
             object tabVariables: TTabSheet
@@ -533,22 +387,6 @@ object MainForm: TMainForm
                 OnHeaderClick = AnyGridHeaderClick
                 OnHeaderDraggedOut = AnyGridHeaderDraggedOut
                 OnInitNode = AnyGridInitNode
-                Columns = <
-                  item
-                    Position = 0
-                    Width = 160
-                    WideText = 'Variable'
-                  end
-                  item
-                    Position = 1
-                    Width = 200
-                    WideText = 'Session'
-                  end
-                  item
-                    Position = 2
-                    Width = 271
-                    WideText = 'Global'
-                  end>
               end
             end
             object tabStatus: TTabSheet
@@ -588,30 +426,6 @@ object MainForm: TMainForm
                 OnHeaderClick = AnyGridHeaderClick
                 OnHeaderDraggedOut = AnyGridHeaderDraggedOut
                 OnInitNode = AnyGridInitNode
-                Columns = <
-                  item
-                    Position = 0
-                    Width = 160
-                    WideText = 'Variable'
-                  end
-                  item
-                    Alignment = taRightJustify
-                    Position = 1
-                    Width = 271
-                    WideText = 'Value'
-                  end
-                  item
-                    Alignment = taRightJustify
-                    Position = 2
-                    Width = 100
-                    WideText = 'Avg per hour'
-                  end
-                  item
-                    Alignment = taRightJustify
-                    Position = 3
-                    Width = 100
-                    WideText = 'Avg per second'
-                  end>
               end
             end
             object tabProcessList: TTabSheet
@@ -662,46 +476,6 @@ object MainForm: TMainForm
                 OnHeaderClick = AnyGridHeaderClick
                 OnHeaderDraggedOut = AnyGridHeaderDraggedOut
                 OnInitNode = AnyGridInitNode
-                Columns = <
-                  item
-                    Alignment = taRightJustify
-                    Position = 0
-                    Width = 70
-                    WideText = 'id'
-                  end
-                  item
-                    Position = 1
-                    Width = 80
-                    WideText = 'User'
-                  end
-                  item
-                    Position = 2
-                    Width = 80
-                    WideText = 'Host'
-                  end
-                  item
-                    Position = 3
-                    Width = 80
-                    WideText = 'DB'
-                  end
-                  item
-                    Position = 4
-                    Width = 80
-                    WideText = 'Command'
-                  end
-                  item
-                    Position = 5
-                    WideText = 'Time'
-                  end
-                  item
-                    Position = 6
-                    WideText = 'State'
-                  end
-                  item
-                    Position = 7
-                    Width = 141
-                    WideText = 'Info'
-                  end>
               end
               object pnlProcessViewBox: TPanel
                 Left = 0
@@ -749,7 +523,6 @@ object MainForm: TMainForm
                   Top = 18
                   Width = 635
                   Height = 51
-                  SingleLineMode = False
                   Align = alClient
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
@@ -757,29 +530,12 @@ object MainForm: TMainForm
                   Font.Name = 'Courier New'
                   Font.Style = []
                   TabOrder = 1
-                  CodeFolding.GutterShapeSize = 11
-                  CodeFolding.CollapsedLineColor = clGrayText
-                  CodeFolding.FolderBarLinesColor = clGrayText
-                  CodeFolding.IndentGuidesColor = clGray
-                  CodeFolding.IndentGuides = True
-                  CodeFolding.ShowCollapsedLine = False
-                  CodeFolding.ShowHintMark = True
-                  UseCodeFolding = False
                   Gutter.AutoSize = True
-                  Gutter.DigitCount = 2
-                  Gutter.Font.Charset = DEFAULT_CHARSET
-                  Gutter.Font.Color = clWindowText
-                  Gutter.Font.Height = -11
-                  Gutter.Font.Name = 'Courier New'
-                  Gutter.Font.Style = []
                   Gutter.LeftOffset = 2
-                  Gutter.ShowLineNumbers = True
                   Highlighter = SynSQLSyn1
                   Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces]
                   ReadOnly = True
                   RightEdge = 0
-                  WordWrap = True
-                  FontSmoothing = fsmNone
                 end
               end
             end
@@ -821,35 +577,6 @@ object MainForm: TMainForm
                 OnHeaderClick = AnyGridHeaderClick
                 OnHeaderDraggedOut = AnyGridHeaderDraggedOut
                 OnInitNode = AnyGridInitNode
-                Columns = <
-                  item
-                    Position = 0
-                    Width = 120
-                    WideText = 'Command-type'
-                  end
-                  item
-                    Alignment = taRightJustify
-                    Position = 1
-                    Width = 100
-                    WideText = 'Total count'
-                  end
-                  item
-                    Alignment = taRightJustify
-                    Position = 2
-                    Width = 100
-                    WideText = 'Average per hour'
-                  end
-                  item
-                    Alignment = taRightJustify
-                    Position = 3
-                    Width = 100
-                    WideText = 'Average per second'
-                  end
-                  item
-                    Position = 4
-                    Width = 211
-                    WideText = 'Percentage'
-                  end>
               end
             end
           end
@@ -897,116 +624,6 @@ object MainForm: TMainForm
             OnInitNode = ListTablesInitNode
             OnKeyPress = ListTablesKeyPress
             OnNewText = ListTablesNewText
-            Columns = <
-              item
-                Position = 0
-                Width = 120
-                WideText = 'Name'
-              end
-              item
-                Position = 1
-                Width = 70
-                WideText = 'Rows'
-              end
-              item
-                Position = 2
-                Width = 70
-                WideText = 'Size'
-              end
-              item
-                Position = 3
-                Width = 120
-                WideText = 'Created'
-              end
-              item
-                Position = 4
-                Width = 120
-                WideText = 'Updated'
-              end
-              item
-                Position = 5
-                Width = 70
-                WideText = 'Engine'
-              end
-              item
-                Position = 6
-                Width = 100
-                WideText = 'Comment'
-              end
-              item
-                Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark]
-                Position = 7
-                WideText = 'Version'
-              end
-              item
-                Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark]
-                Position = 8
-                Width = 70
-                WideText = 'Row format'
-              end
-              item
-                Alignment = taRightJustify
-                Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark]
-                Position = 9
-                Width = 70
-                WideText = 'Avg row length'
-              end
-              item
-                Alignment = taRightJustify
-                Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark]
-                Position = 10
-                Width = 70
-                WideText = 'Max data length'
-              end
-              item
-                Alignment = taRightJustify
-                Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark]
-                Position = 11
-                Width = 70
-                WideText = 'Index length'
-              end
-              item
-                Alignment = taRightJustify
-                Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark]
-                Position = 12
-                Width = 70
-                WideText = 'Data free'
-              end
-              item
-                Alignment = taRightJustify
-                Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark]
-                Position = 13
-                Width = 90
-                WideText = 'Auto increment'
-              end
-              item
-                Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark]
-                Position = 14
-                Width = 120
-                WideText = 'Check time'
-              end
-              item
-                Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark]
-                Position = 15
-                Width = 70
-                WideText = 'Collation'
-              end
-              item
-                Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark]
-                Position = 16
-                Width = 70
-                WideText = 'Checksum'
-              end
-              item
-                Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark]
-                Position = 17
-                Width = 70
-                WideText = 'Create options'
-              end
-              item
-                Position = 18
-                WideText = 'Type'
-              end>
           end
         end
         object tabEditor: TTabSheet
@@ -1120,9 +737,6 @@ object MainForm: TMainForm
             BevelOuter = bvNone
             TabOrder = 1
             Visible = False
-            DesignSize = (
-              643
-              66)
             object lblTableFilter: TLabel
               Left = 480
               Top = 0
@@ -1161,7 +775,6 @@ object MainForm: TMainForm
               Top = 21
               Width = 477
               Height = 42
-              SingleLineMode = False
               Anchors = [akLeft, akTop, akRight, akBottom]
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
@@ -1170,22 +783,8 @@ object MainForm: TMainForm
               Font.Style = []
               PopupMenu = popupFilter
               TabOrder = 0
-              CodeFolding.GutterShapeSize = 11
-              CodeFolding.CollapsedLineColor = clGrayText
-              CodeFolding.FolderBarLinesColor = clGrayText
-              CodeFolding.IndentGuidesColor = clGray
-              CodeFolding.IndentGuides = True
-              CodeFolding.ShowCollapsedLine = False
-              CodeFolding.ShowHintMark = True
-              UseCodeFolding = False
-              Gutter.Font.Charset = DEFAULT_CHARSET
-              Gutter.Font.Color = clWindowText
-              Gutter.Font.Height = -11
-              Gutter.Font.Name = 'Terminal'
-              Gutter.Font.Style = []
               Gutter.LeftOffset = 10
               Gutter.RightOffset = 0
-              Gutter.ShowLineNumbers = True
               Gutter.Visible = False
               Gutter.Width = 0
               Highlighter = SynSQLSyn1
@@ -1193,9 +792,7 @@ object MainForm: TMainForm
               RightEdge = 0
               ScrollBars = ssVertical
               WantTabs = True
-              WordWrap = True
               OnStatusChange = SynMemoFilterStatusChange
-              FontSmoothing = fsmNone
             end
             object editFilterSearch: TEdit
               Left = 480
@@ -1264,7 +861,6 @@ object MainForm: TMainForm
             OnMouseUp = AnyGridMouseUp
             OnMouseWheel = AnyGridMouseWheel
             OnNewText = AnyGridNewText
-            Columns = <>
           end
         end
         object tabQuery: TTabSheet
@@ -1288,7 +884,6 @@ object MainForm: TMainForm
             Align = alTop
             BevelOuter = bvNone
             TabOrder = 0
-            OnCanResize = pnlQueryMemoCanResize
             object spltQueryHelpers: TSplitter
               Left = 448
               Top = 0
@@ -1303,9 +898,7 @@ object MainForm: TMainForm
               Top = 0
               Width = 448
               Height = 96
-              SingleLineMode = False
               Align = alClient
-              ActiveLineColor = clWindow
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -13
@@ -1316,24 +909,9 @@ object MainForm: TMainForm
               OnDragDrop = SynMemoQueryDragDrop
               OnDragOver = SynMemoQueryDragOver
               OnKeyPress = SynMemoQueryKeyPress
-              OnMouseWheel = SynMemoQueryMouseWheel
-              CodeFolding.GutterShapeSize = 11
-              CodeFolding.CollapsedLineColor = clGrayText
-              CodeFolding.FolderBarLinesColor = clGrayText
-              CodeFolding.IndentGuidesColor = clGray
-              CodeFolding.IndentGuides = True
-              CodeFolding.ShowCollapsedLine = False
-              CodeFolding.ShowHintMark = True
-              UseCodeFolding = False
               Gutter.AutoSize = True
-              Gutter.Font.Charset = DEFAULT_CHARSET
-              Gutter.Font.Color = clGrayText
-              Gutter.Font.Height = -11
-              Gutter.Font.Name = 'Terminal'
-              Gutter.Font.Style = []
               Gutter.LeftOffset = 2
               Gutter.RightOffset = 0
-              Gutter.ShowLineNumbers = True
               Highlighter = SynSQLSyn1
               Options = [eoAutoIndent, eoAutoSizeMaxScrollWidth, eoDropFiles, eoGroupUndo, eoHideShowScrollbars, eoKeepCaretX, eoShowScrollHint, eoTabIndent]
               RightEdge = 0
@@ -1342,18 +920,6 @@ object MainForm: TMainForm
               OnDropFiles = SynMemoQueryDropFiles
               OnReplaceText = SynMemoQueryReplaceText
               OnStatusChange = SynMemoQueryStatusChange
-              OnPaintTransient = SynMemoQueryPaintTransient
-              FontSmoothing = fsmNone
-              RemovedKeystrokes = <>
-              AddedKeystrokes = <
-                item
-                  Command = ecUpperCaseBlock
-                  ShortCut = 16469
-                end
-                item
-                  Command = ecLowerCaseBlock
-                  ShortCut = 16460
-                end>
             end
             object treeQueryHelpers: TVirtualStringTree
               Left = 452
@@ -1393,17 +959,6 @@ object MainForm: TMainForm
               OnNewText = treeQueryHelpersNewText
               OnNodeClick = treeQueryHelpersNodeClick
               OnResize = treeQueryHelpersResize
-              Columns = <
-                item
-                  Position = 0
-                  Width = 70
-                  WideText = 'Main column'
-                end
-                item
-                  Position = 1
-                  Width = 100
-                  WideText = 'Attributes'
-                end>
             end
           end
           object QueryGrid: TVirtualStringTree
@@ -1454,30 +1009,6 @@ object MainForm: TMainForm
             OnMouseWheel = AnyGridMouseWheel
             OnNewText = AnyGridNewText
             OnStartOperation = AnyGridStartOperation
-            Columns = <>
-          end
-          object tabsetQuery: TTabSet
-            Left = 0
-            Top = 100
-            Width = 643
-            Height = 24
-            Align = alTop
-            DitherBackground = False
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            Images = ImageListMain
-            SelectedColor = clWindow
-            SoftTop = True
-            Style = tsSoftTabs
-            TabPosition = tpTop
-            UnselectedColor = clBtnFace
-            OnClick = tabsetQueryClick
-            OnGetImageIndex = tabsetQueryGetImageIndex
-            OnMouseLeave = tabsetQueryMouseLeave
-            OnMouseMove = tabsetQueryMouseMove
           end
         end
       end
@@ -1500,7 +1031,6 @@ object MainForm: TMainForm
     AutoSize = True
     BevelInner = bvNone
     BevelOuter = bvNone
-    BevelKind = bkNone
     TabOrder = 4
     object ToolBarMainButtons: TToolBar
       Left = 11
@@ -1703,7 +1233,6 @@ object MainForm: TMainForm
     end
   end
   object MainMenu1: TMainMenu
-    AutoHotkeys = maManual
     Images = ImageListMain
     Left = 424
     Top = 152
@@ -1743,9 +1272,6 @@ object MainForm: TMainForm
       end
       object N1: TMenuItem
         Caption = '-'
-      end
-      object actSelectTreeBackground1: TMenuItem
-        Action = actSelectTreeBackground
       end
       object ExportSettings1: TMenuItem
         Action = actExportSettings
@@ -1933,877 +1459,13 @@ object MainForm: TMainForm
       end
     end
   end
-  object ActionList1: TActionList
-    Images = ImageListMain
-    Left = 424
-    Top = 104
-    object actSessionManager: TAction
-      Category = 'File'
-      Caption = 'Session manager'
-      Hint = 'Display session manager'
-      ImageIndex = 37
-      OnExecute = actSessionManagerExecute
-    end
-    object actNewWindow: TAction
-      Category = 'File'
-      Caption = 'New &window'
-      Hint = 'New window...'
-      ImageIndex = 37
-      ShortCut = 16462
-      OnExecute = actNewWindowExecute
-    end
-    object actExitApplication: TAction
-      Category = 'File'
-      Caption = 'E&xit'
-      Hint = 'Exit|Exit application'
-      ImageIndex = 26
-      OnExecute = actExitApplicationExecute
-    end
-    object actCopy: TAction
-      Category = 'Various'
-      Caption = '&Copy'
-      Hint = 'Copy|Copy to Clipboard'
-      ImageIndex = 3
-      ShortCut = 16451
-      OnExecute = actCopyOrCutExecute
-    end
-    object actPaste: TAction
-      Category = 'Various'
-      Caption = '&Paste'
-      Hint = 'Paste|Paste from Clipboard'
-      ImageIndex = 4
-      ShortCut = 16470
-      OnExecute = actPasteExecute
-    end
-    object actUserManager: TAction
-      Category = 'Tools'
-      Caption = 'User manager'
-      Hint = 'Manage user authentication and privileges'
-      ImageIndex = 11
-      OnExecute = actUserManagerExecute
-    end
-    object actCut: TAction
-      Category = 'Various'
-      Caption = 'Cu&t'
-      Hint = 'Cut|Cuts the selection and puts it on the Clipboard'
-      ImageIndex = 2
-      ShortCut = 16472
-      OnExecute = actCopyOrCutExecute
-    end
-    object actUndo: TEditUndo
-      Category = 'Various'
-      Caption = '&Undo'
-      Enabled = False
-      ImageIndex = 40
-      ShortCut = 32776
-    end
-    object actAboutBox: TAction
-      Category = 'Various'
-      Caption = 'About...'
-      Hint = 'About this application'
-      ImageIndex = 99
-      OnExecute = actAboutBoxExecute
-    end
-    object actMaintenance: TAction
-      Category = 'Tools'
-      Caption = 'Maintenance'
-      Hint = 'Optimize, repair and analyse tables'
-      ImageIndex = 39
-      OnExecute = actTableToolsExecute
-    end
-    object actFindTextOnServer: TAction
-      Category = 'Tools'
-      Caption = 'Find text on server'
-      Hint = 'Searches selected tables for text occurences'
-      ImageIndex = 146
-      ShortCut = 24646
-      OnExecute = actTableToolsExecute
-    end
-    object actExportData: TAction
-      Category = 'Export/Import'
-      Caption = 'Export grid rows'
-      Enabled = False
-      Hint = 'Export rows to file or copy to clipboard, in various formats'
-      ImageIndex = 20
-      OnExecute = actExportDataExecute
-    end
-    object actPrintList: TAction
-      Category = 'Various'
-      Caption = 'Print...'
-      Hint = 'Print List or Data'
-      ImageIndex = 34
-      ShortCut = 16464
-      OnExecute = actPrintListExecute
-    end
-    object actCopyTable: TAction
-      Category = 'Database'
-      Caption = 'Table copy'
-      Enabled = False
-      Hint = 'Create a base table copy of this table or view'
-      ImageIndex = 19
-      OnExecute = actCopyTableExecute
-    end
-    object actExecuteQuery: TAction
-      Category = 'SQL'
-      Caption = 'Run'
-      Enabled = False
-      Hint = 'Execute SQL...|Execute SQL-query/queries...'
-      ImageIndex = 57
-      ShortCut = 120
-      OnExecute = actExecuteQueryExecute
-    end
-    object actExecuteSelection: TAction
-      Category = 'SQL'
-      Caption = 'Run Selection'
-      Enabled = False
-      Hint = 'Execute selected SQL...|Execute selected SQL-query/queries...'
-      ImageIndex = 104
-      ShortCut = 16504
-      OnExecute = actExecuteQueryExecute
-    end
-    object actExecuteCurrentQuery: TAction
-      Category = 'SQL'
-      Caption = 'Run current query'
-      Enabled = False
-      Hint = 'Run current query|Run currently focused SQL query'
-      ImageIndex = 105
-      ShortCut = 24696
-      OnExecute = actExecuteQueryExecute
-    end
-    object actExplainCurrentQuery: TAction
-      Category = 'SQL'
-      Caption = 'Explain current query'
-      Hint = 'Run EXPLAIN <current query> and show results'
-      OnExecute = actExecuteQueryExecute
-    end
-    object actExplainAnalyzeCurrentQuery: TAction
-      Category = 'SQL'
-      Caption = 'Explain analyzer for current query'
-      Hint = 'Run EXPLAIN <current query> and send results to MariaDB.org'
-      OnExecute = actExplainAnalyzeCurrentQueryExecute
-    end
-    object actDataPreview: TAction
-      Category = 'Data'
-      Caption = 'Image preview'
-      Hint = 'Preview image contents from BLOB cells'
-      ImageIndex = 152
-      OnExecute = actDataPreviewExecute
-      OnUpdate = actDataPreviewUpdate
-    end
-    object actInsertFiles: TAction
-      Category = 'Export/Import'
-      Caption = 'Insert files into TEXT/BLOB fields...'
-      ImageIndex = 47
-      OnExecute = actInsertFilesExecute
-    end
-    object actExportTables: TAction
-      Category = 'Export/Import'
-      Caption = 'Export database as SQL'
-      Hint = 'Dump database objects to an SQL file'
-      ImageIndex = 9
-      OnExecute = actTableToolsExecute
-    end
-    object actLoadSQL: TAction
-      Category = 'SQL'
-      Caption = 'Load SQL file...'
-      Hint = 'Load SQL file...'
-      ImageIndex = 51
-      ShortCut = 16463
-      OnExecute = actLoadSQLExecute
-    end
-    object actRunSQL: TAction
-      Category = 'SQL'
-      Caption = 'Run SQL file...'
-      Hint = 'Run SQL file(s) directly, without loading into the editor'
-      ImageIndex = 189
-      OnExecute = actLoadSQLExecute
-    end
-    object actDropObjects: TAction
-      Category = 'Database'
-      Caption = 'Drop ...'
-      Enabled = False
-      Hint = 'Deletes tables, views, procedures and functions'
-      ImageIndex = 131
-      OnExecute = actDropObjectsExecute
-    end
-    object actCreateView: TAction
-      Category = 'Database'
-      Caption = 'View'
-      Enabled = False
-      Hint = 'Create view ...'
-      ImageIndex = 81
-      OnExecute = actCreateDBObjectExecute
-    end
-    object actDataFirst: TAction
-      Category = 'Data'
-      Caption = '&First'
-      Enabled = False
-      Hint = 'First'
-      ImageIndex = 89
-      OnExecute = actDataFirstExecute
-    end
-    object actDataLast: TAction
-      Category = 'Data'
-      Caption = '&Last'
-      Enabled = False
-      Hint = 'Last'
-      ImageIndex = 90
-      OnExecute = actDataLastExecute
-    end
-    object actDataInsert: TAction
-      Category = 'Data'
-      Caption = '&Insert row'
-      Enabled = False
-      Hint = 'Insert row into table'
-      ImageIndex = 45
-      ShortCut = 45
-      OnExecute = actDataInsertExecute
-    end
-    object actDataDuplicateRow: TAction
-      Category = 'Data'
-      Caption = 'Duplicate row'
-      Enabled = False
-      ImageIndex = 45
-      ShortCut = 16429
-      OnExecute = actDataInsertExecute
-    end
-    object actDataDelete: TAction
-      Category = 'Data'
-      Caption = '&Delete selected row(s)'
-      Enabled = False
-      Hint = 'Delete selected row(s)'
-      ImageIndex = 46
-      ShortCut = 16430
-      OnExecute = actDataDeleteExecute
-    end
-    object actDataPostChanges: TAction
-      Category = 'Data'
-      Caption = 'P&ost'
-      Enabled = False
-      Hint = 'Post'
-      ImageIndex = 55
-      ShortCut = 16397
-      OnExecute = actDataPostChangesExecute
-    end
-    object actDataCancelChanges: TAction
-      Category = 'Data'
-      Caption = 'Cancel editing'
-      Enabled = False
-      Hint = 'Cancel editing'
-      ImageIndex = 26
-      ShortCut = 27
-      OnExecute = actDataCancelChangesExecute
-    end
-    object actCreateTable: TAction
-      Category = 'Database'
-      Caption = 'Table'
-      Enabled = False
-      Hint = 'Create new table in selected database'
-      ImageIndex = 14
-      OnExecute = actCreateDBObjectExecute
-    end
-    object actEmptyTables: TAction
-      Category = 'Database'
-      Caption = 'Empty table(s) ...'
-      Enabled = False
-      Hint = 'Delete all rows in selected table(s)'
-      ImageIndex = 46
-      ShortCut = 8238
-      OnExecute = actEmptyTablesExecute
-    end
-    object actCreateDatabase: TAction
-      Category = 'Database'
-      Caption = 'Database'
-      Hint = 'Create a new, blank database'
-      ImageIndex = 5
-      OnExecute = actCreateDatabaseExecute
-    end
-    object actSQLhelp: TAction
-      Category = 'Tools'
-      Caption = 'SQL help'
-      Enabled = False
-      Hint = 'SQL help browser'
-      ImageIndex = 31
-      ShortCut = 112
-      OnExecute = actSQLhelpExecute
-    end
-    object actRefresh: TAction
-      Category = 'Various'
-      Caption = 'Refresh'
-      Hint = 'Refresh'
-      ImageIndex = 0
-      ShortCut = 116
-      OnExecute = actRefreshExecute
-    end
-    object actFullRefresh: TAction
-      Category = 'Various'
-      Caption = 'Full status refresh'
-      Enabled = False
-      Hint = 
-        'Get full statistics refresh on table data. Slow on InnoDB tables' +
-        '!'
-      ImageIndex = 184
-      ShortCut = 8308
-      OnExecute = actFullRefreshExecute
-    end
-    object actImportCSV: TAction
-      Category = 'Export/Import'
-      Caption = 'Import CSV file...'
-      Hint = 'Import a CSV or tab delimited file'
-      ImageIndex = 50
-      OnExecute = actImportCSVExecute
-    end
-    object actExportSettings: TAction
-      Category = 'Export/Import'
-      Caption = 'Export settings file ...'
-      ImageIndex = 100
-      OnExecute = actExportSettingsExecute
-    end
-    object actImportSettings: TAction
-      Category = 'Export/Import'
-      Caption = 'Import settings file ...'
-      ImageIndex = 101
-      OnExecute = actImportSettingsExecute
-    end
-    object actPreferences: TAction
-      Category = 'Tools'
-      Caption = 'Preferences'
-      ImageIndex = 98
-      OnExecute = actPreferencesExecute
-    end
-    object actPreferencesLogging: TAction
-      Category = 'Tools'
-      Caption = 'Logging preferences'
-    end
-    object actPreferencesData: TAction
-      Category = 'Tools'
-      Caption = 'Data grid preferences'
-    end
-    object actFlushHosts: TAction
-      Category = 'Tools'
-      Caption = 'Hosts'
-      ImageIndex = 28
-      OnExecute = actFlushExecute
-    end
-    object actFlushLogs: TAction
-      Category = 'Tools'
-      Caption = 'Logs'
-      ImageIndex = 28
-      OnExecute = actFlushExecute
-    end
-    object actFlushPrivileges: TAction
-      Category = 'Tools'
-      Caption = 'Privileges'
-      ImageIndex = 28
-      OnExecute = actFlushExecute
-    end
-    object actFlushTables: TAction
-      Category = 'Tools'
-      Caption = 'Tables'
-      ImageIndex = 28
-      OnExecute = actFlushExecute
-    end
-    object actFlushTableswithreadlock: TAction
-      Category = 'Tools'
-      Caption = 'Tables with read lock'
-      ImageIndex = 28
-      OnExecute = actFlushExecute
-    end
-    object actFlushStatus: TAction
-      Category = 'Tools'
-      Caption = 'Status'
-      ImageIndex = 28
-      OnExecute = actFlushExecute
-    end
-    object actUpdateCheck: TAction
-      Category = 'Tools'
-      Caption = 'Check for updates ...'
-      ImageIndex = 94
-      OnExecute = actUpdateCheckExecute
-    end
-    object actWebDownloadpage: TAction
-      Category = 'Various'
-      Caption = 'Download page'
-      Hint = 'http://www.heidisql.com/download.php'
-      ImageIndex = 69
-      OnExecute = actWebbrowse
-    end
-    object actWebForum: TAction
-      Category = 'Various'
-      Caption = 'Support forum'
-      Hint = 'http://www.heidisql.com/forum.php'
-      ImageIndex = 95
-      OnExecute = actWebbrowse
-    end
-    object actWebChangelog: TAction
-      Category = 'Various'
-      Caption = 'Changelog'
-      Hint = 'https://github.com/HeidiSQL/HeidiSQL/commits/master'
-      ImageIndex = 68
-      OnExecute = actWebbrowse
-    end
-    object actHelp: TAction
-      Category = 'Various'
-      Caption = 'General help'
-      Hint = 'General online help document'
-      ImageIndex = 99
-      OnExecute = actHelpExecute
-    end
-    object actSaveSQLAs: TAction
-      Category = 'SQL'
-      Caption = 'Save as ...'
-      Enabled = False
-      Hint = 'Save SQL to a textfile'
-      ImageIndex = 10
-      ShortCut = 123
-      OnExecute = actSaveSQLAsExecute
-    end
-    object actSaveSQLselection: TAction
-      Category = 'SQL'
-      Caption = 'Save selection to file ...'
-      Enabled = False
-      Hint = 'Save selected text to a file'
-      ImageIndex = 10
-      ShortCut = 24659
-      OnExecute = actSaveSQLAsExecute
-    end
-    object actSaveSQLSnippet: TAction
-      Category = 'SQL'
-      Caption = 'Save as snippet ...'
-      Enabled = False
-      Hint = 'Save as snippet ...'
-      ImageIndex = 54
-      OnExecute = actSaveSQLAsExecute
-    end
-    object actSaveSQLSelectionSnippet: TAction
-      Category = 'SQL'
-      Caption = 'Save selection as snippet ...'
-      Enabled = False
-      Hint = 'Save selected text as snippet ...'
-      ImageIndex = 54
-      OnExecute = actSaveSQLAsExecute
-    end
-    object actClearQueryEditor: TAction
-      Category = 'SQL'
-      Caption = 'Clear'
-      Enabled = False
-      Hint = 'Clear query editor'
-      ImageIndex = 58
-      ShortCut = 16471
-      OnExecute = actClearEditorExecute
-    end
-    object actClearFilterEditor: TAction
-      Category = 'Data'
-      Caption = 'Clear'
-      Hint = 'Clear filter editor'
-      ImageIndex = 58
-      ShortCut = 16471
-      OnExecute = actClearEditorExecute
-    end
-    object actClearQueryLog: TAction
-      Category = 'SQL'
-      Caption = 'Clear'
-      Hint = 'Clear query log'
-      ImageIndex = 58
-      ShortCut = 16465
-      OnExecute = actClearEditorExecute
-    end
-    object actQueryStopOnErrors: TAction
-      Category = 'SQL'
-      AutoCheck = True
-      Caption = 'Stop on errors in batch mode'
-      Checked = True
-      Hint = 'Stop on errors in batch mode'
-      ImageIndex = 63
-      OnExecute = actQueryStopOnErrorsExecute
-    end
-    object actQueryWordWrap: TAction
-      Category = 'SQL'
-      AutoCheck = True
-      Caption = 'Wrap long lines'
-      Hint = 'Wrap long lines'
-      ImageIndex = 62
-      OnExecute = actQueryWordWrapExecute
-    end
-    object actQueryFind: TAction
-      Category = 'SQL'
-      Caption = 'Find text ...'
-      Hint = 'Find text ...'
-      ImageIndex = 30
-      ShortCut = 16454
-      OnExecute = actQueryFindReplaceExecute
-    end
-    object actQueryReplace: TAction
-      Category = 'SQL'
-      Caption = 'Replace text ...'
-      Hint = 'Replace text ...'
-      ImageIndex = 59
-      ShortCut = 16466
-      OnExecute = actQueryFindReplaceExecute
-    end
-    object actQueryFindAgain: TAction
-      Category = 'SQL'
-      Caption = 'Find or replace again'
-      ImageIndex = 142
-      ShortCut = 114
-      OnExecute = actQueryFindAgainExecute
-    end
-    object actSetDelimiter: TAction
-      Category = 'SQL'
-      Caption = 'Set delimiter used in SQL execution'
-      Enabled = False
-      Hint = 'Set delimiter used in SQL execution'
-      ImageIndex = 106
-      OnExecute = actSetDelimiterExecute
-    end
-    object actApplyFilter: TAction
-      Category = 'Data'
-      Caption = 'Apply filter'
-      ImageIndex = 55
-      ShortCut = 120
-      OnExecute = actApplyFilterExecute
-    end
-    object actRemoveFilter: TAction
-      Category = 'Data'
-      Caption = 'Remove filter'
-      ImageIndex = 26
-      OnExecute = actRemoveFilterExecute
-    end
-    object actSelectTreeBackground: TAction
-      Category = 'File'
-      Caption = 'Select session background color ...'
-      Hint = 'Lets you chose a per session color value for the database tree'
-      ImageIndex = 115
-      OnExecute = actSelectTreeBackgroundExecute
-    end
-    object actPreviousTab: TPreviousTab
-      Category = 'Tools'
-      TabControl = PageControlMain
-      Caption = '&Previous tab'
-      Hint = 'Previous tab|Go back to the previous tab'
-      ImageIndex = 117
-      ShortCut = 24585
-      Wrap = True
-    end
-    object actNextTab: TNextTab
-      Category = 'Tools'
-      TabControl = PageControlMain
-      Caption = '&Next tab'
-      Hint = 'Next tab|Go to the next tab'
-      ImageIndex = 116
-      ShortCut = 16393
-      Wrap = True
-    end
-    object actSelectAll: TAction
-      Category = 'Various'
-      Caption = 'Select all'
-      Hint = 'Select all|Select all items or text'
-      ImageIndex = 118
-      ShortCut = 16449
-      OnExecute = actSelectAllExecute
-      OnUpdate = ValidateControls
-    end
-    object actCreateRoutine: TAction
-      Category = 'Database'
-      Caption = 'Stored routine'
-      Hint = 'Create stored routine|Create stored procedure or function'
-      ImageIndex = 119
-      OnExecute = actCreateDBObjectExecute
-    end
-    object actNewQueryTab: TAction
-      Category = 'File'
-      Caption = 'New query tab'
-      Hint = 'Open a blank query tab'
-      ImageIndex = 132
-      ShortCut = 16468
-      OnExecute = actNewQueryTabExecute
-    end
-    object actCloseQueryTab: TAction
-      Category = 'File'
-      Caption = 'Close query tab'
-      Enabled = False
-      ImageIndex = 133
-      ShortCut = 16499
-      OnExecute = actCloseQueryTabExecute
-    end
-    object actSelectInverse: TAction
-      Category = 'Various'
-      Caption = 'Invert selection'
-      ImageIndex = 138
-      ShortCut = 16457
-      OnExecute = actSelectInverseExecute
-    end
-    object actFilterPanel: TAction
-      Category = 'Various'
-      AutoCheck = True
-      Caption = 'Filter panel'
-      Hint = 'Activates the filter panel'
-      ImageIndex = 30
-      ShortCut = 49222
-      OnExecute = actFilterPanelExecute
-    end
-    object actBulkTableEdit: TAction
-      Category = 'Tools'
-      Caption = 'Bulk table editor'
-      ImageIndex = 19
-      OnExecute = actTableToolsExecute
-    end
-    object actCreateTrigger: TAction
-      Category = 'Database'
-      Caption = 'Trigger'
-      Hint = 'Create a trigger'
-      ImageIndex = 137
-      OnExecute = actCreateDBObjectExecute
-    end
-    object actSaveSQL: TAction
-      Category = 'SQL'
-      Caption = 'Save'
-      Enabled = False
-      Hint = 'Save SQL to file'
-      ImageIndex = 10
-      ShortCut = 16467
-      OnExecute = actSaveSQLExecute
-    end
-    object actDataResetSorting: TAction
-      Category = 'Data'
-      Caption = 'Reset sorting'
-      ImageIndex = 139
-      ShortCut = 32851
-      OnExecute = actDataResetSortingExecute
-    end
-    object actReformatSQL: TAction
-      Category = 'SQL'
-      Caption = 'Reformat SQL'
-      Hint = 
-        'Automatically reformat disordered SQL in active editor to make i' +
-        't more readable'
-      ImageIndex = 140
-      ShortCut = 16503
-      OnExecute = actReformatSQLExecute
-    end
-    object actBlobAsText: TAction
-      Category = 'Data'
-      AutoCheck = True
-      Caption = 'View binary data as text (instead of HEX)'
-      Hint = 'View binary data as text (instead of HEX)'
-      ImageIndex = 141
-      OnExecute = actBlobAsTextExecute
-    end
-    object actDataShowNext: TAction
-      Category = 'Data'
-      Caption = 'Next'
-      Hint = 'Next X rows'
-      ImageIndex = 79
-      ShortCut = 49186
-      OnExecute = actDataShowNextExecute
-    end
-    object actDataShowAll: TAction
-      Category = 'Data'
-      Caption = 'Show all'
-      Hint = 'Show all rows'
-      ImageIndex = 143
-      ShortCut = 49187
-      OnExecute = actDataShowAllExecute
-    end
-    object actRunRoutines: TAction
-      Category = 'Database'
-      Caption = 'Run routine(s) ...'
-      ImageIndex = 35
-      OnExecute = actRunRoutinesExecute
-    end
-    object actCreateEvent: TAction
-      Category = 'Database'
-      Caption = 'Event'
-      Enabled = False
-      Hint = 'Create new event in selected database'
-      ImageIndex = 80
-      OnExecute = actCreateDBObjectExecute
-    end
-    object actDataSetNull: TAction
-      Category = 'Data'
-      Caption = 'NULL'
-      Enabled = False
-      Hint = 'Set focused cell to NULL'
-      ImageIndex = 92
-      ShortCut = 24654
-      OnExecute = actDataSetNullExecute
-    end
-    object actDataSaveBlobToFile: TAction
-      Category = 'Data'
-      Caption = 'Save BLOB to file ...'
-      Hint = 'Save contents to local file ...'
-      ImageIndex = 10
-      OnExecute = actDataSaveBlobToFileExecute
-    end
-    object actDisconnect: TAction
-      Category = 'File'
-      Caption = 'Disconnect'
-      Hint = 'Close selected database connection'
-      ImageIndex = 29
-      OnExecute = actDisconnectExecute
-    end
-    object actBatchInOneGo: TAction
-      Category = 'SQL'
-      AutoCheck = True
-      Caption = 'Send batch in one go'
-      GroupIndex = 1
-      Hint = 'Send up to max_allowed_packet batch at once'
-      OnExecute = actBatchInOneGoExecute
-    end
-    object actSingleQueries: TAction
-      Category = 'SQL'
-      AutoCheck = True
-      Caption = 'Send queries one by one'
-      Checked = True
-      GroupIndex = 1
-      OnExecute = actBatchInOneGoExecute
-    end
-    object actCancelOperation: TAction
-      Category = 'Various'
-      Caption = 'Cancel running operation'
-      Enabled = False
-      Hint = 'Cancel running operation'
-      ImageIndex = 159
-      ShortCut = 27
-      OnExecute = actCancelOperationExecute
-    end
-    object actToggleComment: TAction
-      Category = 'SQL'
-      Caption = 'Un/comment'
-      Hint = 'Makes selected SQL a comment or removes comment chars'
-      ImageIndex = 165
-      OnExecute = actToggleCommentExecute
-    end
-    object actSynchronizeDatabase: TAction
-      Category = 'Export/Import'
-      Caption = 'Synchronize database'
-      ImageIndex = 27
-      OnExecute = actSynchronizeDatabaseExecute
-    end
-    object actLaunchCommandline: TAction
-      Category = 'Tools'
-      Caption = 'Launch command line'
-      ImageIndex = 170
-      OnExecute = actLaunchCommandlineExecute
-    end
-    object actGridEditFunction: TAction
-      Category = 'Data'
-      Caption = 'SQL function'
-      Hint = 'Insert SQL function call in this grid cell, e.g. NOW()'
-      ImageIndex = 13
-      ShortCut = 16497
-      OnExecute = actGridEditFunctionExecute
-    end
-    object actLogHorizontalScrollbar: TAction
-      Category = 'Various'
-      AutoCheck = True
-      Caption = 'Horizontal scrollbar'
-      OnExecute = actLogHorizontalScrollbarExecute
-    end
-    object actGroupObjects: TAction
-      Category = 'Various'
-      AutoCheck = True
-      Caption = 'Group objects by type'
-      OnExecute = actGroupObjectsExecute
-    end
-    object actUnixTimestampColumn: TAction
-      Category = 'Data'
-      AutoCheck = True
-      Caption = 'This is a UNIX timestamp column'
-      Enabled = False
-      OnExecute = actUnixTimestampColumnExecute
-    end
-    object actFavoriteObjectsOnly: TAction
-      Category = 'Various'
-      AutoCheck = True
-      Caption = 'Show only favorites'
-      Hint = 'Show only favorite tree items'
-      ImageIndex = 112
-      OnExecute = actFavoriteObjectsOnlyExecute
-    end
-    object actPreviousResult: TAction
-      Category = 'Data'
-      Caption = 'Previous result tab'
-      ImageIndex = 117
-      ShortCut = 32805
-      OnExecute = actPreviousResultExecute
-    end
-    object actNextResult: TAction
-      Category = 'Data'
-      Caption = 'Next result tab'
-      ImageIndex = 116
-      ShortCut = 32807
-      OnExecute = actNextResultExecute
-    end
-    object actSaveSynMemoToTextfile: TAction
-      Category = 'Various'
-      Caption = 'Save as textfile...'
-      Hint = 'Save contents to a textfile'
-      ImageIndex = 10
-      ShortCut = 16467
-      OnExecute = actSaveSynMemoToTextfileExecute
-      OnUpdate = ValidateControls
-    end
-    object actGotoDbTree: TAction
-      Category = 'Various'
-      Caption = 'Database tree'
-      ShortCut = 16452
-      OnExecute = actGotoDbTreeExecute
-    end
-    object actGotoFilter: TAction
-      Category = 'Various'
-      Caption = 'Table filter'
-      ShortCut = 16453
-      OnExecute = actGotoFilterExecute
-    end
-    object actGotoTab1: TAction
-      Category = 'Various'
-      Caption = 'Tab 1'
-      ShortCut = 16433
-      OnExecute = actGotoTabNumberExecute
-    end
-    object actGotoTab2: TAction
-      Category = 'Various'
-      Caption = 'Tab 2'
-      ShortCut = 16434
-      OnExecute = actGotoTabNumberExecute
-    end
-    object actGotoTab3: TAction
-      Category = 'Various'
-      Caption = 'Tab 3'
-      ShortCut = 16435
-      OnExecute = actGotoTabNumberExecute
-    end
-    object actGotoTab4: TAction
-      Category = 'Various'
-      Caption = 'Tab 4'
-      ShortCut = 16436
-      OnExecute = actGotoTabNumberExecute
-    end
-    object actGotoTab5: TAction
-      Category = 'Various'
-      Caption = 'Tab 5'
-      ShortCut = 16437
-      OnExecute = actGotoTabNumberExecute
-    end
-    object actCopyRows: TAction
-      Category = 'Various'
-      Caption = 'Copy selected rows'
-      Hint = 'Copy selected rows in custom format'
-      ImageIndex = 155
-      ShortCut = 24643
-      OnExecute = actCopyOrCutExecute
-    end
-  end
   object menuConnections: TPopupMenu
-    AutoHotkeys = maManual
     Images = ImageListMain
     OnPopup = menuConnectionsPopup
     Left = 344
     Top = 200
   end
   object ImageListMain: TImageList
-    ColorDepth = cd32Bit
     DrawingStyle = dsTransparent
     Left = 504
     Top = 104
@@ -9456,13 +8118,8 @@ object MainForm: TMainForm
     end
   end
   object SynSQLSyn1: TSynSQLSyn
-    Options.AutoDetectEnabled = False
-    Options.AutoDetectLineLimit = 0
-    Options.Visible = False
     CommentAttri.Foreground = clGray
-    ConditionalCommentAttri.Foreground = clGray
     DataTypeAttri.Foreground = clMaroon
-    DelimitedIdentifierAttri.Foreground = clOlive
     FunctionAttri.Foreground = clNavy
     IdentifierAttri.Foreground = clOlive
     KeyAttri.Foreground = clBlue
@@ -9481,7 +8138,6 @@ object MainForm: TMainForm
     Top = 101
   end
   object popupDataGrid: TPopupMenu
-    AutoHotkeys = maManual
     Images = ImageListMain
     OnPopup = popupDataGridPopup
     Left = 200
@@ -9608,25 +8264,21 @@ object MainForm: TMainForm
       Caption = 'Quick Filter'
       ImageIndex = 53
       object QF1: TMenuItem
-        AutoHotkeys = maManual
         Caption = 'Column = Value'
         ImageIndex = 61
         OnClick = QuickFilterClick
       end
       object QF2: TMenuItem
-        AutoHotkeys = maManual
         Caption = 'Column != Value'
         ImageIndex = 61
         OnClick = QuickFilterClick
       end
       object QF3: TMenuItem
-        AutoHotkeys = maManual
         Caption = 'Column > Value'
         ImageIndex = 61
         OnClick = QuickFilterClick
       end
       object QF4: TMenuItem
-        AutoHotkeys = maManual
         Caption = 'Column < Value'
         ImageIndex = 61
         OnClick = QuickFilterClick
@@ -9650,8 +8302,6 @@ object MainForm: TMainForm
         Caption = 'More values ...'
         ImageIndex = 61
         OnClick = QFvaluesClick
-        object TMenuItem
-        end
       end
       object N11a: TMenuItem
         Caption = '-'
@@ -9697,7 +8347,6 @@ object MainForm: TMainForm
         OnClick = QuickFilterClick
       end
       object N7a: TMenuItem
-        AutoHotkeys = maManual
         Caption = '-'
       end
       object QF15: TMenuItem
@@ -9805,41 +8454,6 @@ object MainForm: TMainForm
   object popupListHeader: TVTHeaderPopupMenu
     Images = ImageListMain
     Left = 424
-    Top = 208
-  end
-  object SynCompletionProposal: TSynCompletionProposal
-    Options = [scoLimitToMatchedText, scoUseInsertList, scoUsePrettyText, scoUseBuiltInTimer, scoEndCharCompletion, scoCompleteWithTab, scoCompleteWithEnter]
-    NbLinesInWindow = 12
-    Width = 350
-    EndOfTokenChr = ',()[]. ='#9
-    TriggerChars = '.'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clBtnText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Tahoma'
-    TitleFont.Style = [fsBold]
-    Columns = <
-      item
-        ColumnWidth = 100
-      end
-      item
-        ColumnWidth = 100
-      end>
-    ItemHeight = 18
-    Images = ImageListMain
-    Margin = 1
-    OnExecute = SynCompletionProposalExecute
-    ShortCut = 16416
-    Editor = SynMemoQuery
-    TimerInterval = 500
-    OnAfterCodeCompletion = SynCompletionProposalAfterCodeCompletion
-    OnCodeCompletion = SynCompletionProposalCodeCompletion
-    Left = 592
     Top = 208
   end
   object popupQuery: TPopupMenu
@@ -10065,12 +8679,6 @@ object MainForm: TMainForm
     Left = 688
     Top = 149
   end
-  object BalloonHint1: TBalloonHint
-    Delay = 100
-    HideAfter = 10000
-    Left = 424
-    Top = 264
-  end
   object popupExecuteQuery: TPopupMenu
     Images = ImageListMain
     Left = 272
@@ -10095,11 +8703,5 @@ object MainForm: TMainForm
       Action = actBatchInOneGo
       AutoCheck = True
     end
-  end
-  object ApplicationEvents1: TApplicationEvents
-    OnDeactivate = ApplicationEvents1Deactivate
-    OnIdle = ApplicationEvents1Idle
-    Left = 504
-    Top = 152
   end
 end

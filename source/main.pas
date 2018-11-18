@@ -50,7 +50,6 @@ type
       destructor Destroy; override;
   end;
   TResultTabs = TObjectList<TResultTab>;
-  TTabSet = TTabControl;
   TQueryTab = class(TComponent)
     private
       FMemo: TSynMemo;
@@ -5669,8 +5668,8 @@ begin
   Proposal := Sender as TSynCompletionProposal;
   Proposal.ClearList;
   Conn := ActiveConnection;
-  Editor := Proposal.Form.CurrentEditor;
-  Editor.GetHighlighterAttriAtRowColEx(Editor.PrevWordPos, Token, TokenTypeInt, Start, Attri);
+  {Editor := Proposal.Form.CurrentEditor;
+  Editor.GetHighlighterAttriAtRowColEx(Editor.PrevWordPos, Token, TokenTypeInt, Start, Attri);}
   CanExecute := AppSettings.ReadBool(asCompletionProposal) and
     (not (TtkTokenKind(TokenTypeInt) in [tkString, tkComment]));
   if not CanExecute then
