@@ -13,6 +13,8 @@ type
     end;
     TTabSet = TTabControl;
     TButtonedEdit = TEditButton;
+    TUnicodeStrings = TStrings;
+    PInt = ^Int64;
 
     TCustomSynEdit = class
         var
@@ -42,6 +44,8 @@ type
 
    end;
 
+   function GetSystemTime(SystemTime: TSystemTime): TDateTime;
+
 implementation
 
 procedure TSynCompletionProposalInsertList.Add(str: String);
@@ -63,6 +67,11 @@ end;
 function TSynCompletionProposalForm.CurrentEditor() : TCustomSynEdit;
 begin
   Result:=TCustomSynEdit.Create;
+end;
+
+function GetSystemTime(SystemTime: TSystemTime): TDateTime;
+begin
+  Result := Now();
 end;
 
 end.

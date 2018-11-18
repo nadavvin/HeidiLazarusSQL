@@ -5683,12 +5683,12 @@ begin
   // Find token1.token2.token3, while cursor is somewhere in token3
   Ident := '[^\s,\(\)=\.]';
   rx.Expression := '(('+Ident+'+)\.)?('+Ident+'+)\.('+Ident+'*)$';
-  LeftPart := Copy(Editor.LineText, 1, Editor.CaretX-1);
+  {LeftPart := Copy(Editor.LineText, 1, Editor.CaretX-1);
   if rx.Exec(LeftPart) then begin
     Token1 := Conn.DeQuoteIdent(rx.Match[2]);
     Token2 := Conn.DeQuoteIdent(rx.Match[3]);
     Token3 := Conn.DeQuoteIdent(rx.Match[4]);
-  end;
+  end;}
 
   // Server variables, s'il vous plait?
   rx.Expression := '^@@(SESSION|GLOBAL)$';
@@ -5711,7 +5711,7 @@ begin
     // spaces are not detected correctly.
 
     // 1. find currently edited sql query around the cursor position in synmemo
-    if Editor = SynMemoFilter then begin
+    {if Editor = SynMemoFilter then begin
       // Make sure the below regexp can find structure
       sql := 'SELECT * FROM '+ActiveDbObj.QuotedName+' WHERE ' + Editor.Text;
     end else begin
@@ -5725,7 +5725,7 @@ begin
         end;
       end;
       Queries.Free;
-    end;
+    end;}
 
     // 2. Parse FROM clause, detect relevant table/view, probably aliased
     rx.ModifierG := True;
@@ -5785,9 +5785,9 @@ begin
     if Token2 = '' then begin
 
       // Column names from selected table
-      if Editor = SynMemoFilter then begin
+      {if Editor = SynMemoFilter then begin
         AddColumns(ActiveDbObj.QuotedName);
-      end;
+      end;}
 
       // All databases
       for i:=0 to Conn.AllDatabases.Count-1 do begin
@@ -5822,7 +5822,7 @@ begin
       end;
 
       // Procedure params
-      if GetParentFormOrFrame(Editor) is TfrmRoutineEditor then begin
+      {if GetParentFormOrFrame(Editor) is TfrmRoutineEditor then begin
         RoutineEditor := GetParentFormOrFrame(Editor) as TfrmRoutineEditor;
         for Param in RoutineEditor.Parameters do begin
           if Param.Context = 'IN' then ImageIndex := 120
@@ -5832,7 +5832,7 @@ begin
           Proposal.InsertList.Add(Param.Name);
           Proposal.ItemList.Add(Format(SYNCOMPLETION_PATTERN, [ImageIndex, Param.Datatype, Param.Name, '']));
         end;
-      end;
+      end;}
 
     end;
 
@@ -5870,11 +5870,11 @@ begin
     ShowStatusMsg('', 4);
 
   // Display UTC date/time
-  GetSystemTime(SystemTime);
+  {GetSystemTime(SystemTime);
   tmp := EncodeDate(SystemTime.wYear, SystemTime.wMonth, SystemTime.wDay) +
     EncodeTime(SystemTime.wHour, SystemTime.wMinute, SystemTime.wSecond, SystemTime.wMilliseconds);
   DateTimeToString(utcs, 'ddddd t', tmp);
-  ShowStatusMsg('UTC: ' + utcs, 5);
+  ShowStatusMsg('UTC: ' + utcs, 5);}
 end;
 
 
@@ -5993,7 +5993,7 @@ begin
   if ExecRegExpr('\s+LIKE\s+''', Filter) then
     Filter := Filter + ActiveConnection.LikeClauseTail;
 
-  if Filter <> '' then begin
+  {if Filter <> '' then begin
     SynMemoFilter.UndoList.AddGroupBreak;
     SynMemoFilter.SelectAll;
     if KeyPressed(VK_SHIFT) and (Pos(Filter, SynmemoFilter.Text) = 0) and (Pos(SynmemoFilter.Text, Filter) = 0) then
@@ -6002,7 +6002,7 @@ begin
       SynmemoFilter.SelText := Filter;
     ToggleFilterPanel(True);
     actApplyFilterExecute(Sender);
-  end;
+  end;}
 end;
 
 
@@ -6080,10 +6080,10 @@ var
   History: TQueryHistory;
 begin
   // dropping a tree node or listbox item into the query-memo
-  ActiveQueryMemo.UndoList.AddGroupBreak;
+  {ActiveQueryMemo.UndoList.AddGroupBreak;}
   src := Source as TControl;
   Text := '';
-  ShiftPressed := KeyPressed(VK_SHIFT);
+  {ShiftPressed := KeyPressed(VK_SHIFT);}
   Tree := ActiveQueryHelpers;
   // Check for allowed controls as source has already
   // been performed in OnDragOver. So, only do typecasting here.
@@ -6135,7 +6135,7 @@ begin
 
   if Text <> '' then begin
     ActiveQueryMemo.SelText := Text;
-    ActiveQueryMemo.UndoList.AddGroupBreak;
+    {ActiveQueryMemo.UndoList.AddGroupBreak;}
     // Requires to set focus, as doubleclick actions also call this procedure
     ActiveQueryMemo.SetFocus;
   end;
@@ -6165,7 +6165,7 @@ var
   Editor: TSynMemo;
   Token: String;
   Attri: TSynHighlighterAttributes;
-  OldCaretXY, StartOfTokenRowCol, CurrentRowCol: TBufferCoord;
+  {OldCaretXY, StartOfTokenRowCol, CurrentRowCol: TBufferCoord;}
   TokenTypeInt, Start, CurrentCharIndex: Integer;
   OldSelStart, OldSelEnd: Integer;
 const
@@ -6177,21 +6177,21 @@ begin
     CurrentCharIndex := Editor.RowColToCharIndex(Editor.CaretXY);
     // Go one left on trailing line feed, after which PrevWordPos doesn't work
     Dec(CurrentCharIndex, 1);
-    CurrentRowCol := Editor.CharIndexToRowCol(CurrentCharIndex);
+    {CurrentRowCol := Editor.CharIndexToRowCol(CurrentCharIndex);
     StartOfTokenRowCol := Editor.PrevWordPosEx(CurrentRowCol);
-    Editor.GetHighlighterAttriAtRowColEx(StartOfTokenRowCol, Token, TokenTypeInt, Start, Attri);
+    Editor.GetHighlighterAttriAtRowColEx(StartOfTokenRowCol, Token, TokenTypeInt, Start, Attri);}
     if TtkTokenKind(TokenTypeInt) in [tkDatatype, tkFunction, tkKey] then begin
-      OldCaretXY := Editor.CaretXY;
+      {OldCaretXY := Editor.CaretXY;}
       OldSelStart := Editor.SelStart;
       OldSelEnd := Editor.SelEnd;
-      Editor.UndoList.BeginBlock;
-      Editor.SelStart := Editor.RowColToCharIndex(StartOfTokenRowCol);
+      {Editor.UndoList.BeginBlock;
+      Editor.SelStart := Editor.RowColToCharIndex(StartOfTokenRowCol);}
       Editor.SelEnd := Editor.SelStart + Length(Token);
       Editor.SelText := UpperCase(Token);
-      Editor.CaretXY := OldCaretXY;
+      {Editor.CaretXY := OldCaretXY;}
       Editor.SelStart := OldSelStart;
       Editor.SelEnd := OldSelEnd;
-      Editor.UndoList.EndBlock;
+      {Editor.UndoList.EndBlock;}
     end;
   end;
 end;
@@ -6204,7 +6204,7 @@ var
   NewFontSize: Integer;
 begin
   // Change font size with MouseWheel
-  if KeyPressed(VK_CONTROL) and AppSettings.ReadBool(asWheelZoom) then begin
+  {if KeyPressed(VK_CONTROL) and AppSettings.ReadBool(asWheelZoom) then begin
     Editor := TSynEdit(Sender);
     NewFontSize := Editor.Font.Size;
     if WheelDelta > 0 then
@@ -6218,11 +6218,11 @@ begin
     Handled := True;
   end else begin
     Handled := False;
-  end;
+  end;}
 end;
 
 
-procedure TMainForm.SynMemoQueryPaintTransient(Sender: TObject; Canvas: TCanvas; TransientType: TTransientType);
+{procedure TMainForm.SynMemoQueryPaintTransient(Sender: TObject; Canvas: TCanvas; TransientType: TTransientType);
 var
   Editor : TSynEdit;
   OpenChars: array of Char;
@@ -6238,9 +6238,9 @@ var
   TmpCharA, TmpCharB: Char;
 
   function IsCharBracket(AChar: Char): Boolean;
-  begin
-    Result := CharInSet(AChar, ['{','[','(','<','}',']',')','>']);
-  end;
+  begin}
+    //Result := CharInSet(AChar, ['{','[','(','<','}',']',')','>']);
+  {end;
 
   function CharToPixels(P: TBufferCoord): TPoint;
   begin
@@ -6255,12 +6255,12 @@ begin
   SetLength(OpenChars, ArrayLength);
   SetLength(CloseChars, ArrayLength);
   for i := 0 to ArrayLength - 1 do
-    Case i of
-      0: begin OpenChars[i] := '('; CloseChars[i] := ')'; end;
-      1: begin OpenChars[i] := '{'; CloseChars[i] := '}'; end;
-      2: begin OpenChars[i] := '['; CloseChars[i] := ']'; end;
-      3: begin OpenChars[i] := '<'; CloseChars[i] := '>'; end;
-    end;
+    Case i of}
+      //0: begin OpenChars[i] := '('; CloseChars[i] := ')'; end;
+      //1: begin OpenChars[i] := '{'; CloseChars[i] := '}'; end;
+      //2: begin OpenChars[i] := '['; CloseChars[i] := ']'; end;
+      //3: begin OpenChars[i] := '<'; CloseChars[i] := '>'; end;
+    {end;
 
   P := Editor.CaretXY;
   D := Editor.DisplayXY;
@@ -6323,7 +6323,7 @@ begin
     end;
     Editor.Canvas.Brush.Style := bsSolid;
   end;
-end;
+end;}
 
 
 procedure TMainForm.popupHostPopup(Sender: TObject);
@@ -6837,7 +6837,7 @@ var
   HintSQL: TStringList;
 begin
   // Display some hint with row/col count + SQL when mouse hovers over result tab
-  if (FLastHintMousepos.X = x) and (FLastHintMousepos.Y = Y) then
+  {if (FLastHintMousepos.X = x) and (FLastHintMousepos.Y = Y) then
     Exit;
   FLastHintMousepos := Point(X, Y);
   Tabs := Sender as TTabSet;
@@ -6866,14 +6866,14 @@ begin
   Rect := Tabs.ItemRect(idx);
   Org := Tabs.ClientOrigin;
   OffsetRect(Rect, Org.X, Org.Y);
-  BalloonHint1.ShowHint(Rect);
+  BalloonHint1.ShowHint(Rect);}
 end;
 
 
 procedure TMainForm.tabsetQueryMouseLeave(Sender: TObject);
 begin
   // BalloonHint.HideAfter is -1, so it will stay forever if we wouldn't hide it at some point
-  BalloonHint1.HideHint;
+  {BalloonHint1.HideHint;}
   FLastHintControlIndex := -1;
 end;
 
@@ -6894,9 +6894,9 @@ begin
   // Restore function name from array
   f := MySQLFunctions[TControl(Sender).tag].Name
     + MySQLFunctions[TControl(Sender).tag].Declaration;
-  sm.UndoList.AddGroupBreak;
+  {sm.UndoList.AddGroupBreak;}
   sm.SelText := f;
-  sm.UndoList.AddGroupBreak;
+  {sm.UndoList.AddGroupBreak;}
   if not SynMemoFilter.Focused then
     ValidateQueryControls(Sender);
 end;
@@ -7421,7 +7421,7 @@ begin
   // Reset typing timer
   TimerFilterVT.Enabled := False;
   TimerFilterVT.Enabled := True;
-  editFilterVT.RightButton.Visible := editFilterVT.Text <> '';
+  {editFilterVT.RightButton.Visible := editFilterVT.Text <> '';}
 end;
 
 
@@ -7433,8 +7433,8 @@ end;
 
 procedure TMainForm.editDatabaseTableFilterKeyPress(Sender: TObject; var Key: Char);
 begin
-  if Key = #27 then
-    (Sender as TButtonedEdit).OnRightButtonClick(Sender);
+  {if Key = #27 then
+    (Sender as TButtonedEdit).OnRightButtonClick(Sender);}
 end;
 
 
@@ -7516,8 +7516,8 @@ begin
   OldDataLocalNumberFormat := DataLocalNumberFormat;
   DataLocalNumberFormat := False;
   // Display hour glass instead of X icon
-  OldImageIndex := editFilterVT.RightButton.ImageIndex;
-  editFilterVT.RightButton.ImageIndex := 150;
+  {OldImageIndex := editFilterVT.RightButton.ImageIndex;
+  editFilterVT.RightButton.ImageIndex := 150;}
   editFilterVT.Repaint;
 
   while Assigned(Node) do begin
@@ -7546,7 +7546,7 @@ begin
   else
     InvalidateVT(VT, VTREE_LOADED, true);
   DataLocalNumberFormat := OldDataLocalNumberFormat;
-  editFilterVT.RightButton.ImageIndex := OldImageIndex;
+  {editFilterVT.RightButton.ImageIndex := OldImageIndex;}
   rx.Free;
 end;
 
@@ -7586,7 +7586,7 @@ begin
     SessionVal := vt.Text[Node, 1];
     GlobalVal := vt.Text[Node, 2];
     if SessionVal <> GlobalVal then begin
-      TargetCanvas.Brush.Color := clWebBlanchedAlmond;
+      {TargetCanvas.Brush.Color := clWebBlanchedAlmond;}
       TargetCanvas.Pen.Color := TargetCanvas.Brush.Color;
       TargetCanvas.Rectangle(CellRect);
     end;
@@ -8273,7 +8273,7 @@ var
 begin
   // Tell SQL highlighter about names of tables and procedures in selected database
   SynSQLSyn1.TableNames.Clear;
-  SynSQLSyn1.ProcNames.Clear;
+  {SynSQLSyn1.ProcNames.Clear;}
   if Connection.DbObjectsCached(Database) then begin
     DBObjects := Connection.GetDBObjects(Database);
     TableNames := TStringList.Create;
@@ -8295,7 +8295,7 @@ begin
     TableNames.EndUpdate;
     ProcNames.EndUpdate;
     SynSQLSyn1.TableNames.Text := TableNames.Text;
-    SynSQLSyn1.ProcNames.Text := ProcNames.Text;
+    {SynSQLSyn1.ProcNames.Text := ProcNames.Text;}
     TableNames.Free;
     ProcNames.Free;
   end;
@@ -8527,7 +8527,7 @@ begin
     Clause := Clause + Conn.LikeClauseTail;
 
   end;
-  SynMemoFilter.UndoList.AddGroupBreak;
+  {SynMemoFilter.UndoList.AddGroupBreak;}
   SynMemoFilter.SelectAll;
   SynMemoFilter.SelText := Clause;
 end;
@@ -8792,7 +8792,7 @@ begin
         Handled := True;
       end;
     end;
-  end else if KeyPressed(VK_CONTROL) then begin
+  {end else if KeyPressed(VK_CONTROL) then begin
     // Change font size with MouseWheel
     if AppSettings.ReadBool(asWheelZoom) then begin
       NewFontSize := VT.Font.Size;
@@ -8804,7 +8804,7 @@ begin
       AppSettings.ResetPath;
       AppSettings.WriteInt(asDataFontSize, NewFontSize);
       ApplyFontToGrids;
-    end;
+    end;}
   end else if ssShift in Shift then begin
     // Horizontal scrolling with Alt+Mousewheel
     VT.OffsetX := VT.OffsetX + WheelDelta;
@@ -8898,7 +8898,7 @@ var
   g: TVirtualStringTree;
 begin
   g := TVirtualStringTree(Sender);
-  case Key of
+  {case Key of
     VK_HOME: g.FocusedColumn := g.Header.Columns.GetFirstVisibleColumn(False);
     VK_END: begin
       if (ssCtrl in Shift) and (g = DataGrid) then
@@ -8908,7 +8908,7 @@ begin
     VK_RETURN: if Assigned(g.FocusedNode) then g.EditNode(g.FocusedNode, g.FocusedColumn);
     VK_DOWN: if g.FocusedNode = g.GetLast then actDataInsertExecute(Sender);
     VK_NEXT: if (g = DataGrid) and (g.FocusedNode = g.GetLast) then actDataShowNext.Execute;
-  end;
+  end;}
 end;
 
 
@@ -8936,8 +8936,8 @@ procedure TMainForm.AnyGridEdited(Sender: TBaseVirtualTree; Node:
 begin
   // Reassign Esc to "Cancel row editing" action
   if ([tsEditing, tsEditPending] * Sender.TreeStates) = [] then begin
-    actDataCancelChanges.ShortCut := TextToShortcut('Esc');
-    actDataPostChanges.ShortCut := TextToShortcut('Ctrl+Enter');
+    {actDataCancelChanges.ShortCut := TextToShortcut('Esc');
+    actDataPostChanges.ShortCut := TextToShortcut('Ctrl+Enter');}
   end;
 end;
 
@@ -8945,8 +8945,8 @@ procedure TMainForm.AnyGridEditCancelled(Sender: TBaseVirtualTree; Column:
     TColumnIndex);
 begin
   // Reassign Esc to "Cancel row editing" action
-  actDataCancelChanges.ShortCut := TextToShortcut('Esc');
-  actDataPostChanges.ShortCut := TextToShortcut('Ctrl+Enter');
+  {actDataCancelChanges.ShortCut := TextToShortcut('Esc');
+  actDataPostChanges.ShortCut := TextToShortcut('Ctrl+Enter');}
 end;
 
 procedure TMainForm.AnyGridCreateEditor(Sender: TBaseVirtualTree; Node:
@@ -9486,7 +9486,7 @@ begin
 end;
 
 
-procedure TMainForm.ListDatabasesInitNode(Sender: TBaseVirtualTree; ParentNode, Node: PVirtualNode;
+{procedure TMainForm.ListDatabasesInitNode(Sender: TBaseVirtualTree; ParentNode, Node: PVirtualNode;
   var InitialStates: TVirtualNodeInitStates);
 var
   Idx: PInt;
@@ -9494,7 +9494,7 @@ begin
   // Integers mapped to the node's index so nodes can be sorted without losing their database name
   Idx := Sender.GetNodeData(Node);
   Idx^ := Node.Index;
-end;
+end;}
 
 
 procedure TMainForm.ListDatabasesGetText(Sender: TBaseVirtualTree; Node: PVirtualNode;
@@ -9758,8 +9758,8 @@ var
   IsResultGrid: Boolean;
   ClpFormat: Word;
   ClpData: THandle;
-  APalette: HPalette;
-  Exporter: TSynExporterRTF;
+  {APalette: HPalette;
+  Exporter: TSynExporterRTF;}
   Results: TDBQuery;
   RowNum: PInt64;
   ExportDialog: TfrmExportGrid;
@@ -9774,8 +9774,8 @@ begin
   Screen.Cursor := crHourglass;
   try
     if SendingControl = btnPreviewCopy then begin
-      imgPreview.Picture.SaveToClipBoardFormat(ClpFormat, ClpData, APalette);
-      ClipBoard.SetAsHandle(ClpFormat, ClpData);
+      {imgPreview.Picture.SaveToClipBoardFormat(ClpFormat, ClpData, APalette);
+      ClipBoard.SetAsHandle(ClpFormat, ClpData);}
       Success := True;
     end else if Control is TCustomEdit then begin
       Edit := TCustomEdit(Control);
@@ -9825,7 +9825,7 @@ begin
       SynMemo := Control as TSynMemo;
       if SynMemo.SelAvail then begin
         // Create both text and RTF clipboard format, so rich text applications can paste highlighted SQL
-        Clipboard.Open;
+        {Clipboard.Open;
         Clipboard.AsText := SynMemo.SelText;
         Exporter := TSynExporterRTF.Create(Self);
         Exporter.Highlighter := SynSQLSyn1;
@@ -9834,13 +9834,13 @@ begin
         else SynMemo.CopyToClipboard;
         Exporter.CopyToClipboard;
         Clipboard.Close;
-        Exporter.Free;
+        Exporter.Free;}
         Success := True;
       end;
     end;
   finally
     if not Success then
-      MessageBeep(MB_ICONASTERISK);
+      {MessageBeep(MB_ICONASTERISK);}
     Screen.Cursor := crDefault;
   end;
 end;
@@ -9892,7 +9892,7 @@ begin
     end;
   end;
   if not Success then
-    MessageBeep(MB_ICONASTERISK);
+    {MessageBeep(MB_ICONASTERISK);}
 end;
 
 
@@ -9926,7 +9926,7 @@ begin
     end;
   end;
   if not Success then
-    MessageBeep(MB_ICONASTERISK);
+    {MessageBeep(MB_ICONASTERISK);}
 end;
 
 
@@ -9956,7 +9956,7 @@ begin
     end;
   end;
   if not Success then
-    MessageBeep(MB_ICONASTERISK);
+    {MessageBeep(MB_ICONASTERISK);}
 end;
 
 
@@ -10021,7 +10021,7 @@ begin
   Path := GetRegKeyTable+'\'+REGKEY_RECENTFILTERS;
   if AppSettings.SessionPathExists(Path) then begin
     AppSettings.SessionPath := Path;
-    SynMemoFilter.UndoList.AddGroupBreak;
+    {SynMemoFilter.UndoList.AddGroupBreak;}
     SynMemoFilter.BeginUpdate;
     SynMemoFilter.SelectAll;
     SynMemoFilter.SelText := AppSettings.ReadString(asRecentFilter, IntToStr(key));
@@ -10100,8 +10100,8 @@ end;
 procedure TMainForm.ListTablesKeyPress(Sender: TObject; var Key: Char);
 begin
   // Open object editor on pressing Enter
-  if Ord(Key) = VK_RETURN then
-    ListTables.OnDblClick(Sender);
+  {if Ord(Key) = VK_RETURN then
+    ListTables.OnDblClick(Sender);}
 end;
 
 
@@ -10166,15 +10166,15 @@ begin
   QueryTab.Memo.Highlighter := SynMemoQuery.Highlighter;
   QueryTab.Memo.Gutter.Assign(SynMemoQuery.Gutter);
   QueryTab.Memo.Font.Assign(SynMemoQuery.Font);
-  QueryTab.Memo.ActiveLineColor := SynMemoQuery.ActiveLineColor;
+  {QueryTab.Memo.ActiveLineColor := SynMemoQuery.ActiveLineColor;}
   QueryTab.Memo.OnDragDrop := SynMemoQuery.OnDragDrop;
   QueryTab.Memo.OnDragOver := SynMemoQuery.OnDragOver;
   QueryTab.Memo.OnDropFiles := SynMemoQuery.OnDropFiles;
   QueryTab.Memo.OnKeyPress := SynMemoQuery.OnKeyPress;
-  QueryTab.Memo.OnMouseWheel := SynMemoQuery.OnMouseWheel;
+  {QueryTab.Memo.OnMouseWheel := SynMemoQuery.OnMouseWheel;}
   QueryTab.Memo.OnReplaceText := SynMemoQuery.OnReplaceText;
   QueryTab.Memo.OnStatusChange := SynMemoQuery.OnStatusChange;
-  QueryTab.Memo.OnPaintTransient := SynMemoQuery.OnPaintTransient;
+  {QueryTab.Memo.OnPaintTransient := SynMemoQuery.OnPaintTransient;}
   SynCompletionProposal.AddEditor(QueryTab.Memo);
 
   QueryTab.spltHelpers := TSplitter.Create(QueryTab.pnlMemo);
@@ -10244,10 +10244,10 @@ begin
   QueryTab.tabsetQuery.TabHeight := tabsetQuery.TabHeight;
   QueryTab.tabsetQuery.Height := tabsetQuery.Height;
   QueryTab.tabsetQuery.TabPosition := tabsetQuery.TabPosition;
-  QueryTab.tabsetQuery.SoftTop := tabsetQuery.SoftTop;
+  {QueryTab.tabsetQuery.SoftTop := tabsetQuery.SoftTop;
   QueryTab.tabsetQuery.DitherBackground := tabsetQuery.DitherBackground;
   QueryTab.tabsetQuery.SelectedColor := tabsetQuery.SelectedColor;
-  QueryTab.tabsetQuery.UnselectedColor := tabsetQuery.UnselectedColor;
+  QueryTab.tabsetQuery.UnselectedColor := tabsetQuery.UnselectedColor;}
   QueryTab.tabsetQuery.OnClick := tabsetQuery.OnClick;
   QueryTab.tabsetQuery.OnGetImageIndex := tabsetQuery.OnGetImageIndex;
   QueryTab.tabsetQuery.OnMouseMove := tabsetQuery.OnMouseMove;
@@ -10269,7 +10269,7 @@ begin
   // when user clicks right besides the visible tabs
   aPoint := PageControlMain.ClientOrigin;
   aRect := Rect(aPoint.X, aPoint.Y, aPoint.X + PageControlMain.Width, aPoint.Y + PageControlMain.Height - tabQuery.Height);
-  GetCursorPos(aPoint);
+  {GetCursorPos(aPoint);}
   if PtInRect(aRect, aPoint) then
     actNewQueryTab.Execute;
 end;
@@ -10323,12 +10323,12 @@ begin
   if NewPageIndex >= PageIndex then
     Dec(NewPageIndex);
   // Avoid excessive flicker:
-  LockWindowUpdate(PageControlMain.Handle);
+  {LockWindowUpdate(PageControlMain.Handle);}
   PageControlMain.Pages[PageIndex].Free;
   QueryTabs.Delete(PageIndex-tabQuery.PageIndex);
   PageControlMain.ActivePageIndex := NewPageIndex;
   FixQueryTabCloseButtons;
-  LockWindowUpdate(0);
+  {LockWindowUpdate(0);}
   PageControlMain.OnChange(PageControlMain);
 end;
 
@@ -10408,8 +10408,8 @@ begin
   rxdb.Free;
   rxtable.Free;
 
-  editDatabaseFilter.RightButton.Visible := editDatabaseFilter.Text <> '';
-  editTableFilter.RightButton.Visible := editTableFilter.Text <> '';
+  {editDatabaseFilter.RightButton.Visible := editDatabaseFilter.Text <> '';
+  editTableFilter.RightButton.Visible := editTableFilter.Text <> '';}
 end;
 
 
@@ -10426,7 +10426,7 @@ begin
   // Create right menu with filter history
   Edit := Sender as TButtonedEdit;
   Menu := TPopupMenu.Create(Edit);
-  Menu.AutoHotkeys := maManual;
+  {Menu.AutoHotkeys := maManual;}
   Menu.Images := ImageListMain;
   AppSettings.SessionPath := '';
   if Edit = editDatabaseFilter then
@@ -10541,13 +10541,13 @@ begin
     Exit;
   CurTickcount := GetTickCount;
   TabNumber := GetMainTabAt(X, Y);
-  if (TabNumber = FLastTabNumberOnMouseUp)
+  {if (TabNumber = FLastTabNumberOnMouseUp)
     and (CurTickcount - FLastMouseUpOnPageControl <= GetDoubleClickTime) then
     CloseQueryTab(TabNumber)
-  else begin
+  else begin}
     FLastMouseUpOnPageControl := CurTickcount;
     FLastTabNumberOnMouseUp := TabNumber;
-  end;
+  {end;}
 end;
 
 
@@ -10697,12 +10697,12 @@ var
 begin
   Result := nil;
   Control := Screen.ActiveControl;
-  if Control is TCustomSynEdit then begin
+  {if Control is TCustomSynEdit then begin
     Result := Control as TSynMemo;
     // We have a few readonly-SynMemos which we'll ignore here
     if (not AcceptReadOnlyMemo) and Result.ReadOnly then
       Result := nil;
-  end;
+  end;}
   if (not Assigned(Result)) and QueryTabActive then
     Result := ActiveQueryMemo;
 end;
@@ -10766,12 +10766,12 @@ var
   Cap: String;
 begin
   // Set window caption and taskbar text
-  Cap := DBtree.Path(DBtree.FocusedNode, 0, '\') + ' - ' + APPNAME;
+  {Cap := DBtree.Path(DBtree.FocusedNode, 0, '\') + ' - ' + APPNAME;
   if AppSettings.PortableMode then
     Cap := Cap + ' Portable';
   Cap := Cap + ' ' + FAppVersion;
   Caption := Cap;
-  Application.Title := Cap;
+  Application.Title := Cap;}
 end;
 
 
