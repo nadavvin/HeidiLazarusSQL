@@ -10923,7 +10923,7 @@ end;
 procedure TMainform.SetupSynEditors;
 var
   i, j: Integer;
-  Editors: TObjectList;
+  Editors: TObjectList<TComponent>;
   BaseEditor, Editor: TSynMemo;
   KeyStroke: TSynEditKeyStroke;
   ActiveLineColor: TColor;
@@ -10942,7 +10942,7 @@ var
 
 begin
   // Restore font, highlighter and shortcuts for each instantiated TSynMemo
-  Editors := TObjectList.Create;
+  Editors := TObjectList<TComponent>.Create;
   BaseEditor := SynMemoQuery;
   for i:=0 to QueryTabs.Count-1 do
     Editors.Add(QueryTabs[i].Memo);
@@ -10972,29 +10972,29 @@ begin
     Editor := Editors[i] as TSynMemo;
     LogSQL('Setting up TSynMemo "'+Editor.Name+'"', lcDebug);
     Editor.Color := GetThemeColor(clWindow);
-    Editor.ScrollHintColor := GetThemeColor(clInfoBk);
+    {Editor.ScrollHintColor := GetThemeColor(clInfoBk);}
     Editor.Font.Name := AppSettings.ReadString(asFontName);
     Editor.Font.Size := AppSettings.ReadInt(asFontSize);
-    Editor.Gutter.BorderColor := GetThemeColor(clWindow);
+    {Editor.Gutter.BorderColor := GetThemeColor(clWindow);}
     Editor.Gutter.Color := GetThemeColor(clBtnFace);
-    Editor.Gutter.Font.Name := Editor.Font.Name;
+    {Editor.Gutter.Font.Name := Editor.Font.Name;
     Editor.Gutter.Font.Size := Editor.Font.Size;
-    Editor.Gutter.Font.Color := BaseEditor.Gutter.Font.Color;
+    Editor.Gutter.Font.Color := BaseEditor.Gutter.Font.Color;}
     Editor.Gutter.AutoSize := BaseEditor.Gutter.AutoSize;
-    Editor.Gutter.DigitCount := BaseEditor.Gutter.DigitCount;
+    {Editor.Gutter.DigitCount := BaseEditor.Gutter.DigitCount;}
     Editor.Gutter.LeftOffset := BaseEditor.Gutter.LeftOffset;
     Editor.Gutter.RightOffset := BaseEditor.Gutter.RightOffset;
-    Editor.Gutter.ShowLineNumbers := BaseEditor.Gutter.ShowLineNumbers;
-    if Editor <> SynMemoSQLLog then
+    {Editor.Gutter.ShowLineNumbers := BaseEditor.Gutter.ShowLineNumbers;}
+    {if Editor <> SynMemoSQLLog then
       Editor.WordWrap := actQueryWordWrap.Checked;
-    Editor.ActiveLineColor := ActiveLineColor;
+    Editor.ActiveLineColor := ActiveLineColor;}
     Editor.Options := BaseEditor.Options;
     if Editor = SynMemoSQLLog then
       Editor.Options := Editor.Options + [eoRightMouseMovesCursor];
     Editor.TabWidth := AppSettings.ReadInt(asTabWidth);
-    Editor.MaxScrollWidth := BaseEditor.MaxScrollWidth;
+    {Editor.MaxScrollWidth := BaseEditor.MaxScrollWidth;}
     Editor.WantTabs := BaseEditor.WantTabs;
-    Editor.OnPaintTransient := BaseEditor.OnPaintTransient;
+    {Editor.OnPaintTransient := BaseEditor.OnPaintTransient;}
     // Shortcuts
     if Editor = BaseEditor then for j:=0 to Editor.Keystrokes.Count-1 do begin
       KeyStroke := Editor.Keystrokes[j];
@@ -11008,7 +11008,7 @@ begin
       except
         on E:ESynKeyError do begin
           LogSQL(f_('Could not apply SynEdit keystroke shortcut "%s" (or secondary: "%s") to %s. %s. Please go to Tools > Preferences > Shortcuts to change this settings.',
-            [ShortCutToText(Shortcut1), ShortCutToText(Shortcut2), EditorCommandToCodeString(Keystroke.Command), E.Message, _('Tools'), _('Preferences'), _('Shortcuts')]), lcError);
+            ['ShortCutToText(Shortcut1)', 'ShortCutToText(Shortcut2)', EditorCommandToCodeString(Keystroke.Command), E.Message, _('Tools'), _('Preferences'), _('Shortcuts')]), lcError);
         end;
       end;
     end else

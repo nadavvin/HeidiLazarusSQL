@@ -4,7 +4,7 @@ unit dbconnection;
 interface
 
 uses
-  Classes, SysUtils, windows, mysql_structures, {SynRegExpr, }Generics.Collections, Generics.Defaults,
+  Classes, SysUtils, windows, mysql_structures, {Syn}RegExpr, Generics.Collections, Generics.Defaults,
   DateUtils, Types, Math, Dialogs, {ADODB,} DB, {DBCommon, ComObj,} Graphics, ExtCtrls, StrUtils, sqldb,
   {gnugettext, AnsiStrings,} Controls, Forms;
 
