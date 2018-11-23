@@ -31,7 +31,7 @@ type
   TBindParam = class(TObjectList<TBindParamItem>)
     private
     public
-      constructor Create();
+      {constructor Create();}
       function FindParameter(Param: String) : Integer;
       procedure CleanToKeep;
   end;
@@ -9486,7 +9486,7 @@ begin
 end;
 
 
-{procedure TMainForm.ListDatabasesInitNode(Sender: TBaseVirtualTree; ParentNode, Node: PVirtualNode;
+procedure TMainForm.ListDatabasesInitNode(Sender: TBaseVirtualTree; ParentNode, Node: PVirtualNode;
   var InitialStates: TVirtualNodeInitStates);
 var
   Idx: PInt;
@@ -9494,7 +9494,7 @@ begin
   // Integers mapped to the node's index so nodes can be sorted without losing their database name
   Idx := Sender.GetNodeData(Node);
   Idx^ := Node.Index;
-end;}
+end;
 
 
 procedure TMainForm.ListDatabasesGetText(Sender: TBaseVirtualTree; Node: PVirtualNode;
@@ -11031,7 +11031,7 @@ var
   NewSQL: String;
 begin
   // Reformat SQL query
-  m := ActiveSynMemo(False);
+  {m := ActiveSynMemo(False);
   if not Assigned(m) then begin
     ErrorDialog(_('Cannot reformat'), _('Please select a non-readonly SQL editor first.'));
     Exit;
@@ -11053,7 +11053,7 @@ begin
       m.SelEnd := CursorPosStart + Length(NewSQL);
     m.UndoList.AddGroupBreak;
     Screen.Cursor := crDefault;
-  end;
+  end;}
 end;
 
 
@@ -11063,7 +11063,7 @@ var
   TabsHeight: Integer;
 begin
   // Activate tab popup menu only when clicked on tabs area.
-  TabsHeight := (FBtnAddTab.Height+2) * PageControlMain.RowCount;
+  {TabsHeight := (FBtnAddTab.Height+2) * PageControlMain.RowCount;}
   if MousePos.Y <= TabsHeight then begin
     ClickPoint := PageControlMain.ClientToScreen(MousePos);
     popupMainTabs.Popup(ClickPoint.X, ClickPoint.Y);
@@ -11147,7 +11147,7 @@ begin
     sql := 'DELETE FROM '+ActiveDbObj.QuotedName(False)+' WHERE ' + WhereClause;
 
   end;
-  ActiveQueryMemo.UndoList.AddGroupBreak;
+  {ActiveQueryMemo.UndoList.AddGroupBreak;}
   ActiveQueryMemo.SelText := sql;
 end;
 
@@ -11224,8 +11224,8 @@ var
 begin
   // Resize "Size" column in dbtree to hold widest possible byte numbers without cutting text
   VT := Sender as TVirtualStringTree;
-  if (VT.Header.Columns.Count >= 2) and (coVisible in VT.Header.Columns[1].Options) then
-    VT.Header.Columns[1].Width := TextWidth(VT.Canvas, FormatByteNumber(SIZE_MB*100)) + VT.TextMargin*2 + 8;
+  {if (VT.Header.Columns.Count >= 2) and (coVisible in VT.Header.Columns[1].Options) then
+    VT.Header.Columns[1].Width := TextWidth(VT.Canvas, FormatByteNumber(SIZE_MB*100)) + VT.TextMargin*2 + 8;}
 end;
 
 
@@ -11239,14 +11239,14 @@ begin
   // See http://www.delphipraxis.net/viewtopic.php?p=1113607
   // TODO: Does not work when a SynMemo has focus, probably related to the broken solution of this issue:
   // http://sourceforge.net/tracker/index.php?func=detail&aid=1574059&group_id=3221&atid=103221
-  Control := FindVCLWindow(MousePos);
+  {Control := FindVCLWindow(MousePos);
   if (Control is TBaseVirtualTree) and (not Control.Focused) and PtInRect(Control.ClientRect, Control.ScreenToClient(MousePos)) then begin
     VT := Control as TBaseVirtualTree;
     VT.OffsetY := VT.OffsetY + (WheelDelta div 2); // Don't know why, but WheelDelta is twice as big as it normally appears
     VT.UpdateScrollBars(True);
     Handled := True;
   end else
-    Handled := False;
+    Handled := False;}
 end;
 
 
@@ -11257,7 +11257,7 @@ begin
 end;
 
 
-procedure TMainForm.WMCopyData(var Msg: TWMCopyData);
+{procedure TMainForm.WMCopyData(var Msg: TWMCopyData);
 var
   i: Integer;
   Connection: TDBConnection;
@@ -11289,15 +11289,15 @@ begin
   // Style theme applied, e.g. via preferences dialog
   // Ensure SynMemo's have fitting colors
   SetupSynEditors;
-end;
+end;}
 
 
 procedure TMainForm.DefaultHandler(var Message);
 begin
-  if TMessage(Message).Msg = SecondInstMsgId then begin
+  {if TMessage(Message).Msg = SecondInstMsgId then begin
     // A second instance asked for our handle. Post that into its message queue.
     PostThreadMessage(TMessage(Message).WParam, SecondInstMsgId, Handle, 0);
-  end else
+  end else}
     // Otherwise do what would happen without this overridden procedure
     inherited;
 end;
@@ -11482,7 +11482,7 @@ begin
   Result := '';
   if Encoding = TEncoding.Default then begin
     // Listing taken from http://forge.mysql.com/worklog/task.php?id=1349
-    case GetACP of
+    {case GetACP of
       437: Result := 'cp850';
       850: Result := 'cp850';
       852: Result := 'cp852';
@@ -11531,7 +11531,8 @@ begin
       51950: Result := 'big5';
       54936: Result := 'gb18030';
       65001: Result := 'utf8';
-    end;
+    end;}
+    Result := 'utf8'; //Mine code
   end else if (Encoding <> nil) and (Encoding.CodePage = 437) then
     Result := 'ascii'
   else if Encoding = TEncoding.Unicode then
@@ -11939,7 +11940,7 @@ var
   i: Integer;
 begin
   // Refreshing list of snippet file names needs to refresh helper node too
-  if not Assigned(FSnippetFilenames) then
+  {if not Assigned(FSnippetFilenames) then
     FSnippetFilenames := TStringList.Create;
   FSnippetFilenames.Clear;
   try
@@ -11955,7 +11956,7 @@ begin
       LogSQL(f_('Error with snippets directory: %s', [E.Message]), lcError);
     end;
   end;
-  RefreshHelperNode(HELPERNODE_SNIPPETS);
+  RefreshHelperNode(HELPERNODE_SNIPPETS);}
 end;
 
 
@@ -12170,7 +12171,7 @@ var
 begin
   // Un/comment selected SQL
   Editor := ActiveSynMemo(False);
-  Editor.UndoList.AddGroupBreak;
+  {Editor.UndoList.AddGroupBreak;}
   rx := TRegExpr.Create;
   rx.Expression := '^(\s*)(\-\- |#)?(.*)$';
   if not Editor.SelAvail then begin
@@ -12201,7 +12202,7 @@ procedure TMainForm.EnableProgress(MaxValue: Integer);
 begin
   // Initialize progres bar and button
   SetProgressPosition(0);
-  SetProgressState(pbsNormal);
+  {SetProgressState(pbsNormal);}
   ProgressBarStatus.Visible := True;
   ProgressBarStatus.Max := MaxValue;
 end;
@@ -12212,8 +12213,8 @@ begin
   // Hide global progress bar
   SetProgressPosition(0);
   ProgressBarStatus.Hide;
-  if Assigned(TaskBarList3) then
-    TaskBarList3.SetProgressState(Application.MainForm.Handle, 0);
+  {if Assigned(TaskBarList3) then
+    TaskBarList3.SetProgressState(Application.MainForm.Handle, 0);}
 end;
 
 
@@ -12222,8 +12223,8 @@ begin
   // Advance progress bar and task progress position
   ProgressBarStatus.Position := Value;
   ProgressBarStatus.Repaint;
-  if Assigned(TaskBarList3) then
-    TaskBarList3.SetProgressValue(Application.MainForm.Handle, Value, ProgressBarStatus.Max);
+  {if Assigned(TaskBarList3) then
+    TaskBarList3.SetProgressValue(Application.MainForm.Handle, Value, ProgressBarStatus.Max);}
 end;
 
 
@@ -12233,7 +12234,7 @@ begin
 end;
 
 
-procedure TMainForm.SetProgressState(State: TProgressbarState);
+{procedure TMainForm.SetProgressState(State: TProgressbarState);
 var
   Flag: Integer;
 begin
@@ -12249,14 +12250,14 @@ begin
     end;
     TaskBarList3.SetProgressState(Application.MainForm.Handle, Flag);
   end;
-end;
+end;}
 
 
 procedure TMainForm.TaskDialogHyperLinkClicked(Sender: TObject);
 begin
   // Used by hyperlinks in helpers.MessageDialog()
-  if Sender is TTaskDialog then
-    ShellExec(TTaskDialog(Sender).URL);
+  {if Sender is TTaskDialog then
+    ShellExec(TTaskDialog(Sender).URL);}
 end;
 
 
@@ -12290,7 +12291,7 @@ begin
           on E:Exception do begin
             // Try again without SSL. See issue #65
             MainForm.LogSQL(E.Message, lcError);
-            CheckWebpage.URL := ReplaceRegExpr('^https:', CheckWebpage.URL, 'http:');
+            CheckWebpage.URL := ReplaceRegExpr('^https:', CheckWebpage.URL, 'http:', False);
             CheckWebpage.SendRequest(TempFileName);
           end;
         end;
@@ -12324,12 +12325,12 @@ var
 begin
   // Go back to the result tab left to the active one
   Tab := ActiveQueryTab;
-  if Tab <> nil then begin
+  {if Tab <> nil then begin
     if Tab.tabsetQuery.TabIndex > 0 then
       Tab.tabsetQuery.SelectNext(False)
     else
       MessageBeep(MB_ICONEXCLAMATION);
-  end;
+  end;}
 end;
 
 
@@ -12339,12 +12340,12 @@ var
 begin
   // Advance to the next result tab
   Tab := ActiveQueryTab;
-  if Tab <> nil then begin
+  {if Tab <> nil then begin
     if Tab.tabsetQuery.TabIndex < Tab.tabsetQuery.Tabs.Count-1 then
       Tab.tabsetQuery.SelectNext(True)
     else
       MessageBeep(MB_ICONEXCLAMATION);
-  end;
+  end;}
 end;
 
 
@@ -12448,14 +12449,14 @@ end;
 procedure TQueryTab.MemofileModifiedTimerNotify(Sender: TObject);
 var
   OldTopLine: Integer;
-  OldCursor: TBufferCoord;
+  {OldCursor: TBufferCoord;}
 begin
   (Sender as TTimer).Enabled := False;
   if MessageDialog(_('Reload file?'), f_('File was modified from outside: %s', [MemoFilename]), mtConfirmation, [mbYes, mbCancel]) = mrYes then begin
-    OldCursor := Memo.CaretXY;
+    {OldCursor := Memo.CaretXY;}
     OldTopLine := Memo.TopLine;
     LoadContents(MemoFilename, True, nil);
-    Memo.CaretXY := OldCursor;
+    {Memo.CaretXY := OldCursor;}
     Memo.TopLine := OldTopLine;
   end;
 end;
@@ -12479,7 +12480,7 @@ begin
     Content := ReadTextfile(Filename, Encoding);
     if Pos(DirnameSnippets, Filename) = 0 then
       MainForm.AddOrRemoveFromQueryLoadHistory(Filename, True, True);
-    Memo.UndoList.AddGroupBreak;
+    {Memo.UndoList.AddGroupBreak;}
     Memo.BeginUpdate;
     LineBreaks := ScanLineBreaks(Content);
     if ReplaceContent then begin
@@ -12743,7 +12744,7 @@ var
   Raw: String;
   Item: TQueryHistoryItem;
 begin
-  inherited Create(TQueryHistoryItemComparer.Create, True);
+  {inherited Create(TQueryHistoryItemComparer.Create, True);}
   AppSettings.SessionPath := SessionPath + '\' + REGKEY_QUERYHISTORY;
   ValueNames := AppSettings.GetValueNames;
   for i:=0 to ValueNames.Count-1 do begin
@@ -12781,7 +12782,7 @@ begin
 end;
 
 
-function TQueryHistoryItemComparer.Compare(const Left, Right: TQueryHistoryItem): Integer;
+{function TQueryHistoryItemComparer.Compare(const Left, Right: TQueryHistoryItem): Integer;
 begin
   // Simple sort method for a TDBObjectList
   if Left.Time > Right.Time then
@@ -12790,7 +12791,7 @@ begin
     Result := 0
   else
     Result := 1;
-end;
+end;}
 
 
 { TBindParam }
@@ -12812,10 +12813,10 @@ begin
 end;
 
 
-constructor TBindParam.Create;
+{constructor TBindParam.Create;
 begin
   inherited Create(TBindParamItemComparer.Create);
-end;
+end;}
 
 
 function TBindParam.FindParameter(Param: String): Integer;
@@ -12836,7 +12837,7 @@ end;
 { TBindParamItemComparer }
 
 
-function TBindParamItemComparer.Compare(const Left,
+{function TBindParamItemComparer.Compare(const Left,
   Right: TBindParamItem): Integer;
 var
   CompResult: Integer;
@@ -12849,7 +12850,7 @@ begin
     Result := 0
   else
     Result := 1;
-end;
+end;}
 
 end.
 

@@ -10,7 +10,7 @@ interface
 
 uses
   Windows, SysUtils, Classes, Controls, Forms, Dialogs, StdCtrls, ComCtrls, CheckLst,
-  SynRegExpr, Buttons, ExtCtrls, ToolWin, ExtDlgs, Math, extra_controls,
+  {Syn}RegExpr, Buttons, ExtCtrls, ToolWin, ExtDlgs, Math, extra_controls,
   dbconnection, mysql_structures, gnugettext2, MissingAndConversions;
 
 type
@@ -374,7 +374,7 @@ begin
     on E:EDatabaseError do begin
       Screen.Cursor := crDefault;
       ModalResult := mrNone;
-      MainForm.SetProgressState(pbsError);
+      {MainForm.SetProgressState(pbsError);}
       ErrorDialog(E.Message);
     end;
   end;
@@ -634,19 +634,19 @@ begin
   Dialog := TOpenTextFileDialog.Create(Self);
   Dialog.Filter := _('CSV files')+' (*.csv)|*.csv|'+_('Text files')+' (*.txt)|*.txt|'+_('All files')+' (*.*)|*.*';
   Dialog.DefaultExt := 'csv';
-  Dialog.Encodings.Assign(Mainform.FileEncodings);
-  Dialog.EncodingIndex := AppSettings.ReadInt(asFileDialogEncoding, Self.Name);
+  {Dialog.Encodings.Assign(Mainform.FileEncodings);
+  Dialog.EncodingIndex := AppSettings.ReadInt(asFileDialogEncoding, Self.Name);}
   if Dialog.Execute then begin
     editfilename.Text := Dialog.FileName;
-    Encoding := Mainform.GetEncodingByName(Dialog.Encodings[Dialog.EncodingIndex]);
+    {Encoding := Mainform.GetEncodingByName(Dialog.Encodings[Dialog.EncodingIndex]);
     if Encoding = nil then begin
       TestStream := TFileStream.Create(Dialog.Filename, fmOpenRead or fmShareDenyNone);
       Encoding := DetectEncoding(TestStream);
       TestStream.Free;
-    end;
+    end;}
     SelectedCharsetIndex := -1;
     grpParseMethod.OnClick(Sender);
-    AppSettings.WriteInt(asFileDialogEncoding, Dialog.EncodingIndex, Self.Name);
+    {AppSettings.WriteInt(asFileDialogEncoding, Dialog.EncodingIndex, Self.Name);}
   end;
   Dialog.Free;
 end;

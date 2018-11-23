@@ -10,7 +10,7 @@ interface
 
 uses
   Windows, SysUtils, Classes, Controls, Forms, StdCtrls, ComCtrls, Buttons, Dialogs, StdActns,
-  VirtualTrees, ExtCtrls, Graphics, SynRegExpr, Math, Generics.Collections, extra_controls,
+  VirtualTrees, ExtCtrls, Graphics, {Syn}RegExpr, Math, Generics.Collections, extra_controls,
   dbconnection, apphelpers, Menus, gnugettext2, DateUtils, {System.}Zip, {System.}UITypes, StrUtils;
 
 type

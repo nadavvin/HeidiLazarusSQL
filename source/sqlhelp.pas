@@ -296,8 +296,8 @@ procedure TfrmSQLhelp.memosKeyDown(Sender: TObject; var Key: Word; Shift: TShift
 begin
   // Esc pressed - close form.
   // Seems that if we're in a memo, the ButtonClose.Cancel=True doesn't have an effect
-  if Key = VK_ESCAPE then
-    Close;
+  {if Key = VK_ESCAPE then
+    Close;}
 end;
 
 
@@ -353,7 +353,7 @@ procedure TfrmSQLhelp.editFilterChange(Sender: TObject);
 begin
   timerSearch.Enabled := False;
   timerSearch.Enabled := True;
-  editFilter.RightButton.Visible := Trim(editFilter.Text) <> '';
+  {editFilter.RightButton.Visible := Trim(editFilter.Text) <> '';}
 end;
 
 

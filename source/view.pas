@@ -72,7 +72,7 @@ begin
   inherited;
   lblDisabledWhy.Font.Color := clRed;
   comboDefiner.Text := '';
-  comboDefiner.TextHint := f_('Current user (%s)', [Obj.Connection.CurrentUserHostCombination]);
+  {comboDefiner.TextHint := f_('Current user (%s)', [Obj.Connection.CurrentUserHostCombination]);}
   comboDefiner.Hint := f_('Leave empty for current user (%s)', [Obj.Connection.CurrentUserHostCombination]);
   if Obj.Name <> '' then begin
     // Edit mode

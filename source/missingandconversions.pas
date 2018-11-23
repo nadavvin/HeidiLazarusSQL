@@ -5,7 +5,7 @@ unit MissingAndConversions;
 interface
 
 uses
-    Classes, SysUtils, SynCompletion, ComCtrls, EditBtn;
+    Classes, SysUtils, SynCompletion, ComCtrls, EditBtn, SynEdit;
 
 type
     TSynCompletionProposalInsertList = class
@@ -16,8 +16,8 @@ type
     TUnicodeStrings = TStrings;
     PInt = ^Int64;
 
-    TCustomSynEdit = class
-        var
+    TCustomSynEdit = class(TSynEdit)
+        public
            PrevWordPos: Int64;
         procedure GetHighlighterAttriAtRowColEx();
     end;
@@ -25,7 +25,7 @@ type
     TSynCompletionProposalForm = class
         var
            Enabled: Boolean;
-        function CurrentEditor() : TCustomSynEdit;
+        {function CurrentEditor() : TCustomSynEdit;}
     end;
 
     SynCompletionType = class
@@ -45,6 +45,7 @@ type
    end;
 
    function GetSystemTime(SystemTime: TSystemTime): TDateTime;
+   function UTF8ToString(str: AnsiString): String;
 
 implementation
 
@@ -64,14 +65,19 @@ procedure TCustomSynEdit.GetHighlighterAttriAtRowColEx();
 begin
 end;
 
-function TSynCompletionProposalForm.CurrentEditor() : TCustomSynEdit;
+{function TSynCompletionProposalForm.CurrentEditor() : TCustomSynEdit;
 begin
-  Result:=TCustomSynEdit.Create;
-end;
+  Result:=TCustomSynEdit.Create();
+end;}
 
 function GetSystemTime(SystemTime: TSystemTime): TDateTime;
 begin
   Result := Now();
+end;
+
+function UTF8ToString(str: AnsiString): String;
+begin
+  Result := str;
 end;
 
 end.

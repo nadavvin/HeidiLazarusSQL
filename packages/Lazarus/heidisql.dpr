@@ -41,6 +41,7 @@ uses
   exportgrid in '..\..\source\exportgrid.pas' {frmExportGrid},
   syncdb in '..\..\source\syncdb.pas' {frmSyncDB},
   {gnugettext in '..\..\source\gnugettext.pas',}
+  gnugettext2 in '..\..\source\gnugettext2.pas',
   JumpList in '..\..\source\JumpList.pas',
   extra_controls in '..\..\source\extra_controls.pas',
   change_password in '..\..\source\change_password.pas' {frmPasswordChange},

@@ -333,8 +333,8 @@ var
   btn: TButton;
 begin
   // A split button does not drop its menu down when the normal button area is clicked. Do that by hand.
-  btn := Sender as TButton;
-  btn.DropDownMenu.Popup(btn.ClientOrigin.X, btn.ClientOrigin.Y+btn.Height);
+  {btn := Sender as TButton;
+  btn.DropDownMenu.Popup(btn.ClientOrigin.X, btn.ClientOrigin.Y+btn.Height);}
 end;
 
 

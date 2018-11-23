@@ -5,7 +5,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, ComCtrls, StdCtrls,
-  ExtCtrls, ToolWin, ClipBrd, Generics.Collections, Generics.Defaults, SynRegExpr, extra_controls,
+  ExtCtrls, ToolWin, ClipBrd, Generics.Collections, Generics.Defaults, {Syn}RegExpr, extra_controls,
   dbconnection, apphelpers, VirtualTrees, Menus, gnugettext2, EditBtn;
 
 {$I const.inc}
@@ -357,7 +357,7 @@ begin
     end;
     listUsers.Clear;
     InvalidateVT(listUsers, VTREE_NOTLOADED, False);
-    FPrivObjects := TPrivObjList.Create(TPrivComparer.Create, True);
+    {FPrivObjects := TPrivObjList.Create(TPrivComparer.Create, True);}
     Modified := False;
     FAdded := False;
     listUsers.OnFocusChanged(listUsers, listUsers.FocusedNode, listUsers.FocusedColumn);
@@ -1524,7 +1524,7 @@ end;
 
 { TPrivComparer }
 
-function TPrivComparer.Compare(const Left, Right: TPrivObj): Integer;
+{function TPrivComparer.Compare(const Left, Right: TPrivObj): Integer;
 begin
   // Prio for global > db > table > view > function > proc > event > column
   if (Left.DBObj.NodeType < Right.DBObj.NodeType) then
@@ -1537,7 +1537,7 @@ begin
       Right.DBObj.Database+Right.DBObj.Name+Right.DBObj.Column
       );
   end;
-end;
+end;}
 
 
 end.

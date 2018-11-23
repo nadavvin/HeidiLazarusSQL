@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Controls, Forms, Dialogs, StdCtrls,
   {ShellApi, }Math, Graphics, ComCtrls, ToolWin, extra_controls,
-  dbconnection, mysql_structures, VirtualTrees, grideditlinks, {SynRegExpr,} gnugettext2, apphelpers;
+  dbconnection, mysql_structures, VirtualTrees, grideditlinks, {Syn}RegExpr, gnugettext2, apphelpers;
 
 type
   TColInfo = class
@@ -118,7 +118,7 @@ procedure TfrmInsertFiles.FormCreate(Sender: TObject);
 begin
   TranslateComponent(Self);
   ListFiles.Images := GetSystemImageList;
-  DragAcceptFiles(Handle, True);
+  {DragAcceptFiles(Handle, True);}
   MainForm.RestoreListSetup(ListColumns);
   MainForm.RestoreListSetup(ListFiles);
   FixVT(ListFiles);
@@ -245,8 +245,8 @@ var
 begin
   // Space/click on checkbox column
   Grid := Sender as TVirtualStringTree;
-  if Ord(Key) = VK_SPACE then
-    GridHandleClickOrKeyPress(Grid, Grid.FocusedNode, Grid.FocusedColumn, []);
+  {if Ord(Key) = VK_SPACE then
+    GridHandleClickOrKeyPress(Grid, Grid.FocusedNode, Grid.FocusedColumn, []);}
 end;
 
 
@@ -578,8 +578,8 @@ end;
 procedure TfrmInsertFiles.ListFilesKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   // Remove focused file
-  if Key = VK_DELETE then
-    btnRemoveFiles.OnClick(btnRemoveFiles);
+  {if Key = VK_DELETE then
+    btnRemoveFiles.OnClick(btnRemoveFiles);}
 end;
 
 
@@ -662,7 +662,7 @@ begin
     except
       on E:EDatabaseError do begin
         Screen.Cursor := crDefault;
-        MainForm.SetProgressState(pbsError);
+        {MainForm.SetProgressState(pbsError);}
         ErrorDialog(E.Message);
         ModalResult := mrNone;
         break;
@@ -685,7 +685,7 @@ var
   FileName: array [0..MaxFileNameLen] of char;
 begin
   // Files dropped onto form
-  Screen.Cursor := crHourglass;
+  {Screen.Cursor := crHourglass;
   FileCount := DragQueryFile(msg.WParam, $FFFFFFFF, FileName, MaxFileNameLen);
   // Query Windows one at a time for the file name
   ListFiles.BeginUpdate;
@@ -698,7 +698,7 @@ begin
     ListFiles.EndUpdate;
     Screen.Cursor := crDefault;
   end;
-  DragFinish(msg.WParam);
+  DragFinish(msg.WParam);}
 end;
 
 

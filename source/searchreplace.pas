@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Controls, Forms, Dialogs, StdCtrls,
-  ExtCtrls, SynMemo, SynEditTypes, gnugettext2, VirtualTrees, SynRegExpr,
+  ExtCtrls, SynMemo, SynEditTypes, gnugettext2, VirtualTrees, {Syn}RegExpr,
   SynEditRegexSearch, SynEditMiscClasses, SynEditSearch, extra_controls;
 
 type
@@ -102,8 +102,8 @@ begin
       comboSearchIn.ItemIndex := comboSearchIn.Items.Count-1;
     if _Editor.SelAvail then
       SearchText := _Editor.SelText
-    else
-      SearchText := _Editor.WordAtCursor;
+    {else
+      SearchText := _Editor.WordAtCursor;}
   end;
 
   if Assigned(_Grid) then begin
@@ -231,15 +231,15 @@ end;
 procedure TfrmSearchReplace.DoSearchReplaceText;
 var
   Occurences: Integer;
-  OldCaretXY: TBufferCoord;
+  {OldCaretXY: TBufferCoord;}
   Replacement: String;
 begin
-  if chkRegularExpression.Checked then
+  {if chkRegularExpression.Checked then
     Editor.SearchEngine := SynEditRegexSearch1
   else
-    Editor.SearchEngine := SynEditSearch1;
+    Editor.SearchEngine := SynEditSearch1;}
 
-  OldCaretXY := Editor.CaretXY;
+  {OldCaretXY := Editor.CaretXY;}
   Replacement := comboReplace.Text;
   Replacement := StringReplace(Replacement, '\n', CRLF, [rfReplaceAll]);
   Replacement := StringReplace(Replacement, '\t', #9, [rfReplaceAll]);
@@ -258,11 +258,11 @@ begin
 
   if ssoReplaceAll in Options then
     MessageDialog(f_('Text "%s" %s times replaced.', [comboSearch.Text, FormatNumber(Occurences)]), mtInformation, [mbOk])
-  else begin
+  {else begin
     if (OldCaretXY.Char = Editor.CaretXY.Char) and
       (OldCaretXY.Line = Editor.CaretXY.Line) then
       MessageDialog(f_('Text "%s" not found.', [comboSearch.Text]), mtInformation, [mbOk]);
-  end;
+  end;}
 end;
 
 

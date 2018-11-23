@@ -247,29 +247,28 @@
         <UnitName Value="MissingAndConversions"/>
       </Unit41>
       <Unit42>
-        <Filename Value="../../components/generics.collections/src/generics.strings.pas"/>
+        <Filename Value="../../source/src/generics.collections.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="Generics.Strings"/>
+        <UnitName Value="Generics.Collections"/>
       </Unit42>
       <Unit43>
-        <Filename Value="../../components/generics.collections/src/generics.helpers.pas"/>
+        <Filename Value="../../source/src/generics.defaults.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="Generics.Helpers"/>
       </Unit43>
       <Unit44>
-        <Filename Value="../../components/generics.collections/src/generics.collections.pas"/>
+        <Filename Value="../../source/src/generics.hashes.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit44>
       <Unit45>
-        <Filename Value="../../components/generics.collections/src/generics.defaults.pas"/>
+        <Filename Value="../../source/src/generics.helpers.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit45>
       <Unit46>
-        <Filename Value="../../components/generics.collections/src/generics.hashes.pas"/>
+        <Filename Value="../../source/src/generics.memoryexpanders.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit46>
       <Unit47>
-        <Filename Value="../../components/generics.collections/src/generics.memoryexpanders.pas"/>
+        <Filename Value="../../source/src/generics.strings.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit47>
     </Units>
@@ -277,9 +276,8 @@
   <CompilerOptions>
     <Version Value="11"/>
     <SearchPaths>
-      <IncludeFiles Value="../../source;../../components/generics.collections/src;$(ProjOutDir)"/>
-      <Libraries Value="../../components/generics.collections;../../components/generics.collections/lib/x86_64-linux"/>
-      <OtherUnitFiles Value="../../source;../../components/generics.collections;../../components/generics.collections/src"/>
+      <IncludeFiles Value="../../source;../../source/src;$(ProjOutDir)"/>
+      <OtherUnitFiles Value="../../source;../../source/src"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Parsing>

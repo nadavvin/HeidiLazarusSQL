@@ -194,7 +194,7 @@ uses Main, apphelpers, grideditlinks;
 {$R *.DFM}
 
 
-procedure Tconnform.WMNCLBUTTONDOWN(var Msg: TWMNCLButtonDown) ;
+{procedure Tconnform.WMNCLBUTTONDOWN(var Msg: TWMNCLButtonDown) ;
 begin
   if Msg.HitTest = HTHELP then
     Msg.Result := 0 // "eat" the message
@@ -210,7 +210,7 @@ begin
     Help(Self, 'connecting');
   end else
     inherited;
-end;
+end;}
 
 
 procedure Tconnform.FormCreate(Sender: TObject);
@@ -241,7 +241,7 @@ begin
   MainForm.RestoreListSetup(ListSessions);
   ListSessions.OnCompareNodes := MainForm.AnyGridCompareNodes;
   ListSessions.OnHeaderClick := MainForm.AnyGridHeaderClick;
-  ListSessions.OnHeaderDraggedOut := MainForm.AnyGridHeaderDraggedOut;
+  {ListSessions.OnHeaderDraggedOut := MainForm.AnyGridHeaderDraggedOut;}
   btnImportSettings.Caption := MainForm.actImportSettings.Caption;
   FLoaded := False;
 
@@ -400,7 +400,7 @@ var
   btn: TButton;
 begin
   btn := Sender as TButton;
-  btn.DropDownMenu.Popup(btn.ClientOrigin.X, btn.ClientOrigin.Y+btn.Height);
+  {btn.DropDownMenu.Popup(btn.ClientOrigin.X, btn.ClientOrigin.Y+btn.Height);}
 end;
 
 
@@ -685,7 +685,7 @@ begin
 end;
 
 
-procedure Tconnform.ListSessionsDragDrop(Sender: TBaseVirtualTree;
+{procedure Tconnform.ListSessionsDragDrop(Sender: TBaseVirtualTree;
   Source: TObject; DataObject: IDataObject; Formats: TFormatArray;
   Shift: TShiftState; Pt: TPoint; var Effect: Integer; Mode: TDropMode);
 var
@@ -736,7 +736,7 @@ begin
     end;
   end;
   SiblingSessions.Free;
-end;
+end;}
 
 
 procedure Tconnform.ListSessionsDragOver(Sender: TBaseVirtualTree;
@@ -770,7 +770,7 @@ begin
       ParentNode := ParentNode.Parent;
     end;
     // Shows the right tooltip on Aero GUI
-    Effect := DROPEFFECT_MOVE;
+    {Effect := DROPEFFECT_MOVE;}
   end;
 end;
 
@@ -981,7 +981,7 @@ begin
     Connection.LogPrefix := SelectedSessionPath;
     Connection.OnLog := Mainform.LogSQL;
     FPopupDatabases := TPopupMenu.Create(Self);
-    FPopupDatabases.AutoHotkeys := maManual;
+    {FPopupDatabases.AutoHotkeys := maManual;}
     Screen.Cursor := crHourglass;
     try
       Connection.Active := True;
@@ -1203,13 +1203,13 @@ var
   ButtonWidth: Integer;
 begin
   // Splitter resized - adjust width of buttons
-  ButtonWidth := Round((ListSessions.Width - 2 * ListSessions.Margins.Left) / 3);
+  {ButtonWidth := Round((ListSessions.Width - 2 * ListSessions.Margins.Left) / 3);}
   btnNew.Width := ButtonWidth;
   btnSave.Width := ButtonWidth;
   btnDelete.Width := ButtonWidth;
   btnNew.Left := ListSessions.Left;
-  btnSave.Left := btnNew.Left + btnNew.Width + ListSessions.Margins.Left;
-  btnDelete.Left := btnSave.Left + btnSave.Width + ListSessions.Margins.Left;
+  {btnSave.Left := btnNew.Left + btnNew.Width + ListSessions.Margins.Left;
+  btnDelete.Left := btnSave.Left + btnSave.Width + ListSessions.Margins.Left;}
 end;
 
 
