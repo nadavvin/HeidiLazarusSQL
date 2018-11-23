@@ -4,8 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, EditBtn,
-  Dialogs, StdCtrls, SynEdit, SynMemo, SynRegExpr, ComCtrls, ExtCtrls, WideStrUtils,
-  apphelpers, dbconnection{, gnugettext};
+  Dialogs, StdCtrls, SynEdit, SynMemo, {Syn}RegExpr, ComCtrls, ExtCtrls, WideStrUtils,
+  apphelpers, dbconnection, gnugettext, MissingAndConversions;
 
 type
   TFrame = TDBObjectEditor;
@@ -104,18 +104,18 @@ begin
   editName.Clear;
   editComment.Clear;
   comboDefiner.Text := '';
-  comboDefiner.TextHint := f_('Current user (%s)', [Obj.Connection.CurrentUserHostCombination]);
+  {comboDefiner.TextHint := f_('Current user (%s)', [Obj.Connection.CurrentUserHostCombination]);}
   comboDefiner.Hint := f_('Leave empty for current user (%s)', [Obj.Connection.CurrentUserHostCombination]);
   chkDropAfterExpiration.Checked := True;
   radioEvery.Checked := True;
   grpState.ItemIndex := 0;
   SynMemoBody.Text := 'BEGIN'+CRLF+CRLF+'END';
   dateOnce.Date := Now;
-  timeOnce.Time := Now;
+  {timeOnce.Time := Now;}
   dateStarts.Date := Now;
-  timeStarts.Time := Now;
+  {timeStarts.Time := Now;}
   dateEnds.Date := Now;
-  timeEnds.Time := Now;
+  {timeEnds.Time := Now;}
   udEveryQuantity.Position := 1;
   comboEveryInterval.ItemIndex := comboEveryInterval.Items.IndexOf('DAY');
   tabALTERcode.TabVisible := False;
@@ -143,9 +143,9 @@ begin
     if rx.Exec(CreateCode) then begin
       if UpperCase(rx.Match[1]) = 'AT' then begin
         radioOnce.Checked := True;
-        d := MainForm.ActiveConnection.ParseDateTime(WideDequotedStr(rx.Match[3], ''''));
+        {d := MainForm.ActiveConnection.ParseDateTime(WideDequotedStr(rx.Match[3], ''''));
         dateOnce.DateTime := d;
-        timeOnce.DateTime := d;
+        timeOnce.DateTime := d;}
       end else begin
         radioEvery.Checked := True;
         comboEveryInterval.ItemIndex := comboEveryInterval.Items.IndexOf(rx.Match[4]);
@@ -153,18 +153,18 @@ begin
         if udEveryQuantity.Enabled then
           udEveryQuantity.Position := MakeInt(rx.Match[3])
         else
-          editEveryQuantity.Text := WideDequotedStr(rx.Match[3], '''');
+          {editEveryQuantity.Text := WideDequotedStr(rx.Match[3], '''');}
         chkStarts.Checked := rx.MatchLen[5] > 0;
         if chkStarts.Checked then begin
           d := MainForm.ActiveConnection.ParseDateTime(rx.Match[6]);
-          dateStarts.DateTime := d;
-          timeStarts.DateTime := d;
+          {dateStarts.DateTime := d;
+          timeStarts.DateTime := d;}
         end;
         chkEnds.Checked := rx.MatchLen[7] > 0;
         if chkEnds.Checked then begin
           d := MainForm.ActiveConnection.ParseDateTime(rx.Match[8]);
-          dateEnds.DateTime := d;
-          timeEnds.DateTime := d;
+          {dateEnds.DateTime := d;
+          timeEnds.DateTime := d;}
         end;
       end;
       Delete(CreateCode, 1, rx.MatchPos[0]+rx.MatchLen[0]);
@@ -280,16 +280,16 @@ begin
     Result := Result + 'DEFINER='+DBObject.Connection.QuoteIdent(comboDefiner.Text, True, '@')+' ';
   Result := Result + 'EVENT ' + DBObject.Connection.QuoteIdent(ObjName) + CRLF + #9 + 'ON SCHEDULE' + CRLF + #9#9;
   if radioOnce.Checked then begin
-    d := dateOnce.DateTime;
+    {d := dateOnce.DateTime;
     ReplaceTime(d, timeOnce.DateTime);
-    Result := Result + 'AT ' + esc(DateTimeToStr(d)) + CRLF;
+    Result := Result + 'AT ' + esc(DateTimeToStr(d)) + CRLF;}
   end else begin
     if udEveryQuantity.Enabled then
       Quantity := IntToStr(udEveryQuantity.Position)
     else
       Quantity := esc(editEveryQuantity.Text);
     Result := Result + 'EVERY ' + Quantity + ' ' + comboEveryInterval.Text;
-    if chkStarts.Checked then begin
+    {if chkStarts.Checked then begin
       d := dateStarts.DateTime;
       ReplaceTime(d, timeStarts.DateTime);
       Result := Result + ' STARTS ' + esc(DateTimeToStr(d));
@@ -298,7 +298,7 @@ begin
       d := dateEnds.DateTime;
       ReplaceTime(d, timeEnds.DateTime);
       Result := Result + ' ENDS ' + esc(DateTimeToStr(d));
-    end;
+    end;}
     Result := Result + CRLF;
   end;
 

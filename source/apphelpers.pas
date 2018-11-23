@@ -12,7 +12,7 @@ uses
   Classes, SysUtils, Graphics, GraphUtil, ClipBrd, Dialogs, Forms, Controls{, ShellApi},
   {Windows, ShlObj, ActiveX,} VirtualTrees, {Syn}RegExpr, Messages, Math,
   Registry, DateUtils, Generics.Collections, StrUtils, {AnsiStrings, TlHelp32,} Types,
-  dbconnection, mysql_structures, SynMemo, Menus, {WinInet, gnugettext,} Themes,
+  dbconnection, mysql_structures, SynMemo, Menus, {WinInet,} gnugettext, Themes, MissingAndConversions,
   Character, ImgList, {System.}UITypes, ActnList, {WinSock, IOUtils,} StdCtrls, ComCtrls{,}
   {CommCtrl,} {Vcl.Imaging.pngimage};
 
@@ -556,13 +556,13 @@ end;
   @return int64 Size in bytes
 }
 function _GetFileSize(Filename: String): Int64;
-var
-  Attr: _WIN32_FILE_ATTRIBUTE_DATA;
+{var
+  Attr: _WIN32_FILE_ATTRIBUTE_DATA;}
 begin
-  if FileExists(Filename) then begin
+  {if FileExists(Filename) then begin
     GetFileAttributesEx(PChar(Filename), GetFileExInfoStandard, @Attr);
     Result := Int64(Attr.nFileSizeHigh) shl 32 + Int64(Attr.nFileSizeLow);
-  end else
+  end else}
     Result := -1;
 end;
 
@@ -771,12 +771,12 @@ end;
 }
 function GetShellFolder(CSIDL: integer): string;
 var
-  pidl                   : PItemIdList;
+  {pidl                   : PItemIdList;}
   FolderPath             : string;
   SystemFolder           : Integer;
-  Malloc                 : IMalloc;
+  {Malloc                 : IMalloc;}
 begin
-  Malloc := nil;
+  {Malloc := nil;
   FolderPath := '';
   SHGetMalloc(Malloc);
   if Malloc = nil then
@@ -797,20 +797,21 @@ begin
     Result := FolderPath;
   finally
     Malloc.Free(pidl);
-  end;
+  end;}
+  Result := '';
 end;
 
 
 function DirnameUserAppData: String;
 begin
   // User folder for HeidiSQL's data (<user name>\Application Data)
-  Result := GetShellFolder(CSIDL_APPDATA) + '\' + APPNAME + '\';
+  Result := ''{GetShellFolder(CSIDL_APPDATA) + '\' + APPNAME + '\'};
 end;
 
 function DirnameUserDocuments: String;
 begin
   // "HeidiSQL" folder under user's documents folder, e.g. c:\Users\Mike\Documents\HeidiSQL\
-  Result := GetShellFolder(CSIDL_MYDOCUMENTS) + '\' + APPNAME + '\';
+  Result := ''{GetShellFolder(CSIDL_MYDOCUMENTS) + '\' + APPNAME + '\'};
 end;
 
 
@@ -958,7 +959,7 @@ begin
   if not params.IsEmpty then
     Msg := Msg + ' params: "'+params+'"';
   MainForm.LogSQL(Msg, lcDebug);
-  ShellExecute(0, 'open', PChar(cmd), PChar(params), PChar(path), SW_SHOWNORMAL);
+  {ShellExecute(0, 'open', PChar(cmd), PChar(params), PChar(path), SW_SHOWNORMAL);}
 end;
 
 
@@ -1118,8 +1119,8 @@ function GetTempDir: String;
 var
   TempPath: array[0..MAX_PATH] of Char;
 begin
-  GetTempPath(MAX_PATH, PChar(@TempPath));
-  Result := StrPas(TempPath);
+  {GetTempPath(MAX_PATH, PChar(@TempPath));}
+  Result := '/tmp'{StrPas(TempPath)};
 end;
 
 
@@ -1400,7 +1401,7 @@ begin
     // editors (mostly MS applications).
     // Note that the content is UTF8 encoded ANSI. Using unicode variables results in raw
     // text pasted in editors. TODO: Find out why and optimize redundant code away by a loop.
-    OpenClipBoard(0);
+    {OpenClipBoard(0);}
     CF_HTML := RegisterClipboardFormat('HTML Format');
     SetLength(HTMLContent, HTML.Size);
     HTML.Position := 0;
@@ -1412,19 +1413,19 @@ begin
         'StartFragment:000089' + CRLF +
         'EndFragment:같같같' + CRLF +
         HTMLContent + CRLF;
-      HTMLContent := AnsiStrings.StringReplace(
+      {HTMLContent := AnsiStrings.StringReplace(
         HTMLContent, '같같같',
         AnsiStrings.Format('%.6d', [Length(HTMLContent)]),
-        [rfReplaceAll]);
+        [rfReplaceAll]);}
     end;
     ClpLen := Length(HTMLContent) + 1;
-    GlobalMem := GlobalAlloc(GMEM_DDESHARE + GMEM_MOVEABLE, ClpLen);
-    lp := GlobalLock(GlobalMem);
+    {GlobalMem := GlobalAlloc(GMEM_DDESHARE + GMEM_MOVEABLE, ClpLen);
+    lp := GlobalLock(GlobalMem);}
     Move(PAnsiChar(HTMLContent)^, lp[0], ClpLen);
     SetString(HTMLContent, nil, 0);
-    GlobalUnlock(GlobalMem);
+    {GlobalUnlock(GlobalMem);
     SetClipboardData(CF_HTML, GlobalMem);
-    CloseClipboard;
+    CloseClipboard;}
   end;
 end;
 
@@ -1449,7 +1450,7 @@ begin
   end;
   VT.EndUpdate;
   // Disable hottracking in non-Vista mode, looks ugly in XP, but nice in Vista
-  if (toUseExplorerTheme in VT.TreeOptions.PaintOptions) and (Win32MajorVersion >= 6) then
+  if (toUseExplorerTheme in VT.TreeOptions.PaintOptions) {and (Win32MajorVersion >= 6)} then
     VT.TreeOptions.PaintOptions := VT.TreeOptions.PaintOptions + [toHotTrack]
   else
     VT.TreeOptions.PaintOptions := VT.TreeOptions.PaintOptions - [toHotTrack];
@@ -1475,10 +1476,10 @@ begin
   // https://sourceforge.net/p/dxgettext/bugs/80/
   for i:=0 to Form.ComponentCount-1 do begin
     Comp := Form.Components[i];
-    if (Comp is TButton) and (TButton(Comp).Style = bsSplitButton) then begin
+    {if (Comp is TButton) and (TButton(Comp).Style = bsSplitButton) then begin
       TButton(Comp).Style := bsPushButton;
       TButton(Comp).Style := bsSplitButton;
-    end;
+    end;}
     if (Comp is TToolButton) and (TToolButton(Comp).Style = tbsDropDown) then begin
       TToolButton(Comp).Style := tbsButton;
       TToolButton(Comp).Style := tbsDropDown;
@@ -1488,19 +1489,20 @@ end;
 
 
 function GetTextHeight(Font: TFont): Integer;
-var
+{var
   DC: HDC;
   SaveFont: HFont;
-  SysMetrics, Metrics: TTextMetric;
+  SysMetrics, Metrics: TTextMetric;}
 begin
   // Code taken from StdCtrls.TCustomEdit.AdjustHeight
-  DC := GetDC(0);
+  {DC := GetDC(0);
   GetTextMetrics(DC, SysMetrics);
   SaveFont := SelectObject(DC, Font.Handle);
   GetTextMetrics(DC, Metrics);
   SelectObject(DC, SaveFont);
   ReleaseDC(0, DC);
-  Result := Metrics.tmHeight;
+  Result := Metrics.tmHeight;}
+  Result := 10;
 end;
 
 
@@ -1749,7 +1751,7 @@ end;
 
 procedure InheritFont(AFont: TFont);
 var
-  LogFont: TLogFont;
+  {LogFont: TLogFont;}
   GUIFontName: String;
 begin
   // Set custom font if set, or default system font.
@@ -1765,7 +1767,7 @@ begin
   end else begin
     // Apply system font. See issue #3204.
     // Code taken from http://www.gerixsoft.com/blog/delphi/system-font
-    if SystemParametersInfo(SPI_GETICONTITLELOGFONT, SizeOf(TLogFont), @LogFont, 0) then begin
+    {if SystemParametersInfo(SPI_GETICONTITLELOGFONT, SizeOf(TLogFont), @LogFont, 0) then begin
       AFont.Height := LogFont.lfHeight;
       AFont.Orientation := LogFont.lfOrientation;
       AFont.Charset := TFontCharset(LogFont.lfCharSet);
@@ -1775,7 +1777,7 @@ begin
         FIXED_PITCH: AFont.Pitch := fpFixed;
         else AFont.Pitch := fpDefault;
       end;
-    end;
+    end;}
   end;
 end;
 
@@ -1786,13 +1788,14 @@ var
   MaxValue, MinValue: Double;
   Lightness: Double;
 begin
-  R := GetRValue(ColorToRGB(AColor));
+  {R := GetRValue(ColorToRGB(AColor));
   G := GetGValue(ColorToRGB(AColor));
   B := GetBValue(ColorToRGB(AColor));
   MaxValue := Max(Max(R,G),B);
   MinValue := Min(Min(R,G),B);
   Lightness := (((MaxValue + MinValue) * 240) + 255 ) / 510;
-  Result := Round(Lightness);
+  Result := Round(Lightness);}
+  Result := 50;
 end;
 
 
@@ -2044,18 +2047,18 @@ function ParamStrToBlob(out cbData: DWORD): Pointer;
 var
   cmd: String;
 begin
-  cmd := Windows.GetCommandLine;
+  cmd := {Windows.GetCommandLine}'';
   cbData := Length(cmd)*2 + 3;
   Result := PChar(cmd);
 end;
 
 procedure HandleSecondInstance;
-var
+{var
   Run: DWORD;
   Now: DWORD;
   Msg: TMsg;
   Wnd: HWND;
-  Dat: TCopyDataStruct;
+  Dat: TCopyDataStruct;}
 begin
   // MessageBox(0, 'already running', nil, MB_ICONINFORMATION);
   // Send a message to all main windows (HWND_BROADCAST) with the identical,
@@ -2063,7 +2066,7 @@ begin
   // instances.
   // (Broadcast should only be called with registered message ids!)
 
-  SendMessage(HWND_BROADCAST, SecondInstMsgId, GetCurrentThreadId, 0);
+  {SendMessage(HWND_BROADCAST, SecondInstMsgId, GetCurrentThreadId, 0);
 
   // Waiting for reply by first instance. For those of you which didn't knew:
   // Threads have message queues too ;o)
@@ -2101,7 +2104,7 @@ begin
       ShowWindow(Wnd, SW_RESTORE);
     BringWindowToTop(Wnd);
     SetForegroundWindow(Wnd);
-  end;
+  end;}
 end;
 
 function CheckForSecondInstance: Boolean;
@@ -2115,7 +2118,7 @@ begin
   // can contain all chars but not '\'
 
   Result := False;
-  MutexName := PChar(APPNAME);
+  {MutexName := PChar(APPNAME);
   for Loop := lstrlen(MutexName) to MAX_PATH - 1 do
   begin
     MutexHandle := CreateMutex(nil, False, MutexName);
@@ -2145,7 +2148,7 @@ begin
   else
     // No clue why we should get here. Oh, maybe Microsoft has changed rules, again.
     // However, we return false and let the application start
-  end;
+  end;}
 end;
 
 
@@ -2164,12 +2167,13 @@ end;
 
 
 function KeyPressed(Code: Integer): Boolean;
-var
-  State: TKeyboardState;
+{var
+  State: TKeyboardState;}
 begin
   // Checks whether a key is pressed, defined by virtual key code
-  GetKeyboardState(State);
-  Result := (State[Code] and 128) <> 0;
+  {GetKeyboardState(State);
+  Result := (State[Code] and 128) <> 0;}
+  Result := False;
 end;
 
 
@@ -2287,7 +2291,7 @@ end;
   http://www.michael-puff.de/Programmierung/Delphi/Code-Snippets/GetImageLinkTimeStamp.shtml
 }
 function GetImageLinkTimeStamp(const FileName: string): TDateTime;
-const
+{const
   INVALID_SET_FILE_POINTER = DWORD(-1);
   BorlandMagicTimeStamp = $2A425E19; // Delphi 4-6 (and above?)
   FileTime1970: TFileTime = (dwLowDateTime:$D53E8000; dwHighDateTime:$019DB1DE);
@@ -2307,7 +2311,7 @@ type
 var
   FileHandle: THandle;
   BytesRead: DWORD;
-  ImageDosHeader: TImageDosHeader;
+  {ImageDosHeader: TImageDosHeader;
   ImageNtHeaders: TImageNtHeaders;
   SectionHeaders: PImageSectionHeaders;
   Section: Word;
@@ -2316,9 +2320,9 @@ var
   ResDirRaw: DWORD;
   ResDirTable: TImageResourceDirectory;
   FileTime: TFileTime;
-  TimeStamp: DWord;
+  TimeStamp: DWord;}
 begin
-  TimeStamp := 0;
+  {TimeStamp := 0;
   Result := 0;
   // Open file for read access
   FileHandle := CreateFile(PChar(FileName), GENERIC_READ, FILE_SHARE_READ, nil, OPEN_EXISTING, 0, 0);
@@ -2391,7 +2395,8 @@ begin
   finally
     CloseHandle(FileHandle);
   end;
-  Result := UnixToDateTime(TimeStamp);
+  Result := UnixToDateTime(TimeStamp);}
+  Result := Now();
 end;
 
 

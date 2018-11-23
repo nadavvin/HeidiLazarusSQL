@@ -5,7 +5,7 @@ interface
 uses
   Windows, Classes, Graphics, Forms, Controls, StdCtrls, VirtualTrees,
   ComCtrls, ToolWin, Dialogs, SysUtils, Menus, ExtDlgs,
-  apphelpers, {gnugettext, }ActnList, StdActns, extra_controls, {System.Actions,}
+  apphelpers, gnugettext, ActnList, StdActns, extra_controls, {System.Actions,}
   {Vcl.}ExtCtrls;
 
 {$I const.inc}
@@ -77,7 +77,7 @@ function TfrmTextEditor.GetText: String;
 var
   LB: String;
 begin
-  Result := FmemoText.Text;
+  {Result := FmemoText.Text;}
   // Convert linebreaks back to selected
   LB := '';
   case FSelectedLineBreaks of
@@ -104,10 +104,10 @@ begin
   end;
   if Assigned(Detected) then
     SelectLineBreaks(Detected);
-  FmemoText.Text := text;
+  {FmemoText.Text := text;
   FmemoText.SelectAll;
   // Trigger change event, which is not fired when text is empty. See #132.
-  FmemoText.OnChange(FmemoText);
+  FmemoText.OnChange(FmemoText);}
   Modified := False;
 end;
 
@@ -139,24 +139,24 @@ end;
 procedure TfrmTextEditor.SetMaxLength(len: integer);
 begin
   // Input: Length in number of bytes.
-  FmemoText.MaxLength := len;
+  {FmemoText.MaxLength := len;}
 end;
 
 procedure TfrmTextEditor.SetFont(font: TFont);
 begin
-  FmemoText.Font.Name := font.Name;
-  FmemoText.Font.Size := font.Size;
+  {FmemoText.Font.Name := font.Name;
+  FmemoText.Font.Size := font.Size;}
 end;
 
 procedure TfrmTextEditor.FormCreate(Sender: TObject);
 begin
-  FmemoText := TLineNormalizingMemo.Create(Self);
+  {FmemoText := TLineNormalizingMemo.Create(Self);
   FmemoText.Parent := Self;
   FmemoText.Align := alClient;
   FmemoText.ScrollBars := ssBoth;
   FmemoText.WantTabs := True;
   FmemoText.OnChange := memoTextChange;
-  FmemoText.OnKeyDown := memoTextKeyDown;
+  FmemoText.OnKeyDown := memoTextKeyDown;}
   // Use same text properties as in query/find/replace actions
   actSearchFind.Caption := MainForm.actQueryFind.Caption;
   actSearchFind.Hint := MainForm.actQueryFind.Hint;
@@ -197,20 +197,20 @@ end;
 
 procedure TfrmTextEditor.FormShow(Sender: TObject);
 begin
-  FmemoText.SetFocus;
+  {FmemoText.SetFocus;}
 end;
 
 
 procedure TfrmTextEditor.memoTextKeyDown(Sender: TObject; var Key: Word; Shift:
     TShiftState);
 begin
-  case Key of
+  {case Key of
     // Cancel by Escape
     VK_ESCAPE: btnCancelClick(Sender);
     // Apply changes and end editing by Ctrl + Enter
     VK_RETURN: if ssCtrl in Shift then btnApplyClick(Sender);
     Ord('a'), Ord('A'): if (ssCtrl in Shift) and (not (ssAlt in Shift)) then Mainform.actSelectAllExecute(Sender);
-  end;
+  end;}
 end;
 
 procedure TfrmTextEditor.btnWrapClick(Sender: TObject);
@@ -220,11 +220,11 @@ begin
   Screen.Cursor := crHourglass;
   // Changing the scrollbars invoke the OnChange event. We avoid thinking the text was really modified.
   WasModified := Modified;
-  if FmemoText.ScrollBars = ssBoth then
+  {if FmemoText.ScrollBars = ssBoth then
     FmemoText.ScrollBars := ssVertical
   else
     FmemoText.ScrollBars := ssBoth;
-  TToolbutton(Sender).Down := FmemoText.ScrollBars = ssVertical;
+  TToolbutton(Sender).Down := FmemoText.ScrollBars = ssVertical;}
   Modified := WasModified;
   Screen.Cursor := crDefault;
 end;
@@ -238,14 +238,14 @@ begin
   d := TOpenTextFileDialog.Create(Self);
   d.Filter := _('Text files')+' (*.txt)|*.txt|'+_('All files')+' (*.*)|*.*';
   d.FilterIndex := 0;
-  d.Encodings.Assign(MainForm.FileEncodings);
-  d.EncodingIndex := AppSettings.ReadInt(asFileDialogEncoding, Self.Name);
+  {d.Encodings.Assign(MainForm.FileEncodings);
+  d.EncodingIndex := AppSettings.ReadInt(asFileDialogEncoding, Self.Name);}
   if d.Execute then try
     Screen.Cursor := crHourglass;
-    FmemoText.Text := ReadTextFile(d.FileName, MainForm.GetEncodingByName(d.Encodings[d.EncodingIndex]));
+    {FmemoText.Text := ReadTextFile(d.FileName, MainForm.GetEncodingByName(d.Encodings[d.EncodingIndex]));
     if (FmemoText.MaxLength > 0) and (Length(FmemoText.Text) > FmemoText.MaxLength) then
       FmemoText.Text := copy(FmemoText.Text, 0, FmemoText.MaxLength);
-    AppSettings.WriteInt(asFileDialogEncoding, d.EncodingIndex, Self.Name);
+    AppSettings.WriteInt(asFileDialogEncoding, d.EncodingIndex, Self.Name);}
   finally
     Screen.Cursor := crDefault;
   end;
@@ -289,9 +289,9 @@ end;
 
 procedure TfrmTextEditor.memoTextChange(Sender: TObject);
 begin
-  lblTextLength.Caption := FormatNumber(Length(FmemoText.Text)) + ' characters.';
+  {lblTextLength.Caption := FormatNumber(Length(FmemoText.Text)) + ' characters.';
   if FmemoText.MaxLength > 0 then
-    lblTextLength.Caption := lblTextLength.Caption + ' (Max: '+FormatNumber(FmemoText.MaxLength)+')';
+    lblTextLength.Caption := lblTextLength.Caption + ' (Max: '+FormatNumber(FmemoText.MaxLength)+')';}
   Modified := True;
 end;
 

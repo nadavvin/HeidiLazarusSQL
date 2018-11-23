@@ -12,7 +12,7 @@ uses
   Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ComCtrls, ExtCtrls, SynEditHighlighter, SynHighlighterSQL,
   SynEdit, SynMemo, VirtualTrees, SynEditKeyCmds, ActnList, SynEditMiscClasses, StdActns, Menus,
-  mysql_structures, {gnugettext, Vcl.}Themes{, Vcl.Styles};
+  mysql_structures, gnugettext, {Vcl.}Themes{, Vcl.Styles};
 
 type
   TShortcutItemData = record
@@ -260,7 +260,7 @@ begin
   AppSettings.WriteInt(asTabWidth, updownSQLTabWidth.Position);
   AppSettings.WriteInt(asLogsqlnum, updownLogLines.Position);
   AppSettings.WriteInt(asLogsqlwidth, updownLogSnip.Position);
-  AppSettings.WriteString(asSessionLogsDirectory, editLogDir.Text);
+  {AppSettings.WriteString(asSessionLogsDirectory, editLogDir.Text);}
   AppSettings.WriteBool(asLogErrors, chkLogEventErrors.Checked);
   AppSettings.WriteBool(asLogUserSQL, chkLogEventUserGeneratedSQL.Checked);
   AppSettings.WriteBool(asLogSQL, chkLogEventSQL.Checked);
@@ -275,7 +275,7 @@ begin
     AppSettings.WriteInt(asHighlighterBackground, Attri.Background, Attri.Name);
     AppSettings.WriteInt(asHighlighterStyle, Attri.IntegerStyle, Attri.Name);
   end;
-  AppSettings.WriteString(asSQLColActiveLine, ColorToString(SynMemoSQLSample.ActiveLineColor));
+  {AppSettings.WriteString(asSQLColActiveLine, ColorToString(SynMemoSQLSample.ActiveLineColor));}
   AppSettings.WriteString(asSQLColMatchingBraceForeground, ColorToString(MainForm.MatchingBraceForegroundColor));
   AppSettings.WriteString(asSQLColMatchingBraceBackground, ColorToString(MainForm.MatchingBraceBackgroundColor));
 
@@ -294,9 +294,9 @@ begin
   AppSettings.WriteBool(asDoUsageStatistics, chkDoStatistics.Checked);
   AppSettings.WriteBool(asWheelZoom, chkWheelZoom.Checked);
   AppSettings.WriteBool(asDisplayBars, chkColorBars.Checked);
-  AppSettings.WriteInt(asBarColor, cboxColorBars.Selected);
+  {AppSettings.WriteInt(asBarColor, cboxColorBars.Selected);
   AppSettings.WriteString(asMySQLBinaries, editMySQLBinaries.Text);
-  AppSettings.WriteString(asCustomSnippetsDirectory, editCustomSnippetsDirectory.Text);
+  AppSettings.WriteString(asCustomSnippetsDirectory, editCustomSnippetsDirectory.Text);}
   if comboAppLanguage.ItemIndex > 0 then begin
     // There is no TStringList.Names[Value] getter, so we find the language code via loop
     LangCode := '';
@@ -323,10 +323,10 @@ begin
   AppSettings.WriteInt(asFieldColorDatetime, FGridTextColors[dtcTemporal]);
   AppSettings.WriteInt(asFieldColorSpatial, FGridTextColors[dtcSpatial]);
   AppSettings.WriteInt(asFieldColorOther, FGridTextColors[dtcOther]);
-  AppSettings.WriteInt(asFieldNullBackground, cboxNullBackground.Selected);
+  {AppSettings.WriteInt(asFieldNullBackground, cboxNullBackground.Selected);
   AppSettings.WriteInt(asRowBackgroundEven, cboxRowBackgroundEven.Selected);
   AppSettings.WriteInt(asRowBackgroundOdd, cboxRowBackgroundOdd.Selected);
-  AppSettings.WriteInt(asHightlightSameTextBackground, cboxRowHighlightSameText.Selected);
+  AppSettings.WriteInt(asHightlightSameTextBackground, cboxRowHighlightSameText.Selected);}
   AppSettings.WriteBool(asDataLocalNumberFormat, chkLocalNumberFormat.Checked);
   AppSettings.WriteBool(asHintsOnResultTabs, chkHintsOnResultTabs.Checked);
 
@@ -376,7 +376,7 @@ begin
   // Set relevant properties in mainform
   MainForm.ApplyFontToGrids;
 
-  TStyleManager.TrySetStyle(comboTheme.Text);
+  {TStyleManager.TrySetStyle(comboTheme.Text);}
   Mainform.LogToFile := chkLogToFile.Checked;
   MainForm.actLogHorizontalScrollbar.Checked := chkHorizontalScrollbar.Checked;
   MainForm.actLogHorizontalScrollbar.OnExecute(MainForm.actLogHorizontalScrollbar);
@@ -402,7 +402,7 @@ end;
 
 
 // Callback function used by EnumFontFamilies()
-function EnumFixedProc(
+{function EnumFixedProc(
   lpelf: PEnumLogFont;
   lpntm: PNewTextMetric;
   FontType: Integer;
@@ -412,7 +412,7 @@ begin
   Result := 1;  // don't cancel
   if (lpelf^.elfLogFont.lfPitchAndFamily and FIXED_PITCH) <> 0 then
     (TStrings(Data)).Add(String(lpelf^.elfLogFont.lfFaceName));
-end;
+end;}
 
 
 procedure Toptionsform.FormCreate(Sender: TObject);
@@ -425,10 +425,10 @@ begin
 
   // Misecllaneous
   // Hide browse button on Wine, as the browse dialog returns Windows-style paths, while we need a Unix path
-  if MainForm.IsWine then begin
+  {if MainForm.IsWine then begin
     editMySQLBinaries.RightButton.Visible := False;
     editMySQLBinaries.OnDblClick := nil;
-  end;
+  end;}
 
   InitLanguages;
   for i:=0 to FLanguages.Count-1 do begin
@@ -438,7 +438,7 @@ begin
   comboGUIFont.Items.Assign(Screen.Fonts);
   comboGUIFont.Items.Insert(0, '<'+_('Default system font')+'>');
 
-  Styles := TStyleManager.StyleNames;
+  {Styles := TStyleManager.StyleNames;}
   for i:=Low(Styles) to High(Styles) do begin
     comboTheme.Items.Add(Styles[i]);
   end;
@@ -450,13 +450,13 @@ begin
     comboGridTextColors.Items.Add(DatatypeCategories[dtc].Name);
 
   // SQL
-  EnumFontFamilies(Canvas.Handle, nil, @EnumFixedProc, LPARAM(Pointer(comboSQLFontName.Items)));
+  {EnumFontFamilies(Canvas.Handle, nil, @EnumFixedProc, LPARAM(Pointer(comboSQLFontName.Items)));}
   comboSQLFontName.Sorted := True;
   SynMemoSQLSample.Text := SynMemoSQLSample.Highlighter.SampleSource;
   SynSQLSynSQLSample.TableNames.CommaText := 't,sample';
   for i:=0 to SynSQLSynSQLSample.AttrCount - 1 do begin
-    SynSQLSynSQLSample.Attribute[i].AssignColorAndStyle(MainForm.SynSQLSyn1.Attribute[i]);
-    comboSQLColElement.Items.Add(SynSQLSynSQLSample.Attribute[i].FriendlyName);
+    {SynSQLSynSQLSample.Attribute[i].AssignColorAndStyle(MainForm.SynSQLSyn1.Attribute[i]);
+    comboSQLColElement.Items.Add(SynSQLSynSQLSample.Attribute[i].FriendlyName);}
   end;
   comboSQLColElement.Items.Add(_('Active line background'));
   comboSQLColElement.Items.Add(_('Brace matching color'));
@@ -497,9 +497,9 @@ begin
   chkDoStatistics.Checked := AppSettings.ReadBool(asDoUsageStatistics);
   chkWheelZoom.Checked := AppSettings.ReadBool(asWheelZoom);
   chkColorBars.Checked := AppSettings.ReadBool(asDisplayBars);
-  cboxColorBars.Selected := AppSettings.ReadInt(asBarColor);
+  {cboxColorBars.Selected := AppSettings.ReadInt(asBarColor);
   editMySQLBinaries.Text := AppSettings.ReadString(asMySQLBinaries);
-  editCustomSnippetsDirectory.Text := AppSettings.ReadString(asCustomSnippetsDirectory);
+  editCustomSnippetsDirectory.Text := AppSettings.ReadString(asCustomSnippetsDirectory);}
   LangCode := AppSettings.ReadString(asAppLanguage);
   comboAppLanguage.ItemIndex := comboAppLanguage.Items.IndexOf(FLanguages.Values[LangCode]);
   GUIFont := AppSettings.ReadString(asGUIFontName);
@@ -517,7 +517,7 @@ begin
   updownLogLines.Position := AppSettings.ReadInt(asLogsqlnum);
   updownLogSnip.Position := AppSettings.ReadInt(asLogsqlwidth);
   chkLogToFile.Checked := AppSettings.ReadBool(asLogToFile);
-  editLogDir.Text := AppSettings.ReadString(asSessionLogsDirectory);
+  {editLogDir.Text := AppSettings.ReadString(asSessionLogsDirectory);}
   chkLogEventErrors.Checked := AppSettings.ReadBool(asLogErrors);
   chkLogEventUserGeneratedSQL.Checked := AppSettings.ReadBool(asLogUserSQL);
   chkLogEventSQL.Checked := AppSettings.ReadBool(asLogSQL);
@@ -558,10 +558,10 @@ begin
   FGridTextColors[dtcOther] := AppSettings.ReadInt(asFieldColorOther);
   comboGridTextColors.ItemIndex := 0;
   comboGridTextColors.OnSelect(comboGridTextColors);
-  cboxNullBackground.Selected := AppSettings.ReadInt(asFieldNullBackground);
+  {cboxNullBackground.Selected := AppSettings.ReadInt(asFieldNullBackground);
   cboxRowBackgroundEven.Selected := AppSettings.ReadInt(asRowBackgroundEven);
   cboxRowBackgroundOdd.Selected := AppSettings.ReadInt(asRowBackgroundOdd);
-  cboxRowHighlightSameText.Selected := AppSettings.ReadInt(asHightlightSameTextBackground);
+  cboxRowHighlightSameText.Selected := AppSettings.ReadInt(asHightlightSameTextBackground);}
   chkLocalNumberFormat.Checked := AppSettings.ReadBool(asDataLocalNumberFormat);
   chkHintsOnResultTabs.Checked := AppSettings.ReadBool(asHintsOnResultTabs);
 
@@ -599,13 +599,13 @@ begin
   SynMemoSQLSample.Font.Size := updownSQLFontSize.Position;
   SynMemoSQLSample.TabWidth := updownSQLTabWidth.Position;
   AttriIdx := comboSQLColElement.ItemIndex;
-  Foreground := cboxSQLColForeground.Selected;
-  Background := cboxSQLColBackground.Selected;
+  {Foreground := cboxSQLColForeground.Selected;
+  Background := cboxSQLColBackground.Selected;}
   if AttriIdx = comboSQLColElement.Items.Count-1 then begin
     MainForm.MatchingBraceForegroundColor := Foreground;
     MainForm.MatchingBraceBackgroundColor := Background;
-  end else if AttriIdx = comboSQLColElement.Items.Count-2 then begin
-    SynMemoSQLSample.ActiveLineColor := Foreground;
+  {end else if AttriIdx = comboSQLColElement.Items.Count-2 then begin
+    SynMemoSQLSample.ActiveLineColor := Foreground;}
   end else begin
     Attri := SynSqlSynSQLSample.Attribute[AttriIdx];
     Attri.Foreground := Foreground;
@@ -645,11 +645,11 @@ end;
 
 procedure Toptionsform.SelectDirectory(Sender: TObject; NewFolderButton: Boolean);
 var
-  Browse: TBrowseForFolder;
+  {Browse: TBrowseForFolder;}
   Edit: TButtonedEdit;
 begin
   // Select folder for any option
-  Edit := Sender as TButtonedEdit;
+  {Edit := Sender as TButtonedEdit;
   Browse := TBrowseForFolder.Create(Self);
   Browse.Folder := Edit.Text;
   Browse.DialogCaption := _(Edit.TextHint);
@@ -660,7 +660,7 @@ begin
     Edit.Text := Browse.Folder;
     Modified(Sender);
   end;
-  Browse.Free;
+  Browse.Free;}
 end;
 
 
@@ -723,7 +723,7 @@ end;
 procedure Toptionsform.comboGridTextColorsSelect(Sender: TObject);
 begin
   // Data type category selected
-  colorboxGridTextColors.Selected := FGridTextColors[TDBDatatypeCategoryIndex(comboGridTextColors.ItemIndex)];
+  {colorboxGridTextColors.Selected := FGridTextColors[TDBDatatypeCategoryIndex(comboGridTextColors.ItemIndex)];}
 end;
 
 
@@ -743,7 +743,7 @@ end;
 procedure Toptionsform.colorBoxGridTextColorsSelect(Sender: TObject);
 begin
   // Color selected
-  FGridTextColors[TDBDatatypeCategoryIndex(comboGridTextColors.ItemIndex)] := colorboxGridTextColors.Selected;
+  {FGridTextColors[TDBDatatypeCategoryIndex(comboGridTextColors.ItemIndex)] := colorboxGridTextColors.Selected;}
   Modified(Sender);
 end;
 
@@ -761,7 +761,7 @@ begin
     chkSQLBold.Enabled := False;
     chkSQLItalic.Enabled := False;
   end else if AttriIdx = comboSQLColElement.Items.Count-2 then begin
-    Foreground := SynMemoSQLSample.ActiveLineColor;
+    {Foreground := SynMemoSQLSample.ActiveLineColor;}
     Background := clNone;
     chkSQLBold.Enabled := False;
     chkSQLItalic.Enabled := False;
@@ -778,8 +778,8 @@ begin
     chkSQLBold.OnClick := SQLFontChange;
     chkSQLItalic.OnClick := SQLFontChange;
   end;
-  cboxSQLColForeground.Selected := Foreground;
-  cboxSQLColBackground.Selected := Background;
+  {cboxSQLColForeground.Selected := Foreground;
+  cboxSQLColBackground.Selected := Background;}
 end;
 
 
@@ -795,7 +795,7 @@ end;
 }
 procedure Toptionsform.SynMemoSQLSampleClick(Sender: TObject);
 var
-  Token: UnicodeString;
+  Token: {UnicodeString}String;
   Attri: TSynHighlighterAttributes;
   AttriIdx: Integer;
   sm: TSynMemo;
@@ -804,7 +804,7 @@ begin
   sm.GetHighlighterAttriAtRowCol(sm.CaretXY, Token, Attri);
   if Attri = nil then
     Exit;
-  AttriIdx := ComboSQLColElement.Items.IndexOf(Attri.FriendlyName);
+  {AttriIdx := ComboSQLColElement.Items.IndexOf(Attri.FriendlyName);}
   if AttriIdx = -1 then
     Exit;
   ComboSQLColElement.ItemIndex := AttriIdx;
@@ -841,7 +841,7 @@ begin
   lblShortcutHint.Enabled := ShortcutFocused;
   lblShortcut1.Enabled := ShortcutFocused;
   lblShortcut2.Enabled := ShortcutFocused;
-  Shortcut1.Enabled := lblShortcut1.Enabled;
+  {Shortcut1.Enabled := lblShortcut1.Enabled;}
   if ShortcutFocused then begin
     Data := Sender.GetNodeData(Node);
     lblShortcutHint.Caption := TreeShortcutItems.Text[Node, 0];
@@ -850,10 +850,10 @@ begin
       if Data.Action.Hint <> '' then
         lblShortcutHint.Caption := Data.Action.Hint;
     end;
-    Shortcut1.HotKey := Data.ShortCut1;
-    Shortcut2.HotKey := Data.ShortCut2;
+    {Shortcut1.HotKey := Data.ShortCut1;
+    Shortcut2.HotKey := Data.ShortCut2;}
   end;
-  Shortcut2.Enabled := lblShortcut2.Enabled;
+  {Shortcut2.Enabled := lblShortcut2.Enabled;}
 end;
 
 
@@ -973,7 +973,7 @@ var
 begin
   // Shortcut 1 changed
   Data := TreeShortcutItems.GetNodeData(TreeShortcutItems.FocusedNode);
-  Data.Shortcut1 := (Sender as TSynHotKey).HotKey;
+  {Data.Shortcut1 := (Sender as TSynHotKey).HotKey;}
   Modified(Sender);
 end;
 
@@ -984,7 +984,7 @@ var
 begin
   // Shortcut 2 changed
   Data := TreeShortcutItems.GetNodeData(TreeShortcutItems.FocusedNode);
-  Data.Shortcut2 := (Sender as TSynHotKey).HotKey;
+  {Data.Shortcut2 := (Sender as TSynHotKey).HotKey;}
   Modified(Sender);
 end;
 
@@ -1022,7 +1022,7 @@ begin
   FLanguages := TStringList.Create;
   FLanguages.Add('' + FLanguages.NameValueSeparator + _('Auto detect'));
   AvailLangCodes := TStringList.Create;
-  DefaultInstance.GetListOfLanguages('default', AvailLangCodes);
+  {DefaultInstance.GetListOfLanguages('default', AvailLangCodes);}
   AddLang('aa', 'Afar');
   AddLang('aa', 'Afar');
   AddLang('ab', 'Abkhazian');

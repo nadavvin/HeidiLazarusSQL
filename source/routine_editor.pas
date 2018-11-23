@@ -4,8 +4,8 @@ interface
 
 uses
   {Windows, }SysUtils, Classes, Graphics, Controls, Forms, Dialogs, SynEdit, SynMemo, StdCtrls,
-  ComCtrls, ToolWin, VirtualTrees, {SynRegExpr,}
-  dbconnection, apphelpers, Menus, ExtCtrls;
+  ComCtrls, ToolWin, VirtualTrees, {Syn}RegExpr, MissingAndConversions,
+  dbconnection, apphelpers, Menus, ExtCtrls, gnugettext;
 
 type
   TFrame = TDBObjectEditor;
@@ -152,7 +152,7 @@ begin
   comboSecurity.ItemIndex := 0;
   editComment.Clear;
   comboDefiner.Text := '';
-  comboDefiner.TextHint := f_('Current user (%s)', [Obj.Connection.CurrentUserHostCombination]);
+  {comboDefiner.TextHint := f_('Current user (%s)', [Obj.Connection.CurrentUserHostCombination]);}
   comboDefiner.Hint := f_('Leave empty for current user (%s)', [Obj.Connection.CurrentUserHostCombination]);
   SynMemoBody.Text := 'BEGIN'+CRLF+CRLF+'END';
   if DBObject.Name <> '' then begin

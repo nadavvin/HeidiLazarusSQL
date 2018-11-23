@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Classes, Graphics, Forms, Controls, StdCtrls, VirtualTrees,
-  ComCtrls, ToolWin, Dialogs, SysUtils, {gnugettext, }extra_controls;
+  ComCtrls, ToolWin, Dialogs, SysUtils, gnugettext, extra_controls, MissingAndConversions;
 
 {$I const.inc}
 
@@ -55,7 +55,7 @@ var
 begin
   // Convert hex to binary string before returning
   SetLength(Ansi, memoText.GetTextLen div 2);
-  HexToBin(PWideChar(memoText.Text), PAnsiChar(Ansi), Length(Ansi));
+  HexToBin({PWideChar}PChar(memoText.Text), PAnsiChar(Ansi), Length(Ansi));
   Result := String(Ansi);
 end;
 
@@ -110,13 +110,13 @@ end;
 procedure TfrmBinEditor.memoTextKeyDown(Sender: TObject; var Key: Word; Shift:
     TShiftState);
 begin
-  case Key of
+  {case Key of
     // Cancel by Escape
     VK_ESCAPE: btnCancelClick(Sender);
     // Apply changes and end editing by Ctrl + Enter
     VK_RETURN: if ssCtrl in Shift then btnApplyClick(Sender);
     Ord('a'), Ord('A'): if (ssCtrl in Shift) and (not (ssAlt in Shift)) then Mainform.actSelectAllExecute(Sender);
-  end;
+  end;}
 end;
 
 procedure TfrmBinEditor.btnWrapClick(Sender: TObject);

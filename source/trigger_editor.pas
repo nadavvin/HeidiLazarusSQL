@@ -4,8 +4,8 @@ interface
 
 uses
   Windows, SysUtils, Classes, Controls, Forms, Graphics, Dialogs, StdCtrls, SynEdit, SynMemo,
-  SynCompletion{Proposal, SynRegExpr},
-  dbconnection, mysql_structures, apphelpers, {gnugettext,} ComCtrls;
+  SynCompletion{Proposal}, {Syn}RegExpr, MissingAndConversions,
+  dbconnection, mysql_structures, apphelpers, gnugettext, ComCtrls;
 
 type
   TFrame = TDBObjectEditor;
@@ -59,7 +59,7 @@ uses main;
 }
 constructor TfrmTriggerEditor.Create(AOwner: TComponent);
 var
-  col: TProposalColumn;
+  {col: TProposalColumn;}
   i: Integer;
 begin
   inherited;
@@ -68,17 +68,17 @@ begin
   editName.MaxLength := NAME_LEN;
   comboTiming.Items.Text := 'BEFORE'+CRLF+'AFTER';
   comboEvent.Items.Text := 'INSERT'+CRLF+'UPDATE'+CRLF+'DELETE';
-  for i:=0 to Mainform.SynCompletionProposal.Columns.Count-1 do begin
+  {for i:=0 to Mainform.SynCompletionProposal.Columns.Count-1 do begin
     col := SynCompletionProposalStatement.Columns.Add;
     col.ColumnWidth := Mainform.SynCompletionProposal.Columns[i].ColumnWidth;
-  end;
+  end;}
   SynCompletionProposalStatement.NbLinesInWindow := Mainform.SynCompletionProposal.NbLinesInWindow;
   SynCompletionProposalStatement.Width := Mainform.SynCompletionProposal.Width;
-  SynCompletionProposalStatement.Options := Mainform.SynCompletionProposal.Options;
+  {SynCompletionProposalStatement.Options := Mainform.SynCompletionProposal.Options;
   SynCompletionProposalStatement.TimerInterval := Mainform.SynCompletionProposal.TimerInterval;
   SynCompletionProposalStatement.ItemHeight := Mainform.SynCompletionProposal.ItemHeight;
   SynCompletionProposalStatement.Margin := Mainform.SynCompletionProposal.Margin;
-  SynCompletionProposalStatement.Font := Font;
+  SynCompletionProposalStatement.Font := Font;}
 end;
 
 
@@ -94,7 +94,7 @@ begin
   inherited;
   editName.Text := '';
   comboDefiner.Text := '';
-  comboDefiner.TextHint := f_('Current user (%s)', [Obj.Connection.CurrentUserHostCombination]);
+  {comboDefiner.TextHint := f_('Current user (%s)', [Obj.Connection.CurrentUserHostCombination]);}
   comboDefiner.Hint := f_('Leave empty for current user (%s)', [Obj.Connection.CurrentUserHostCombination]);
   SynMemoBody.Text := 'BEGIN'+CRLF+CRLF+'END';
   comboEvent.ItemIndex := 0;
@@ -246,7 +246,7 @@ begin
 end;
 
 
-procedure TfrmTriggerEditor.SynCompletionProposalStatementExecute(Kind: SynCompletionType; Sender: TObject;
+{procedure TfrmTriggerEditor.SynCompletionProposalStatementExecute(Kind: SynCompletionType; Sender: TObject;
   var CurrentInput: String; var x, y: Integer; var CanExecute: Boolean);
 var
   Proposal: TSynCompletionProposal;
@@ -272,7 +272,7 @@ begin
     end;
   end else
     Mainform.SynCompletionProposalExecute(Kind, Sender, CurrentInput, x, y, CanExecute);
-end;
+end;}
 
 
 procedure TfrmTriggerEditor.btnHelpClick(Sender: TObject);

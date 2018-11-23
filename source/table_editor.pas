@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, StdCtrls,
-  ComCtrls, ToolWin, VirtualTrees, SynRegExpr, {ActiveX, }ExtCtrls, SynEdit,
+  ComCtrls, ToolWin, VirtualTrees, {Syn}RegExpr, {ActiveX, }ExtCtrls, SynEdit,
   SynMemo, Menus, Clipbrd, Math, {System.}UITypes,
   grideditlinks, mysql_structures, dbconnection, apphelpers, gnugettext2;
 
@@ -879,11 +879,11 @@ procedure TfrmTableEditor.listColumnsDragOver(Sender: TBaseVirtualTree;
 begin
   Accept := (Source = Sender) and (Mode <> dmNowhere);
   // Not sure what this effect does, probably show a specific mouse cursor?
-  Effect := DROPEFFECT_MOVE;
+  {Effect := DROPEFFECT_MOVE;}
 end;
 
 
-procedure TfrmTableEditor.listColumnsDragDrop(Sender: TBaseVirtualTree;
+{procedure TfrmTableEditor.listColumnsDragDrop(Sender: TBaseVirtualTree;
   Source: TObject; DataObject: IDataObject; Formats: TFormatArray;
   Shift: TShiftState; Pt: TPoint; var Effect: Integer; Mode: TDropMode);
 var
@@ -899,7 +899,7 @@ begin
     listColumns.MoveTo(listColumns.FocusedNode, Node, AttachMode, False);
     ValidateColumnControls;
   end;
-end;
+end;}
 
 
 procedure TfrmTableEditor.listColumnsBeforeCellPaint(Sender: TBaseVirtualTree;
@@ -1281,8 +1281,8 @@ var
 begin
   // Space/click on checkbox column
   VT := Sender as TVirtualStringTree;
-  if (Ord(Key) = VK_SPACE) and (VT.FocusedColumn in [4, 5, 6]) then
-    vtHandleClickOrKeyPress(VT, VT.FocusedNode, VT.FocusedColumn, []);
+  {if (Ord(Key) = VK_SPACE) and (VT.FocusedColumn in [4, 5, 6]) then
+    vtHandleClickOrKeyPress(VT, VT.FocusedNode, VT.FocusedColumn, []);}
 end;
 
 
@@ -1388,7 +1388,7 @@ begin
   ed := Sender as TEdit;
   ShouldBe := CleanupNumber(ed.Text);
   if (ed.Text = ShouldBe) or (ed.Text = '') then Exit;
-  MessageBeep(MB_ICONEXCLAMATION);
+  {MessageBeep(MB_ICONEXCLAMATION);}
   CursorPos := ed.SelStart;
   ed.OnChange := nil;
   ed.Text := ShouldBe;
@@ -1779,7 +1779,7 @@ begin
 end;
 
 
-procedure TfrmTableEditor.treeIndexesDragDrop(Sender: TBaseVirtualTree;
+{procedure TfrmTableEditor.treeIndexesDragDrop(Sender: TBaseVirtualTree;
   Source: TObject; DataObject: IDataObject; Formats: TFormatArray;
   Shift: TShiftState; Pt: TPoint; var Effect: Integer; Mode: TDropMode);
 var
@@ -1828,7 +1828,7 @@ begin
   Modification(Sender);
   // Finally tell parent node to update its children
   VT.ReinitChildren(Node, False);
-end;
+end;}
 
 
 procedure TfrmTableEditor.btnMoveUpIndexClick(Sender: TObject);
@@ -1873,10 +1873,10 @@ begin
     ListForeignKeys.Enabled := SupportsForeignKeys;
     tlbForeignKeys.Enabled := SupportsForeignKeys;
     pnlNoForeignKeys.Caption := f_('The selected table engine (%s) does not support foreign keys.', [comboEngine.Text]);
-    if SupportsForeignKeys then
+    {if SupportsForeignKeys then
       ListForeignKeys.Margins.Bottom := 0
     else
-      ListForeignKeys.Margins.Bottom := GetTextHeight(pnlNoForeignKeys.Font)+4;
+      ListForeignKeys.Margins.Bottom := GetTextHeight(pnlNoForeignKeys.Font)+4;}
     ListForeignKeys.Repaint;
   end
   // Ensure SynMemo's have focus, otherwise Select-All and Copy actions may fail
