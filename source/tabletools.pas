@@ -11,7 +11,8 @@ interface
 uses
   Windows, SysUtils, Classes, Controls, Forms, StdCtrls, ComCtrls, Buttons, Dialogs, StdActns,
   VirtualTrees, ExtCtrls, Graphics, {Syn}RegExpr, Math, Generics.Collections, extra_controls,
-  dbconnection, apphelpers, Menus, gnugettext2, DateUtils, {System.}Zip, {System.}UITypes, StrUtils;
+  dbconnection, apphelpers, Menus, gnugettext2, DateUtils, {System.}Zip, {System.}UITypes, StrUtils,
+  MissingAndConversions;
 
 type
   TToolMode = (tmMaintenance, tmFind, tmSQLExport, tmBulkTableEdit);
@@ -325,7 +326,7 @@ begin
   idx := AppSettings.ReadInt(asExportSQLOutput);
   if (idx = -1)
     or (idx >= comboExportOutputType.Items.Count)
-    or StartsStr(OUTPUT_SERVER, comboExportOutputType.Items[idx])
+    {or StartsStr(OUTPUT_SERVER, comboExportOutputType.Items[idx])}
     then idx := 0;
   comboExportOutputType.ItemIndex := idx;
   comboExportOutputType.OnChange(Sender);
@@ -381,8 +382,8 @@ begin
       AppSettings.WriteBool(asExportSQLAddComments, menuExportAddComments.Checked);
       AppSettings.WriteBool(asExportSQLRemoveAutoIncrement, menuExportRemoveAutoIncrement.Checked);
 
-      if not StartsStr(OUTPUT_SERVER, comboExportOutputType.Text) then
-        AppSettings.WriteInt(asExportSQLOutput, comboExportOutputType.ItemIndex);
+      {if not StartsStr(OUTPUT_SERVER, comboExportOutputType.Text) then
+        AppSettings.WriteInt(asExportSQLOutput, comboExportOutputType.ItemIndex);}
 
       // Remove duplicates from recent file pulldown
       if (comboExportOutputType.Text = OUTPUT_FILE)
@@ -587,7 +588,7 @@ var
   i: Integer;
   Conn: TDBConnection;
   FileName, FileNameZip, FileNameInZip: TFileName;
-  Zip: TZipFile;
+  {Zip: TZipFile;}
   StartTime: Cardinal;
   LogRow: TStringlist;
 
@@ -733,7 +734,7 @@ begin
       FileName := TFileStream(ExportStream).FileName;
     FreeAndNil(ExportStream);
 
-    if comboExportOutputType.Text = OUTPUT_FILE_COMPRESSED then begin
+    {if comboExportOutputType.Text = OUTPUT_FILE_COMPRESSED then begin
       AddNotes('', '', _('Compressing')+'...', '');
       StartTime := GetTickCount;
       FileNameZip := FExportFileName;
@@ -749,7 +750,7 @@ begin
       LogRow[2] := _('Compressing done.');
       LogRow[3] := FormatTimeNumber((GetTickCount-StartTime) / 1000, True);
       ResultGrid.Repaint;
-    end;
+    end;}
 
     // Activate ansi mode or whatever again, locally
     Conn.Query('/*!40101 SET SQL_MODE=IFNULL(@OLD_LOCAL_SQL_MODE, '''') */');
@@ -1151,7 +1152,7 @@ begin
       comboExportOutputTarget.ItemIndex := 0;
     lblExportOutputTarget.Caption := _('Filename')+':';
     btnExportOutputTargetSelect.Enabled := True;
-    btnExportOutputTargetSelect.ImageIndex := 51;
+    {btnExportOutputTargetSelect.ImageIndex := 51;}
   end else if comboExportOutputType.Text = OUTPUT_DIR then begin
     comboExportOutputTarget.Style := csDropDown;
     comboExportOutputTarget.Hint := FilenameHint;
@@ -1160,18 +1161,18 @@ begin
       comboExportOutputTarget.ItemIndex := 0;
     lblExportOutputTarget.Caption := _('Directory')+':';
     btnExportOutputTargetSelect.Enabled := True;
-    btnExportOutputTargetSelect.ImageIndex := 51;
+    {btnExportOutputTargetSelect.ImageIndex := 51;}
   end else if comboExportOutputType.Text = OUTPUT_CLIPBOARD then begin
     comboExportOutputTarget.Enabled := False;
     comboExportOutputTarget.Items.Clear;
     lblExportOutputTarget.Caption := '';
     btnExportOutputTargetSelect.Enabled := False;
-    btnExportOutputTargetSelect.ImageIndex := 4;
+    {btnExportOutputTargetSelect.ImageIndex := 4;}
   end else if comboExportOutputType.Text = OUTPUT_DB then begin
     comboExportOutputTarget.Style := csDropDownList;
     lblExportOutputTarget.Caption := _('Database')+':';
     btnExportOutputTargetSelect.Enabled := False;
-    btnExportOutputTargetSelect.ImageIndex := 27;
+    {btnExportOutputTargetSelect.ImageIndex := 27;}
     // Add unchecked databases
     comboExportOutputTarget.Items.Clear;
     SessionNode := MainForm.GetRootNode(TreeObjects, MainForm.ActiveConnection);
@@ -1189,7 +1190,7 @@ begin
     comboExportOutputTarget.Style := csDropDownList;
     lblExportOutputTarget.Caption := _('Database')+':';
     btnExportOutputTargetSelect.Enabled := False;
-    btnExportOutputTargetSelect.ImageIndex := 27;
+    {btnExportOutputTargetSelect.ImageIndex := 27;}
     SessionName := Copy(comboExportOutputType.Text, Length(OUTPUT_SERVER)+1, Length(comboExportOutputType.Text));
     FreeAndNil(FTargetConnection);
     Params := TConnectionParameters.Create(SessionName);
@@ -1272,14 +1273,14 @@ var
   btn: TButton;
 begin
   btn := Sender as TButton;
-  btn.DropDownMenu.Popup(btn.ClientOrigin.X, btn.ClientOrigin.Y+btn.Height);
+  {btn.DropDownMenu.Popup(btn.ClientOrigin.X, btn.ClientOrigin.Y+btn.Height);}
 end;
 
 
 procedure TfrmTableTools.btnExportOutputTargetSelectClick(Sender: TObject);
 var
   SaveDialog: TSaveDialog;
-  Browse: TBrowseForFolder;
+  {Browse: TBrowseForFolder;}
 begin
   if (comboExportOutputType.Text = OUTPUT_FILE) or (comboExportOutputType.Text = OUTPUT_FILE_COMPRESSED) then begin
     // Select filename
@@ -1293,7 +1294,7 @@ begin
     if SaveDialog.Execute then
       comboExportOutputTarget.Text := SaveDialog.FileName;
     SaveDialog.Free;
-  end else if(comboExportOutputType.Text = OUTPUT_DIR) then begin
+  {end else if(comboExportOutputType.Text = OUTPUT_DIR) then begin
     Browse := TBrowseForFolder.Create(Self);
     Browse.Folder := comboExportOutputTarget.Text;
     Browse.DialogCaption := _('Select output directory');
@@ -1301,7 +1302,7 @@ begin
     Browse.BrowseOptions := Browse.BrowseOptions - [bifNoNewFolderButton] + [bifNewDialogStyle];
     if Browse.Execute then
       comboExportOutputTarget.Text := Browse.Folder;
-    Browse.Free;
+    Browse.Free;}
   end;
   ValidateControls(Sender);
 end;
