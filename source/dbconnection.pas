@@ -6,7 +6,7 @@ interface
 uses
   Classes, SysUtils, windows, mysql_structures, {Syn}RegExpr, Generics.Collections, Generics.Defaults,
   DateUtils, Types, Math, Dialogs, {ADODB,} DB, {DBCommon, ComObj,} Graphics, ExtCtrls, StrUtils, sqldb,
-  gnugettext, {AnsiStrings,} Controls, Forms, MissingAndConversions;
+  gnugettext, {AnsiStrings,} Controls, Forms, MissingAndConversions, SQLDBConnection;
 
 
 type
@@ -755,7 +755,7 @@ var
   mysql_free_result: procedure(Result: PMYSQL_RES); stdcall;
   mysql_get_client_info: function: PAnsiChar; stdcall;
   mysql_get_server_info: function(Handle: PMYSQL): PAnsiChar; stdcall;
-  mysql_init: function(Handle: PMYSQL): PMYSQL; stdcall;
+  {mysql_init: function(Handle: PMYSQL): PMYSQL; stdcall;}
   mysql_num_fields: function(Result: PMYSQL_RES): Integer; stdcall;
   mysql_num_rows: function(Result: PMYSQL_RES): Int64; stdcall;
   mysql_options: function(Handle: PMYSQL; Option: TMySQLOption; arg: PAnsiChar): Integer; stdcall;
