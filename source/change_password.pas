@@ -3,9 +3,9 @@ unit change_password;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, extra_controls, gnugettext,
-  Vcl.Menus, Clipbrd, Vcl.ComCtrls, System.Math;
+  {Winapi.Windows, Winapi.Messages, System.}SysUtils, {System.}Variants, {System.}Classes, {Vcl.}Graphics,
+  {Vcl.}Controls, {Vcl.}Forms, {Vcl.}Dialogs, {Vcl.}StdCtrls, {Vcl.}ExtCtrls, extra_controls, gnugettext,
+  {Vcl.}Menus, Clipbrd, {Vcl.}ComCtrls, {System.}Math, MissingAndConversions;
 
 type
   TfrmPasswordChange = class(TFormWithSizeGrip)
@@ -106,11 +106,11 @@ var
 begin
   // Copy new password to clipboard
   Clipboard.AsText := editPassword.Text;
-  OldImageIndex := btnCopyToClipboard.ImageIndex;
-  btnCopyToClipboard.ImageIndex := 55;
+  {OldImageIndex := btnCopyToClipboard.ImageIndex;
+  btnCopyToClipboard.ImageIndex := 55;}
   btnCopyToClipboard.Repaint;
   Sleep(500);
-  btnCopyToClipboard.ImageIndex := OldImageIndex;
+  {btnCopyToClipboard.ImageIndex := OldImageIndex;}
 end;
 
 
@@ -168,11 +168,11 @@ begin
   end;
   Inc(Distance, Length(p)*10);
   progressbarPasswordStrength.Position := Round(progressbarPasswordStrength.Max / 500 * Distance);
-  case progressbarPasswordStrength.Position of
+  {case progressbarPasswordStrength.Position of
     0..20: progressbarPasswordStrength.State := pbsError;
     21..50: progressbarPasswordStrength.State := pbsPaused;
     51..100: progressbarPasswordStrength.State := pbsNormal;
-  end;
+  end;}
 end;
 
 

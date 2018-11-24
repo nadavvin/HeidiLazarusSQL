@@ -6,7 +6,7 @@ interface
 uses
   Classes, SysUtils, windows, mysql_structures, {Syn}RegExpr, Generics.Collections, Generics.Defaults,
   DateUtils, Types, Math, Dialogs, {ADODB,} DB, {DBCommon, ComObj,} Graphics, ExtCtrls, StrUtils, sqldb,
-  {gnugettext, AnsiStrings,} Controls, Forms;
+  gnugettext, {AnsiStrings,} Controls, Forms, MissingAndConversions;
 
 
 type
@@ -807,7 +807,7 @@ var
   Success: Boolean;
 begin
   inherited;
-  Success := CreatePipe(ReadHandle, WriteHandle, nil, 8192);
+  {Success := CreatePipe(ReadHandle, WriteHandle, nil, 8192);
   if Success then
     Success := DuplicateHandle(
       GetCurrentProcess, ReadHandle,
@@ -821,14 +821,14 @@ begin
       DUPLICATE_CLOSE_SOURCE OR DUPLICATE_SAME_ACCESS
     );
   if not Success then
-    raise EDatabaseError.Create(_('Error creating I/O pipes'));
+    raise EDatabaseError.Create(_('Error creating I/O pipes'));}
 end;
 
 
 destructor TProcessPipe.Destroy;
 begin
-  CloseHandle(ReadHandle);
-  CloseHandle(WriteHandle);
+  {CloseHandle(ReadHandle);
+  CloseHandle(WriteHandle);}
   inherited;
 end;
 
@@ -848,10 +848,10 @@ end;
 
 destructor TPlink.Destroy;
 begin
-  FConnection.Log(lcInfo, f_('Closing plink.exe process #%d ...', [FProcessInfo.dwProcessId]));
+  {FConnection.Log(lcInfo, f_('Closing plink.exe process #%d ...', [FProcessInfo.dwProcessId]));
   TerminateProcess(FProcessInfo.hProcess, 0);
   CloseHandle(FProcessInfo.hProcess);
-  CloseHandle(FProcessInfo.hThread);
+  CloseHandle(FProcessInfo.hThread);}
   FInPipe.Free;
   FOutPipe.Free;
   FErrorPipe.Free;
@@ -864,7 +864,7 @@ var
   PlinkCmd, PlinkCmdDisplay: String;
   OutText, ErrorText: String;
   rx: TRegExpr;
-  StartupInfo: TStartupInfo;
+  {StartupInfo: TStartupInfo;}
   ExitCode: LongWord;
   Waited, ReturnedSomethingAt, PortChecks: Integer;
 begin
@@ -901,17 +901,17 @@ begin
   FConnection.Log(lcInfo, PlinkCmdDisplay);
 
   // Prepare process
-  FillChar(StartupInfo, SizeOf(StartupInfo), 0);
+  {FillChar(StartupInfo, SizeOf(StartupInfo), 0);
   StartupInfo.cb := SizeOf(StartupInfo);
   StartupInfo.dwFlags := STARTF_USESHOWWINDOW or STARTF_USESTDHANDLES;
   StartupInfo.wShowWindow := SW_HIDE;
   StartupInfo.hStdInput:= FInPipe.ReadHandle;
   StartupInfo.hStdError:= FErrorPipe.WriteHandle;
-  StartupInfo.hStdOutput:= FOutPipe.WriteHandle;
+  StartupInfo.hStdOutput:= FOutPipe.WriteHandle;}
 
   // Create plink.exe process
   FillChar(FProcessInfo, SizeOf(FProcessInfo), 0);
-  if not CreateProcess(
+  {if not CreateProcess(
        nil,
        PChar(PlinkCmd),
        nil,
@@ -923,7 +923,7 @@ begin
        StartupInfo,
        FProcessInfo) then begin
     raise EDatabaseError.CreateFmt(_('Could not execute PLink: %s'), [CRLF+PlinkCmdDisplay]);
-  end;
+  end;}
 
   // Wait until timeout has finished, or some text returned.
   // Parse pipe output and probably show some message in a dialog.
@@ -931,10 +931,10 @@ begin
   ReturnedSomethingAt := -1;
   while Waited < FConnection.Parameters.SSHTimeout*1000 do begin
     Inc(Waited, 200);
-    WaitForSingleObject(FProcessInfo.hProcess, 200);
+    {WaitForSingleObject(FProcessInfo.hProcess, 200);
     GetExitCodeProcess(FProcessInfo.hProcess, ExitCode);
     if ExitCode <> STILL_ACTIVE then
-      raise EDatabaseError.CreateFmt(_('PLink exited unexpected. Command line was: %s'), [CRLF+PlinkCmdDisplay]);
+      raise EDatabaseError.CreateFmt(_('PLink exited unexpected. Command line was: %s'), [CRLF+PlinkCmdDisplay]);}
 
     OutText := ReadPipe(FOutPipe);
     ErrorText := ReadPipe(FErrorPipe);
@@ -985,11 +985,11 @@ var
   R: AnsiString;
 begin
   Result := '';
-  if Pipe.ReadHandle = INVALID_HANDLE_VALUE then
+  {if Pipe.ReadHandle = INVALID_HANDLE_VALUE then
     raise EDatabaseError.Create(_('Error reading I/O pipes'));
 
   // Check if there is data to read from stdout
-  PeekNamedPipe(Pipe.ReadHandle, nil, 0, nil, @BufferReadCount, nil);
+  PeekNamedPipe(Pipe.ReadHandle, nil, 0, nil, @BufferReadCount, nil);}
 
   if BufferReadCount <> 0 then begin
     FillChar(Buffer, sizeof(Buffer), 'z');
@@ -998,7 +998,7 @@ begin
     OutLen := 0;
     while BytesRemaining >= 1024 do begin
       // Read stdout pipe
-      ReadFile(Pipe.ReadHandle, Buffer, 1024, BufferReadCount, nil);
+      {ReadFile(Pipe.ReadHandle, Buffer, 1024, BufferReadCount, nil);}
       Dec(BytesRemaining, BufferReadCount);
 
       SetLength(R, OutLen + BufferReadCount);
@@ -1007,7 +1007,7 @@ begin
     end;
 
     if BytesRemaining > 0 then begin
-      ReadFile(Pipe.ReadHandle, Buffer, BytesRemaining, BufferReadCount, nil);
+      {ReadFile(Pipe.ReadHandle, Buffer, BytesRemaining, BufferReadCount, nil);}
       SetLength(R, OutLen + BufferReadCount);
       Move(Buffer, R[OutLen + 1], BufferReadCount);
     end;
@@ -1030,7 +1030,8 @@ const
 var
   PText: PAnsiChar;
 begin
-  Result := '';
+  Result := Text;
+  {Result := '';
   PText := AnsiStrings.AnsiStrAlloc(cMaxLength);
   while Text <> '' do begin
     AnsiStrings.StrPCopy(PText, copy(Text, 1, cMaxLength-1));
@@ -1038,7 +1039,7 @@ begin
     Result := Result + AnsiStrings.StrPas(PText);
     Delete(Text, 1, cMaxLength-1);
   end;
-  AnsiStrings.StrDispose(PText);
+  AnsiStrings.StrDispose(PText);}
 end;
 
 
@@ -1066,7 +1067,7 @@ begin
         EscBuffer := EscBuffer + Chr;
         {$WARNINGS ON}
         if Length(EscBuffer) >= High(EscBuffer) then begin
-          MessageBeep(MB_ICONASTERISK);
+          {MessageBeep(MB_ICONASTERISK);}
           EscBuffer := '';
           EscFlag := FALSE;
         end;
@@ -1094,8 +1095,8 @@ begin
   {$WARNINGS OFF}
   TextA := Utf8ToAnsi(Text);
   {$WARNINGS ON}
-  if TextA <> '' then
-    WriteFile(FInPipe.WriteHandle, TextA[1], Length(TextA), WrittenBytes, nil);
+  {if TextA <> '' then
+    WriteFile(FInPipe.WriteHandle, TextA[1], Length(TextA), WrittenBytes, nil);}
 end;
 
 
@@ -1602,7 +1603,7 @@ var
 begin
   // Map library procedure to internal procedure
   Log(lcDebug, f_('Assign procedure "%s"', [Name]));
-  Proc := GetProcAddress(LibMysqlHandle, Name);
+  {Proc := GetProcAddress(LibMysqlHandle, Name);
   if Proc = nil then begin
     if @mysql_get_client_info = nil then
       mysql_get_client_info := GetProcAddress(LibMysqlHandle, 'mysql_get_client_info');
@@ -1611,7 +1612,7 @@ begin
       ClientVersion := ' ('+DecodeApiString(mysql_get_client_info)+')';
     LibMysqlHandle := 0;
     raise EDatabaseError.Create(f_('Your %s is out-dated or somehow incompatible to %s. Please use the one from the installer, or just reinstall %s.', [LibMysqlPath+ClientVersion, APPNAME, APPNAME]));
-  end;
+  end;}
 end;
 
 
@@ -1619,12 +1620,12 @@ procedure TPgConnection.AssignProc(var Proc: FARPROC; Name: PAnsiChar);
 begin
   // Map library procedure to internal procedure
   Log(lcDebug, f_('Assign procedure "%s"', [Name]));
-  Proc := GetProcAddress(LibPqHandle, Name);
+  {Proc := GetProcAddress(LibPqHandle, Name);
   if Proc = nil then begin
     LibPqHandle := 0;
     Log(lcDebug, f_('Library error in %s: Could not find procedure address for "%s"', [LibPqPath, Name]));
     raise EDatabaseError.Create(f_('Your %s is out-dated or somehow incompatible to %s. Please use the one from the installer, or just reinstall %s.', [LibPqPath, APPNAME, APPNAME]));
-  end;
+  end;}
 end;
 
 
@@ -1857,7 +1858,7 @@ var
   rx: TRegExpr;
   i: Integer;
 begin
-  if Value then begin
+  {if Value then begin
     DoBeforeConnect;
     try
       // Creating the ADO object throws exceptions if MDAC is missing, especially on Wine
@@ -1983,7 +1984,7 @@ begin
     ClearCache(False);
     FConnectionStarted := 0;
     Log(lcInfo, f_(MsgDisconnect, [FParameters.Hostname, DateTimeToStr(Now)]));
-  end;
+  end;}
 end;
 
 
@@ -2136,7 +2137,7 @@ var
 begin
   // Init libmysql before actually connecting.
   // Try newer libmariadb version at first, and fall back to libmysql
-  if LibMysqlHandle = 0 then begin
+  {if LibMysqlHandle = 0 then begin
     LibMysqlPath := 'libmariadb.dll';
     Log(lcDebug, f_('Loading library file %s ...', [LibMysqlPath]));
     // Temporarily suppress error popups while loading new library on Windows XP, see #79
@@ -2188,7 +2189,7 @@ begin
       AssignProc(@mysql_warning_count, 'mysql_warning_count');
       Log(lcDebug, LibMysqlPath + ' v' + DecodeApiString(mysql_get_client_info) + ' loaded.');
     end;
-  end;
+  end;}
   inherited;
 end;
 
@@ -2199,7 +2200,7 @@ var
 begin
   // Init lib before actually connecting.
   // Each connection has its own library handle
-  if LibPqHandle = 0 then begin
+  {if LibPqHandle = 0 then begin
     Log(lcDebug, f_('Loading library file %s ...', [LibPqPath]));
     LibPqHandle := LoadLibrary(PWideChar(LibPqPath));
     if LibPqHandle = 0 then begin
@@ -2238,7 +2239,7 @@ begin
 
       Log(lcDebug, LibPqPath + ' v' + IntToStr(PQlibVersion) + ' loaded.');
     end;
-  end;
+  end;}
   inherited;
 end;
 
@@ -2259,14 +2260,14 @@ end;
 
 procedure TMySQLConnection.DoAfterConnect;
 var
-  TZI: TTimeZoneInformation;
+  {TZI: TTimeZoneInformation;}
   Minutes, Hours, i: Integer;
   Offset: String;
 begin
   inherited;
 
   // Set timezone offset to UTC
-  if (ServerVersionInt >= 40103) and Parameters.LocalTimeZone then begin
+  {if (ServerVersionInt >= 40103) and Parameters.LocalTimeZone then begin
     Minutes := 0;
     case GetTimeZoneInformation(TZI) of
       TIME_ZONE_ID_STANDARD: Minutes := (TZI.Bias + TZI.StandardBias);
@@ -2297,7 +2298,7 @@ begin
     FSQLSpecifities[spKillQuery] := 'KILL QUERY %d';
 
   if ServerVersionInt >= 50124 then
-    FSQLSpecifities[spLockedTables] := 'SHOW OPEN TABLES FROM %s WHERE '+QuoteIdent('in_use')+'!=0';
+    FSQLSpecifities[spLockedTables] := 'SHOW OPEN TABLES FROM %s WHERE '+QuoteIdent('in_use')+'!=0';}
 end;
 
 
@@ -2356,8 +2357,8 @@ end;
 function TAdoDBConnection.Ping(Reconnect: Boolean): Boolean;
 begin
   Log(lcDebug, 'Ping server ...');
-  if FActive then try
-    FAdoHandle.Execute('SELECT 1');
+  {if FActive then try
+    {FAdoHandle.Execute('SELECT 1');
   except
     on E:EOleException do begin
       FLastError := E.Message;
@@ -2370,7 +2371,7 @@ begin
   Result := FActive;
   // Restart keep-alive timer
   FKeepAliveTimer.Enabled := False;
-  FKeepAliveTimer.Enabled := True;
+  FKeepAliveTimer.Enabled := True;}
 end;
 
 
@@ -2517,7 +2518,7 @@ var
   QueryResult, NextResult: _RecordSet;
   Affected: Int64;
 begin
-  if (FLockedByThread <> nil) and (FLockedByThread.ThreadID <> GetCurrentThreadID) then begin
+  {if (FLockedByThread <> nil) and (FLockedByThread.ThreadID <> GetCurrentThreadID) then begin
     Log(lcDebug, _('Waiting for running query to finish ...'));
     try
       FLockedByThread.WaitFor;
@@ -2565,7 +2566,7 @@ begin
       Log(lcError, GetLastError);
       raise EDatabaseError.Create(GetLastError);
     end;
-  end;
+  end;}
 end;
 
 
@@ -3273,9 +3274,9 @@ end;
 function TAdoDBConnection.GetLastErrorCode: Cardinal;
 begin
   // SELECT @@SPID throws errors without filling the error pool. See issue #2684.
-  if FAdoHandle.Errors.Count > 0 then
+  {if FAdoHandle.Errors.Count > 0 then
     Result := FAdoHandle.Errors[FAdoHandle.Errors.Count-1].NativeError
-  else
+  else}
     Result := 0;
 end;
 
@@ -3317,9 +3318,9 @@ function TAdoDBConnection.GetLastError: String;
 var
   Msg: String;
   rx: TRegExpr;
-  E: Error;
+  {E: Error;}
 begin
-  if FAdoHandle.Errors.Count > 0 then begin
+  {if FAdoHandle.Errors.Count > 0 then begin
     E := FAdoHandle.Errors[FAdoHandle.Errors.Count-1];
     Msg := E.Description;
     // Remove stuff from driver in message "[DBNETLIB][ConnectionOpen (Connect()).]"
@@ -3332,7 +3333,8 @@ begin
     Msg := _('unknown');
   if (FLastError <> '') and (Pos(FLastError, Msg) = 0) then
     Msg := FLastError + CRLF + Msg;
-  Result := f_(MsgSQLError, [LastErrorCode, Msg]);
+  Result := f_(MsgSQLError, [LastErrorCode, Msg]);}
+  Result := '';
 end;
 
 
@@ -4426,7 +4428,7 @@ var
   i: Integer;
 begin
   // Cache and return a db's table list
-  if Refresh then
+  {if Refresh then
     ClearDbObjects(db);
 
   // Find list in cache
@@ -4477,7 +4479,8 @@ begin
       if Cache[i].NodeType = OnlyNodeType then
         Result.Add(Cache[i]);
     end;
-  end;
+  end;}
+  Result := Nil;
 end;
 
 
@@ -4935,13 +4938,14 @@ begin
 
       ngMSSQL: begin
         // clear out password
-        ConnectionString := TAdoDBConnection(Self).FAdoHandle.ConnectionString;
+        {ConnectionString := TAdoDBConnection(Self).FAdoHandle.ConnectionString;
         rx := TRegExpr.Create;
         rx.ModifierI := True;
-        rx.Expression := '(\Wpassword=)([^;]*)';
-        ConnectionString := rx.Replace(ConnectionString, '${1}******', True);
-        rx.Free;
-        Result.Values[_('Connection string')] := ConnectionString;
+        rx.Expression := '(\Wpassword=)([^;]*)';}
+        //ConnectionString := rx.Replace(ConnectionString, '${1}******', True);
+        {rx.Free;
+        Result.Values[_('Connection string')] := ConnectionString;}
+        Result := Nil;
       end;
 
       ngPgSQL: begin
@@ -5094,12 +5098,12 @@ begin
           if rxCol.Match[3] <> '' then
             Col.DefaultType := cdtNullUpdateTS;
           Delete(ColSpec, 1, rxCol.MatchLen[0]);
-        end else if StartsText('CURRENT_TIMESTAMP', rxCol.Match[1]) then begin
+        {end else if StartsText('CURRENT_TIMESTAMP', rxCol.Match[1]) then begin
           Col.DefaultType := cdtCurTS;
           Col.DefaultText := rxCol.Match[1];
           if rxCol.Match[3] <> '' then
             Col.DefaultType := cdtCurTSUpdateTS;
-          Delete(ColSpec, 1, rxCol.MatchLen[0]);
+          Delete(ColSpec, 1, rxCol.MatchLen[0]);}
         end else begin
           Col.DefaultType := cdtText;
           Col.DefaultText := ExtractLiteral(ColSpec, '');
@@ -5472,7 +5476,7 @@ begin
   FColumnOrgNames.CaseSensitive := True;
   FStoreResult := True;
   FDBObject := nil;
-  FFormatSettings := TFormatSettings.Create('en-US');
+  {FFormatSettings := TFormatSettings.Create('en-US');}
 end;
 
 
@@ -5509,11 +5513,11 @@ destructor TAdoDBQuery.Destroy;
 var
   i: Integer;
 begin
-  if HasResult then for i:=Low(FResultList) to High(FResultList) do begin
+  {if HasResult then for i:=Low(FResultList) to High(FResultList) do begin
     FResultList[i].Close;
     FResultList[i].Free;
   end;
-  SetLength(FResultList, 0);
+  SetLength(FResultList, 0);}
   inherited;
 end;
 
@@ -5626,7 +5630,7 @@ var
   NumResults: Int64;
 begin
   // TODO: Handle multiple results
-  if UseRawResult = -1 then begin
+  {if UseRawResult = -1 then begin
     Connection.Query(FSQL, FStoreResult);
     UseRawResult := 0;
   end;
@@ -5669,7 +5673,7 @@ begin
       FColumnOrgNames.Clear;
       for i:=0 to NumFields-1 do begin
         FColumnNames.Add(LastResult.Fields[i].FieldName);
-        FColumnOrgNames.Add(FColumnNames[i]);
+        FColumnOrgNames.Add(FColumnNames[i]);}
         { ftUnknown, ftString, ftSmallint, ftInteger, ftWord, // 0..4
           ftBoolean, ftFloat, ftCurrency, ftBCD, ftDate, ftTime, ftDateTime, // 5..11
           ftBytes, ftVarBytes, ftAutoInc, ftBlob, ftMemo, ftGraphic, ftFmtMemo, // 12..18
@@ -5679,7 +5683,7 @@ begin
           ftFixedWideChar, ftWideMemo, ftOraTimeStamp, ftOraInterval, // 38..41
           ftLongWord, ftShortint, ftByte, ftExtended, ftConnection, ftParams, ftStream, //42..48
           ftTimeStampOffset, ftObject, ftSingle //49..51 }
-        case LastResult.Fields[i].DataType of
+        {case LastResult.Fields[i].DataType of
           ftSmallint, ftWord:
             TypeIndex := dtMediumInt;
           ftInteger:
@@ -5728,7 +5732,7 @@ begin
       SetLength(FColumnLengths, 0);
       SetLength(FColumnFlags, 0);
     end;
-  end;
+  end;}
 end;
 
 
@@ -5887,7 +5891,7 @@ var
   Row: TRowData;
   NumRows, WantedLocalRecNo: Int64;
 begin
-  if Value = FRecNo then
+  {if Value = FRecNo then
     Exit;
   if (not FEditingPrepared) and (Value >= RecordCount) then begin
     FRecNo := RecordCount;
@@ -5936,7 +5940,7 @@ begin
 
     FRecNo := Value;
     FEof := False;
-  end;
+  end;}
 end;
 
 
@@ -6004,7 +6008,7 @@ var
   c: Char;
   Field: PMYSQL_FIELD;
 begin
-  if (Column > -1) and (Column < ColumnCount) then begin
+  {if (Column > -1) and (Column < ColumnCount) then begin
     if FEditingPrepared and Assigned(FCurrentUpdateRow) then begin
       // Row was edited and only valid in a TRowData
       AnsiStr := AnsiString(FCurrentUpdateRow[Column].NewText);
@@ -6024,7 +6028,8 @@ begin
       end else
         Exit(False);
     end;
-  end;
+  end;}
+  Exit(False);
 end;
 
 function TMySQLQuery.Col(Column: Integer; IgnoreErrors: Boolean=False): String;
@@ -6077,7 +6082,7 @@ end;
 function TAdoDBQuery.Col(Column: Integer; IgnoreErrors: Boolean=False): String;
 begin
   // Catch broken connection
-  if not FConnection.Active then begin
+  {if not FConnection.Active then begin
     Result := '';
   end else if (Column > -1) and (Column < ColumnCount) then begin
     if FEditingPrepared and Assigned(FCurrentUpdateRow) then begin
@@ -6103,7 +6108,7 @@ begin
       end
     end;
   end else if not IgnoreErrors then
-    Raise EDatabaseError.CreateFmt(_(MsgInvalidColumn), [Column, ColumnCount, RecordCount]);
+    Raise EDatabaseError.CreateFmt(_(MsgInvalidColumn), [Column, ColumnCount, RecordCount]);}
 end;
 
 
@@ -6319,7 +6324,8 @@ end;
 
 function TAdoDbQuery.ColIsKeyPart(Column: Integer): Boolean;
 begin
-  Result := FCurrentResults.Fields[Column].IsIndexField;
+  {Result := FCurrentResults.Fields[Column].IsIndexField;}
+  Exit(False);
 end;
 
 
@@ -6376,7 +6382,8 @@ begin
   else if FEditingPrepared and Assigned(FCurrentUpdateRow) then
     Result := FCurrentUpdateRow[Column].NewIsNull
   else
-    Result := FCurrentResults.Fields[Column].IsNull;
+    {Result := FCurrentResults.Fields[Column].IsNull;}
+    Result := False;
 end;
 
 
@@ -6885,14 +6892,15 @@ var
   rx: TRegExpr;
 begin
   // Untested with joins, compute columns and views
-  Result := GetTableNameFromSQLEx(SQL, idMixCase);
+  {Result := GetTableNameFromSQLEx(SQL, idMixCase);
   rx := TRegExpr.Create;
   rx.Expression := '\.([^\.]+)$';
   if rx.Exec(Result) then
     Result := rx.Match[1];
   rx.Free;
   if Result = '' then
-    raise EDatabaseError.Create('Could not determine name of table.');
+    raise EDatabaseError.Create('Could not determine name of table.');}
+  Exit('');
 end;
 
 
@@ -7036,14 +7044,14 @@ end;
 
 { TDBObjectComparer }
 
-function TDBObjectComparer.Compare(const Left, Right: TDBObject): Integer;
+{function TDBObjectComparer.Compare(const Left, Right: TDBObject): Integer;
 begin
   // Simple sort method for a TDBObjectList
   Result := CompareAnyNode(Left.Schema+'.'+Left.Name, Right.Schema+'.'+Right.Name);
-end;
+end;}
 
 
-function TDBObjectDropComparer.Compare(const Left, Right: TDBObject): Integer;
+{function TDBObjectDropComparer.Compare(const Left, Right: TDBObject): Integer;
 begin
   // Sorting a TDBObject items so that dropping them does not trap in SQL errors
   if (Left.NodeType = lntTrigger) and (Right.NodeType <> lntTrigger) then
@@ -7056,7 +7064,7 @@ begin
     Result := 1
   else
     Result := 0;
-end;
+end;}
 
 
 
@@ -7566,7 +7574,7 @@ finalization
 
 // Release libmysql.dll handle
 if LibMysqlHandle <> 0 then begin
-  FreeLibrary(LibMysqlHandle);
+  {FreeLibrary(LibMysqlHandle);}
   LibMysqlHandle := 0;
 end;
 

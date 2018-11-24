@@ -2450,12 +2450,12 @@ var
       Btn.Default := True;
   end;
 begin
-  if (Win32MajorVersion >= 6) and StyleServices.Enabled then begin
+  {if (Win32MajorVersion >= 6) and StyleServices.Enabled then begin}
     // Use modern task dialog on Vista and above
     Dialog := TTaskDialog.Create(nil);
     Dialog.Flags := [tfEnableHyperlinks, tfAllowDialogCancellation];
     Dialog.CommonButtons := [];
-    Dialog.OnHyperlinkClicked := MainForm.TaskDialogHyperLinkClicked;
+    {Dialog.OnHyperlinkClicked := MainForm.TaskDialogHyperLinkClicked;}
 
     // Caption, title and text
     case DlgType of
@@ -2490,7 +2490,7 @@ begin
           ConfirmIcon.LoadFromResourceName(hInstance, 'Z_ICONQUESTION');
         end;
         Dialog.Flags := Dialog.Flags + [tfUseHiconMain];
-        Dialog.CustomMainIcon := ConfirmIcon;
+        {Dialog.CustomMainIcon := ConfirmIcon;}
       end;
       else
         Dialog.MainIcon := tdiNone;
@@ -2536,7 +2536,7 @@ begin
       Result := mrNo;
 
     Dialog.Free;
-  end else begin
+  {end else begin
     // Backwards compatible dialog on Windows XP
     m := Msg;
     if Title <> '' then
@@ -2551,7 +2551,7 @@ begin
       Result := MessageDlg(m, DlgType, Buttons, 0)
     else
       Result := mrNo;
-  end;
+  end;}
 end;
 
 
@@ -2570,9 +2570,9 @@ end;
 function GetHTMLCharsetByEncoding(Encoding: TEncoding): String;
 begin
   Result := '';
-  if Encoding = TEncoding.Default then
+  {if Encoding = TEncoding.Default then
     Result := 'Windows-'+IntToStr(GetACP)
-  else if Encoding.CodePage = 437 then
+  else }if Encoding.CodePage = 437 then
     Result := 'ascii'
   else if Encoding = TEncoding.Unicode then
     Result := 'utf-16le'
@@ -2774,11 +2774,11 @@ end;
 
 function GetSystemImageList: TImageList;
 var
-  Info: TSHFileInfo;
+  {Info: TSHFileInfo;}
   ImageListHandle: Cardinal;
 begin
   // Create shared imagelist once and use in TPopupMenu and TVirtualTree or whatever
-  if SystemImageList = nil then begin
+  {if SystemImageList = nil then begin
     ImageListHandle := SHGetFileInfo('', 0, Info, SizeOf(Info), SHGFI_SYSICONINDEX or SHGFI_SMALLICON);
     if ImageListHandle <> 0 then begin
       SystemImageList := TImageList.Create(MainForm);
@@ -2786,18 +2786,18 @@ begin
       SystemImageList.ShareImages := true;
       SystemImageList.DrawingStyle := dsTransparent;
     end;
-  end;
+  end;}
   Result := SystemImageList;
 end;
 
 
 function GetSystemImageIndex(Filename: String): Integer;
-var
-  Info: TSHFileInfo;
+{var
+  Info: TSHFileInfo;}
 begin
   // Return image index of shared system image list, for a given filename
-  SHGetFileInfo(PChar(Filename), 0, Info, SizeOf(Info), SHGFI_SYSICONINDEX or SHGFI_TYPENAME);
-  Result := Info.iIcon;
+  {SHGetFileInfo(PChar(Filename), 0, Info, SizeOf(Info), SHGFI_SYSICONINDEX or SHGFI_TYPENAME);
+  Result := Info.iIcon;}
 end;
 
 
@@ -2810,10 +2810,10 @@ var
   hFile: DWord;
   bRead: DWord;
   bToRead: DWord;
-  pDos: PImageDosHeader;
-  pNt: PImageNtHeaders;
+  {pDos: PImageDosHeader;
+  pNt: PImageNtHeaders;}
 begin
-  Result := 32;
+  {Result := 32;
   ExeFilename := ParamStr(0);
   hFile := CreateFile(pChar(ExeFilename), GENERIC_READ, FILE_SHARE_READ, NIL, OPEN_EXISTING, 0, 0);
   if hFile <> INVALID_HANDLE_VALUE then try
@@ -2836,7 +2836,7 @@ begin
     end;
   finally
     CloseHandle(hFile);
-  end;
+  end;}
 end;
 
 
@@ -2859,12 +2859,12 @@ end;
 
 function PortOpen(Port: Word): Boolean;
 var
-  client: sockaddr_in;
+  {client: sockaddr_in;}
   sock: Integer;
   ret: Integer;
-  wsdata: WSAData;
+  {wsdata: WSAData;}
 begin
-  Result := True;
+  {Result := True;
   ret := WSAStartup($0002, wsdata);
   if ret<>0 then
     Exit;
@@ -2876,7 +2876,7 @@ begin
     Result := connect(sock, client, SizeOf(client)) <> 0;
   finally
     WSACleanup;
-  end;
+  end;}
 end;
 
 
@@ -2889,9 +2889,9 @@ begin
   Result := True;
   Pieces := TStringList.Create;
   SplitRegExpr('[\\\/]', FilePath, Pieces);
-  for i:=1 to Pieces.Count-1 do begin
+  {for i:=1 to Pieces.Count-1 do begin
     Result := Result and TPath.HasValidFileNameChars(Pieces[i], False);
-  end;
+  end;}
   Pieces.Free;
 end;
 
@@ -2908,11 +2908,11 @@ begin
   // Taken from https://forums.embarcadero.com/message.jspa?messageID=900804
   Result := False;
   // Avoid crash on WinXP
-  if Win32MajorVersion >= 6 then begin
+  {if Win32MajorVersion >= 6 then begin
     if GetProductInfo(Win32MajorVersion, Win32MinorVersion, TOSVersion.ServicePackMajor, TOSVersion.ServicePackMinor, pdwReturnedProductType) then begin
       Result := (pdwReturnedProductType = PRODUCT_CLOUD) OR (pdwReturnedProductType = PRODUCT_CLOUDN);
     end;
-  end;
+  end;}
 end;
 
 
@@ -2924,7 +2924,7 @@ begin
   // Detect current Microsoft Store package name
   // See https://stackoverflow.com/questions/48549899/how-to-detect-universal-windows-platform-uwp-in-delphi
   Result := '';
-  if (Win32MajorVersion > 6) or ((Win32MajorVersion = 6) and (Win32MinorVersion > 1)) then begin
+  {if (Win32MajorVersion > 6) or ((Win32MajorVersion = 6) and (Win32MinorVersion > 1)) then begin
     // Windows 10, but not necessarily a Store App
     Len := 0;
     GetCurrentPackageFullName(Len, nil);
@@ -2932,7 +2932,7 @@ begin
     GetCurrentPackageFullName(Len, PWideChar(Name));
     if not Name.IsEmpty then
       Result := Trim(Name);
-  end;
+  end;}
 end;
 
 
@@ -2953,17 +2953,17 @@ begin
 
   // Create copy of original image list
   ImgListCopy := TImageList.Create(nil);
-  ImgListCopy.ColorDepth := cd32Bit;
+  {ImgListCopy.ColorDepth := cd32Bit;}
   ImgListCopy.DrawingStyle := dsTransparent;
   ImgListCopy.Clear;
 
   // Add from source image list
-  for i := 0 to ImgList.Count-1 do begin
-    ImgListCopy.AddImage(ImgList, i);
+  {for i := 0 to ImgList.Count-1 do begin
+    ImgListCopy.AddImage(ImgList.get, i);
   end;
 
   // Set size to match scale factor
-  ImgList.SetSize(Round(ImgList.Width * ScaleFactor), Round(ImgList.Height * ScaleFactor));
+  ImgList.SetSize(Round(ImgList.Width * ScaleFactor), Round(ImgList.Height * ScaleFactor));}
 
   for i:= 0 to ImgListCopy.Count-1 do begin
     Extracted := Graphics.TBitmap.Create;
@@ -2972,7 +2972,7 @@ begin
     Scaled.Width := ImgList.Width;
     Scaled.Height := ImgList.Height;
     Scaled.Canvas.FillRect(Scaled.Canvas.ClipRect);
-    GraphUtil.ScaleImage(Extracted, Scaled, ScaleFactor);
+    {GraphUtil.ScaleImage(Extracted, Scaled, ScaleFactor);}
     ImgList.Add(Scaled, Scaled);
   end;
 
@@ -2983,7 +2983,8 @@ end;
 
 function GetThemeColor(Color: TColor): TColor;
 begin
-  Result := TStyleManager.ActiveStyle.GetSystemColor(Color);
+  {Result := TStyleManager.ActiveStyle.GetSystemColor(Color);}
+  Result := clLtGray;
 end;
 
 
@@ -3265,8 +3266,8 @@ end;
 
 procedure THttpDownload.SendRequest(Filename: String);
 var
-  NetHandle: HINTERNET;
-  UrlHandle: HINTERNET;
+  {NetHandle: HINTERNET;
+  UrlHandle: HINTERNET;}
   Buffer: array[1..4096] of Byte;
   Head: array[1..1024] of Char;
   BytesInChunk, HeadSize, Reserved, TimeOutSeconds: Cardinal;
@@ -3275,13 +3276,14 @@ var
   UserAgent, OS: String;
   HttpStatus: Integer;
 begin
-  DoStore := False;
+  {DoStore := False;
   if MainForm.IsWine then
     OS := 'Linux/Wine'
   else
     OS := 'Windows NT '+IntToStr(Win32MajorVersion)+'.'+IntToStr(Win32MinorVersion);
   UserAgent := APPNAME+'/'+MainForm.AppVersion+' ('+OS+'; '+ExtractFilename(Application.ExeName)+'; '+FOwner.Name+')';
   NetHandle := InternetOpen(PChar(UserAgent), INTERNET_OPEN_TYPE_PRECONFIG, nil, nil, 0);
+  OS := '';
 
   // Do not let the user wait 30s
   TimeOutSeconds := FTimeOut * 1000;
@@ -3336,7 +3338,7 @@ begin
       InternetCloseHandle(UrlHandle);
     if Assigned(NetHandle) then
       InternetCloseHandle(NetHandle);
-  end;
+  end;}
 end;
 
 
@@ -3367,7 +3369,7 @@ begin
     FSettingsFile := ExtractFilePath(ParamStr(0)) + 'portable_settings.txt';
   if FileExists(FSettingsFile) then begin
     FPortableMode := True;
-    FBasePath := '\Software\' + APPNAME + ' Portable '+IntToStr(GetCurrentProcessId)+'\';
+    FBasePath := '\Software\' + APPNAME + ' Portable '{+IntToStr(GetCurrentProcessId)}+'\';
     try
       ImportSettings(FSettingsFile);
     except
@@ -3648,7 +3650,7 @@ destructor TAppSettings.Destroy;
 var
   AllKeys: TStringList;
   i: Integer;
-  Proc: TProcessEntry32;
+  {Proc: TProcessEntry32;}
   ProcRuns: Boolean;
   SnapShot: THandle;
   rx: TRegExpr;
@@ -3660,8 +3662,8 @@ begin
     FRegistry.DeleteKey(FBasePath);
 
     // Remove dead keys from instances which didn't close clean, e.g. because of an AV
-    SnapShot := CreateToolhelp32Snapshot(TH32CS_SnapProcess, 0);
-    Proc.dwSize := Sizeof(Proc);
+    {SnapShot := CreateToolhelp32Snapshot(TH32CS_SnapProcess, 0);
+    Proc.dwSize := Sizeof(Proc);}
     FRegistry.OpenKeyReadOnly('\Software\');
     AllKeys := TStringList.Create;
     FRegistry.GetKeyNames(AllKeys);
@@ -3671,16 +3673,16 @@ begin
       if not rx.Exec(AllKeys[i]) then
         Continue;
       ProcRuns := False;
-      if Process32First(SnapShot, Proc) then while True do begin
+      {if Process32First(SnapShot, Proc) then while True do begin
         ProcRuns := rx.Match[1] = IntToStr(Proc.th32ProcessID);
         if ProcRuns or (not Process32Next(SnapShot, Proc)) then
           break;
-      end;
+      end;}
       if not ProcRuns then
         FRegistry.DeleteKey(AllKeys[i]);
     end;
     FRegistry.CloseKey;
-    CloseHandle(SnapShot);
+    {CloseHandle(SnapShot);}
     AllKeys.Free;
     rx.Free;
   except

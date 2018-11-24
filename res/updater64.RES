@@ -1,0 +1,1 @@
+updater exe "updater64.exe"

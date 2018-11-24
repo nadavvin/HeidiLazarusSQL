@@ -7,7 +7,7 @@ unit mysql_structures;
 interface
 
 uses
-  Classes, Graphics, Windows, SysUtils{, gnugettext};
+  Classes, Graphics, Windows, SysUtils, gnugettext;
 
 {$I const.inc}
 

@@ -46,8 +46,8 @@ uses
   extra_controls in '..\..\source\extra_controls.pas',
   change_password in '..\..\source\change_password.pas' {frmPasswordChange},
   Vcl.FormsFix in '..\..\source\Vcl.FormsFix.pas',
-  Vcl.Themes,
-  Vcl.Styles;
+  {Vcl.}Themes{,
+  Vcl.Styles};
 
 {.$R *.RES}
 {$R ..\..\res\icon.RES}
@@ -68,18 +68,18 @@ begin
   FormatSettings.LongTimeFormat := 'hh:nn:ss';
 
   AppSettings := TAppSettings.Create;
-  SecondInstMsgId := RegisterWindowMessage(APPNAME);
+  {SecondInstMsgId := RegisterWindowMessage(APPNAME);}
   if (not AppSettings.ReadBool(asAllowMultipleInstances)) and CheckForSecondInstance then begin
     AppSettings.Free;
     Application.Terminate;
   end else begin
     AppLanguage := AppSettings.ReadString(asAppLanguage);
-    UseLanguage(AppLanguage);
+    {UseLanguage(AppLanguage);}
     Application.Initialize;
     Application.Title := APPNAME;
     Application.UpdateFormatSettings := False;
-    AppHelpers.InheritFont(Application.DefaultFont);
-    TStyleManager.TrySetStyle(AppSettings.ReadString(asTheme));
+    {AppHelpers.InheritFont(Application.DefaultFont);
+    TStyleManager.TrySetStyle(AppSettings.ReadString(asTheme));}
     Application.CreateForm(TMainForm, MainForm);
     MainForm.AfterFormCreate;
     Application.OnDeactivate := MainForm.ApplicationDeActivate;

@@ -3,12 +3,13 @@
   <ProjectSession>
     <Version Value="11"/>
     <BuildModes Active="Default"/>
-    <Units Count="64">
+    <Units Count="69">
       <Unit0>
         <Filename Value="heidisql.dpr"/>
         <IsPartOfProject Value="True"/>
-        <TopLine Value="25"/>
-        <CursorPos X="43" Y="45"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="34"/>
+        <CursorPos X="9" Y="50"/>
         <UsageCount Value="206"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -20,9 +21,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Main"/>
-        <EditorIndex Value="4"/>
-        <TopLine Value="9475"/>
-        <CursorPos X="5" Y="9495"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="3"/>
+        <CursorPos X="22" Y="21"/>
         <UsageCount Value="206"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -52,7 +53,7 @@
         <Filename Value="../../source/loaddata.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <EditorIndex Value="32"/>
+        <EditorIndex Value="35"/>
         <TopLine Value="695"/>
         <CursorPos Y="727"/>
         <UsageCount Value="206"/>
@@ -74,19 +75,22 @@
         <Filename Value="../../source/options.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="190"/>
-        <CursorPos X="121" Y="208"/>
+        <EditorIndex Value="44"/>
+        <TopLine Value="999"/>
+        <CursorPos X="3" Y="1017"/>
         <UsageCount Value="206"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit6>
       <Unit7>
         <Filename Value="../../source/tabletools.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="83" Y="14"/>
+        <EditorIndex Value="29"/>
+        <TopLine Value="1831"/>
+        <CursorPos Y="1866"/>
         <UsageCount Value="206"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit7>
       <Unit8>
@@ -104,7 +108,7 @@
         <Filename Value="../../source/copytable.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <EditorIndex Value="33"/>
+        <EditorIndex Value="36"/>
         <TopLine Value="319"/>
         <CursorPos X="78" Y="337"/>
         <UsageCount Value="206"/>
@@ -115,7 +119,7 @@
         <Filename Value="../../source/insertfiles.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <EditorIndex Value="30"/>
+        <EditorIndex Value="33"/>
         <TopLine Value="670"/>
         <CursorPos X="18" Y="694"/>
         <UsageCount Value="206"/>
@@ -125,9 +129,9 @@
       <Unit11>
         <Filename Value="../../source/apphelpers.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="43"/>
-        <TopLine Value="4"/>
-        <CursorPos X="15" Y="15"/>
+        <EditorIndex Value="52"/>
+        <TopLine Value="3267"/>
+        <CursorPos X="4" Y="3279"/>
         <UsageCount Value="206"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -136,7 +140,7 @@
         <Filename Value="../../source/sqlhelp.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <EditorIndex Value="29"/>
+        <EditorIndex Value="32"/>
         <TopLine Value="338"/>
         <CursorPos X="67" Y="356"/>
         <UsageCount Value="206"/>
@@ -147,8 +151,7 @@
         <Filename Value="../../source/mysql_structures.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="790"/>
-        <CursorPos X="10" Y="808"/>
+        <CursorPos X="39" Y="10"/>
         <UsageCount Value="206"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -178,10 +181,10 @@
         <Filename Value="../../source/createdatabase.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="4"/>
-        <CursorPos X="29" Y="7"/>
+        <EditorIndex Value="42"/>
+        <CursorPos X="35" Y="7"/>
         <UsageCount Value="206"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit16>
       <Unit17>
@@ -199,16 +202,16 @@
         <Filename Value="../../source/editvar.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="43"/>
         <CursorPos X="70" Y="7"/>
         <UsageCount Value="206"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit18>
       <Unit19>
         <Filename Value="../../source/view.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="28"/>
         <TopLine Value="57"/>
         <CursorPos X="99" Y="75"/>
@@ -230,9 +233,9 @@
         <Filename Value="../../source/texteditor.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <EditorIndex Value="38"/>
-        <TopLine Value="2"/>
-        <CursorPos X="5" Y="15"/>
+        <EditorIndex Value="41"/>
+        <TopLine Value="273"/>
+        <CursorPos X="87" Y="294"/>
         <UsageCount Value="206"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -241,8 +244,8 @@
         <Filename Value="../../source/bineditor.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <EditorIndex Value="39"/>
-        <CursorPos X="55" Y="7"/>
+        <EditorIndex Value="48"/>
+        <CursorPos X="90" Y="7"/>
         <UsageCount Value="206"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -250,7 +253,7 @@
       <Unit23>
         <Filename Value="../../source/grideditlinks.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="36"/>
+        <EditorIndex Value="39"/>
         <TopLine Value="1646"/>
         <CursorPos X="114" Y="1657"/>
         <UsageCount Value="206"/>
@@ -261,10 +264,11 @@
         <Filename Value="../../source/routine_editor.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="417"/>
-        <CursorPos X="21" Y="445"/>
+        <EditorIndex Value="47"/>
+        <TopLine Value="138"/>
+        <CursorPos X="99" Y="155"/>
         <UsageCount Value="206"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit24>
       <Unit25>
@@ -272,8 +276,8 @@
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
         <EditorIndex Value="24"/>
-        <TopLine Value="114"/>
-        <CursorPos X="58" Y="132"/>
+        <TopLine Value="1859"/>
+        <CursorPos X="81" Y="1879"/>
         <UsageCount Value="206"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -281,9 +285,9 @@
       <Unit26>
         <Filename Value="../../source/dbconnection.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="42"/>
-        <TopLine Value="361"/>
-        <CursorPos X="34" Y="377"/>
+        <EditorIndex Value="51"/>
+        <TopLine Value="7547"/>
+        <CursorPos X="35" Y="7551"/>
         <UsageCount Value="206"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -292,17 +296,18 @@
         <Filename Value="../../source/trigger_editor.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="26"/>
-        <CursorPos X="78" Y="37"/>
+        <EditorIndex Value="46"/>
+        <TopLine Value="247"/>
+        <CursorPos X="34" Y="258"/>
         <UsageCount Value="206"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit27>
       <Unit28>
         <Filename Value="../../source/searchreplace.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <EditorIndex Value="31"/>
+        <EditorIndex Value="34"/>
         <TopLine Value="224"/>
         <CursorPos X="34" Y="242"/>
         <UsageCount Value="206"/>
@@ -313,26 +318,27 @@
         <Filename Value="../../source/event_editor.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="76" Y="6"/>
+        <EditorIndex Value="45"/>
+        <TopLine Value="276"/>
+        <CursorPos X="10" Y="301"/>
         <UsageCount Value="206"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit29>
       <Unit30>
         <Filename Value="../../source/loginform.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="-1"/>
-        <TopLine Value="-1"/>
-        <CursorPos X="-1" Y="-1"/>
+        <EditorIndex Value="53"/>
+        <CursorPos X="55" Y="7"/>
         <UsageCount Value="206"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit30>
       <Unit31>
         <Filename Value="../../source/Cromis.DirectoryWatch.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="34"/>
+        <EditorIndex Value="37"/>
         <TopLine Value="327"/>
         <CursorPos X="29" Y="355"/>
         <UsageCount Value="206"/>
@@ -354,7 +360,7 @@
         <Filename Value="../../source/syncdb.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <EditorIndex Value="35"/>
+        <EditorIndex Value="38"/>
         <UsageCount Value="206"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -382,28 +388,28 @@
         <Filename Value="../../source/change_password.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="-1"/>
-        <TopLine Value="-1"/>
-        <CursorPos X="-1" Y="-1"/>
+        <EditorIndex Value="54"/>
+        <TopLine Value="144"/>
+        <CursorPos X="51" Y="174"/>
         <UsageCount Value="206"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit36>
       <Unit37>
         <Filename Value="../../source/Vcl.FormsFix.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="-1"/>
-        <TopLine Value="-1"/>
-        <CursorPos X="-1" Y="-1"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="35"/>
+        <CursorPos X="51" Y="83"/>
         <UsageCount Value="206"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit37>
       <Unit38>
         <Filename Value="../../source/synregexpr.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="SynRegExpr"/>
-        <EditorIndex Value="40"/>
+        <EditorIndex Value="49"/>
         <CursorPos X="16"/>
         <UsageCount Value="215"/>
         <Loaded Value="True"/>
@@ -432,9 +438,9 @@
         <Filename Value="../../source/missingandconversions.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="MissingAndConversions"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="58"/>
         <TopLine Value="49"/>
-        <CursorPos X="16" Y="80"/>
+        <CursorPos X="13" Y="75"/>
         <UsageCount Value="204"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -443,10 +449,10 @@
         <Filename Value="../../source/src/generics.collections.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Generics.Collections"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <TopLine Value="406"/>
         <CursorPos X="3" Y="423"/>
-        <UsageCount Value="95"/>
+        <UsageCount Value="122"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit42>
@@ -457,7 +463,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="95"/>
+        <UsageCount Value="122"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit43>
       <Unit44>
@@ -467,7 +473,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="95"/>
+        <UsageCount Value="122"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit44>
       <Unit45>
@@ -477,7 +483,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="95"/>
+        <UsageCount Value="122"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit45>
       <Unit46>
@@ -487,7 +493,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="95"/>
+        <UsageCount Value="122"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit46>
       <Unit47>
@@ -497,12 +503,12 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="95"/>
+        <UsageCount Value="122"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit47>
       <Unit48>
         <Filename Value=""/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="0"/>
       </Unit48>
       <Unit49>
         <Filename Value="../../source/gnugettext.pas"/>
@@ -514,7 +520,7 @@
       </Unit49>
       <Unit50>
         <Filename Value="../../source/Libc.pas"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <CursorPos X="18" Y="5"/>
         <UsageCount Value="103"/>
         <Loaded Value="True"/>
@@ -530,14 +536,14 @@
       </Unit51>
       <Unit52>
         <Filename Value="../../source/routine_editor.dfm"/>
-        <EditorIndex Value="41"/>
+        <EditorIndex Value="50"/>
         <UsageCount Value="110"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit52>
       <Unit53>
         <Filename Value="/usr/lib/fpc/src/packages/fcl-base/src/gettext.pp"/>
-        <EditorIndex Value="37"/>
+        <EditorIndex Value="40"/>
         <TopLine Value="102"/>
         <CursorPos X="31" Y="102"/>
         <UsageCount Value="109"/>
@@ -549,7 +555,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="1953"/>
         <CursorPos X="14" Y="1970"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="8"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit54>
       <Unit55>
@@ -563,16 +569,16 @@
       <Unit56>
         <Filename Value="../../../../../Projects/lazarus/components/synedit/synedit.pp"/>
         <UnitName Value="SynEdit"/>
-        <EditorIndex Value="6"/>
-        <TopLine Value="933"/>
-        <CursorPos X="14" Y="950"/>
-        <UsageCount Value="79"/>
+        <EditorIndex Value="7"/>
+        <TopLine Value="1008"/>
+        <CursorPos X="14" Y="1026"/>
+        <UsageCount Value="93"/>
         <Loaded Value="True"/>
       </Unit56>
       <Unit57>
         <Filename Value="../../../../../Projects/lazarus/lcl/comctrls.pp"/>
         <UnitName Value="ComCtrls"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="11"/>
         <TopLine Value="4094"/>
         <CursorPos X="18" Y="4136"/>
         <UsageCount Value="103"/>
@@ -582,24 +588,24 @@
         <Filename Value="../../source/main.dfm"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="19" Y="19"/>
-        <UsageCount Value="95"/>
+        <UsageCount Value="92"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit58>
       <Unit59>
         <Filename Value="../../../../../Projects/lazarus/components/synedit/synmemo.pas"/>
         <UnitName Value="SynMemo"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <TopLine Value="145"/>
         <CursorPos X="42" Y="55"/>
-        <UsageCount Value="32"/>
+        <UsageCount Value="46"/>
         <Loaded Value="True"/>
       </Unit59>
       <Unit60>
         <Filename Value="../../../../../Projects/lazarus/components/virtualtreeview/VirtualTrees.pas"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="10"/>
         <TopLine Value="3142"/>
         <CursorPos X="14" Y="3157"/>
-        <UsageCount Value="82"/>
+        <UsageCount Value="96"/>
         <Loaded Value="True"/>
       </Unit60>
       <Unit61>
@@ -607,148 +613,191 @@
         <EditorIndex Value="17"/>
         <TopLine Value="59"/>
         <CursorPos X="3" Y="62"/>
-        <UsageCount Value="31"/>
+        <UsageCount Value="45"/>
         <Loaded Value="True"/>
       </Unit61>
       <Unit62>
         <Filename Value="/usr/lib/fpc/src/packages/regexpr/src/regexpr.pas"/>
         <UnitName Value="RegExpr"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <TopLine Value="608"/>
         <CursorPos X="22" Y="626"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
       </Unit62>
       <Unit63>
         <Filename Value="../../../../../Projects/lazarus/lcl/controls.pp"/>
         <UnitName Value="Controls"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <TopLine Value="2302"/>
         <CursorPos X="49" Y="2320"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
       </Unit63>
+      <Unit64>
+        <Filename Value="/usr/lib/fpc/src/packages/rtl-objpas/src/inc/strutils.pp"/>
+        <EditorIndex Value="31"/>
+        <TopLine Value="13"/>
+        <CursorPos X="23" Y="42"/>
+        <UsageCount Value="24"/>
+        <Loaded Value="True"/>
+      </Unit64>
+      <Unit65>
+        <Filename Value="../../../../../Projects/lazarus/lcl/stdctrls.pp"/>
+        <UnitName Value="StdCtrls"/>
+        <EditorIndex Value="30"/>
+        <TopLine Value="388"/>
+        <CursorPos X="14" Y="405"/>
+        <UsageCount Value="23"/>
+        <Loaded Value="True"/>
+      </Unit65>
+      <Unit66>
+        <Filename Value="/usr/lib/fpc/src/packages/rtl-objpas/src/inc/dateutil.inc"/>
+        <EditorIndex Value="57"/>
+        <TopLine Value="392"/>
+        <CursorPos X="10" Y="409"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit66>
+      <Unit67>
+        <Filename Value="../../../../../Projects/lazarus/lcl/imglist.pp"/>
+        <UnitName Value="ImgList"/>
+        <EditorIndex Value="56"/>
+        <TopLine Value="351"/>
+        <CursorPos X="61" Y="369"/>
+        <UsageCount Value="19"/>
+        <Loaded Value="True"/>
+      </Unit67>
+      <Unit68>
+        <Filename Value="../../../../../Projects/lazarus/lcl/graphics.pp"/>
+        <UnitName Value="Graphics"/>
+        <EditorIndex Value="55"/>
+        <TopLine Value="236"/>
+        <CursorPos X="3" Y="254"/>
+        <UsageCount Value="19"/>
+        <Loaded Value="True"/>
+      </Unit68>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="../../source/insertfiles.pas"/>
-        <Caret Line="702" TopLine="670"/>
+        <Filename Value="../../source/dbconnection.pas"/>
+        <Caret Line="6026" Column="9" TopLine="6010"/>
       </Position1>
       <Position2>
-        <Filename Value="../../source/insertfiles.pas"/>
-        <Caret Line="694" Column="18" TopLine="670"/>
+        <Filename Value="../../source/dbconnection.pas"/>
+        <Caret Line="5936" Column="38" TopLine="5920"/>
       </Position2>
       <Position3>
-        <Filename Value="../../source/sqlhelp.pas"/>
-        <Caret Line="300" Column="12" TopLine="281"/>
+        <Filename Value="../../source/dbconnection.pas"/>
+        <Caret Line="6032" Column="15" TopLine="6010"/>
       </Position3>
       <Position4>
-        <Filename Value="../../source/sqlhelp.pas"/>
-        <Caret Line="356" Column="67" TopLine="338"/>
+        <Filename Value="../../source/dbconnection.pas"/>
+        <Caret Line="6017" Column="9" TopLine="5999"/>
       </Position4>
       <Position5>
-        <Filename Value="../../source/connections.pas"/>
-        <Caret Line="213" Column="6" TopLine="195"/>
+        <Filename Value="../../source/dbconnection.pas"/>
+        <Caret Line="6098" Column="39" TopLine="6080"/>
       </Position5>
       <Position6>
-        <Filename Value="../../source/connections.pas"/>
-        <Caret Line="200" Column="9" TopLine="182"/>
+        <Filename Value="../../source/dbconnection.pas"/>
+        <Caret Line="6094" Column="50" TopLine="6076"/>
       </Position6>
       <Position7>
-        <Filename Value="../../source/connections.pas"/>
-        <Caret Line="208" Column="10" TopLine="190"/>
+        <Filename Value="../../source/dbconnection.pas"/>
+        <Caret Line="6026" Column="9" TopLine="6009"/>
       </Position7>
       <Position8>
-        <Filename Value="../../source/connections.pas"/>
-        <Caret Line="209" Column="9" TopLine="191"/>
+        <Filename Value="../../source/dbconnection.pas"/>
+        <Caret Line="6111" Column="94" TopLine="6077"/>
       </Position8>
       <Position9>
-        <Filename Value="../../source/connections.pas"/>
-        <Caret Line="210" Column="10" TopLine="192"/>
+        <Filename Value="../../source/dbconnection.pas"/>
+        <Caret Line="6101" Column="42" TopLine="6084"/>
       </Position9>
       <Position10>
-        <Filename Value="../../source/connections.pas"/>
-        <Caret Line="403" Column="7" TopLine="385"/>
+        <Filename Value="../../source/dbconnection.pas"/>
+        <Caret Line="6384" Column="31" TopLine="6367"/>
       </Position10>
       <Position11>
-        <Filename Value="../../source/connections.pas"/>
-        <Caret Line="244" Column="46" TopLine="227"/>
+        <Filename Value="../../source/dbconnection.pas"/>
+        <Caret Line="6328" Column="15" TopLine="6309"/>
       </Position11>
       <Position12>
-        <Filename Value="../../source/connections.pas"/>
-        <Caret Line="212" Column="14" TopLine="195"/>
+        <Filename Value="../../source/dbconnection.pas"/>
+        <Caret Line="6386" Column="20" TopLine="6367"/>
       </Position12>
       <Position13>
-        <Filename Value="../../source/connections.pas"/>
-        <Caret Line="244" Column="73" TopLine="227"/>
+        <Filename Value="../../source/dbconnection.pas"/>
+        <Caret Line="6903" Column="12" TopLine="6877"/>
       </Position13>
       <Position14>
-        <Filename Value="../../source/connections.pas"/>
-        <Caret Line="688" Column="21" TopLine="671"/>
+        <Filename Value="../../source/dbconnection.pas"/>
+        <Caret Line="6895" Column="41" TopLine="6877"/>
       </Position14>
       <Position15>
-        <Filename Value="../../source/connections.pas"/>
-        <Caret Line="403" Column="79" TopLine="385"/>
+        <Filename Value="../../source/dbconnection.pas"/>
+        <Caret Line="7047" Column="10" TopLine="7029"/>
       </Position15>
       <Position16>
-        <Filename Value="../../source/connections.pas"/>
-        <Caret Line="739" Column="6" TopLine="715"/>
+        <Filename Value="../../source/dbconnection.pas"/>
+        <Caret Line="7054" Column="10" TopLine="7036"/>
       </Position16>
       <Position17>
-        <Filename Value="../../source/connections.pas"/>
-        <Caret Line="773" Column="15" TopLine="756"/>
+        <Filename Value="../../source/dbconnection.pas"/>
+        <Caret Line="7047" Column="10" TopLine="7029"/>
       </Position17>
       <Position18>
-        <Filename Value="../../source/connections.pas"/>
-        <Caret Line="731" Column="27" TopLine="714"/>
+        <Filename Value="../../source/dbconnection.pas"/>
+        <Caret Line="6895" Column="41" TopLine="6877"/>
       </Position18>
       <Position19>
-        <Filename Value="../../source/connections.pas"/>
-        <Caret Line="773" Column="33" TopLine="759"/>
+        <Filename Value="../../source/dbconnection.pas"/>
+        <Caret Line="7067" Column="6" TopLine="7044"/>
       </Position19>
       <Position20>
-        <Filename Value="../../source/connections.pas"/>
-        <Caret Line="984" Column="37" TopLine="966"/>
+        <Filename Value="../../source/dbconnection.pas"/>
+        <Caret Line="7054" Column="11" TopLine="7036"/>
       </Position20>
       <Position21>
-        <Filename Value="../../source/connections.pas"/>
-        <Caret Line="1206" Column="84" TopLine="1188"/>
+        <Filename Value="../../source/dbconnection.pas"/>
+        <Caret Line="7577" Column="33" TopLine="7547"/>
       </Position21>
       <Position22>
-        <Filename Value="../../source/connections.pas"/>
-        <Caret Line="1212" Column="79" TopLine="1193"/>
+        <Filename Value="../../source/dbconnection.pas"/>
+        <Caret Line="7551" Column="35" TopLine="7547"/>
       </Position22>
       <Position23>
-        <Filename Value="../../source/usermanager.pas"/>
-        <Caret Line="360" Column="54" TopLine="342"/>
+        <Filename Value="../../source/mysql_structures.pas"/>
+        <Caret Line="7605" Column="28" TopLine="7585"/>
       </Position23>
       <Position24>
-        <Filename Value="../../source/usermanager.pas"/>
-        <Caret Line="1527" Column="10" TopLine="1508"/>
+        <Filename Value="../../source/mysql_structures.pas"/>
+        <Caret Line="10" Column="39"/>
       </Position24>
       <Position25>
-        <Filename Value="../../source/usermanager.pas"/>
-        <Caret Line="38" Column="3" TopLine="19"/>
+        <Filename Value="../../source/main.pas"/>
+        <Caret Line="9495" Column="5" TopLine="9475"/>
       </Position25>
       <Position26>
-        <Filename Value="../../source/usermanager.pas"/>
-        <Caret Line="360" Column="71" TopLine="342"/>
+        <Filename Value="../../source/main.pas"/>
+        <Caret Line="21" Column="22" TopLine="3"/>
       </Position26>
       <Position27>
-        <Filename Value="../../source/usermanager.pas"/>
-        <Caret Line="485" Column="24" TopLine="467"/>
+        <Filename Value="../../source/Vcl.FormsFix.pas"/>
+        <Caret Line="8" Column="39"/>
       </Position27>
       <Position28>
-        <Filename Value="../../source/usermanager.pas"/>
-        <Caret Line="8" Column="77"/>
+        <Filename Value="../../source/Vcl.FormsFix.pas"/>
+        <Caret Line="10" Column="15"/>
       </Position28>
       <Position29>
-        <Filename Value="../../source/usermanager.pas"/>
-        <Caret Line="618" Column="34" TopLine="600"/>
+        <Filename Value="../../source/Vcl.FormsFix.pas"/>
+        <Caret Line="51" Column="31" TopLine="34"/>
       </Position29>
       <Position30>
-        <Filename Value="../../source/usermanager.pas"/>
-        <Caret Line="1540" Column="6" TopLine="1508"/>
+        <Filename Value="../../source/Vcl.FormsFix.pas"/>
+        <Caret Line="83" Column="51" TopLine="35"/>
       </Position30>
     </JumpHistory>
     <RunParams>
