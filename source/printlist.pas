@@ -36,7 +36,7 @@ implementation
 
 uses main, apphelpers, table_editor, dbconnection;
 
-{$R *.DFM}
+{$R *.dfm}
 
 
 procedure TprintlistForm.FormCreate(Sender: TObject);

@@ -180,7 +180,7 @@ uses
 var
   PrivsRead, PrivsWrite, PrivsAdmin: TStringList;
 
-{$R *.DFM}
+{$R *.dfm}
 
 function ComparePrivs(List: TStringList; Index1, Index2: Integer): Integer;
 var

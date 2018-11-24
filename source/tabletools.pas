@@ -188,7 +188,7 @@ var
   DATA_INSERTNEW,
   DATA_UPDATE : String;
 
-{$R *.DFM}
+{$R *.dfm}
 
 
 procedure TfrmTableTools.FormCreate(Sender: TObject);

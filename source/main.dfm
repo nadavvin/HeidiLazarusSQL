@@ -706,7 +706,6 @@ object MainForm: TMainForm
                 AllowAllUp = True
                 Caption = 'Sorting'
                 ImageIndex = 107
-                Style = tbsTextButton
                 OnClick = btnDataClick
               end
               object tbtnDataColumns: TToolButton
@@ -715,7 +714,6 @@ object MainForm: TMainForm
                 AllowAllUp = True
                 Caption = 'Columns'
                 ImageIndex = 107
-                Style = tbsTextButton
                 OnClick = btnDataClick
               end
               object tbtnDataFilter: TToolButton

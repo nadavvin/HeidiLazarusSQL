@@ -87,7 +87,7 @@ implementation
 
 uses Main, apphelpers;
 
-{$R *.DFM}
+{$R *.dfm}
 
 const
   ProgressBarSteps=100;

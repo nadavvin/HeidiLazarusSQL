@@ -191,7 +191,7 @@ uses Main, apphelpers, grideditlinks;
 
 {$I const.inc}
 
-{$R *.DFM}
+{$R *.dfm}
 
 
 {procedure Tconnform.WMNCLBUTTONDOWN(var Msg: TWMNCLButtonDown) ;

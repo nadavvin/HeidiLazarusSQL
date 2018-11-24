@@ -1205,7 +1205,7 @@ uses
 
 
 
-{$R *.DFM}
+{$R *.dfm}
 
 
 procedure TMainForm.ShowStatusMsg(Msg: String=''; PanelNr: Integer=6);

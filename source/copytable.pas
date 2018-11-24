@@ -60,7 +60,7 @@ const
   nForeignKeys = 2;
   nData = 3;
 
-{$R *.DFM}
+{$R *.dfm}
 {$I const.inc}
 
 

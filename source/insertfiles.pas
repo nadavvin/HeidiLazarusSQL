@@ -110,7 +110,7 @@ const
   ColBinary = 1;
   ColFilesize = 2;
 
-{$R *.DFM}
+{$R *.dfm}
 
 
 

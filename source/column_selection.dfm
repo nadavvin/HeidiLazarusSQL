@@ -9,17 +9,12 @@ object ColumnSelectionForm: TColumnSelectionForm
   Constraints.MinHeight = 150
   Constraints.MinWidth = 200
   ParentFont = True
-  OldCreateOrder = False
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnDeactivate = FormDeactivate
   OnShow = FormShow
-  DesignSize = (
-    184
-    243)
   PixelsPerInch = 96
-  TextHeight = 13
   object btnCancel: TButton
     Left = 101
     Top = 210
@@ -73,19 +68,15 @@ object ColumnSelectionForm: TColumnSelectionForm
     ItemHeight = 13
     TabOrder = 4
   end
-  object editFilter: TButtonedEdit
+  object editFilter: TEditButton
     Left = 63
     Top = 4
     Width = 113
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     Images = MainForm.ImageListMain
-    LeftButton.ImageIndex = 146
-    LeftButton.Visible = True
-    RightButton.ImageIndex = 26
     TabOrder = 5
     TextHint = 'Filter'
     OnChange = PopulateList
-    OnLeftButtonClick = editFilterLeftButtonClick
   end
 end

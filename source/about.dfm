@@ -1403,7 +1403,6 @@ object AboutBox: TAboutBox
     Height = 25
     Action = MainForm.actUpdateCheck
     Anchors = [akLeft, akRight, akBottom]
-    Images = MainForm.ImageListMain
     TabOrder = 0
   end
   object editDonated: TEdit

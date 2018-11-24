@@ -210,7 +210,7 @@ type
 
 implementation
 uses main, apphelpers;
-{$R *.DFM}
+{$R *.dfm}
 
 
 procedure Toptionsform.Modified(Sender: TObject);

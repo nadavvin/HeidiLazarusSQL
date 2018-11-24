@@ -47,7 +47,7 @@ implementation
 uses
   main, apphelpers;
 
-{$R *.DFM}
+{$R *.dfm}
 
 
 procedure TAboutBox.OpenURL(Sender: TObject);
