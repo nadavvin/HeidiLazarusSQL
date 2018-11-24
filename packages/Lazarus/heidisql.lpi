@@ -57,7 +57,9 @@
       <Unit2>
         <Filename Value="../../source/about.pas"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="AboutBox"/>
         <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <UnitName Value="About"/>
       </Unit2>
       <Unit3>
@@ -116,12 +118,16 @@
       <Unit14>
         <Filename Value="../../source/column_selection.pas"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="ColumnSelectionForm"/>
         <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
       </Unit14>
       <Unit15>
         <Filename Value="../../source/data_sorting.pas"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="DataSortingForm"/>
         <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
       </Unit15>
       <Unit16>
         <Filename Value="../../source/createdatabase.pas"/>
@@ -285,6 +291,11 @@
         <SyntaxMode Value="Delphi"/>
       </SyntaxOptions>
     </Parsing>
+    <CodeGeneration>
+      <Optimizations>
+        <OptimizationLevel Value="0"/>
+      </Optimizations>
+    </CodeGeneration>
     <Linking>
       <Options>
         <Win32>
@@ -293,6 +304,9 @@
       </Options>
     </Linking>
     <Other>
+      <Verbosity>
+        <ShowDebugInfo Value="True"/>
+      </Verbosity>
       <CustomOptions Value="-dBorland -dVer150 -dDelphi7 -dCompiler6_Up -dPUREPASCAL"/>
     </Other>
   </CompilerOptions>

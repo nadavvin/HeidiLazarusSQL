@@ -805,13 +805,13 @@ end;
 function DirnameUserAppData: String;
 begin
   // User folder for HeidiSQL's data (<user name>\Application Data)
-  Result := ''{GetShellFolder(CSIDL_APPDATA) + '\' + APPNAME + '\'};
+  Result := '/tmp/a'{GetShellFolder(CSIDL_APPDATA) + '\' + APPNAME + '\'};
 end;
 
 function DirnameUserDocuments: String;
 begin
   // "HeidiSQL" folder under user's documents folder, e.g. c:\Users\Mike\Documents\HeidiSQL\
-  Result := ''{GetShellFolder(CSIDL_MYDOCUMENTS) + '\' + APPNAME + '\'};
+  Result := '/tmp/b'{GetShellFolder(CSIDL_MYDOCUMENTS) + '\' + APPNAME + '\'};
 end;
 
 

@@ -1747,7 +1747,7 @@ begin
   QueryTab.spltHelpers := spltQueryHelpers;
   QueryTab.spltQuery := spltQuery;
   QueryTab.tabsetQuery := tabsetQuery;
-  InheritFont(QueryTab.tabsetQuery.Font);
+  {InheritFont(QueryTab.tabsetQuery.Font);}
   QueryTab.ResultTabs := TResultTabs.Create(True);
 
   QueryTabs := TObjectList<TQueryTab>.Create(True);
@@ -1762,7 +1762,7 @@ begin
   end;
 
   // Enable auto completion in data tab, filter editor
-  SynCompletionProposal.AddEditor(SynMemoFilter);
+  {SynCompletionProposal.AddEditor(SynMemoFilter);}
 
   // Fix node height on Virtual Trees for current DPI settings
   FixVT(DBTree);
@@ -1789,7 +1789,7 @@ begin
   MonitorIndex := Min(Screen.MonitorCount-1, MonitorIndex);
   MakeFullyVisible(Screen.Monitors[MonitorIndex]);
 
-  actQueryStopOnErrors.Checked := AppSettings.ReadBool(asStopOnErrorsInBatchMode);
+  {actQueryStopOnErrors.Checked := AppSettings.ReadBool(asStopOnErrorsInBatchMode);
   actBlobAsText.Checked := AppSettings.ReadBool(asDisplayBLOBsAsText);
   actQueryWordWrap.Checked := AppSettings.ReadBool(asWrapLongLines);
   actSingleQueries.Checked := AppSettings.ReadBool(asSingleQueries);
@@ -1797,7 +1797,7 @@ begin
   actPreferencesLogging.ImageIndex := actPreferences.ImageIndex;
   actPreferencesLogging.OnExecute := actPreferences.OnExecute;
   actPreferencesData.ImageIndex := actPreferences.ImageIndex;
-  actPreferencesData.OnExecute := actPreferences.OnExecute;
+  actPreferencesData.OnExecute := actPreferences.OnExecute;}
 
   pnlQueryMemo.Height := AppSettings.ReadInt(asQuerymemoheight);
   treeQueryHelpers.Width := AppSettings.ReadInt(asQueryhelperswidth);
@@ -1808,8 +1808,8 @@ begin
   SynMemoSQLLog.Height := Max(AppSettings.ReadInt(asLogHeight), spltTopBottom.MinSize);
   // Force status bar position to below log memo
   StatusBar.Top := SynMemoSQLLog.Top + SynMemoSQLLog.Height;
-  actDataShowNext.Hint := f_('Show next %s rows ...', [FormatNumber(AppSettings.ReadInt(asDatagridRowsPerStep))]);
-  actAboutBox.Caption := f_('About %s', [APPNAME+' '+FAppVersion]);
+  {actDataShowNext.Hint := f_('Show next %s rows ...', [FormatNumber(AppSettings.ReadInt(asDatagridRowsPerStep))]);
+  actAboutBox.Caption := f_('About %s', [APPNAME+' '+FAppVersion]);}
   // Activate logging
   LogToFile := AppSettings.ReadBool(asLogToFile);
   if AppSettings.ReadBool(asLogHorizontalScrollbar) then
@@ -1837,13 +1837,13 @@ begin
   DataLocalNumberFormat := AppSettings.ReadBool(asDataLocalNumberFormat);
 
   // Database tree options
-  actGroupObjects.Checked := AppSettings.ReadBool(asGroupTreeObjects);
+  {actGroupObjects.Checked := AppSettings.ReadBool(asGroupTreeObjects);
   if AppSettings.ReadBool(asDisplayObjectSizeColumn) then
     menuShowSizeColumn.Click;
   if AppSettings.ReadBool(asAutoExpand) then
     menuAutoExpand.Click;
   if AppSettings.ReadBool(asDoubleClickInsertsNodeText) then
-    menuDoubleClickInsertsNodeText.Click;
+    menuDoubleClickInsertsNodeText.Click;}
 
   // Restore width of columns of all VirtualTrees
   RestoreListSetup(ListDatabases);
@@ -1854,14 +1854,14 @@ begin
   RestoreListSetup(ListTables);
 
   // Shortcuts
-  for i:=0 to ActionList1.ActionCount-1 do begin
+  {for i:=0 to ActionList1.ActionCount-1 do begin
     Action := TAction(ActionList1.Actions[i]);
     Action.ShortCut := AppSettings.ReadInt(asActionShortcut1, Action.Name, Action.ShortCut);
-  end;
+  end;}
 
   // Size of completion proposal window
-  SynCompletionProposal.Width := AppSettings.ReadInt(asCompletionProposalWidth);
-  SynCompletionProposal.NbLinesInWindow := AppSettings.ReadInt(asCompletionProposalNbLinesInWindow);
+  {SynCompletionProposal.Width := AppSettings.ReadInt(asCompletionProposalWidth);
+  SynCompletionProposal.NbLinesInWindow := AppSettings.ReadInt(asCompletionProposalNbLinesInWindow);}
 
   // Place progressbar on the statusbar
   ProgressBarStatus.Parent := StatusBar;
@@ -1872,13 +1872,13 @@ begin
 
   SetMainTab(tabHost);
   FBtnAddTab := TSpeedButton.Create(PageControlMain);
-  FBtnAddTab.Parent := PageControlMain;
+  {FBtnAddTab.Parent := PageControlMain;
   ImageListMain.GetBitmap(actNewQueryTab.ImageIndex, FBtnAddTab.Glyph);
   FBtnAddTab.Height := PageControlMain.TabRect(0).Bottom - PageControlMain.TabRect(0).Top - 2;
   FBtnAddTab.Width := FBtnAddTab.Height;
   FBtnAddTab.Flat := True;
   FBtnAddTab.Hint := actNewQueryTab.Hint;
-  FBtnAddTab.OnClick := actNewQueryTab.OnExecute;
+  FBtnAddTab.OnClick := actNewQueryTab.OnExecute;}
 
   // Filter panel
   ImageListMain.GetBitmap(134, btnCloseFilterPanel.Glyph);
@@ -4456,7 +4456,7 @@ begin
   end else begin
     FDelimiter := Value;
     LogSQL(f_('Delimiter changed to %s', [FDelimiter]), lcInfo);
-    actSetDelimiter.Hint := actSetDelimiter.Caption + ' (current value: '+FDelimiter+')';
+    {actSetDelimiter.Hint := actSetDelimiter.Caption + ' (current value: '+FDelimiter+')';}
   end;
 end;
 
@@ -5429,7 +5429,7 @@ begin
   inDataOrQueryTabNotEmpty := inDataOrQueryTab and Assigned(Grid) and (Grid.RootNodeCount > 0);
   inGrid := Assigned(Grid) and (ActiveControl = Grid);
 
-  actFullRefresh.Enabled := PageControlMain.ActivePage = tabDatabase;
+  {actFullRefresh.Enabled := PageControlMain.ActivePage = tabDatabase;
   actDataInsert.Enabled := inGrid and Assigned(Results);
   actDataDuplicateRow.Enabled := inGrid and inDataOrQueryTabNotEmpty and Assigned(Grid.FocusedNode);
   actDataDelete.Enabled := inGrid and (Grid.SelectedCount > 0);
@@ -5443,16 +5443,16 @@ begin
   actUnixTimestampColumn.Enabled := inDataTab and EnableTimestamp;
   actUnixTimestampColumn.Checked := inDataTab and HandleUnixTimestampColumn(Grid, Grid.FocusedColumn);
   actPreviousResult.Enabled := inDataOrQueryTabNotEmpty;
-  actNextResult.Enabled := inDataOrQueryTabNotEmpty;
+  actNextResult.Enabled := inDataOrQueryTabNotEmpty;}
 
   // Activate export-options if we're on Data- or Query-tab
-  actExportData.Enabled := inDataOrQueryTabNotEmpty;
-  actDataSetNull.Enabled := inDataOrQueryTab and Assigned(Results) and Assigned(Grid.FocusedNode);
+  {actExportData.Enabled := inDataOrQueryTabNotEmpty;
+  actDataSetNull.Enabled := inDataOrQueryTab and Assigned(Results) and Assigned(Grid.FocusedNode);}
 
   inSynMemo := ActiveSynMemo(True) <> nil;
   inSynMemoEditable := inSynMemo and (not ActiveSynMemo(True).ReadOnly);
-  actSaveSynMemoToTextfile.Enabled := inSynMemo;
-  actToggleComment.Enabled := inSynMemoEditable;
+  {actSaveSynMemoToTextfile.Enabled := inSynMemo;
+  actToggleComment.Enabled := inSynMemoEditable;}
   if inSynMemo then begin
     actCut.Enabled := inSynMemoEditable;
     actPaste.Enabled := inSynMemoEditable;
@@ -5484,7 +5484,7 @@ begin
   Tab := ActiveQueryTab;
   NotEmpty := InQueryTab and (Tab.Memo.GetTextLen > 0);
   HasSelection := InQueryTab and Tab.Memo.SelAvail;
-  actExecuteQuery.Enabled := InQueryTab and NotEmpty and (not Tab.QueryRunning);
+  {actExecuteQuery.Enabled := InQueryTab and NotEmpty and (not Tab.QueryRunning);
   actExecuteSelection.Enabled := InQueryTab and HasSelection and (not Tab.QueryRunning);
   actExecuteCurrentQuery.Enabled := actExecuteQuery.Enabled;
   actExplainAnalyzeCurrentQuery.Enabled := actExecuteQuery.Enabled;
@@ -5495,7 +5495,7 @@ begin
   actSaveSQLSelectionSnippet.Enabled := InQueryTab and HasSelection;
   actClearQueryEditor.Enabled := InQueryTab;
   actSetDelimiter.Enabled := InQueryTab;
-  actCloseQueryTab.Enabled := IsQueryTab(PageControlMain.ActivePageIndex, False);
+  actCloseQueryTab.Enabled := IsQueryTab(PageControlMain.ActivePageIndex, False);}
 end;
 
 
@@ -8535,7 +8535,7 @@ end;
 
 procedure TMainForm.SynMemoFilterStatusChange(Sender: TObject; Changes: TSynStatusChanges);
 begin
-  actClearFilterEditor.Enabled := (Sender as TSynMemo).GetTextLen > 0;
+  {actClearFilterEditor.Enabled := (Sender as TSynMemo).GetTextLen > 0;}
 end;
 
 
@@ -10658,12 +10658,12 @@ var
 begin
   // Find query tab where passed treeHelpers resides
   Result := nil;
-  for Tab in QueryTabs do begin
+  {for Tab in QueryTabs do begin
     if Tab.treeHelpers = FindTree then begin
       Result := Tab;
       break;
     end;
-  end;
+  end;}
 end;
 
 
@@ -10887,22 +10887,22 @@ begin
   // Called when active tab changes
   pnlFilterVT.Enabled := (PageControlMain.ActivePage <> tabEditor) or (ActiveObjectEditor is TfrmTableEditor);
   lblFilterVT.Enabled := pnlFilterVT.Enabled;
-  editFilterVT.Enabled := pnlFilterVT.Enabled;
+  {editFilterVT.Enabled := pnlFilterVT.Enabled;}
   lblFilterVTInfo.Enabled := pnlFilterVT.Enabled;
-  if pnlFilterVT.Enabled then
+  {if pnlFilterVT.Enabled then
     editFilterVT.Color := GetThemeColor(clWindow)
   else
-    editFilterVT.Color := GetThemeColor(clBtnFace);
+    editFilterVT.Color := GetThemeColor(clBtnFace);}
 
   tab := PageControlMain.ActivePage;
   if tab = tabHost then
     tab := PageControlHost.ActivePage;
   FilterPanelVisible := pnlFilterVT.Tag = Integer(True);
   if not FilterPanelVisible then begin
-    if editFilterVT.Text <> '' then
+    {if editFilterVT.Text <> '' then
       editFilterVT.Text := ''
     else
-      editFilterVTChange(Sender);
+      editFilterVTChange(Sender);}
   end else begin
     if tab = tabVariables then f := FFilterTextVariables
     else if tab = tabStatus then f := FFilterTextStatus

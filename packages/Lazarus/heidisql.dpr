@@ -49,14 +49,6 @@ uses
   {Vcl.}Themes{,
   Vcl.Styles};
 
-{.$R *.RES}
-{$R ..\..\res\icon.RES}
-{$R ..\..\res\icon-question.RES}
-{$R ..\..\res\version.RES}
-{$R ..\..\res\manifest.RES}
-{$R ..\..\res\updater.RES}
-{$R ..\..\res\styles.RES}
-
 var
   AppLanguage: String;
 begin
