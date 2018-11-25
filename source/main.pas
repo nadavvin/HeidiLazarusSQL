@@ -1200,7 +1200,7 @@ const
 implementation
 
 uses
-  About, printlist, mysql_structures, UpdateCheck,
+  About, printlist, mysql_structures2, mysql55, UpdateCheck,
   column_selection, data_sorting, grideditlinks, ExportGrid{, jpeg, GIFImg};
 
 

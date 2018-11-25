@@ -4,9 +4,9 @@ unit dbconnection;
 interface
 
 uses
-  Classes, SysUtils, windows, mysql_structures, {Syn}RegExpr, Generics.Collections, Generics.Defaults,
-  DateUtils, Types, Math, Dialogs, {ADODB,} DB, {DBCommon, ComObj,} Graphics, ExtCtrls, StrUtils, sqldb,
-  gnugettext, {AnsiStrings,} Controls, Forms, MissingAndConversions, SQLDBConnection;
+  Classes, SysUtils, windows, mysql_structures2, mysql55, {Syn}RegExpr, Generics.Collections, Generics.Defaults,
+  DateUtils, Types, Math, Dialogs, {ADODB,} DB, {DBCommon, ComObj,} Graphics, ExtCtrls, StrUtils,
+  gnugettext, {AnsiStrings,} Controls, Forms, MissingAndConversions;
 
 
 type
@@ -743,7 +743,7 @@ var
   LibMysqlPath: String;
   LibMysqlHandle: HMODULE; // Shared module handle
 
-  mysql_affected_rows: function(Handle: PMYSQL): Int64; stdcall;
+  {mysql_affected_rows: function(Handle: PMYSQL): Int64; stdcall;
   mysql_character_set_name: function(Handle: PMYSQL): PAnsiChar; stdcall;
   mysql_close: procedure(Handle: PMYSQL); stdcall;
   mysql_data_seek: procedure(Result: PMYSQL_RES; Offset: Int64); stdcall;
@@ -755,7 +755,7 @@ var
   mysql_free_result: procedure(Result: PMYSQL_RES); stdcall;
   mysql_get_client_info: function: PAnsiChar; stdcall;
   mysql_get_server_info: function(Handle: PMYSQL): PAnsiChar; stdcall;
-  {mysql_init: function(Handle: PMYSQL): PMYSQL; stdcall;}
+  mysql_init: function(Handle: PMYSQL): PMYSQL; stdcall;
   mysql_num_fields: function(Result: PMYSQL_RES): Integer; stdcall;
   mysql_num_rows: function(Result: PMYSQL_RES): Int64; stdcall;
   mysql_options: function(Handle: PMYSQL; Option: TMySQLOption; arg: PAnsiChar): Integer; stdcall;
@@ -770,7 +770,7 @@ var
   mysql_set_character_set: function(Handle: PMYSQL; csname: PAnsiChar): Integer; stdcall;
   mysql_thread_init: function: Byte; stdcall;
   mysql_thread_end: procedure; stdcall;
-  mysql_warning_count: function(Handle: PMYSQL): Cardinal; stdcall;
+  mysql_warning_count: function(Handle: PMYSQL): Cardinal; stdcall;}
 
   LibPqPath: String = 'libpq.dll';
   LibPqHandle: HMODULE;
@@ -5596,7 +5596,7 @@ begin
           end else if (Field.flags and SET_FLAG) = SET_FLAG then begin
             if FConnection.Datatypes[j].Index = dtSet then
               FColumnTypes[i] := FConnection.Datatypes[j];
-          end else if Field._type = Cardinal(FConnection.Datatypes[j].NativeType) then begin
+          {end else if Field._type = Cardinal(FConnection.Datatypes[j].NativeType) then begin
             // Text and Blob types share the same constants (see FIELD_TYPEs)
             // See http://dev.mysql.com/doc/refman/5.7/en/c-api-data-structures.html
             if Connection.IsUnicode then
@@ -5606,7 +5606,7 @@ begin
             if IsBinary and (FConnection.Datatypes[j].Index in [dtChar..dtLongtext]) then
               continue;
             FColumnTypes[i] := FConnection.Datatypes[j];
-            break;
+            break;}
           end;
         end;
         FConnection.Log(lcDebug, 'Detected column type for '+FColumnNames[i]+': '+FColumnTypes[i].Name);

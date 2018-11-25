@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, SysUtils, Classes, Controls, Forms, Dialogs, StdCtrls, ExtCtrls,
-  dbconnection, mysql_structures, ComCtrls, gnugettext, {Syn}RegExpr, extra_controls;
+  dbconnection, mysql_structures2, mysql55, ComCtrls, gnugettext, {Syn}RegExpr, extra_controls;
 
 type
   TVarType = (vtString, vtNumeric, vtBoolean, vtEnum);

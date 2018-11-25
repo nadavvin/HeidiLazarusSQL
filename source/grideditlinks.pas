@@ -7,8 +7,8 @@ interface
 uses
   Windows, Forms, Graphics, Messages, VirtualTrees, ComCtrls, SysUtils, Classes,
   StdCtrls, ExtCtrls, CheckLst, Controls, Types, Dialogs, Menus, Masks, DateUtils, Math,
-  dbconnection, mysql_structures, apphelpers, texteditor, bineditor, gnugettext2,
-  StrUtils, {System.}UITypes{, SynRegExpr}, RegExpr ,MaskEdit, EditBtn, gettext, LCLType;
+  dbconnection, mysql_structures2, mysql55, apphelpers, texteditor, bineditor, gnugettext2,
+  StrUtils, {System.}UITypes, {Syn}RegExpr ,MaskEdit, EditBtn, gettext, LCLType;
 
 type
   TButtonedEdit = TEditButton;

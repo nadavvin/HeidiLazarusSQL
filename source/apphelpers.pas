@@ -12,7 +12,7 @@ uses
   Classes, SysUtils, Graphics, GraphUtil, ClipBrd, Dialogs, Forms, Controls{, ShellApi},
   {Windows, ShlObj, ActiveX,} VirtualTrees, {Syn}RegExpr, Messages, Math,
   Registry, DateUtils, Generics.Collections, StrUtils, {AnsiStrings, TlHelp32,} Types,
-  dbconnection, mysql_structures, SynMemo, Menus, {WinInet,} gnugettext, Themes, MissingAndConversions,
+  dbconnection, mysql_structures2, mysql55, SynMemo, Menus, {WinInet,} gnugettext, Themes, MissingAndConversions,
   Character, ImgList, {System.}UITypes, ActnList, {WinSock, IOUtils,} StdCtrls, ComCtrls{,}
   {CommCtrl,} {Vcl.Imaging.pngimage};
 

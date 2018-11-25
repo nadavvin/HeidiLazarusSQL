@@ -12,7 +12,7 @@ uses
   Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ComCtrls, ExtCtrls, SynEditHighlighter, SynHighlighterSQL,
   SynEdit, SynMemo, VirtualTrees, SynEditKeyCmds, ActnList, SynEditMiscClasses, StdActns, Menus,
-  mysql_structures, gnugettext, {Vcl.}Themes{, Vcl.Styles};
+  mysql_structures2, mysql55, gnugettext, {Vcl.}Themes{, Vcl.Styles};
 
 type
   TShortcutItemData = record

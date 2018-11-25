@@ -11,7 +11,7 @@ interface
 uses
   Windows, SysUtils, Classes, Controls, Forms, Dialogs, StdCtrls, ComCtrls, CheckLst,
   {Syn}RegExpr, Buttons, ExtCtrls, ToolWin, ExtDlgs, Math, extra_controls,
-  dbconnection, mysql_structures, gnugettext2, MissingAndConversions;
+  dbconnection, mysql_structures2, gnugettext2, mysql55, MissingAndConversions;
 
 type
   Tloaddataform = class(TFormWithSizeGrip)

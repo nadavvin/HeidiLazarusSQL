@@ -6,7 +6,7 @@ uses
   Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, StdCtrls,
   ComCtrls, ToolWin, VirtualTrees, {Syn}RegExpr, {ActiveX, }ExtCtrls, SynEdit,
   SynMemo, Menus, Clipbrd, Math, {System.}UITypes,
-  grideditlinks, mysql_structures, dbconnection, apphelpers, gnugettext2;
+  grideditlinks, mysql_structures2, mysql55, dbconnection, apphelpers, gnugettext2;
 
 type
   TFrame = TDBObjectEditor;
