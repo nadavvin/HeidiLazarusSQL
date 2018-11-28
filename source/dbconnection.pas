@@ -6,7 +6,7 @@ interface
 uses
   Classes, SysUtils, windows, mysql_structures2, mysql55, {Syn}RegExpr, Generics.Collections, Generics.Defaults,
   DateUtils, Types, Math, Dialogs, {ADODB,} DB, {DBCommon, ComObj,} Graphics, ExtCtrls, StrUtils,
-  gnugettext, {AnsiStrings,} Controls, Forms, MissingAndConversions;
+  gnugettext, {AnsiStrings,} Controls, Forms, MissingAndConversions, ctypes;
 
 
 type
@@ -667,7 +667,8 @@ type
     private
       FResultList: TMySQLRawResults;
       FCurrentResults: PMYSQL_RES;
-      FCurrentRow: PMYSQL_ROW;
+      FCurrentRow: {P}MYSQL_ROW;
+      Row1: MYSQL_ROW;
       procedure SetRecNo(Value: Int64); override;
     public
       destructor Destroy; override;
@@ -5828,7 +5829,7 @@ end;
 
 procedure TMySQLQuery.SetRecNo(Value: Int64);
 var
-  LengthPointer: PLongInt;
+  LengthPointer: pculong{PLongInt};
   i, j: Integer;
   NumRows, WantedLocalRecNo: Int64;
   Row: TRowData;
@@ -5867,7 +5868,8 @@ begin
           WantedLocalRecNo := FCurrentResults.row_count-(NumRows-Value);
           if (WantedLocalRecNo = 0) or (FRecNo+1 <> Value) or (FCurrentRow = nil) then
             mysql_data_seek(FCurrentResults, WantedLocalRecNo);
-          FCurrentRow := mysql_fetch_row(FCurrentResults);
+          Row1 := mysql_fetch_row(FCurrentResults);
+          FCurrentRow := @Row1;
           FCurrentUpdateRow := nil;
           // Remember length of column contents. Important for Col() so contents of cells with #0 chars are not cut off
           LengthPointer := mysql_fetch_lengths(FCurrentResults);
@@ -6007,28 +6009,30 @@ var
   ByteVal: Byte;
   c: Char;
   Field: PMYSQL_FIELD;
+  pc : PChar;
 begin
-  {if (Column > -1) and (Column < ColumnCount) then begin
+  if (Column > -1) and (Column < ColumnCount) then begin
     if FEditingPrepared and Assigned(FCurrentUpdateRow) then begin
       // Row was edited and only valid in a TRowData
       AnsiStr := AnsiString(FCurrentUpdateRow[Column].NewText);
       if Datatype(Column).Category in [dtcBinary, dtcSpatial] then begin
         SetLength(baData, Length(AnsiStr));
-        CopyMemory(baData, @AnsiStr[1], Length(AnsiStr));
+        Move{CopyMemory}(baData, {@}AnsiStr[1], Length(AnsiStr));
         Exit(True);
       end else
         Exit(False);
     end else begin
       // The normal case: Fetch cell from mysql result
-      SetString(AnsiStr, FCurrentRow[Column], FColumnLengths[Column]);
-      if Datatype(Column).Category in [dtcBinary, dtcSpatial] then begin
-        SetLength(baData, Length(AnsiStr));
-        CopyMemory(baData, @AnsiStr[1], Length(AnsiStr));
-        Exit(True);
-      end else
+//      pc := FCurrentRow[Column];
+//      SetString(AnsiStr, FCurrentRow[Column], FColumnLengths[Column]);
+//      if Datatype(Column).Category in [dtcBinary, dtcSpatial] then begin
+//        SetLength(baData, Length(AnsiStr));
+//        Move{CopyMemory}(baData, {@}AnsiStr[1], Length(AnsiStr));
+//        Exit(True);
+//      end else
         Exit(False);
     end;
-  end;}
+  end;
   Exit(False);
 end;
 
