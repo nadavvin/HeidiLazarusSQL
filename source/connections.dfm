@@ -9,29 +9,19 @@ object connform: Tconnform
   Constraints.MinHeight = 400
   Constraints.MinWidth = 665
   ParentFont = True
-  OldCreateOrder = False
   ShowHint = True
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  DesignSize = (
-    649
-    364)
   PixelsPerInch = 96
-  TextHeight = 13
   object splitterMain: TSplitter
-    AlignWithMargins = True
     Left = 208
     Top = 8
     Width = 8
     Height = 316
     Cursor = crSizeWE
-    Margins.Left = 0
-    Margins.Top = 8
-    Margins.Right = 0
-    Margins.Bottom = 40
     ResizeStyle = rsUpdate
     OnMoved = splitterMainMoved
   end
@@ -69,15 +59,10 @@ object connform: Tconnform
     TabOrder = 5
   end
   object ListSessions: TVirtualStringTree
-    AlignWithMargins = True
     Left = 8
     Top = 8
     Width = 200
     Height = 316
-    Margins.Left = 8
-    Margins.Top = 8
-    Margins.Right = 0
-    Margins.Bottom = 40
     Align = alLeft
     Constraints.MinWidth = 200
     DragMode = dmAutomatic
@@ -98,7 +83,6 @@ object connform: Tconnform
     OnCreateEditor = ListSessionsCreateEditor
     OnDblClick = btnOpenClick
     OnDragOver = ListSessionsDragOver
-    OnDragDrop = ListSessionsDragDrop
     OnFocusChanged = ListSessionsFocusChanged
     OnFocusChanging = ListSessionsFocusChanging
     OnGetText = ListSessionsGetText
@@ -106,44 +90,6 @@ object connform: Tconnform
     OnGetNodeDataSize = ListSessionsGetNodeDataSize
     OnNewText = ListSessionsNewText
     OnStructureChange = ListSessionsStructureChange
-    Columns = <
-      item
-        Position = 0
-        Width = 163
-        WideText = 'Session name'
-      end
-      item
-        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus]
-        Position = 1
-        WideText = 'Host'
-      end
-      item
-        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus]
-        Position = 2
-        WideText = 'User'
-      end
-      item
-        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus]
-        Position = 3
-        WideText = 'Version'
-      end
-      item
-        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus]
-        Position = 4
-        WideText = 'Last connect'
-      end
-      item
-        Alignment = taRightJustify
-        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus]
-        Position = 5
-        WideText = 'Counter'
-      end
-      item
-        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus]
-        Position = 6
-        Width = 33
-        WideText = 'Comment'
-      end>
   end
   object btnNew: TButton
     Left = 8
@@ -152,8 +98,6 @@ object connform: Tconnform
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = 'New'
-    DropDownMenu = popupNew
-    Style = bsSplitButton
     TabOrder = 1
     OnClick = btnNewClick
   end
@@ -168,15 +112,10 @@ object connform: Tconnform
     OnClick = btnDeleteClick
   end
   object PageControlDetails: TPageControl
-    AlignWithMargins = True
     Left = 216
     Top = 8
     Width = 425
     Height = 316
-    Margins.Left = 0
-    Margins.Top = 8
-    Margins.Right = 8
-    Margins.Bottom = 40
     ActivePage = tabStart
     Align = alClient
     Images = MainForm.ImageListMain
@@ -185,15 +124,10 @@ object connform: Tconnform
       Caption = 'Start'
       ImageIndex = 112
       object lblHelp: TLabel
-        AlignWithMargins = True
         Left = 10
         Top = 10
         Width = 397
         Height = 161
-        Margins.Left = 10
-        Margins.Top = 10
-        Margins.Right = 10
-        Margins.Bottom = 10
         Align = alTop
         AutoSize = False
         Caption = 'lblHelp'
@@ -205,7 +139,6 @@ object connform: Tconnform
         Width = 159
         Height = 25
         Caption = 'Import settings ...'
-        ImageIndex = 101
         TabOrder = 0
         OnClick = btnImportSettingsClick
       end
@@ -213,9 +146,6 @@ object connform: Tconnform
     object tabSettings: TTabSheet
       Caption = 'Settings'
       ImageIndex = 39
-      DesignSize = (
-        417
-        287)
       object lblPort: TLabel
         Left = 3
         Top = 168
@@ -376,27 +306,10 @@ object connform: Tconnform
         TabOrder = 10
         OnChange = Modification
       end
-      object editDatabases: TButtonedEdit
-        Left = 120
-        Top = 213
-        Width = 294
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
-        Images = MainForm.ImageListMain
-        RightButton.ImageIndex = 75
-        RightButton.Visible = True
-        TabOrder = 9
-        TextHint = 'Separated by semicolon'
-        OnChange = Modification
-        OnRightButtonClick = editDatabasesRightButtonClick
-      end
     end
     object tabSSHtunnel: TTabSheet
       Caption = 'SSH tunnel'
       ImageIndex = 147
-      DesignSize = (
-        417
-        287)
       object lblSSHLocalPort: TLabel
         Left = 3
         Top = 190
@@ -495,22 +408,6 @@ object connform: Tconnform
         TextHint = 'Your secure shell password'
         OnChange = Modification
       end
-      object editSSHPlinkExe: TButtonedEdit
-        Left = 120
-        Top = 9
-        Width = 294
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
-        Images = MainForm.ImageListMain
-        RightButton.ImageIndex = 51
-        RightButton.Visible = True
-        TabOrder = 0
-        Text = 'editSSHPlinkExe'
-        TextHint = 'Doubleclick to select plink.exe ...'
-        OnChange = editSSHPlinkExeChange
-        OnDblClick = PickFile
-        OnRightButtonClick = PickFile
-      end
       object editSSHhost: TEdit
         Left = 120
         Top = 52
@@ -531,22 +428,6 @@ object connform: Tconnform
         TabOrder = 2
         Text = 'editSSHport'
         OnChange = Modification
-      end
-      object editSSHPrivateKey: TButtonedEdit
-        Left = 120
-        Top = 160
-        Width = 294
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
-        Images = MainForm.ImageListMain
-        RightButton.ImageIndex = 51
-        RightButton.Visible = True
-        TabOrder = 7
-        Text = 'editSSHPrivateKey'
-        TextHint = 'PuTTY private key (*.ppk)'
-        OnChange = Modification
-        OnDblClick = PickFile
-        OnRightButtonClick = PickFile
       end
       object editSSHTimeout: TEdit
         Left = 120
@@ -570,9 +451,6 @@ object connform: Tconnform
     object tabAdvanced: TTabSheet
       Caption = 'Advanced'
       ImageIndex = 98
-      DesignSize = (
-        417
-        287)
       object lblSSLPrivateKey: TLabel
         Left = 3
         Top = 39
@@ -626,51 +504,6 @@ object connform: Tconnform
         Height = 13
         Caption = 'Ping every X seconds:'
       end
-      object editSSLPrivateKey: TButtonedEdit
-        Left = 120
-        Top = 36
-        Width = 294
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
-        Images = MainForm.ImageListMain
-        RightButton.ImageIndex = 51
-        RightButton.Visible = True
-        TabOrder = 1
-        TextHint = 'Path to key file'
-        OnChange = Modification
-        OnDblClick = PickFile
-        OnRightButtonClick = PickFile
-      end
-      object editSSLCACertificate: TButtonedEdit
-        Left = 120
-        Top = 65
-        Width = 294
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
-        Images = MainForm.ImageListMain
-        RightButton.ImageIndex = 51
-        RightButton.Visible = True
-        TabOrder = 2
-        TextHint = 'Path to certificate authority file'
-        OnChange = Modification
-        OnDblClick = PickFile
-        OnRightButtonClick = PickFile
-      end
-      object editSSLCertificate: TButtonedEdit
-        Left = 120
-        Top = 92
-        Width = 294
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
-        Images = MainForm.ImageListMain
-        RightButton.ImageIndex = 51
-        RightButton.Visible = True
-        TabOrder = 3
-        TextHint = 'Path to certificate file'
-        OnChange = Modification
-        OnDblClick = PickFile
-        OnRightButtonClick = PickFile
-      end
       object chkWantSSL: TCheckBox
         Left = 120
         Top = 13
@@ -693,20 +526,6 @@ object connform: Tconnform
         Caption = 'Use own client time zone'
         TabOrder = 8
         OnClick = Modification
-      end
-      object editStartupScript: TButtonedEdit
-        Left = 120
-        Top = 165
-        Width = 294
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
-        Images = MainForm.ImageListMain
-        RightButton.ImageIndex = 51
-        RightButton.Visible = True
-        TabOrder = 5
-        OnChange = Modification
-        OnDblClick = PickFile
-        OnRightButtonClick = PickFile
       end
       object chkFullTableStatus: TCheckBox
         Left = 120
@@ -838,8 +657,6 @@ object connform: Tconnform
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = 'More'
-    DropDownMenu = popupMore
-    Style = bsSplitButton
     TabOrder = 6
     OnClick = btnMoreClick
   end

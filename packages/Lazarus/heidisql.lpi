@@ -65,7 +65,9 @@
       <Unit3>
         <Filename Value="../../source/connections.pas"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="connform"/>
         <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
       </Unit3>
       <Unit4>
         <Filename Value="../../source/loaddata.pas"/>

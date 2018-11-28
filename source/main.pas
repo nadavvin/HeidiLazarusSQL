@@ -18,7 +18,7 @@ uses
   TableTools, View, Usermanager, SelectDBObject, connections, sqlhelp, dbconnection,
   insertfiles, searchreplace, loaddata, copytable, VTHeaderPopup, Cromis.DirectoryWatch, SyncDB, gnugettext2,
   JumpList, {System.Actions, System.}UITypes{, pngimage}, Vcl.FormsFix,
-  {System.ImageList,} FileUtil, MissingAndConversions, SQLDBConnection;
+  {System.ImageList,} FileUtil, MissingAndConversions;
 
 
 type
@@ -2017,6 +2017,8 @@ begin
   end;
 
   {ParseCommandLine(Windows.GetCommandLine, ConnectionParams, FileNames);}
+  ConnectionParams := nil;
+  Connections.Clear;
   if Assigned(ConnectionParams) then begin
     // Minimal parameter for command line mode is hostname
     InitConnection(ConnectionParams, True, Connection);
