@@ -1530,24 +1530,24 @@ begin
   Connections.Clear;
 
   // Save various settings
-  AppSettings.WriteBool(asStopOnErrorsInBatchMode, actQueryStopOnErrors.Checked);
-  AppSettings.WriteBool(asDisplayBLOBsAsText, actBlobAsText.Checked);
+  {AppSettings.WriteBool(asStopOnErrorsInBatchMode, actQueryStopOnErrors.Checked);// actQueryStopOnErrors = nil
+  AppSettings.WriteBool(asDisplayBLOBsAsText, actBlobAsText.Checked);//  actBlobAsText = nil}
   AppSettings.WriteString(asDelimiter, FDelimiter);
   AppSettings.WriteInt(asQuerymemoheight, pnlQueryMemo.Height);
   AppSettings.WriteInt(asQueryhelperswidth, treeQueryHelpers.Width);
-  AppSettings.WriteInt(asCompletionProposalWidth, SynCompletionProposal.Width);
-  AppSettings.WriteInt(asCompletionProposalNbLinesInWindow, SynCompletionProposal.NbLinesInWindow);
+  {AppSettings.WriteInt(asCompletionProposalWidth, SynCompletionProposal.Width); //SynCompletionProposal = nil
+  AppSettings.WriteInt(asCompletionProposalNbLinesInWindow, SynCompletionProposal.NbLinesInWindow); //SynCompletionProposal = nil}
   AppSettings.WriteInt(asDbtreewidth, pnlLeft.width);
-  AppSettings.WriteBool(asGroupTreeObjects, actGroupObjects.Checked);
+  {AppSettings.WriteBool(asGroupTreeObjects, actGroupObjects.Checked); //actGroupObjects = nil}
   AppSettings.WriteInt(asDataPreviewHeight, pnlPreview.Height);
-  AppSettings.WriteBool(asDataPreviewEnabled, actDataPreview.Checked);
+  {AppSettings.WriteBool(asDataPreviewEnabled, actDataPreview.Checked);//actDataPreview = nil}
   AppSettings.WriteInt(asLogHeight, SynMemoSQLLog.Height);
   AppSettings.WriteBool(asFilterPanel, pnlFilterVT.Tag=Integer(True));
-  AppSettings.WriteBool(asWrapLongLines, actQueryWordWrap.Checked);
-  AppSettings.WriteBool(asSingleQueries, actSingleQueries.Checked);
-  AppSettings.WriteBool(asLogHorizontalScrollbar, actLogHorizontalScrollbar.Checked);
+  {AppSettings.WriteBool(asWrapLongLines, actQueryWordWrap.Checked);//actQueryWordWrap = nil
+  AppSettings.WriteBool(asSingleQueries, actSingleQueries.Checked);//actSingleQueries = nil
+  AppSettings.WriteBool(asLogHorizontalScrollbar, actLogHorizontalScrollbar.Checked);//actLogHorizontalScrollbar = nil}
   AppSettings.WriteBool(asMainWinMaximized, WindowState=wsMaximized);
-  AppSettings.WriteInt(asMainWinOnMonitor, Monitor.MonitorNum);
+  {AppSettings.WriteInt(asMainWinOnMonitor, Monitor.MonitorNum);//<Error: Type TMAINFORM has no component named MONITOR.>}
   // Window dimensions are only valid when WindowState is normal.
   if WindowState = wsNormal then begin
     AppSettings.WriteInt(asMainWinLeft, Left);
