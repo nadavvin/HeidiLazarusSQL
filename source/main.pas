@@ -7097,16 +7097,17 @@ var
   i : Byte;
   ColWidths, ColsVisible, ColPos, Regname: String;
   OwnerForm: TWinControl;
+  x: TVIRTUALTREECOLUMNS;
 begin
   ColWidths := '';
   ColsVisible := '';
   ColPos := '';
-  for i := 0 to List.Header.Columns.Count - 1 do
+  for i := 0 to List.Header.Columns.Count - 1 do//<Error: Type TVIRTUALTREECOLUMNS has no component named COUNT.>
   begin
     // Column widths
     if ColWidths <> '' then
       ColWidths := ColWidths + ',';
-    ColWidths := ColWidths + IntToStr(List.Header.Columns[i].Width);
+    ColWidths := ColWidths + IntToStr(List.Header.Columns[i].Width);//crash here <Error: Type TVIRTUALTREECOLUMNS has no component named Width.>
 
     // Column visibility
     if coVisible in List.Header.Columns[i].Options then
