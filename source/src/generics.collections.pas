@@ -1316,7 +1316,7 @@ end;
 function TCustomListEnumerator<T>.DoMoveNext: boolean;
 begin
   Inc(FIndex);
-  Result := (FList.FLength <> 0) and (FIndex < FList.FLength)
+  Result := (FList <> nil) and (FList.FLength <> 0) and (FIndex < FList.FLength)
 end;
 
 function TCustomListEnumerator<T>.DoGetCurrent: T;

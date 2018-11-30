@@ -1846,7 +1846,7 @@ begin
     menuDoubleClickInsertsNodeText.Click;}
 
   // Restore width of columns of all VirtualTrees
-  RestoreListSetup(ListDatabases);
+  RestoreListSetup(ListDatabases);//crash here...
   RestoreListSetup(ListVariables);
   RestoreListSetup(ListStatus);
   RestoreListSetup(ListProcesses);
@@ -2017,8 +2017,8 @@ begin
   end;
 
   {ParseCommandLine(Windows.GetCommandLine, ConnectionParams, FileNames);}
-  ConnectionParams := nil;
-  Connections.Clear;
+  ConnectionParams := nil;{work arround code...}
+  Connections.Clear;{work arround code...}
   if Assigned(ConnectionParams) then begin
     // Minimal parameter for command line mode is hostname
     InitConnection(ConnectionParams, True, Connection);
@@ -7201,11 +7201,11 @@ begin
   if Value <> '' then begin
     ValueList := Explode(',', Value);
     if ValueList.Count = 2 then begin
-      List.Header.SortColumn := MakeInt(ValueList[0]);
+      {List.Header.SortColumn := MakeInt(ValueList[0]);//crash here, use function get somehow
       if MakeInt(ValueList[1]) = 0 then
         List.Header.SortDirection := sdAscending
       else
-        List.Header.SortDirection := sdDescending;
+        List.Header.SortDirection := sdDescending;}
     end;
   end;
 

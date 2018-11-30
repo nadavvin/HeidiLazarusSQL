@@ -1137,8 +1137,8 @@ begin
   // Parameters from stored registry key
   Create;
 
-  if not AppSettings.SessionPathExists(SessionRegPath) then
-    raise Exception.Create(f_('Error: Session "%s" not found in registry.', [SessionRegPath]));
+  {if not AppSettings.SessionPathExists(SessionRegPath) then
+    raise Exception.Create(f_('Error: Session "%s" not found in registry.', [SessionRegPath]));}
 
   FSessionPath := SessionRegPath;
   AppSettings.SessionPath := SessionRegPath;
