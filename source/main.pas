@@ -1564,7 +1564,7 @@ begin
 
   LogToFile := False;
   AppSettings.Free;
-end;
+end;//crash here
 
 
 {***
@@ -1846,7 +1846,7 @@ begin
     menuDoubleClickInsertsNodeText.Click;}
 
   // Restore width of columns of all VirtualTrees
-  RestoreListSetup(ListDatabases);//crash here...
+  RestoreListSetup(ListDatabases);
   RestoreListSetup(ListVariables);
   RestoreListSetup(ListStatus);
   RestoreListSetup(ListProcesses);
@@ -7107,10 +7107,10 @@ begin
     // Column widths
     if ColWidths <> '' then
       ColWidths := ColWidths + ',';
-    ColWidths := ColWidths + IntToStr(List.Header.Columns[i].Width);//crash here <Error: Type TVIRTUALTREECOLUMNS has no component named Width.>
+    ColWidths := ColWidths;{ + IntToStr(List.Header.Columns[i].Width);}//crash here <Error: Type TVIRTUALTREECOLUMNS has no component named Width.>
 
     // Column visibility
-    if coVisible in List.Header.Columns[i].Options then
+    {if coVisible in List.Header.Columns[i].Options then//<Error: Type TVIRTUALTREECOLUMNS has no component named Options.>
     begin
       if ColsVisible <> '' then
         ColsVisible := ColsVisible + ',';
@@ -7120,7 +7120,7 @@ begin
     // Column position
     if ColPos <> '' then
       ColPos := ColPos + ',';
-    ColPos := ColPos + IntToStr(List.Header.Columns[i].Position);
+    ColPos := ColPos + IntToStr(List.Header.Columns[i].Position);}
 
   end;
 
