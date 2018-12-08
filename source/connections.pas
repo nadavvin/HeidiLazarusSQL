@@ -1204,6 +1204,7 @@ var
 begin
   // Splitter resized - adjust width of buttons
   {ButtonWidth := Round((ListSessions.Width - 2 * ListSessions.Margins.Left) / 3);}
+  ButtonWidth := Round((ListSessions.Width) / 3);
   btnNew.Width := ButtonWidth;
   btnSave.Width := ButtonWidth;
   btnDelete.Width := ButtonWidth;
