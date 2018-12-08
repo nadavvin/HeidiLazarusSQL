@@ -1,57 +1,58 @@
 object connform: Tconnform
   Left = 288
+  Height = 400
   Top = 129
+  Width = 665
   BorderIcons = [biSystemMenu, biHelp]
   Caption = 'Session manager'
-  ClientHeight = 364
-  ClientWidth = 649
+  ClientHeight = 400
+  ClientWidth = 665
   Color = clBtnFace
   Constraints.MinHeight = 400
   Constraints.MinWidth = 665
-  ParentFont = True
-  ShowHint = True
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  PixelsPerInch = 96
+  ParentFont = True
+  ShowHint = True
+  LCLVersion = '2.1.0.0'
   object splitterMain: TSplitter
-    Left = 208
-    Top = 8
-    Width = 8
-    Height = 316
     Cursor = crSizeWE
-    ResizeStyle = rsUpdate
+    Left = 200
+    Height = 400
+    Top = 0
+    Width = 8
     OnMoved = splitterMainMoved
   end
   object btnSave: TButton
     Left = 64
-    Top = 331
-    Width = 50
     Height = 25
+    Top = 367
+    Width = 50
     Anchors = [akLeft, akBottom]
     Caption = 'Save'
-    TabOrder = 2
     OnClick = btnSaveClick
+    TabOrder = 2
   end
   object btnOpen: TButton
-    Left = 389
-    Top = 331
-    Width = 80
+    Left = 405
     Height = 25
+    Top = 367
+    Width = 80
     Anchors = [akRight, akBottom]
     Caption = 'Open'
     Default = True
     Enabled = False
-    TabOrder = 4
     OnClick = btnOpenClick
+    TabOrder = 4
   end
   object btnCancel: TButton
-    Left = 475
-    Top = 331
-    Width = 80
+    Left = 491
     Height = 25
+    Top = 367
+    Width = 80
     Anchors = [akRight, akBottom]
     Cancel = True
     Caption = 'Cancel'
@@ -59,14 +60,16 @@ object connform: Tconnform
     TabOrder = 5
   end
   object ListSessions: TVirtualStringTree
-    Left = 8
-    Top = 8
+    Left = 0
+    Height = 400
+    Top = 0
     Width = 200
-    Height = 316
     Align = alLeft
     Constraints.MinWidth = 200
     DragMode = dmAutomatic
     Header.AutoSizeIndex = -1
+    Header.Columns = <>
+    Header.MainColumn = -1
     Header.Options = [hoAutoResize, hoColumnResize, hoDblClickResize, hoDrag, hoHotTrack, hoShowSortGlyphs, hoVisible]
     Header.ParentFont = True
     Header.PopupMenu = MainForm.popupListHeader
@@ -77,7 +80,7 @@ object connform: Tconnform
     PopupMenu = popupSessions
     TabOrder = 0
     TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScrollOnExpand, toAutoSort, toAutoTristateTracking]
-    TreeOptions.MiscOptions = [toAcceptOLEDrop, toEditable, toFullRepaintOnResize, toInitOnSave, toToggleOnDblClick, toWheelPanning, toFullRowDrag]
+    TreeOptions.MiscOptions = [toEditable, toFullRepaintOnResize, toInitOnSave, toToggleOnDblClick, toWheelPanning, toFullRowDrag]
     TreeOptions.PaintOptions = [toHotTrack, toShowButtons, toShowDropmark, toShowRoot, toShowTreeLines, toThemeAware, toUseBlendedImages, toUseExplorerTheme, toHideTreeLinesIfThemed]
     TreeOptions.SelectionOptions = [toFullRowSelect, toRightClickSelect]
     OnCreateEditor = ListSessionsCreateEditor
@@ -93,577 +96,622 @@ object connform: Tconnform
   end
   object btnNew: TButton
     Left = 8
-    Top = 331
-    Width = 50
     Height = 25
+    Top = 367
+    Width = 50
     Anchors = [akLeft, akBottom]
     Caption = 'New'
-    TabOrder = 1
     OnClick = btnNewClick
+    TabOrder = 1
   end
   object btnDelete: TButton
     Left = 120
-    Top = 331
-    Width = 50
     Height = 25
+    Top = 367
+    Width = 50
     Anchors = [akLeft, akBottom]
     Caption = 'Delete'
-    TabOrder = 3
     OnClick = btnDeleteClick
+    TabOrder = 3
   end
   object PageControlDetails: TPageControl
-    Left = 216
-    Top = 8
-    Width = 425
-    Height = 316
+    Left = 208
+    Height = 400
+    Top = 0
+    Width = 457
     ActivePage = tabStart
     Align = alClient
     Images = MainForm.ImageListMain
+    TabIndex = 0
     TabOrder = 7
     object tabStart: TTabSheet
       Caption = 'Start'
+      ClientHeight = 369
+      ClientWidth = 447
       ImageIndex = 112
       object lblHelp: TLabel
-        Left = 10
-        Top = 10
-        Width = 397
+        Left = 0
         Height = 161
+        Top = 0
+        Width = 447
         Align = alTop
         AutoSize = False
         Caption = 'lblHelp'
+        ParentColor = False
         WordWrap = True
       end
       object btnImportSettings: TButton
         Left = 10
+        Height = 25
         Top = 184
         Width = 159
-        Height = 25
         Caption = 'Import settings ...'
-        TabOrder = 0
         OnClick = btnImportSettingsClick
+        TabOrder = 0
       end
     end
     object tabSettings: TTabSheet
       Caption = 'Settings'
+      ClientHeight = 369
+      ClientWidth = 447
       ImageIndex = 39
       object lblPort: TLabel
         Left = 3
+        Height = 13
         Top = 168
         Width = 24
-        Height = 13
         Caption = 'Port:'
         FocusControl = editPort
+        ParentColor = False
       end
       object lblPassword: TLabel
         Left = 3
+        Height = 13
         Top = 143
         Width = 50
-        Height = 13
         Caption = 'Password:'
         FocusControl = editPassword
+        ParentColor = False
       end
       object lblHost: TLabel
         Left = 3
+        Height = 13
         Top = 45
         Width = 72
-        Height = 13
         Caption = 'Hostname / IP:'
         FocusControl = editHost
+        ParentColor = False
       end
       object lblUsername: TLabel
         Left = 3
+        Height = 13
         Top = 118
         Width = 26
-        Height = 13
         Caption = 'User:'
         FocusControl = editUsername
+        ParentColor = False
       end
       object lblNetworkType: TLabel
         Left = 3
+        Height = 13
         Top = 12
         Width = 69
-        Height = 13
         Caption = 'Network type:'
+        ParentColor = False
       end
       object lblDatabase: TLabel
         Left = 3
+        Height = 13
         Top = 216
         Width = 55
-        Height = 13
         Caption = 'Databases:'
+        ParentColor = False
       end
       object lblComment: TLabel
         Left = 3
+        Height = 13
         Top = 241
         Width = 49
-        Height = 13
         Caption = 'Comment:'
+        ParentColor = False
       end
       object chkCompressed: TCheckBox
         Left = 120
+        Height = 17
         Top = 190
         Width = 294
-        Height = 17
-        Anchors = [akLeft, akTop, akRight]
+        Anchors = [akTop, akLeft, akRight]
         Caption = 'Compressed client/server protocol'
-        TabOrder = 8
         OnClick = Modification
+        TabOrder = 8
       end
       object editPort: TEdit
         Left = 120
+        Height = 21
         Top = 165
         Width = 57
-        Height = 21
+        OnChange = Modification
         TabOrder = 6
         Text = '0'
-        OnChange = Modification
       end
       object updownPort: TUpDown
         Left = 177
+        Height = 21
         Top = 165
         Width = 16
-        Height = 21
         Associate = editPort
-        Max = 2147483647
+        Max = -1
+        Min = 0
+        Position = 0
         TabOrder = 7
         Thousands = False
         Wrap = True
       end
       object editPassword: TEdit
         Left = 120
+        Height = 21
         Top = 140
         Width = 294
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
+        Anchors = [akTop, akLeft, akRight]
+        EchoMode = emPassword
+        OnChange = Modification
         PasswordChar = '*'
         TabOrder = 5
-        OnChange = Modification
       end
       object editUsername: TEdit
         Left = 120
+        Height = 21
         Top = 115
         Width = 294
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
-        TabOrder = 4
+        Anchors = [akTop, akLeft, akRight]
         OnChange = Modification
+        TabOrder = 4
       end
       object editHost: TEdit
         Left = 120
+        Height = 21
         Top = 42
         Width = 294
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
-        TabOrder = 1
+        Anchors = [akTop, akLeft, akRight]
         OnChange = editHostChange
+        TabOrder = 1
       end
       object comboNetType: TComboBox
         Left = 120
+        Height = 21
         Top = 9
         Width = 294
-        Height = 21
-        Style = csDropDownList
-        Anchors = [akLeft, akTop, akRight]
+        Anchors = [akTop, akLeft, akRight]
         DropDownCount = 12
+        ItemHeight = 0
         ItemIndex = 0
-        TabOrder = 0
-        Text = 'TCP/IP'
-        OnChange = comboNetTypeChange
         Items.Strings = (
           'TCP/IP'
           'Named pipe'
           'SSH tunnel'
-          'MSSQL')
+          'MSSQL'
+        )
+        OnChange = comboNetTypeChange
+        Style = csDropDownList
+        TabOrder = 0
+        Text = 'TCP/IP'
       end
       object chkLoginPrompt: TCheckBox
         Left = 120
+        Height = 17
         Top = 69
         Width = 294
-        Height = 17
-        Anchors = [akLeft, akTop, akRight]
+        Anchors = [akTop, akLeft, akRight]
         Caption = 'Prompt for credentials'
-        TabOrder = 2
         OnClick = chkLoginPromptClick
+        TabOrder = 2
       end
       object chkWindowsAuth: TCheckBox
         Left = 120
+        Height = 17
         Top = 92
         Width = 294
-        Height = 17
-        Anchors = [akLeft, akTop, akRight]
+        Anchors = [akTop, akLeft, akRight]
         Caption = 'Use Windows authentication'
         Enabled = False
-        TabOrder = 3
         OnClick = chkLoginPromptClick
+        TabOrder = 3
       end
       object memoComment: TMemo
         Left = 120
+        Height = 35
         Top = 238
         Width = 294
-        Height = 35
-        Anchors = [akLeft, akTop, akRight, akBottom]
-        ScrollBars = ssVertical
-        TabOrder = 10
+        Anchors = [akTop, akLeft, akRight, akBottom]
         OnChange = Modification
+        ScrollBars = ssVertical
+        TabOrder = 9
       end
     end
     object tabSSHtunnel: TTabSheet
       Caption = 'SSH tunnel'
+      ClientHeight = 369
+      ClientWidth = 447
       ImageIndex = 147
       object lblSSHLocalPort: TLabel
         Left = 3
+        Height = 13
         Top = 190
         Width = 51
-        Height = 13
         Caption = 'Local port:'
         FocusControl = editSSHlocalport
+        ParentColor = False
       end
       object lblSSHUser: TLabel
         Left = 3
+        Height = 13
         Top = 82
         Width = 52
-        Height = 13
         Caption = 'Username:'
         FocusControl = editSSHUser
+        ParentColor = False
       end
       object lblSSHPassword: TLabel
         Left = 3
+        Height = 13
         Top = 109
         Width = 50
-        Height = 13
         Caption = 'Password:'
         FocusControl = editSSHPassword
+        ParentColor = False
       end
       object lblSSHPlinkExe: TLabel
         Left = 3
+        Height = 13
         Top = 12
         Width = 87
-        Height = 13
         Caption = 'plink.exe location:'
+        ParentColor = False
       end
       object lblSSHhost: TLabel
         Left = 3
+        Height = 13
         Top = 55
         Width = 81
-        Height = 13
         Caption = 'SSH host + port:'
         FocusControl = editSSHhost
+        ParentColor = False
       end
       object lblSSHkeyfile: TLabel
         Left = 3
+        Height = 13
         Top = 163
         Width = 75
-        Height = 13
         Caption = 'Private key file:'
-        FocusControl = editSSHPrivateKey
+        ParentColor = False
       end
       object lblDownloadPlink: TLabel
+        Cursor = crHandPoint
         Left = 120
+        Height = 13
+        Hint = 'http://www.chiark.greenend.org.uk/~sgtatham/putty/'
         Top = 33
         Width = 93
-        Height = 13
-        Cursor = crHandPoint
-        Hint = 'http://www.chiark.greenend.org.uk/~sgtatham/putty/'
         Caption = 'Download plink.exe'
+        ParentColor = False
         OnClick = lblDownloadPlinkClick
       end
       object lblPlinkTimeout: TLabel
         Left = 3
+        Height = 13
         Top = 136
         Width = 86
-        Height = 13
         Caption = 'plink.exe timeout:'
+        ParentColor = False
       end
       object editSSHlocalport: TEdit
         Left = 120
+        Height = 21
         Top = 187
         Width = 294
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
+        Anchors = [akTop, akLeft, akRight]
         NumbersOnly = True
-        TabOrder = 8
-        Text = 'editSSHlocalport'
         OnChange = Modification
+        TabOrder = 0
+        Text = 'editSSHlocalport'
       end
       object editSSHUser: TEdit
         Left = 120
+        Height = 21
         Top = 79
         Width = 294
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
+        Anchors = [akTop, akLeft, akRight]
+        OnChange = Modification
         TabOrder = 3
         Text = 'editSSHUser'
         TextHint = 'Your secure shell username'
-        OnChange = Modification
       end
       object editSSHPassword: TEdit
         Left = 120
+        Height = 21
         Top = 106
         Width = 294
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
+        Anchors = [akTop, akLeft, akRight]
+        EchoMode = emPassword
+        OnChange = Modification
         PasswordChar = '*'
         TabOrder = 4
         Text = 'editSSHPassword'
         TextHint = 'Your secure shell password'
-        OnChange = Modification
       end
       object editSSHhost: TEdit
         Left = 120
+        Height = 21
         Top = 52
         Width = 230
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
+        Anchors = [akTop, akLeft, akRight]
+        OnChange = Modification
         TabOrder = 1
         Text = 'editSSHhost'
-        OnChange = Modification
       end
       object editSSHport: TEdit
         Left = 356
+        Height = 21
         Top = 52
         Width = 58
-        Height = 21
         Anchors = [akTop, akRight]
         NumbersOnly = True
+        OnChange = Modification
         TabOrder = 2
         Text = 'editSSHport'
-        OnChange = Modification
       end
       object editSSHTimeout: TEdit
         Left = 120
+        Height = 21
         Top = 133
         Width = 60
-        Height = 21
+        OnChange = Modification
         TabOrder = 5
         Text = '0'
-        OnChange = Modification
       end
       object updownSSHTimeout: TUpDown
         Left = 180
+        Height = 21
         Top = 133
         Width = 17
-        Height = 21
         Associate = editSSHTimeout
+        Min = 0
+        Position = 0
         TabOrder = 6
         Wrap = True
       end
     end
     object tabAdvanced: TTabSheet
       Caption = 'Advanced'
+      ClientHeight = 369
+      ClientWidth = 447
       ImageIndex = 98
       object lblSSLPrivateKey: TLabel
         Left = 3
+        Height = 13
         Top = 39
         Width = 78
-        Height = 13
         Caption = 'SSL private key:'
-        FocusControl = editSSLPrivateKey
+        ParentColor = False
       end
       object lblSSLCACertificate: TLabel
         Left = 3
+        Height = 13
         Top = 68
         Width = 89
-        Height = 13
         Caption = 'SSL CA certificate:'
-        FocusControl = editSSLCACertificate
+        ParentColor = False
       end
       object lblSSLCertificate: TLabel
         Left = 3
+        Height = 13
         Top = 95
         Width = 72
-        Height = 13
         Caption = 'SSL certificate:'
-        FocusControl = editSSLCertificate
+        ParentColor = False
       end
       object lblStartupScript: TLabel
         Left = 3
+        Height = 13
         Top = 168
         Width = 69
-        Height = 13
         Caption = 'Startup script:'
-        FocusControl = editStartupScript
+        ParentColor = False
       end
       object lblQueryTimeout: TLabel
         Left = 3
+        Height = 13
         Top = 195
         Width = 73
-        Height = 13
         Caption = 'Query timeout:'
+        ParentColor = False
       end
       object lblSSLcipher: TLabel
         Left = 3
+        Height = 13
         Top = 120
         Width = 53
-        Height = 13
         Caption = 'SSL cipher:'
+        ParentColor = False
       end
       object lblKeepAlive: TLabel
         Left = 3
+        Height = 13
         Top = 224
         Width = 106
-        Height = 13
         Caption = 'Ping every X seconds:'
+        ParentColor = False
       end
       object chkWantSSL: TCheckBox
         Left = 120
+        Height = 17
         Top = 13
         Width = 313
-        Height = 17
-        Anchors = [akLeft, akTop, akRight]
+        Anchors = [akTop, akLeft, akRight]
         Caption = 'Use SSL'
-        TabOrder = 0
         OnClick = Modification
+        TabOrder = 0
       end
       object chkLocalTimeZone: TCheckBox
         Left = 120
+        Height = 17
+        Hint = 'Use your client time zone in date/time SQL functions, e.g. NOW(), for MySQL 4.1.3+'
         Top = 246
         Width = 294
-        Height = 17
-        Hint = 
-          'Use your client time zone in date/time SQL functions, e.g. NOW()' +
-          ', for MySQL 4.1.3+'
-        Anchors = [akLeft, akTop, akRight]
+        Anchors = [akTop, akLeft, akRight]
         Caption = 'Use own client time zone'
-        TabOrder = 8
         OnClick = Modification
+        TabOrder = 1
       end
       object chkFullTableStatus: TCheckBox
         Left = 120
+        Height = 17
+        Hint = 'Disable to speed up internal queries on databases with many InnoDB tables'
         Top = 269
         Width = 294
-        Height = 17
-        Hint = 
-          'Disable to speed up internal queries on databases with many Inno' +
-          'DB tables'
-        Anchors = [akLeft, akTop, akRight]
+        Anchors = [akTop, akLeft, akRight]
         Caption = 'Get full table status'
-        TabOrder = 9
         OnClick = Modification
+        TabOrder = 2
       end
       object editQueryTimeout: TEdit
         Left = 120
+        Height = 21
         Top = 192
         Width = 90
-        Height = 21
         NumbersOnly = True
-        TabOrder = 6
-        Text = '0'
         OnChange = Modification
+        TabOrder = 5
+        Text = '0'
       end
       object updownQueryTimeout: TUpDown
         Left = 210
+        Height = 21
         Top = 192
         Width = 16
-        Height = 21
         Associate = editQueryTimeout
-        Max = 2147483646
+        Max = -2
+        Min = 0
+        Position = 0
         TabOrder = 7
         Wrap = True
       end
       object editSSLcipher: TEdit
         Left = 120
+        Height = 21
         Top = 119
         Width = 294
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
-        TabOrder = 4
-        TextHint = 'List of permissible ciphers to use for SSL encryption'
+        Anchors = [akTop, akLeft, akRight]
         OnChange = Modification
+        TabOrder = 3
+        TextHint = 'List of permissible ciphers to use for SSL encryption'
       end
       object editKeepAlive: TEdit
         Left = 120
+        Height = 21
         Top = 219
         Width = 90
-        Height = 21
-        TabOrder = 10
-        Text = '0'
         OnChange = Modification
+        TabOrder = 4
+        Text = '0'
       end
       object updownKeepAlive: TUpDown
         Left = 210
+        Height = 21
         Top = 219
         Width = 16
-        Height = 21
         Associate = editKeepAlive
-        Max = 86400
-        TabOrder = 11
+        Max = 20864
+        Min = 0
+        Position = 0
+        TabOrder = 6
       end
     end
     object tabStatistics: TTabSheet
       Caption = 'Statistics'
+      ClientHeight = 369
+      ClientWidth = 447
       ImageIndex = 145
       object lblLastConnectLeft: TLabel
         Left = 3
+        Height = 13
         Top = 31
         Width = 65
-        Height = 13
         Caption = 'Last connect:'
+        ParentColor = False
       end
       object lblCounterLeft: TLabel
         Left = 3
+        Height = 13
         Top = 50
         Width = 100
-        Height = 13
         Caption = 'Successful connects:'
+        ParentColor = False
       end
       object lblCreatedLeft: TLabel
         Left = 3
+        Height = 13
         Top = 12
         Width = 43
-        Height = 13
         Caption = 'Created:'
+        ParentColor = False
       end
       object lblCreatedRight: TLabel
         Left = 204
+        Height = 13
         Top = 12
         Width = 5
-        Height = 13
         Caption = '?'
+        ParentColor = False
       end
       object lblCounterRight1: TLabel
         Left = 204
+        Height = 13
         Top = 50
         Width = 5
-        Height = 13
         Caption = '?'
+        ParentColor = False
       end
       object lblLastConnectRight: TLabel
         Left = 204
+        Height = 13
         Top = 31
         Width = 5
-        Height = 13
         Caption = '?'
+        ParentColor = False
       end
       object lblCounterRight2: TLabel
         Left = 204
+        Height = 13
         Top = 69
         Width = 5
-        Height = 13
         Caption = '?'
+        ParentColor = False
       end
       object lblCounterLeft2: TLabel
         Left = 3
+        Height = 13
         Top = 69
         Width = 112
-        Height = 13
         Caption = 'Unsuccessful connects:'
+        ParentColor = False
       end
     end
   end
   object btnMore: TButton
-    Left = 561
-    Top = 331
-    Width = 80
+    Left = 577
     Height = 25
+    Top = 367
+    Width = 80
     Anchors = [akRight, akBottom]
     Caption = 'More'
-    TabOrder = 6
     OnClick = btnMoreClick
+    TabOrder = 6
   end
   object popupSessions: TPopupMenu
     Images = MainForm.ImageListMain
-    Left = 23
-    Top = 83
+    left = 23
+    top = 83
     object menuRename: TMenuItem
       Caption = 'Rename'
       Enabled = False
@@ -703,19 +751,19 @@ object connform: Tconnform
   object TimerStatistics: TTimer
     Interval = 60000
     OnTimer = TimerStatisticsTimer
-    Left = 24
-    Top = 35
+    left = 24
+    top = 35
   end
   object timerSettingsImport: TTimer
     Enabled = False
     OnTimer = timerSettingsImportTimer
-    Left = 110
-    Top = 35
+    left = 110
+    top = 35
   end
   object popupNew: TPopupMenu
     Images = MainForm.ImageListMain
-    Left = 109
-    Top = 82
+    left = 109
+    top = 82
     object menuNewSessionInRoot: TMenuItem
       Caption = 'Session in root folder'
       ImageIndex = 72
@@ -739,25 +787,19 @@ object connform: Tconnform
   end
   object popupMore: TPopupMenu
     Images = MainForm.ImageListMain
-    Left = 24
-    Top = 144
+    left = 24
+    top = 144
     object Preferences1: TMenuItem
-      Action = MainForm.actPreferences
     end
     object Checkforupdates1: TMenuItem
-      Action = MainForm.actUpdateCheck
     end
     object Importsettingsfile1: TMenuItem
-      Action = MainForm.actImportSettings
     end
     object Exportsettingsfile1: TMenuItem
-      Action = MainForm.actExportSettings
     end
     object menuMoreGeneralHelp: TMenuItem
-      Action = MainForm.actHelp
     end
     object About1: TMenuItem
-      Action = MainForm.actAboutBox
     end
   end
 end
