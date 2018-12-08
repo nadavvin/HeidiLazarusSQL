@@ -3,7 +3,7 @@
   <ProjectSession>
     <Version Value="11"/>
     <BuildModes Active="Default"/>
-    <Units Count="87">
+    <Units Count="91">
       <Unit0>
         <Filename Value="heidisql.dpr"/>
         <IsPartOfProject Value="True"/>
@@ -20,9 +20,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Main"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="1543"/>
-        <CursorPos Y="1566"/>
+        <TopLine Value="1546"/>
+        <CursorPos X="17" Y="1559"/>
         <UsageCount Value="206"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -35,7 +36,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="About"/>
-        <EditorIndex Value="12"/>
+        <EditorIndex Value="16"/>
         <TopLine Value="11"/>
         <CursorPos X="17" Y="11"/>
         <UsageCount Value="206"/>
@@ -48,7 +49,7 @@
         <ComponentName Value="connform"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="15"/>
         <TopLine Value="228"/>
         <CursorPos X="23" Y="241"/>
         <UsageCount Value="206"/>
@@ -129,9 +130,9 @@
       <Unit11>
         <Filename Value="../../source/apphelpers.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="9"/>
-        <TopLine Value="3702"/>
-        <CursorPos Y="3723"/>
+        <EditorIndex Value="13"/>
+        <TopLine Value="184"/>
+        <CursorPos X="3" Y="195"/>
         <UsageCount Value="206"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -149,8 +150,8 @@
       <Unit13>
         <Filename Value="../../source/mysql_structures.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="17"/>
-        <TopLine Value="7584"/>
+        <EditorIndex Value="21"/>
+        <TopLine Value="7580"/>
         <CursorPos X="65" Y="7616"/>
         <UsageCount Value="206"/>
         <Loaded Value="True"/>
@@ -280,7 +281,7 @@
       <Unit26>
         <Filename Value="../../source/dbconnection.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="14"/>
+        <EditorIndex Value="18"/>
         <TopLine Value="1120"/>
         <CursorPos X="97" Y="1141"/>
         <UsageCount Value="206"/>
@@ -402,7 +403,7 @@
         <Filename Value="../../source/missingandconversions.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="MissingAndConversions"/>
-        <EditorIndex Value="15"/>
+        <EditorIndex Value="19"/>
         <CursorPos X="19" Y="17"/>
         <UsageCount Value="204"/>
         <Loaded Value="True"/>
@@ -472,10 +473,10 @@
       <Unit46>
         <Filename Value="../../source/mysql_structures2.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="13"/>
+        <EditorIndex Value="17"/>
         <TopLine Value="55"/>
         <CursorPos Y="78"/>
-        <UsageCount Value="146"/>
+        <UsageCount Value="154"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit46>
@@ -484,7 +485,7 @@
         <UnitName Value="SynRegExpr"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="16"/>
-        <UsageCount Value="215"/>
+        <UsageCount Value="214"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit47>
       <Unit48>
@@ -492,7 +493,7 @@
         <UnitName Value="SQLDBConnection"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="63" Y="8"/>
-        <UsageCount Value="205"/>
+        <UsageCount Value="204"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit48>
       <Unit49>
@@ -500,26 +501,26 @@
         <UnitName Value="SqldbConnector"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="45" Y="8"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit49>
       <Unit50>
         <Filename Value="../../source/gnugettext.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="5" Y="11"/>
-        <UsageCount Value="94"/>
+        <UsageCount Value="93"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit50>
       <Unit51>
         <Filename Value="../../source/Libc.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="18" Y="5"/>
-        <UsageCount Value="91"/>
+        <UsageCount Value="90"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit51>
       <Unit52>
         <Filename Value="/usr/lib/fpc/src/rtl/objpas/classes/classesh.inc"/>
-        <EditorIndex Value="19"/>
+        <EditorIndex Value="23"/>
         <TopLine Value="742"/>
         <CursorPos X="17" Y="759"/>
         <UsageCount Value="102"/>
@@ -529,7 +530,7 @@
       <Unit53>
         <Filename Value="../../source/routine_editor.dfm"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="98"/>
+        <UsageCount Value="97"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit53>
       <Unit54>
@@ -537,14 +538,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="102"/>
         <CursorPos X="31" Y="102"/>
-        <UsageCount Value="97"/>
+        <UsageCount Value="96"/>
       </Unit54>
       <Unit55>
         <Filename Value="/usr/lib/fpc/src/rtl/inc/objpash.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="181"/>
         <CursorPos X="23" Y="194"/>
-        <UsageCount Value="88"/>
+        <UsageCount Value="87"/>
       </Unit55>
       <Unit56>
         <Filename Value="../../../../../Projects/lazarus/components/synedit/synedit.pp"/>
@@ -552,7 +553,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="2461"/>
         <CursorPos Y="2482"/>
-        <UsageCount Value="85"/>
+        <UsageCount Value="84"/>
       </Unit56>
       <Unit57>
         <Filename Value="../../../../../Projects/lazarus/lcl/comctrls.pp"/>
@@ -560,13 +561,13 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="4101"/>
         <CursorPos X="18" Y="4136"/>
-        <UsageCount Value="89"/>
+        <UsageCount Value="88"/>
       </Unit57>
       <Unit58>
         <Filename Value="../../source/main.dfm"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="15" Y="21"/>
-        <UsageCount Value="87"/>
+        <UsageCount Value="86"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit58>
       <Unit59>
@@ -575,21 +576,21 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="55"/>
         <CursorPos X="42" Y="55"/>
-        <UsageCount Value="33"/>
+        <UsageCount Value="32"/>
       </Unit59>
       <Unit60>
         <Filename Value="../../../../../Projects/lazarus/components/virtualtreeview/VirtualTrees.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="810"/>
         <CursorPos X="5" Y="827"/>
-        <UsageCount Value="84"/>
+        <UsageCount Value="83"/>
       </Unit60>
       <Unit61>
         <Filename Value="/usr/lib/fpc/src/rtl/inc/typshrdh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="59"/>
         <CursorPos X="3" Y="62"/>
-        <UsageCount Value="41"/>
+        <UsageCount Value="40"/>
       </Unit61>
       <Unit62>
         <Filename Value="/usr/lib/fpc/src/packages/regexpr/src/regexpr.pas"/>
@@ -597,7 +598,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="608"/>
         <CursorPos X="22" Y="626"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="11"/>
       </Unit62>
       <Unit63>
         <Filename Value="../../../../../Projects/lazarus/lcl/controls.pp"/>
@@ -605,14 +606,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="2302"/>
         <CursorPos X="49" Y="2320"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="11"/>
       </Unit63>
       <Unit64>
         <Filename Value="/usr/lib/fpc/src/packages/rtl-objpas/src/inc/strutils.pp"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="13"/>
         <CursorPos X="23" Y="42"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="19"/>
       </Unit64>
       <Unit65>
         <Filename Value="../../../../../Projects/lazarus/lcl/stdctrls.pp"/>
@@ -620,14 +621,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="388"/>
         <CursorPos X="14" Y="405"/>
-        <UsageCount Value="19"/>
+        <UsageCount Value="18"/>
       </Unit65>
       <Unit66>
         <Filename Value="/usr/lib/fpc/src/packages/rtl-objpas/src/inc/dateutil.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="392"/>
         <CursorPos X="10" Y="409"/>
-        <UsageCount Value="16"/>
+        <UsageCount Value="15"/>
       </Unit66>
       <Unit67>
         <Filename Value="../../../../../Projects/lazarus/lcl/imglist.pp"/>
@@ -635,7 +636,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="351"/>
         <CursorPos X="61" Y="369"/>
-        <UsageCount Value="15"/>
+        <UsageCount Value="14"/>
       </Unit67>
       <Unit68>
         <Filename Value="../../../../../Projects/lazarus/lcl/graphics.pp"/>
@@ -643,7 +644,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="48"/>
         <CursorPos X="3" Y="66"/>
-        <UsageCount Value="15"/>
+        <UsageCount Value="14"/>
       </Unit68>
       <Unit69>
         <Filename Value="../../../../../Projects/lazarus/components/synedit/syneditplugins.pas"/>
@@ -651,14 +652,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="216"/>
         <CursorPos X="5" Y="235"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit69>
       <Unit70>
         <Filename Value="../../../../../Projects/lazarus/lcl/include/customaction.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="95"/>
         <CursorPos Y="113"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit70>
       <Unit71>
         <Filename Value="../../../../../Projects/lazarus/lcl/actnlist.pas"/>
@@ -666,14 +667,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="157"/>
         <CursorPos X="5" Y="157"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit71>
       <Unit72>
         <Filename Value="../../../../../Projects/lazarus/lcl/include/customactionlist.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="41"/>
         <CursorPos Y="59"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="10"/>
       </Unit72>
       <Unit73>
         <Filename Value="../../../../../Projects/lazarus/components/synedit/syncompletion.pas"/>
@@ -681,14 +682,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="1693"/>
         <CursorPos Y="1711"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="10"/>
       </Unit73>
       <Unit74>
         <Filename Value="/usr/lib/fpc/src/rtl/inc/systemh.inc"/>
         <EditorIndex Value="4"/>
         <TopLine Value="737"/>
         <CursorPos X="15" Y="737"/>
-        <UsageCount Value="72"/>
+        <UsageCount Value="76"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit74>
@@ -697,26 +698,26 @@
         <EditorIndex Value="1"/>
         <TopLine Value="786"/>
         <CursorPos X="8" Y="804"/>
-        <UsageCount Value="73"/>
+        <UsageCount Value="77"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit75>
       <Unit76>
         <Filename Value="../../source/const.inc"/>
-        <EditorIndex Value="18"/>
-        <TopLine Value="144"/>
+        <EditorIndex Value="22"/>
+        <TopLine Value="140"/>
         <CursorPos X="3" Y="162"/>
-        <UsageCount Value="72"/>
+        <UsageCount Value="76"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit76>
       <Unit77>
         <Filename Value="/usr/lib/fpc/src/rtl/objpas/types.pp"/>
         <UnitName Value="Types"/>
-        <EditorIndex Value="16"/>
+        <EditorIndex Value="20"/>
         <TopLine Value="2"/>
         <CursorPos X="3" Y="37"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="17"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit77>
@@ -725,7 +726,7 @@
         <EditorIndex Value="3"/>
         <TopLine Value="24"/>
         <CursorPos X="57" Y="49"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="17"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit78>
@@ -735,184 +736,215 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="2459"/>
         <CursorPos X="15" Y="2479"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit79>
       <Unit80>
         <Filename Value="../../../../../Projects/lazarus/lcl/include/control.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="3550"/>
         <CursorPos Y="3567"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit80>
       <Unit81>
         <Filename Value="../../../../../Projects/lazarus/lcl/include/customform.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="137"/>
         <CursorPos Y="165"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit81>
       <Unit82>
         <Filename Value="../../../../../Projects/lazarus/lcl/include/application.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="2224"/>
         <CursorPos Y="2253"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit82>
       <Unit83>
         <Filename Value="../../../lazarus/components/lazutils/laztracer.pas"/>
         <UnitName Value="LazTracer"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="14"/>
         <TopLine Value="30"/>
         <CursorPos X="105" Y="54"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="15"/>
         <Loaded Value="True"/>
       </Unit83>
       <Unit84>
         <Filename Value="../../../fpc/rtl/objpas/classes/lists.inc"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="12"/>
         <TopLine Value="137"/>
         <CursorPos X="16" Y="148"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="15"/>
         <Loaded Value="True"/>
       </Unit84>
       <Unit85>
         <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
-        <TopLine Value="182"/>
-        <CursorPos X="29" Y="203"/>
-        <UsageCount Value="10"/>
+        <TopLine Value="180"/>
+        <CursorPos Y="212"/>
+        <UsageCount Value="15"/>
         <Loaded Value="True"/>
       </Unit85>
       <Unit86>
         <Filename Value="../../../lazarus/lcl/include/application.inc"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="11"/>
         <TopLine Value="2252"/>
         <CursorPos Y="2271"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="15"/>
         <Loaded Value="True"/>
       </Unit86>
+      <Unit87>
+        <Filename Value="../../../lazarus/lcl/include/scrollingwincontrol.inc"/>
+        <EditorIndex Value="7"/>
+        <TopLine Value="293"/>
+        <CursorPos Y="316"/>
+        <UsageCount Value="14"/>
+        <Loaded Value="True"/>
+      </Unit87>
+      <Unit88>
+        <Filename Value="../../../lazarus/lcl/include/customcontrol.inc"/>
+        <EditorIndex Value="8"/>
+        <TopLine Value="8"/>
+        <CursorPos Y="40"/>
+        <UsageCount Value="14"/>
+        <Loaded Value="True"/>
+      </Unit88>
+      <Unit89>
+        <Filename Value="../../../lazarus/lcl/include/wincontrol.inc"/>
+        <EditorIndex Value="9"/>
+        <TopLine Value="6630"/>
+        <CursorPos Y="6658"/>
+        <UsageCount Value="14"/>
+        <Loaded Value="True"/>
+      </Unit89>
+      <Unit90>
+        <Filename Value="../../../lazarus/lcl/include/control.inc"/>
+        <EditorIndex Value="10"/>
+        <TopLine Value="5110"/>
+        <CursorPos Y="5125"/>
+        <UsageCount Value="14"/>
+        <Loaded Value="True"/>
+      </Unit90>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="../../source/main.pas"/>
-        <Caret Line="1558" Column="25" TopLine="1540"/>
+        <Caret Line="1161" Column="22" TopLine="1134"/>
       </Position1>
       <Position2>
         <Filename Value="../../source/main.pas"/>
-        <Caret Line="7141" TopLine="7122"/>
+        <Caret Line="1566" TopLine="1546"/>
       </Position2>
       <Position3>
         <Filename Value="../../source/main.pas"/>
-        <Caret Line="7142" TopLine="7122"/>
+        <Caret Line="1152" Column="19" TopLine="1134"/>
       </Position3>
       <Position4>
         <Filename Value="../../source/main.pas"/>
-        <Caret Line="1559" TopLine="1541"/>
+        <Caret Line="1566" TopLine="1546"/>
       </Position4>
       <Position5>
-        <Filename Value="../../source/main.pas"/>
-        <Caret Line="7141" TopLine="7122"/>
+        <Filename Value="../../source/apphelpers.pas"/>
+        <Caret Line="355" Column="3" TopLine="336"/>
       </Position5>
       <Position6>
-        <Filename Value="../../source/main.pas"/>
-        <Caret Line="7142" TopLine="7122"/>
+        <Filename Value="../../source/apphelpers.pas"/>
+        <Caret Line="195" Column="3" TopLine="184"/>
       </Position6>
       <Position7>
         <Filename Value="../../source/main.pas"/>
-        <Caret Line="1561" TopLine="1542"/>
+        <Caret Line="1566" TopLine="1546"/>
       </Position7>
       <Position8>
         <Filename Value="../../source/main.pas"/>
-        <Caret Line="7141" TopLine="7122"/>
+        <Caret Line="1567" TopLine="1546"/>
       </Position8>
       <Position9>
-        <Filename Value="../../source/main.pas"/>
-        <Caret Line="7142" TopLine="7122"/>
+        <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
+        <Caret Line="981" TopLine="961"/>
       </Position9>
       <Position10>
-        <Filename Value="../../source/main.pas"/>
-        <Caret Line="1562" TopLine="1543"/>
+        <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
+        <Caret Line="186" TopLine="166"/>
       </Position10>
       <Position11>
-        <Filename Value="../../source/main.pas"/>
-        <Caret Line="1563" TopLine="1543"/>
+        <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
+        <Caret Line="200" TopLine="168"/>
       </Position11>
       <Position12>
-        <Filename Value="../../source/main.pas"/>
-        <Caret Line="1565" TopLine="1543"/>
+        <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
+        <Caret Line="202" TopLine="170"/>
       </Position12>
       <Position13>
-        <Filename Value="../../source/main.pas"/>
-        <Caret Line="1566" TopLine="1543"/>
+        <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
+        <Caret Line="203" TopLine="171"/>
       </Position13>
       <Position14>
         <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
-        <Caret Line="981" TopLine="961"/>
+        <Caret Line="204" TopLine="172"/>
       </Position14>
       <Position15>
         <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
-        <Caret Line="186" TopLine="166"/>
+        <Caret Line="205" TopLine="173"/>
       </Position15>
       <Position16>
         <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
-        <Caret Line="200" TopLine="168"/>
+        <Caret Line="206" TopLine="174"/>
       </Position16>
       <Position17>
         <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
-        <Caret Line="202" TopLine="182"/>
+        <Caret Line="207" TopLine="175"/>
       </Position17>
       <Position18>
         <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
-        <Caret Line="203" TopLine="182"/>
+        <Caret Line="208" TopLine="176"/>
       </Position18>
       <Position19>
         <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
-        <Caret Line="204" TopLine="182"/>
+        <Caret Line="209" TopLine="177"/>
       </Position19>
       <Position20>
         <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
-        <Caret Line="205" TopLine="182"/>
+        <Caret Line="210" TopLine="178"/>
       </Position20>
       <Position21>
         <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
-        <Caret Line="206" TopLine="182"/>
+        <Caret Line="209" TopLine="178"/>
       </Position21>
       <Position22>
         <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
-        <Caret Line="207" TopLine="182"/>
+        <Caret Line="210" TopLine="178"/>
       </Position22>
       <Position23>
         <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
-        <Caret Line="208" TopLine="182"/>
+        <Caret Line="209" TopLine="178"/>
       </Position23>
       <Position24>
         <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
-        <Caret Line="209" TopLine="182"/>
+        <Caret Line="210" TopLine="178"/>
       </Position24>
       <Position25>
         <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
-        <Caret Line="210" TopLine="182"/>
+        <Caret Line="209" TopLine="178"/>
       </Position25>
       <Position26>
         <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
-        <Caret Line="209" TopLine="182"/>
+        <Caret Line="212" TopLine="180"/>
       </Position26>
       <Position27>
-        <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
-        <Caret Line="210" TopLine="182"/>
+        <Filename Value="../../../lazarus/lcl/include/control.inc"/>
+        <Caret Line="5122" Column="14" TopLine="5110"/>
       </Position27>
       <Position28>
-        <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
-        <Caret Line="209" TopLine="182"/>
+        <Filename Value="../../source/main.pas"/>
+        <Caret Line="1565" Column="5" TopLine="1546"/>
       </Position28>
       <Position29>
-        <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
-        <Caret Line="210" TopLine="182"/>
+        <Filename Value="../../source/main.pas"/>
+        <Caret Line="1563" TopLine="1546"/>
       </Position29>
       <Position30>
-        <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
-        <Caret Line="209" TopLine="182"/>
+        <Filename Value="../../../lazarus/lcl/include/control.inc"/>
+        <Caret Line="5125" TopLine="5110"/>
       </Position30>
     </JumpHistory>
     <RunParams>
@@ -921,15 +953,6 @@
     </RunParams>
   </ProjectSession>
   <Debugging>
-    <BreakPoints Count="1">
-      <Item1>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="../../source/main.pas"/>
-        <Line Value="1566"/>
-      </Item1>
-    </BreakPoints>
     <Watches Count="4">
       <Item1>
         <Expression Value="OwnerForm.Name"/>
