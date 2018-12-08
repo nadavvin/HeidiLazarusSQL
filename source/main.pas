@@ -1563,8 +1563,8 @@ begin
   SaveListSetup(ListTables);
 
   LogToFile := False;
-  AppSettings.Free;
-end;//crash here
+  //AppSettings.Free;
+end;
 
 
 {***
