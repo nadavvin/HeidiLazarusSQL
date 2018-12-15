@@ -604,7 +604,6 @@ object MainForm: TMainForm
               ClientHeight = 198
               ClientWidth = 631
               ImageIndex = 57
-              OnContextPopup = tabProcessListContextPopup
               object spltProcessList: TSplitter
                 Cursor = crVSplit
                 Left = 0
@@ -816,7 +815,6 @@ object MainForm: TMainForm
               ClientHeight = 198
               ClientWidth = 631
               ImageIndex = 145
-              OnContextPopup = tabCommandStatsContextPopup
               object ListCommandStats: TVirtualStringTree
                 Left = 0
                 Height = 198

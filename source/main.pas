@@ -7107,10 +7107,10 @@ begin
     // Column widths
     if ColWidths <> '' then
       ColWidths := ColWidths + ',';
-    ColWidths := ColWidths;{ + IntToStr(List.Header.Columns[i].Width);}//crash here <Error: Type TVIRTUALTREECOLUMNS has no component named Width.>
+    ColWidths := ColWidths + IntToStr(List.Header.Columns[i].Width);
 
     // Column visibility
-    {if coVisible in List.Header.Columns[i].Options then//<Error: Type TVIRTUALTREECOLUMNS has no component named Options.>
+    if coVisible in List.Header.Columns[i].Options then
     begin
       if ColsVisible <> '' then
         ColsVisible := ColsVisible + ',';
@@ -7120,7 +7120,7 @@ begin
     // Column position
     if ColPos <> '' then
       ColPos := ColPos + ',';
-    ColPos := ColPos + IntToStr(List.Header.Columns[i].Position);}
+    ColPos := ColPos + IntToStr(List.Header.Columns[i].Position);
 
   end;
 
