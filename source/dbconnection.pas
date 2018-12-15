@@ -2473,7 +2473,7 @@ begin
     QueryResult := mysql_store_result(FHandle);
     FLastQueryNetworkDuration := GetTickCount - TimerStart;
 
-    if (QueryResult = nil) and (mysql_affected_rows(FHandle) = -1) then begin
+    if (QueryResult = nil) and (mysql_affected_rows(FHandle) = 0{-1}) then begin
       // Indicates a late error, e.g. triggered by mysql_store_result(), after selecting a stored
       // function with invalid SQL body. Also SHOW TABLE STATUS on older servers.
       // See http://dev.mysql.com/doc/refman/5.0/en/mysql-affected-rows.html

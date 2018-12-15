@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 0
+  Left = 220
   Height = 466
-  Top = 463
+  Top = 507
   Width = 824
   ClientHeight = 443
   ClientWidth = 824
@@ -187,8 +187,18 @@ object MainForm: TMainForm
         DragMode = dmAutomatic
         DragType = dtVCL
         Header.AutoSizeIndex = 0
-        Header.Columns = <>
-        Header.MainColumn = -1
+        Header.Columns = <        
+          item
+            Position = 0
+            Text = 'Name'
+            Width = 112
+          end        
+          item
+            MinWidth = 0
+            Position = 1
+            Text = 'Size'
+            Width = 55
+          end>
         Header.Options = [hoAutoResize, hoColumnResize, hoDrag]
         Header.ParentFont = True
         HintMode = hmTooltip
@@ -375,10 +385,10 @@ object MainForm: TMainForm
             Height = 229
             Top = 0
             Width = 641
-            ActivePage = tabDatabases
+            ActivePage = tabVariables
             Align = alClient
             Images = ImageListMain
-            TabIndex = 0
+            TabIndex = 1
             TabOrder = 0
             OnChange = PageControlHostChange
             object tabDatabases: TTabSheet
@@ -387,14 +397,60 @@ object MainForm: TMainForm
               ClientWidth = 631
               ImageIndex = 5
               object ListDatabases: TVirtualStringTree
+                Cursor = 63
                 Left = 0
                 Height = 198
                 Top = 0
                 Width = 631
                 Align = alClient
                 Header.AutoSizeIndex = 0
-                Header.Columns = <>
-                Header.MainColumn = -1
+                Header.Columns = <                
+                  item
+                    Position = 0
+                    Text = 'Database'
+                    Width = 150
+                  end                
+                  item
+                    Position = 1
+                    Text = 'Size'
+                    Width = 80
+                  end                
+                  item
+                    Position = 2
+                    Text = 'Items'
+                  end                
+                  item
+                    Position = 3
+                    Text = 'Last modification'
+                  end                
+                  item
+                    Position = 4
+                    Text = 'Tables'
+                  end                
+                  item
+                    Position = 5
+                    Text = 'Views'
+                  end                
+                  item
+                    Position = 6
+                    Text = 'Functions'
+                  end                
+                  item
+                    Position = 7
+                    Text = 'Procedures'
+                  end                
+                  item
+                    Position = 8
+                    Text = 'Triggers'
+                  end                
+                  item
+                    Position = 9
+                    Text = 'Events'
+                  end                
+                  item
+                    Position = 10
+                    Text = 'Default collation'
+                  end>
                 Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoHotTrack, hoShowSortGlyphs, hoVisible]
                 Header.ParentFont = True
                 Header.PopupMenu = popupListHeader
@@ -426,15 +482,29 @@ object MainForm: TMainForm
               ImageIndex = 137
               object ListVariables: TVirtualStringTree
                 Left = 0
-                Height = 253
+                Height = 198
                 Top = 0
-                Width = 635
+                Width = 631
                 Align = alClient
                 DragOperations = []
                 Header.AutoSizeIndex = 2
-                Header.Columns = <>
+                Header.Columns = <                
+                  item
+                    Position = 0
+                    Text = 'Variable'
+                    Width = 160
+                  end                
+                  item
+                    Position = 1
+                    Text = 'Session'
+                    Width = 200
+                  end                
+                  item
+                    Position = 2
+                    Text = 'Global'
+                    Width = 269
+                  end>
                 Header.Height = 20
-                Header.MainColumn = -1
                 Header.Options = [hoAutoResize, hoColumnResize, hoDblClickResize, hoDrag, hoHotTrack, hoShowSortGlyphs, hoVisible]
                 Header.ParentFont = True
                 Header.PopupMenu = popupListHeader
@@ -472,15 +542,36 @@ object MainForm: TMainForm
               ImageIndex = 13
               object ListStatus: TVirtualStringTree
                 Left = 0
-                Height = 253
+                Height = 198
                 Top = 0
-                Width = 635
+                Width = 631
                 Align = alClient
                 DragOperations = []
                 Header.AutoSizeIndex = 1
-                Header.Columns = <>
+                Header.Columns = <                
+                  item
+                    Position = 0
+                    Text = 'Variable'
+                    Width = 160
+                  end                
+                  item
+                    Alignment = taRightJustify
+                    Position = 1
+                    Text = 'Value'
+                    Width = 269
+                  end                
+                  item
+                    Alignment = taRightJustify
+                    Position = 2
+                    Text = 'Avg per hour'
+                    Width = 100
+                  end                
+                  item
+                    Position = 3
+                    Text = 'Avg per second'
+                    Width = 100
+                  end>
                 Header.Height = 20
-                Header.MainColumn = -1
                 Header.Options = [hoAutoResize, hoColumnResize, hoDblClickResize, hoDrag, hoHotTrack, hoShowSortGlyphs, hoVisible]
                 Header.ParentFont = True
                 Header.PopupMenu = popupListHeader
@@ -513,25 +604,64 @@ object MainForm: TMainForm
               ClientHeight = 198
               ClientWidth = 631
               ImageIndex = 57
+              OnContextPopup = tabProcessListContextPopup
               object spltProcessList: TSplitter
                 Cursor = crVSplit
                 Left = 0
                 Height = 4
-                Top = 180
-                Width = 635
+                Top = 125
+                Width = 631
                 Align = alBottom
                 ResizeAnchor = akBottom
               end
               object ListProcesses: TVirtualStringTree
                 Left = 0
-                Height = 180
+                Height = 125
                 Top = 0
-                Width = 635
+                Width = 631
                 Align = alClient
                 Header.AutoSizeIndex = 7
-                Header.Columns = <>
+                Header.Columns = <                
+                  item
+                    Alignment = taRightJustify
+                    Position = 0
+                    Text = 'id'
+                    Width = 70
+                  end                
+                  item
+                    Position = 1
+                    Text = 'User'
+                    Width = 80
+                  end                
+                  item
+                    Position = 2
+                    Text = 'Host'
+                    Width = 80
+                  end                
+                  item
+                    Position = 3
+                    Text = 'DB'
+                    Width = 80
+                  end                
+                  item
+                    Position = 4
+                    Text = 'Command'
+                    Width = 80
+                  end                
+                  item
+                    Position = 5
+                    Text = 'Time'
+                  end                
+                  item
+                    Position = 6
+                    Text = 'State'
+                  end                
+                  item
+                    Position = 7
+                    Text = 'Info'
+                    Width = 139
+                  end>
                 Header.Height = 20
-                Header.MainColumn = -1
                 Header.Options = [hoAutoResize, hoColumnResize, hoDblClickResize, hoDrag, hoHotTrack, hoShowSortGlyphs, hoVisible]
                 Header.ParentFont = True
                 Header.PopupMenu = popupListHeader
@@ -564,32 +694,32 @@ object MainForm: TMainForm
               object pnlProcessViewBox: TPanel
                 Left = 0
                 Height = 69
-                Top = 184
-                Width = 635
+                Top = 129
+                Width = 631
                 Align = alBottom
                 BevelOuter = bvNone
                 ClientHeight = 69
-                ClientWidth = 635
+                ClientWidth = 631
                 TabOrder = 1
                 object pnlProcessView: TPanel
                   Left = 0
                   Height = 18
                   Top = 0
-                  Width = 635
+                  Width = 631
                   Align = alTop
                   Alignment = taLeftJustify
                   BevelOuter = bvNone
                   Caption = 'Process SQL:'
                   ClientHeight = 18
-                  ClientWidth = 635
+                  ClientWidth = 631
                   TabOrder = 0
                   object lblExplainProcess: TLabel
                     Cursor = crHandPoint
                     Left = 87
-                    Height = 13
+                    Height = 17
                     Hint = 'Analyze this query'
                     Top = 2
-                    Width = 41
+                    Width = 54
                     Caption = 'EXPLAIN'
                     Enabled = False
                     ParentColor = False
@@ -598,10 +728,10 @@ object MainForm: TMainForm
                   object lblExplainProcessAnalyzer: TLabel
                     Cursor = crHandPoint
                     Left = 142
-                    Height = 13
+                    Height = 17
                     Hint = 'Analyze this query on MariaDB.org'
                     Top = 2
-                    Width = 163
+                    Width = 209
                     Caption = 'EXPLAIN Analyzer on MariaDB.org'
                     Enabled = False
                     ParentColor = False
@@ -613,7 +743,7 @@ object MainForm: TMainForm
                   Left = 0
                   Height = 51
                   Top = 18
-                  Width = 635
+                  Width = 631
                   Align = alClient
                   Font.Color = clWindowText
                   Font.Height = -13
@@ -686,16 +816,43 @@ object MainForm: TMainForm
               ClientHeight = 198
               ClientWidth = 631
               ImageIndex = 145
+              OnContextPopup = tabCommandStatsContextPopup
               object ListCommandStats: TVirtualStringTree
                 Left = 0
-                Height = 253
+                Height = 198
                 Top = 0
-                Width = 635
+                Width = 631
                 Align = alClient
                 Header.AutoSizeIndex = 4
-                Header.Columns = <>
+                Header.Columns = <                
+                  item
+                    Position = 0
+                    Text = 'Command-type'
+                    Width = 120
+                  end                
+                  item
+                    Alignment = taRightJustify
+                    Position = 1
+                    Text = 'Total count'
+                    Width = 100
+                  end                
+                  item
+                    Alignment = taRightJustify
+                    Position = 2
+                    Text = 'Average per hour'
+                    Width = 100
+                  end                
+                  item
+                    Position = 3
+                    Text = 'Average per second'
+                    Width = 100
+                  end                
+                  item
+                    Position = 4
+                    Text = 'Percentage'
+                    Width = 209
+                  end>
                 Header.Height = 20
-                Header.MainColumn = -1
                 Header.Options = [hoAutoResize, hoColumnResize, hoDblClickResize, hoDrag, hoHotTrack, hoShowSortGlyphs, hoVisible]
                 Header.ParentFont = True
                 Header.PopupMenu = popupListHeader
@@ -734,15 +891,111 @@ object MainForm: TMainForm
           ImageIndex = 5
           object ListTables: TVirtualStringTree
             Left = 0
-            Height = 282
+            Height = 229
             Top = 0
-            Width = 643
+            Width = 641
             Align = alClient
             EditDelay = 500
             Header.AutoSizeIndex = -1
-            Header.Columns = <>
+            Header.Columns = <            
+              item
+                Position = 0
+                Text = 'Name'
+                Width = 120
+              end            
+              item
+                Position = 1
+                Text = 'Rows'
+                Width = 70
+              end            
+              item
+                Position = 2
+                Text = 'Size'
+                Width = 70
+              end            
+              item
+                Position = 3
+                Text = 'Created'
+                Width = 120
+              end            
+              item
+                Position = 4
+                Text = 'Updated'
+                Width = 120
+              end            
+              item
+                Position = 5
+                Text = 'Engine'
+                Width = 70
+              end            
+              item
+                Position = 6
+                Text = 'Comment'
+                Width = 100
+              end            
+              item
+                Position = 7
+                Text = 'Version'
+              end            
+              item
+                Position = 8
+                Text = 'Row format'
+              end            
+              item
+                Alignment = taRightJustify
+                Position = 9
+                Text = 'Avg row length'
+                Width = 70
+              end            
+              item
+                Alignment = taRightJustify
+                Position = 10
+                Text = 'Max data length'
+                Width = 70
+              end            
+              item
+                Alignment = taRightJustify
+                Position = 11
+                Text = 'Index length'
+                Width = 70
+              end            
+              item
+                Alignment = taRightJustify
+                Position = 12
+                Text = 'Data free'
+                Width = 70
+              end            
+              item
+                Alignment = taRightJustify
+                Position = 13
+                Text = 'Auto increment'
+                Width = 90
+              end            
+              item
+                Position = 14
+                Text = 'Check time'
+                Width = 120
+              end            
+              item
+                Position = 15
+                Text = 'Collation'
+                Width = 70
+              end            
+              item
+                Position = 16
+                Text = 'Checksum'
+                Width = 70
+              end            
+              item
+                Position = 17
+                Text = 'Create options'
+                Width = 70
+              end            
+              item
+                Position = 18
+                Text = 'Type'
+              end>
             Header.Height = 20
-            Header.MainColumn = -1
             Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoHotTrack, hoShowSortGlyphs, hoVisible]
             Header.ParentFont = True
             Header.PopupMenu = popupListHeader
@@ -787,9 +1040,9 @@ object MainForm: TMainForm
           ImageIndex = 41
           object lblSorryNoData: TLabel
             Left = 0
-            Height = 191
+            Height = 138
             Top = 91
-            Width = 643
+            Width = 641
             Align = alClient
             Alignment = taCenter
             Caption = 'No data available for this item.'
@@ -801,19 +1054,19 @@ object MainForm: TMainForm
             Left = 0
             Height = 25
             Top = 0
-            Width = 643
+            Width = 641
             Align = alTop
             Alignment = taLeftJustify
             BevelOuter = bvNone
             BorderWidth = 1
             ClientHeight = 25
-            ClientWidth = 643
+            ClientWidth = 641
             TabOrder = 0
             object lblDataTop: TLabel
               Left = 1
               Height = 23
               Top = 1
-              Width = 361
+              Width = 359
               Align = alLeft
               Anchors = [akTop, akLeft, akRight, akBottom]
               AutoSize = False
@@ -823,10 +1076,10 @@ object MainForm: TMainForm
               WordWrap = True
             end
             object tlbDataButtons: TToolBar
-              Left = 299
+              Left = 572
               Height = 23
               Top = 1
-              Width = 343
+              Width = 68
               Align = alRight
               AutoSize = True
               ButtonHeight = 22
@@ -840,40 +1093,40 @@ object MainForm: TMainForm
               TabOrder = 0
               Wrapable = False
               object tbtnDataNext: TToolButton
-                Left = 0
-                Top = 0
+                Left = 1
+                Top = 2
               end
               object tbtnDataShowAll: TToolButton
-                Left = 67
-                Top = 0
+                Left = 1
+                Top = 24
               end
               object ToolButton2: TToolButton
-                Left = 134
-                Top = 0
-                Width = 8
+                Left = 1
+                Top = 46
+                Width = 67
                 Caption = 'ToolButton2'
                 ImageIndex = 108
                 Style = tbsSeparator
               end
               object tbtnDataSorting: TToolButton
-                Left = 142
-                Top = 0
+                Left = 1
+                Top = 54
                 AllowAllUp = True
                 Caption = 'Sorting'
                 ImageIndex = 107
                 OnClick = btnDataClick
               end
               object tbtnDataColumns: TToolButton
-                Left = 209
-                Top = 0
+                Left = 1
+                Top = 79
                 AllowAllUp = True
                 Caption = 'Columns'
                 ImageIndex = 107
                 OnClick = btnDataClick
               end
               object tbtnDataFilter: TToolButton
-                Left = 276
-                Top = 0
+                Left = 1
+                Top = 104
                 AllowAllUp = True
                 Caption = 'Filter'
                 ImageIndex = 107
@@ -885,32 +1138,32 @@ object MainForm: TMainForm
             Left = 0
             Height = 66
             Top = 25
-            Width = 643
+            Width = 641
             Align = alTop
             BevelOuter = bvNone
             ClientHeight = 66
-            ClientWidth = 643
+            ClientWidth = 641
             TabOrder = 1
             Visible = False
             object lblTableFilter: TLabel
-              Left = 480
-              Height = 13
+              Left = 408
+              Height = 17
               Top = 0
-              Width = 123
+              Width = 158
               Anchors = [akTop, akRight]
               Caption = 'Create multi column filter:'
               ParentColor = False
             end
             object lblRecentFilters: TLabel
               Left = 1
-              Height = 13
+              Height = 17
               Top = 3
-              Width = 68
+              Width = 84
               Caption = 'Recent filters:'
               ParentColor = False
             end
             object btnFilterApply: TButton
-              Left = 480
+              Left = 478
               Height = 22
               Top = 41
               Width = 76
@@ -918,7 +1171,7 @@ object MainForm: TMainForm
               TabOrder = 2
             end
             object btnFilterClear: TButton
-              Left = 560
+              Left = 558
               Height = 22
               Top = 41
               Width = 76
@@ -930,7 +1183,7 @@ object MainForm: TMainForm
               Left = 0
               Height = 42
               Top = 21
-              Width = 477
+              Width = 475
               Anchors = [akTop, akLeft, akRight, akBottom]
               Font.Color = clWindowText
               Font.Height = -13
@@ -1000,8 +1253,8 @@ object MainForm: TMainForm
               end
             end
             object editFilterSearch: TEdit
-              Left = 480
-              Height = 21
+              Left = 478
+              Height = 29
               Top = 15
               Width = 156
               Anchors = [akTop, akRight]
@@ -1012,9 +1265,9 @@ object MainForm: TMainForm
             end
             object comboRecentFilters: TComboBox
               Left = 77
-              Height = 21
+              Height = 31
               Top = 0
-              Width = 400
+              Width = 398
               Anchors = [akTop, akLeft, akRight]
               ItemHeight = 0
               OnSelect = LoadRecentFilter
@@ -1024,9 +1277,9 @@ object MainForm: TMainForm
           end
           object DataGrid: TVirtualStringTree
             Left = 0
-            Height = 191
+            Height = 138
             Top = 91
-            Width = 643
+            Width = 641
             Align = alClient
             AutoScrollDelay = 50
             EditDelay = 0
@@ -1080,7 +1333,7 @@ object MainForm: TMainForm
             Left = 0
             Height = 4
             Top = 96
-            Width = 643
+            Width = 641
             Align = alTop
             AutoSnap = False
             ResizeAnchor = akTop
@@ -1089,14 +1342,14 @@ object MainForm: TMainForm
             Left = 0
             Height = 96
             Top = 0
-            Width = 643
+            Width = 641
             Align = alTop
             BevelOuter = bvNone
             ClientHeight = 96
-            ClientWidth = 643
+            ClientWidth = 641
             TabOrder = 0
             object spltQueryHelpers: TSplitter
-              Left = 448
+              Left = 446
               Height = 96
               Top = 0
               Width = 4
@@ -1108,7 +1361,7 @@ object MainForm: TMainForm
               Left = 0
               Height = 96
               Top = 0
-              Width = 448
+              Width = 446
               Align = alClient
               Font.Color = clWindowText
               Font.Height = -13
@@ -1181,7 +1434,7 @@ object MainForm: TMainForm
               end
             end
             object treeQueryHelpers: TVirtualStringTree
-              Left = 452
+              Left = 450
               Height = 96
               Top = 0
               Width = 191
@@ -1190,8 +1443,17 @@ object MainForm: TMainForm
               DragMode = dmAutomatic
               DragType = dtVCL
               Header.AutoSizeIndex = 0
-              Header.Columns = <>
-              Header.MainColumn = -1
+              Header.Columns = <              
+                item
+                  Position = 0
+                  Text = 'Main column'
+                  Width = 74
+                end              
+                item
+                  Position = 1
+                  Text = 'Attributes'
+                  Width = 100
+                end>
               Header.Options = [hoAutoResize, hoColumnResize, hoDrag, hoShowSortGlyphs]
               Header.ParentFont = True
               Images = ImageListMain
@@ -1224,9 +1486,9 @@ object MainForm: TMainForm
           end
           object QueryGrid: TVirtualStringTree
             Left = 0
-            Height = 158
-            Top = 124
-            Width = 643
+            Height = 129
+            Top = 100
+            Width = 641
             Align = alClient
             AutoScrollDelay = 50
             EditDelay = 0
