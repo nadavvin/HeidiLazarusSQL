@@ -1745,15 +1745,6 @@ begin
       ClientFlags
       );
     if Connected = nil then begin
-      WriteLn('HERE');
-      WriteLn(PAnsiChar(Utf8Encode(FinalHost)));
-      WriteLn(PAnsiChar(Utf8Encode(FParameters.Username)));
-      WriteLn(PAnsiChar(Utf8Encode(FParameters.Password)));
-      WriteLn(FinalPort);
-      WriteLn(PAnsiChar(Utf8Encode(FinalSocket)));
-      WriteLn(ClientFlags);
-      halt(0);
-      WriteLn('abc');
       Error := LastError;
       Log(lcError, Error);
       FConnectionStarted := 0;
