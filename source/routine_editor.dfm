@@ -297,7 +297,7 @@ object frmRoutineEditor: TfrmRoutineEditor
         OnPaintText = listParametersPaintText
         OnGetImageIndex = listParametersGetImageIndex
         OnNewText = listParametersNewText
-        Columns = <
+        Header.Columns = <
           item
             Position = 0
             Width = 25

@@ -558,7 +558,7 @@ object MainForm: TMainForm
                     Alignment = taRightJustify
                     Position = 1
                     Text = 'Value'
-                    Width = 269
+                    Width = 267
                   end                
                   item
                     Alignment = taRightJustify
@@ -658,7 +658,7 @@ object MainForm: TMainForm
                   item
                     Position = 7
                     Text = 'Info'
-                    Width = 139
+                    Width = 137
                   end>
                 Header.Height = 20
                 Header.Options = [hoAutoResize, hoColumnResize, hoDblClickResize, hoDrag, hoHotTrack, hoShowSortGlyphs, hoVisible]
@@ -848,7 +848,7 @@ object MainForm: TMainForm
                   item
                     Position = 4
                     Text = 'Percentage'
-                    Width = 209
+                    Width = 207
                   end>
                 Header.Height = 20
                 Header.Options = [hoAutoResize, hoColumnResize, hoDblClickResize, hoDrag, hoHotTrack, hoShowSortGlyphs, hoVisible]
@@ -1101,7 +1101,7 @@ object MainForm: TMainForm
               object ToolButton2: TToolButton
                 Left = 1
                 Top = 46
-                Width = 67
+                Width = 8
                 Caption = 'ToolButton2'
                 ImageIndex = 108
                 Style = tbsSeparator
@@ -1445,7 +1445,7 @@ object MainForm: TMainForm
                 item
                   Position = 0
                   Text = 'Main column'
-                  Width = 74
+                  Width = 84
                 end              
                 item
                   Position = 1

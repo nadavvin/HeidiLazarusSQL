@@ -1563,7 +1563,7 @@ begin
   SaveListSetup(ListTables);
 
   LogToFile := False;
-  //AppSettings.Free;
+  AppSettings.Free;
 end;
 
 
@@ -1951,6 +1951,7 @@ var
   SessionManager: TConnForm;
 begin
   DefaultLastrunDate := '2000-01-01';
+  ConnectionParams := Nil;//my code
 
   // Do an updatecheck if checked in settings
   if AppSettings.ReadBool(asUpdatecheck) then begin
@@ -2017,8 +2018,6 @@ begin
   end;
 
   {ParseCommandLine(Windows.GetCommandLine, ConnectionParams, FileNames);}
-  ConnectionParams := nil;{work arround code...}
-  Connections.Clear;{work arround code...}
   if Assigned(ConnectionParams) then begin
     // Minimal parameter for command line mode is hostname
     InitConnection(ConnectionParams, True, Connection);
@@ -7102,7 +7101,7 @@ begin
   ColWidths := '';
   ColsVisible := '';
   ColPos := '';
-  for i := 0 to List.Header.Columns.Count - 1 do//<Error: Type TVIRTUALTREECOLUMNS has no component named COUNT.>
+  for i := 0 to List.Header.Columns.Count - 1 do
   begin
     // Column widths
     if ColWidths <> '' then

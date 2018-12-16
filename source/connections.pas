@@ -503,7 +503,7 @@ begin
   // Select it
   SelectNode(ListSessions, NewNode);
   ValidateControls;
-  ////ListSessions.EditNode(NewNode, 0);
+  ListSessions.EditNode(NewNode, 0);
 end;
 
 

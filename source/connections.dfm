@@ -93,6 +93,44 @@ object connform: Tconnform
     OnGetNodeDataSize = ListSessionsGetNodeDataSize
     OnNewText = ListSessionsNewText
     OnStructureChange = ListSessionsStructureChange
+    Header.Columns = <
+      item
+        Position = 0
+        Text = 'Session name'
+        Width = 163
+      end
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus]
+        Position = 1
+        Text = 'Host'
+      end
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus]
+        Position = 2
+        Text = 'User'
+      end
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus]
+        Position = 3
+        Text = 'Version'
+      end
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus]
+        Position = 4
+        Text = 'Last connect'
+      end
+      item
+        Alignment = taRightJustify
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus]
+        Position = 5
+        Text = 'Counter'
+      end
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus]
+        Position = 6
+        Text = 'Comment'
+        Width = 37
+      end>
   end
   object btnNew: TButton
     Left = 8

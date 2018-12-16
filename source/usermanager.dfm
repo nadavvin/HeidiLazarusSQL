@@ -115,7 +115,7 @@ object UserManagerForm: TUserManagerForm
       OnHeaderClick = listUsersHeaderClick
       OnHotChange = listUsersHotChange
       OnInitNode = listUsersInitNode
-      Columns = <
+      Header.Columns = <
         item
           Position = 0
           Width = 93

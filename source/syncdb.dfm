@@ -54,7 +54,7 @@ object frmSyncDB: TfrmSyncDB
     OnGetNodeDataSize = treeSourceGetNodeDataSize
     OnInitChildren = treeSourceInitChildren
     OnInitNode = treeSourceInitNode
-    Columns = <
+    Header.Columns = <
       item
         Position = 0
         Width = 189
