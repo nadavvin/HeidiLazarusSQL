@@ -1563,7 +1563,7 @@ begin
   SaveListSetup(ListTables);
 
   LogToFile := False;
-  AppSettings.Free;
+  //AppSettings.Free;
 end;
 
 
