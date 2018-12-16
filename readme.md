@@ -1,11 +1,11 @@
 # HeidiLazarusSQL
 
 Porting of HeidiSQL to Lazarus and linux. it will take time, progress for now is:
-<a href="https://i.imgur.com/laglUDj.png">
-  <img src="https://imgur.com/laglUDjl.png" />
+<a href="https://i.imgur.com/d7Xt8qEl.png">
+  <img src="https://imgur.com/d7Xt8qEl.png" />
 </a>
 
-On enter it will crash as access violation.
+It show error on failed connect, crash when success connect.
 
 # HeidiSQL
 HeidiSQL is a useful and reliable tool designed for web developers using the popular [MySQL](http://www.mysql.com/) server, [Microsoft SQL databases](http://www.microsoft.com/sql/), [PostgreSQL](http://www.postgresql.org/) and [MariaDB](http://www.mariadb.org/). It enables you to browse and edit data, create and edit tables, views, procedures, triggers and scheduled events. Also, you can export structure and data, either to SQL file, clipboard or to other servers. Read about [features](https://www.heidisql.com/#featurelist) or see some [screenshots](https://www.heidisql.com/screenshots.php). 
