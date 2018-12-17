@@ -929,7 +929,7 @@ type
     procedure treeQueryHelpersFocusChanging(Sender: TBaseVirtualTree; OldNode,
       NewNode: PVirtualNode; OldColumn, NewColumn: TColumnIndex; var Allowed: Boolean);
     procedure treeQueryHelpersResize(Sender: TObject);
-    {procedure ApplicationEvents1Deactivate(Sender: TObject);}
+    procedure ApplicationEvents1Deactivate(Sender: TObject);
     procedure actDisconnectExecute(Sender: TObject);
     procedure menuEditObjectClick(Sender: TObject);
     procedure Copylinetonewquerytab1Click(Sender: TObject);
@@ -993,7 +993,7 @@ type
     procedure actPreviousResultExecute(Sender: TObject);
     procedure actNextResultExecute(Sender: TObject);
     procedure actSaveSynMemoToTextfileExecute(Sender: TObject);
-    {procedure ApplicationEvents1Idle(Sender: TObject; var Done: Boolean);}
+    procedure ApplicationEvents1Idle(Sender: TObject; var Done: Boolean);
     procedure editDatabaseTableFilterRightButtonClick(Sender: TObject);
     procedure menuDoubleClickInsertsNodeTextClick(Sender: TObject);
     procedure DBtreeDblClick(Sender: TObject);
@@ -2063,14 +2063,15 @@ begin
   end;
 
   // Load SQL file(s) by command line
-  if not RunQueryFiles(FileNames, nil, false) then begin
+  {FileNames not set}
+  {if not RunQueryFiles(FileNames, nil, false) then begin
     for i:=0 to FileNames.Count-1 do begin
       Tab := ActiveOrEmptyQueryTab(False);
       Tab.LoadContents(FileNames[i], True, nil);
       if i = FileNames.Count-1 then
         SetMainTab(Tab.TabSheet);
     end;
-  end;
+  end;}
 end;
 
 
@@ -10367,6 +10368,12 @@ begin
   rxdb.Expression := '('+StringReplace(editDatabaseFilter.Text, ';', '|', [rfReplaceAll])+')';
   rxtable := TRegExpr.Create;
   rxtable.ModifierI := True;
+
+  if not Assigned(editTableFilter) then begin
+     editTableFilter := TButtonedEdit.Create(MainForm);
+     WriteLn('Here');
+  end;
+
   rxtable.Expression := '('+StringReplace(editTableFilter.Text, ';', '|', [rfReplaceAll])+')';
 
   Errors := TStringList.Create;
@@ -12108,14 +12115,14 @@ begin
 end;
 
 
-{procedure TMainForm.ApplicationEvents1Deactivate(Sender: TObject);
+procedure TMainForm.ApplicationEvents1Deactivate(Sender: TObject);
 begin
   // Force result tab balloon hint to disappear. Does not do so when mouse was moved too fast.
   tabsetQueryMouseLeave(Sender);
-end;}
+end;
 
 
-{procedure TMainForm.ApplicationEvents1Idle(Sender: TObject; var Done: Boolean);
+procedure TMainForm.ApplicationEvents1Idle(Sender: TObject; var Done: Boolean);
 begin
   if AppSettings.PortableMode and (FLastPortableSettingsSave < GetTickCount-60000) then begin
     if AppSettings.Writes > FLastAppSettingsWrites then begin
@@ -12132,7 +12139,7 @@ begin
     ListTables.SortTree(ListTables.Header.SortColumn, ListTables.Header.SortDirection);
     FListTablesSorted := True;
   end;
-end;}
+end;
 
 
 procedure TMainForm.ApplicationDeActivate(Sender: TObject);

@@ -305,8 +305,46 @@ object MainForm: TMainForm
         ShowHint = True
         TabOrder = 2
         Wrapable = False
-        object btnTreeFavorites: TToolButton
+        object editDatabaseFilter: TEditButton
           Left = 1
+          Height = 29
+          Hint = 'Database filter|A list of databases, separated by semicolon. Can contain regular expressions, e.g. "mydb;test.*;project\d+".'
+          Top = 2
+          Width = 50
+          ButtonWidth = 23
+          Images = ImageListMain
+          ImageIndex = 191
+          MaxLength = 0
+          NumGlyphs = 1
+          OnButtonClick = editDatabaseTableFilterLeftButtonClick
+          OnChange = editDatabaseTableFilterChange
+          OnExit = editDatabaseTableFilterExit
+          OnKeyPress = editDatabaseTableFilterKeyPress
+          PasswordChar = #0
+          TabOrder = 0
+          TextHint = 'Database filter'
+        end
+        object editTableFilter: TEditButton
+          Left = 74
+          Height = 29
+          Hint = 'Table filter|Can contain regular expressions, e.g. "phpbb_\d"'
+          Top = 2
+          Width = 50
+          ButtonWidth = 23
+          Images = ImageListMain
+          ImageIndex = 192
+          MaxLength = 0
+          NumGlyphs = 1
+          OnButtonClick = editDatabaseTableFilterLeftButtonClick
+          OnChange = editDatabaseTableFilterChange
+          OnExit = editDatabaseTableFilterExit
+          OnKeyPress = editDatabaseTableFilterKeyPress
+          PasswordChar = #0
+          TabOrder = 1
+          TextHint = 'Table filter'
+        end
+        object btnTreeFavorites: TToolButton
+          Left = 51
           Top = 2
         end
       end
@@ -356,6 +394,23 @@ object MainForm: TMainForm
           Width = 16
           Flat = True
           OnClick = actFilterPanelExecute
+        end
+        object editFilterVT: TEditButton
+          Left = 70
+          Height = 29
+          Hint = 'Clear filter'
+          Top = 3
+          Width = 154
+          ButtonWidth = 23
+          Images = ImageListMain
+          ImageIndex = 26
+          MaxLength = 0
+          NumGlyphs = 1
+          OnButtonClick = editFilterVTRightButtonClick
+          OnChange = editFilterVTChange
+          PasswordChar = #0
+          TabOrder = 0
+          TextHint = 'Regular expression'
         end
       end
       object PageControlMain: TPageControl
@@ -1532,6 +1587,22 @@ object MainForm: TMainForm
             OnNewText = AnyGridNewText
             OnStartOperation = AnyGridStartOperation
           end
+          object tabsetQuery: TTabControl
+            Left = 0
+            Height = 24
+            Top = 100
+            Width = 643
+            Images = ImageListMain
+            OnGetImageIndex = tabsetQueryGetImageIndex
+            Align = alTop
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            OnMouseLeave = tabsetQueryMouseLeave
+            OnMouseMove = tabsetQueryMouseMove
+            ParentFont = False
+            TabOrder = 3
+          end
         end
       end
     end
@@ -1758,6 +1829,8 @@ object MainForm: TMainForm
       object N1: TMenuItem
         Caption = '-'
       end
+      object actSelectTreeBackground1: TMenuItem
+      end
       object ExportSettings1: TMenuItem
       end
       object Importsettings1: TMenuItem
@@ -1895,6 +1968,860 @@ object MainForm: TMainForm
       end
       object menuAbout: TMenuItem
       end
+    end
+  end
+  object ActionList1: TActionList
+    Images = ImageListMain
+    left = 424
+    top = 104
+    object actSessionManager: TAction
+      Category = 'File'
+      Caption = 'Session manager'
+      Hint = 'Display session manager'
+      ImageIndex = 37
+      OnExecute = actSessionManagerExecute
+    end
+    object actNewWindow: TAction
+      Category = 'File'
+      Caption = 'New &window'
+      Hint = 'New window...'
+      ImageIndex = 37
+      OnExecute = actNewWindowExecute
+      ShortCut = 16462
+    end
+    object actExitApplication: TAction
+      Category = 'File'
+      Caption = 'E&xit'
+      Hint = 'Exit|Exit application'
+      ImageIndex = 26
+      OnExecute = actExitApplicationExecute
+    end
+    object actCopy: TAction
+      Category = 'Various'
+      Caption = '&Copy'
+      Hint = 'Copy|Copy to Clipboard'
+      ImageIndex = 3
+      OnExecute = actCopyOrCutExecute
+      ShortCut = 16451
+    end
+    object actPaste: TAction
+      Category = 'Various'
+      Caption = '&Paste'
+      Hint = 'Paste|Paste from Clipboard'
+      ImageIndex = 4
+      OnExecute = actPasteExecute
+      ShortCut = 16470
+    end
+    object actUserManager: TAction
+      Category = 'Tools'
+      Caption = 'User manager'
+      Hint = 'Manage user authentication and privileges'
+      ImageIndex = 11
+      OnExecute = actUserManagerExecute
+    end
+    object actCut: TAction
+      Category = 'Various'
+      Caption = 'Cu&t'
+      Hint = 'Cut|Cuts the selection and puts it on the Clipboard'
+      ImageIndex = 2
+      OnExecute = actCopyOrCutExecute
+      ShortCut = 16472
+    end
+    object actUndo: TEditUndo
+      Category = 'Various'
+      Caption = '&Undo'
+      Enabled = False
+      ImageIndex = 40
+      ShortCut = 32776
+    end
+    object actAboutBox: TAction
+      Category = 'Various'
+      Caption = 'About...'
+      Hint = 'About this application'
+      ImageIndex = 99
+      OnExecute = actAboutBoxExecute
+    end
+    object actMaintenance: TAction
+      Category = 'Tools'
+      Caption = 'Maintenance'
+      Hint = 'Optimize, repair and analyse tables'
+      ImageIndex = 39
+      OnExecute = actTableToolsExecute
+    end
+    object actFindTextOnServer: TAction
+      Category = 'Tools'
+      Caption = 'Find text on server'
+      Hint = 'Searches selected tables for text occurences'
+      ImageIndex = 146
+      OnExecute = actTableToolsExecute
+      ShortCut = 24646
+    end
+    object actExportData: TAction
+      Category = 'Export/Import'
+      Caption = 'Export grid rows'
+      Enabled = False
+      Hint = 'Export rows to file or copy to clipboard, in various formats'
+      ImageIndex = 20
+      OnExecute = actExportDataExecute
+    end
+    object actPrintList: TAction
+      Category = 'Various'
+      Caption = 'Print...'
+      Hint = 'Print List or Data'
+      ImageIndex = 34
+      OnExecute = actPrintListExecute
+      ShortCut = 16464
+    end
+    object actCopyTable: TAction
+      Category = 'Database'
+      Caption = 'Table copy'
+      Enabled = False
+      Hint = 'Create a base table copy of this table or view'
+      ImageIndex = 19
+      OnExecute = actCopyTableExecute
+    end
+    object actExecuteQuery: TAction
+      Category = 'SQL'
+      Caption = 'Run'
+      Enabled = False
+      Hint = 'Execute SQL...|Execute SQL-query/queries...'
+      ImageIndex = 57
+      OnExecute = actExecuteQueryExecute
+      ShortCut = 120
+    end
+    object actExecuteSelection: TAction
+      Category = 'SQL'
+      Caption = 'Run Selection'
+      Enabled = False
+      Hint = 'Execute selected SQL...|Execute selected SQL-query/queries...'
+      ImageIndex = 104
+      OnExecute = actExecuteQueryExecute
+      ShortCut = 16504
+    end
+    object actExecuteCurrentQuery: TAction
+      Category = 'SQL'
+      Caption = 'Run current query'
+      Enabled = False
+      Hint = 'Run current query|Run currently focused SQL query'
+      ImageIndex = 105
+      OnExecute = actExecuteQueryExecute
+      ShortCut = 24696
+    end
+    object actExplainCurrentQuery: TAction
+      Category = 'SQL'
+      Caption = 'Explain current query'
+      Hint = 'Run EXPLAIN <current query> and show results'
+      OnExecute = actExecuteQueryExecute
+    end
+    object actExplainAnalyzeCurrentQuery: TAction
+      Category = 'SQL'
+      Caption = 'Explain analyzer for current query'
+      Hint = 'Run EXPLAIN <current query> and send results to MariaDB.org'
+      OnExecute = actExplainAnalyzeCurrentQueryExecute
+    end
+    object actDataPreview: TAction
+      Category = 'Data'
+      Caption = 'Image preview'
+      Hint = 'Preview image contents from BLOB cells'
+      ImageIndex = 152
+      OnExecute = actDataPreviewExecute
+      OnUpdate = actDataPreviewUpdate
+    end
+    object actInsertFiles: TAction
+      Category = 'Export/Import'
+      Caption = 'Insert files into TEXT/BLOB fields...'
+      ImageIndex = 47
+      OnExecute = actInsertFilesExecute
+    end
+    object actExportTables: TAction
+      Category = 'Export/Import'
+      Caption = 'Export database as SQL'
+      Hint = 'Dump database objects to an SQL file'
+      ImageIndex = 9
+      OnExecute = actTableToolsExecute
+    end
+    object actLoadSQL: TAction
+      Category = 'SQL'
+      Caption = 'Load SQL file...'
+      Hint = 'Load SQL file...'
+      ImageIndex = 51
+      OnExecute = actLoadSQLExecute
+      ShortCut = 16463
+    end
+    object actRunSQL: TAction
+      Category = 'SQL'
+      Caption = 'Run SQL file...'
+      Hint = 'Run SQL file(s) directly, without loading into the editor'
+      ImageIndex = 189
+      OnExecute = actLoadSQLExecute
+    end
+    object actDropObjects: TAction
+      Category = 'Database'
+      Caption = 'Drop ...'
+      Enabled = False
+      Hint = 'Deletes tables, views, procedures and functions'
+      ImageIndex = 131
+      OnExecute = actDropObjectsExecute
+    end
+    object actCreateView: TAction
+      Category = 'Database'
+      Caption = 'View'
+      Enabled = False
+      Hint = 'Create view ...'
+      ImageIndex = 81
+      OnExecute = actCreateDBObjectExecute
+    end
+    object actDataFirst: TAction
+      Category = 'Data'
+      Caption = '&First'
+      Enabled = False
+      Hint = 'First'
+      ImageIndex = 89
+      OnExecute = actDataFirstExecute
+    end
+    object actDataLast: TAction
+      Category = 'Data'
+      Caption = '&Last'
+      Enabled = False
+      Hint = 'Last'
+      ImageIndex = 90
+      OnExecute = actDataLastExecute
+    end
+    object actDataInsert: TAction
+      Category = 'Data'
+      Caption = '&Insert row'
+      Enabled = False
+      Hint = 'Insert row into table'
+      ImageIndex = 45
+      OnExecute = actDataInsertExecute
+      ShortCut = 45
+    end
+    object actDataDuplicateRow: TAction
+      Category = 'Data'
+      Caption = 'Duplicate row'
+      Enabled = False
+      ImageIndex = 45
+      OnExecute = actDataInsertExecute
+      ShortCut = 16429
+    end
+    object actDataDelete: TAction
+      Category = 'Data'
+      Caption = '&Delete selected row(s)'
+      Enabled = False
+      Hint = 'Delete selected row(s)'
+      ImageIndex = 46
+      OnExecute = actDataDeleteExecute
+      ShortCut = 16430
+    end
+    object actDataPostChanges: TAction
+      Category = 'Data'
+      Caption = 'P&ost'
+      Enabled = False
+      Hint = 'Post'
+      ImageIndex = 55
+      OnExecute = actDataPostChangesExecute
+      ShortCut = 16397
+    end
+    object actDataCancelChanges: TAction
+      Category = 'Data'
+      Caption = 'Cancel editing'
+      Enabled = False
+      Hint = 'Cancel editing'
+      ImageIndex = 26
+      OnExecute = actDataCancelChangesExecute
+      ShortCut = 27
+    end
+    object actCreateTable: TAction
+      Category = 'Database'
+      Caption = 'Table'
+      Enabled = False
+      Hint = 'Create new table in selected database'
+      ImageIndex = 14
+      OnExecute = actCreateDBObjectExecute
+    end
+    object actEmptyTables: TAction
+      Category = 'Database'
+      Caption = 'Empty table(s) ...'
+      Enabled = False
+      Hint = 'Delete all rows in selected table(s)'
+      ImageIndex = 46
+      OnExecute = actEmptyTablesExecute
+      ShortCut = 8238
+    end
+    object actCreateDatabase: TAction
+      Category = 'Database'
+      Caption = 'Database'
+      Hint = 'Create a new, blank database'
+      ImageIndex = 5
+      OnExecute = actCreateDatabaseExecute
+    end
+    object actSQLhelp: TAction
+      Category = 'Tools'
+      Caption = 'SQL help'
+      Enabled = False
+      Hint = 'SQL help browser'
+      ImageIndex = 31
+      OnExecute = actSQLhelpExecute
+      ShortCut = 112
+    end
+    object actRefresh: TAction
+      Category = 'Various'
+      Caption = 'Refresh'
+      Hint = 'Refresh'
+      ImageIndex = 0
+      OnExecute = actRefreshExecute
+      ShortCut = 116
+    end
+    object actFullRefresh: TAction
+      Category = 'Various'
+      Caption = 'Full status refresh'
+      Enabled = False
+      Hint = 'Get full statistics refresh on table data. Slow on InnoDB tables!'
+      ImageIndex = 184
+      OnExecute = actFullRefreshExecute
+      ShortCut = 8308
+    end
+    object actImportCSV: TAction
+      Category = 'Export/Import'
+      Caption = 'Import CSV file...'
+      Hint = 'Import a CSV or tab delimited file'
+      ImageIndex = 50
+      OnExecute = actImportCSVExecute
+    end
+    object actExportSettings: TAction
+      Category = 'Export/Import'
+      Caption = 'Export settings file ...'
+      ImageIndex = 100
+      OnExecute = actExportSettingsExecute
+    end
+    object actImportSettings: TAction
+      Category = 'Export/Import'
+      Caption = 'Import settings file ...'
+      ImageIndex = 101
+      OnExecute = actImportSettingsExecute
+    end
+    object actPreferences: TAction
+      Category = 'Tools'
+      Caption = 'Preferences'
+      ImageIndex = 98
+      OnExecute = actPreferencesExecute
+    end
+    object actPreferencesLogging: TAction
+      Category = 'Tools'
+      Caption = 'Logging preferences'
+    end
+    object actPreferencesData: TAction
+      Category = 'Tools'
+      Caption = 'Data grid preferences'
+    end
+    object actFlushHosts: TAction
+      Category = 'Tools'
+      Caption = 'Hosts'
+      ImageIndex = 28
+      OnExecute = actFlushExecute
+    end
+    object actFlushLogs: TAction
+      Category = 'Tools'
+      Caption = 'Logs'
+      ImageIndex = 28
+      OnExecute = actFlushExecute
+    end
+    object actFlushPrivileges: TAction
+      Category = 'Tools'
+      Caption = 'Privileges'
+      ImageIndex = 28
+      OnExecute = actFlushExecute
+    end
+    object actFlushTables: TAction
+      Category = 'Tools'
+      Caption = 'Tables'
+      ImageIndex = 28
+      OnExecute = actFlushExecute
+    end
+    object actFlushTableswithreadlock: TAction
+      Category = 'Tools'
+      Caption = 'Tables with read lock'
+      ImageIndex = 28
+      OnExecute = actFlushExecute
+    end
+    object actFlushStatus: TAction
+      Category = 'Tools'
+      Caption = 'Status'
+      ImageIndex = 28
+      OnExecute = actFlushExecute
+    end
+    object actUpdateCheck: TAction
+      Category = 'Tools'
+      Caption = 'Check for updates ...'
+      ImageIndex = 94
+      OnExecute = actUpdateCheckExecute
+    end
+    object actWebDownloadpage: TAction
+      Category = 'Various'
+      Caption = 'Download page'
+      Hint = 'http://www.heidisql.com/download.php'
+      ImageIndex = 69
+      OnExecute = actWebbrowse
+    end
+    object actWebForum: TAction
+      Category = 'Various'
+      Caption = 'Support forum'
+      Hint = 'http://www.heidisql.com/forum.php'
+      ImageIndex = 95
+      OnExecute = actWebbrowse
+    end
+    object actWebChangelog: TAction
+      Category = 'Various'
+      Caption = 'Changelog'
+      Hint = 'https://github.com/HeidiSQL/HeidiSQL/commits/master'
+      ImageIndex = 68
+      OnExecute = actWebbrowse
+    end
+    object actHelp: TAction
+      Category = 'Various'
+      Caption = 'General help'
+      Hint = 'General online help document'
+      ImageIndex = 99
+      OnExecute = actHelpExecute
+    end
+    object actSaveSQLAs: TAction
+      Category = 'SQL'
+      Caption = 'Save as ...'
+      Enabled = False
+      Hint = 'Save SQL to a textfile'
+      ImageIndex = 10
+      OnExecute = actSaveSQLAsExecute
+      ShortCut = 123
+    end
+    object actSaveSQLselection: TAction
+      Category = 'SQL'
+      Caption = 'Save selection to file ...'
+      Enabled = False
+      Hint = 'Save selected text to a file'
+      ImageIndex = 10
+      OnExecute = actSaveSQLAsExecute
+      ShortCut = 24659
+    end
+    object actSaveSQLSnippet: TAction
+      Category = 'SQL'
+      Caption = 'Save as snippet ...'
+      Enabled = False
+      Hint = 'Save as snippet ...'
+      ImageIndex = 54
+      OnExecute = actSaveSQLAsExecute
+    end
+    object actSaveSQLSelectionSnippet: TAction
+      Category = 'SQL'
+      Caption = 'Save selection as snippet ...'
+      Enabled = False
+      Hint = 'Save selected text as snippet ...'
+      ImageIndex = 54
+      OnExecute = actSaveSQLAsExecute
+    end
+    object actClearQueryEditor: TAction
+      Category = 'SQL'
+      Caption = 'Clear'
+      Enabled = False
+      Hint = 'Clear query editor'
+      ImageIndex = 58
+      OnExecute = actClearEditorExecute
+      ShortCut = 16471
+    end
+    object actClearFilterEditor: TAction
+      Category = 'Data'
+      Caption = 'Clear'
+      Hint = 'Clear filter editor'
+      ImageIndex = 58
+      OnExecute = actClearEditorExecute
+      ShortCut = 16471
+    end
+    object actClearQueryLog: TAction
+      Category = 'SQL'
+      Caption = 'Clear'
+      Hint = 'Clear query log'
+      ImageIndex = 58
+      OnExecute = actClearEditorExecute
+      ShortCut = 16465
+    end
+    object actQueryStopOnErrors: TAction
+      Category = 'SQL'
+      AutoCheck = True
+      Caption = 'Stop on errors in batch mode'
+      Checked = True
+      Hint = 'Stop on errors in batch mode'
+      ImageIndex = 63
+      OnExecute = actQueryStopOnErrorsExecute
+    end
+    object actQueryWordWrap: TAction
+      Category = 'SQL'
+      AutoCheck = True
+      Caption = 'Wrap long lines'
+      Hint = 'Wrap long lines'
+      ImageIndex = 62
+      OnExecute = actQueryWordWrapExecute
+    end
+    object actQueryFind: TAction
+      Category = 'SQL'
+      Caption = 'Find text ...'
+      Hint = 'Find text ...'
+      ImageIndex = 30
+      OnExecute = actQueryFindReplaceExecute
+      ShortCut = 16454
+    end
+    object actQueryReplace: TAction
+      Category = 'SQL'
+      Caption = 'Replace text ...'
+      Hint = 'Replace text ...'
+      ImageIndex = 59
+      OnExecute = actQueryFindReplaceExecute
+      ShortCut = 16466
+    end
+    object actQueryFindAgain: TAction
+      Category = 'SQL'
+      Caption = 'Find or replace again'
+      ImageIndex = 142
+      OnExecute = actQueryFindAgainExecute
+      ShortCut = 114
+    end
+    object actSetDelimiter: TAction
+      Category = 'SQL'
+      Caption = 'Set delimiter used in SQL execution'
+      Enabled = False
+      Hint = 'Set delimiter used in SQL execution'
+      ImageIndex = 106
+      OnExecute = actSetDelimiterExecute
+    end
+    object actApplyFilter: TAction
+      Category = 'Data'
+      Caption = 'Apply filter'
+      ImageIndex = 55
+      OnExecute = actApplyFilterExecute
+      ShortCut = 120
+    end
+    object actRemoveFilter: TAction
+      Category = 'Data'
+      Caption = 'Remove filter'
+      ImageIndex = 26
+      OnExecute = actRemoveFilterExecute
+    end
+    object actSelectTreeBackground: TAction
+      Category = 'File'
+      Caption = 'Select session background color ...'
+      Hint = 'Lets you chose a per session color value for the database tree'
+      ImageIndex = 115
+      OnExecute = actSelectTreeBackgroundExecute
+    end
+    object actPreviousTab: TAction
+      Category = 'Tools'
+      Caption = '&Previous tab'
+      Hint = 'Previous tab|Go back to the previous tab'
+      ImageIndex = 117
+      ShortCut = 24585
+    end
+    object actNextTab: TAction
+      Category = 'Tools'
+      Caption = '&Next tab'
+      Hint = 'Next tab|Go to the next tab'
+      ImageIndex = 116
+      ShortCut = 16393
+    end
+    object actSelectAll: TAction
+      Category = 'Various'
+      Caption = 'Select all'
+      Hint = 'Select all|Select all items or text'
+      ImageIndex = 118
+      OnExecute = actSelectAllExecute
+      OnUpdate = ValidateControls
+      ShortCut = 16449
+    end
+    object actCreateRoutine: TAction
+      Category = 'Database'
+      Caption = 'Stored routine'
+      Hint = 'Create stored routine|Create stored procedure or function'
+      ImageIndex = 119
+      OnExecute = actCreateDBObjectExecute
+    end
+    object actNewQueryTab: TAction
+      Category = 'File'
+      Caption = 'New query tab'
+      Hint = 'Open a blank query tab'
+      ImageIndex = 132
+      OnExecute = actNewQueryTabExecute
+      ShortCut = 16468
+    end
+    object actCloseQueryTab: TAction
+      Category = 'File'
+      Caption = 'Close query tab'
+      Enabled = False
+      ImageIndex = 133
+      OnExecute = actCloseQueryTabExecute
+      ShortCut = 16499
+    end
+    object actSelectInverse: TAction
+      Category = 'Various'
+      Caption = 'Invert selection'
+      ImageIndex = 138
+      OnExecute = actSelectInverseExecute
+      ShortCut = 16457
+    end
+    object actFilterPanel: TAction
+      Category = 'Various'
+      AutoCheck = True
+      Caption = 'Filter panel'
+      Hint = 'Activates the filter panel'
+      ImageIndex = 30
+      OnExecute = actFilterPanelExecute
+      ShortCut = 49222
+    end
+    object actBulkTableEdit: TAction
+      Category = 'Tools'
+      Caption = 'Bulk table editor'
+      ImageIndex = 19
+      OnExecute = actTableToolsExecute
+    end
+    object actCreateTrigger: TAction
+      Category = 'Database'
+      Caption = 'Trigger'
+      Hint = 'Create a trigger'
+      ImageIndex = 137
+      OnExecute = actCreateDBObjectExecute
+    end
+    object actSaveSQL: TAction
+      Category = 'SQL'
+      Caption = 'Save'
+      Enabled = False
+      Hint = 'Save SQL to file'
+      ImageIndex = 10
+      OnExecute = actSaveSQLExecute
+      ShortCut = 16467
+    end
+    object actDataResetSorting: TAction
+      Category = 'Data'
+      Caption = 'Reset sorting'
+      ImageIndex = 139
+      OnExecute = actDataResetSortingExecute
+      ShortCut = 32851
+    end
+    object actReformatSQL: TAction
+      Category = 'SQL'
+      Caption = 'Reformat SQL'
+      Hint = 'Automatically reformat disordered SQL in active editor to make it more readable'
+      ImageIndex = 140
+      OnExecute = actReformatSQLExecute
+      ShortCut = 16503
+    end
+    object actBlobAsText: TAction
+      Category = 'Data'
+      AutoCheck = True
+      Caption = 'View binary data as text (instead of HEX)'
+      Hint = 'View binary data as text (instead of HEX)'
+      ImageIndex = 141
+      OnExecute = actBlobAsTextExecute
+    end
+    object actDataShowNext: TAction
+      Category = 'Data'
+      Caption = 'Next'
+      Hint = 'Next X rows'
+      ImageIndex = 79
+      OnExecute = actDataShowNextExecute
+      ShortCut = 49186
+    end
+    object actDataShowAll: TAction
+      Category = 'Data'
+      Caption = 'Show all'
+      Hint = 'Show all rows'
+      ImageIndex = 143
+      OnExecute = actDataShowAllExecute
+      ShortCut = 49187
+    end
+    object actRunRoutines: TAction
+      Category = 'Database'
+      Caption = 'Run routine(s) ...'
+      ImageIndex = 35
+      OnExecute = actRunRoutinesExecute
+    end
+    object actCreateEvent: TAction
+      Category = 'Database'
+      Caption = 'Event'
+      Enabled = False
+      Hint = 'Create new event in selected database'
+      ImageIndex = 80
+      OnExecute = actCreateDBObjectExecute
+    end
+    object actDataSetNull: TAction
+      Category = 'Data'
+      Caption = 'NULL'
+      Enabled = False
+      Hint = 'Set focused cell to NULL'
+      ImageIndex = 92
+      OnExecute = actDataSetNullExecute
+      ShortCut = 24654
+    end
+    object actDataSaveBlobToFile: TAction
+      Category = 'Data'
+      Caption = 'Save BLOB to file ...'
+      Hint = 'Save contents to local file ...'
+      ImageIndex = 10
+      OnExecute = actDataSaveBlobToFileExecute
+    end
+    object actDisconnect: TAction
+      Category = 'File'
+      Caption = 'Disconnect'
+      Hint = 'Close selected database connection'
+      ImageIndex = 29
+      OnExecute = actDisconnectExecute
+    end
+    object actBatchInOneGo: TAction
+      Category = 'SQL'
+      AutoCheck = True
+      Caption = 'Send batch in one go'
+      GroupIndex = 1
+      Hint = 'Send up to max_allowed_packet batch at once'
+      OnExecute = actBatchInOneGoExecute
+    end
+    object actSingleQueries: TAction
+      Category = 'SQL'
+      AutoCheck = True
+      Caption = 'Send queries one by one'
+      Checked = True
+      GroupIndex = 1
+      OnExecute = actBatchInOneGoExecute
+    end
+    object actCancelOperation: TAction
+      Category = 'Various'
+      Caption = 'Cancel running operation'
+      Enabled = False
+      Hint = 'Cancel running operation'
+      ImageIndex = 159
+      OnExecute = actCancelOperationExecute
+      ShortCut = 27
+    end
+    object actToggleComment: TAction
+      Category = 'SQL'
+      Caption = 'Un/comment'
+      Hint = 'Makes selected SQL a comment or removes comment chars'
+      ImageIndex = 165
+      OnExecute = actToggleCommentExecute
+    end
+    object actSynchronizeDatabase: TAction
+      Category = 'Export/Import'
+      Caption = 'Synchronize database'
+      ImageIndex = 27
+      OnExecute = actSynchronizeDatabaseExecute
+    end
+    object actLaunchCommandline: TAction
+      Category = 'Tools'
+      Caption = 'Launch command line'
+      ImageIndex = 170
+      OnExecute = actLaunchCommandlineExecute
+    end
+    object actGridEditFunction: TAction
+      Category = 'Data'
+      Caption = 'SQL function'
+      Hint = 'Insert SQL function call in this grid cell, e.g. NOW()'
+      ImageIndex = 13
+      OnExecute = actGridEditFunctionExecute
+      ShortCut = 16497
+    end
+    object actLogHorizontalScrollbar: TAction
+      Category = 'Various'
+      AutoCheck = True
+      Caption = 'Horizontal scrollbar'
+      OnExecute = actLogHorizontalScrollbarExecute
+    end
+    object actGroupObjects: TAction
+      Category = 'Various'
+      AutoCheck = True
+      Caption = 'Group objects by type'
+      OnExecute = actGroupObjectsExecute
+    end
+    object actUnixTimestampColumn: TAction
+      Category = 'Data'
+      AutoCheck = True
+      Caption = 'This is a UNIX timestamp column'
+      Enabled = False
+      OnExecute = actUnixTimestampColumnExecute
+    end
+    object actFavoriteObjectsOnly: TAction
+      Category = 'Various'
+      AutoCheck = True
+      Caption = 'Show only favorites'
+      Hint = 'Show only favorite tree items'
+      ImageIndex = 112
+      OnExecute = actFavoriteObjectsOnlyExecute
+    end
+    object actPreviousResult: TAction
+      Category = 'Data'
+      Caption = 'Previous result tab'
+      ImageIndex = 117
+      OnExecute = actPreviousResultExecute
+      ShortCut = 32805
+    end
+    object actNextResult: TAction
+      Category = 'Data'
+      Caption = 'Next result tab'
+      ImageIndex = 116
+      OnExecute = actNextResultExecute
+      ShortCut = 32807
+    end
+    object actSaveSynMemoToTextfile: TAction
+      Category = 'Various'
+      Caption = 'Save as textfile...'
+      Hint = 'Save contents to a textfile'
+      ImageIndex = 10
+      OnExecute = actSaveSynMemoToTextfileExecute
+      OnUpdate = ValidateControls
+      ShortCut = 16467
+    end
+    object actGotoDbTree: TAction
+      Category = 'Various'
+      Caption = 'Database tree'
+      OnExecute = actGotoDbTreeExecute
+      ShortCut = 16452
+    end
+    object actGotoFilter: TAction
+      Category = 'Various'
+      Caption = 'Table filter'
+      OnExecute = actGotoFilterExecute
+      ShortCut = 16453
+    end
+    object actGotoTab1: TAction
+      Category = 'Various'
+      Caption = 'Tab 1'
+      OnExecute = actGotoTabNumberExecute
+      ShortCut = 16433
+    end
+    object actGotoTab2: TAction
+      Category = 'Various'
+      Caption = 'Tab 2'
+      OnExecute = actGotoTabNumberExecute
+      ShortCut = 16434
+    end
+    object actGotoTab3: TAction
+      Category = 'Various'
+      Caption = 'Tab 3'
+      OnExecute = actGotoTabNumberExecute
+      ShortCut = 16435
+    end
+    object actGotoTab4: TAction
+      Category = 'Various'
+      Caption = 'Tab 4'
+      OnExecute = actGotoTabNumberExecute
+      ShortCut = 16436
+    end
+    object actGotoTab5: TAction
+      Category = 'Various'
+      Caption = 'Tab 5'
+      OnExecute = actGotoTabNumberExecute
+      ShortCut = 16437
+    end
+    object actCopyRows: TAction
+      Category = 'Various'
+      Caption = 'Copy selected rows'
+      Hint = 'Copy selected rows in custom format'
+      ImageIndex = 155
+      OnExecute = actCopyOrCutExecute
+      ShortCut = 24643
     end
   end
   object menuConnections: TPopupMenu
@@ -8551,6 +9478,23 @@ object MainForm: TMainForm
     left = 424
     top = 208
   end
+  object SynCompletionProposal: TSynCompletion
+    OnExecute = SynCompletionProposalExecute
+    Position = 0
+    LinesInWindow = 6
+    SelectedColor = clHighlight
+    CaseSensitive = False
+    Width = 350
+    AutoUseSingleIdent = True
+    ShortCut = 16416
+    EndOfTokenChr = ',()[]. ='#9
+    OnCodeCompletion = SynCompletionProposalCodeCompletion
+    ExecCommandID = ecSynCompletionExecute
+    Editor = SynMemoQuery
+    ToggleReplaceWhole = False
+    left = 592
+    top = 208
+  end
   object popupQuery: TPopupMenu
     Images = ImageListMain
     OnPopup = popupQueryPopup
@@ -8746,6 +9690,10 @@ object MainForm: TMainForm
     left = 688
     top = 149
   end
+  object BalloonHint1: TTrayIcon
+    left = 424
+    top = 264
+  end
   object popupExecuteQuery: TPopupMenu
     Images = ImageListMain
     left = 272
@@ -8765,5 +9713,11 @@ object MainForm: TMainForm
     object Runbatchinonego1: TMenuItem
       AutoCheck = True
     end
+  end
+  object ApplicationEvents1: TApplicationProperties
+    OnDeactivate = ApplicationEvents1Deactivate
+    OnIdle = ApplicationEvents1Idle
+    left = 504
+    top = 152
   end
 end

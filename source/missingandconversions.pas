@@ -13,6 +13,7 @@ type
     end;
     TTabSet = TTabControl;
     TButtonedEdit = TEditButton;
+
     TUnicodeStrings = TStrings;
     PInt = ^Int64;
 
