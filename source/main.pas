@@ -357,7 +357,7 @@ type
     setNULL1: TMenuItem;
     menuExporttables: TMenuItem;
     popupListHeader: TVTHeaderPopupMenu;
-    SynCompletionProposal: TSynCompletionProposal;
+    SynCompletionProposal: TSynCompletion;
     tabCommandStats: TTabSheet;
     ListCommandStats: TVirtualStringTree;
     QF13: TMenuItem;
@@ -528,7 +528,7 @@ type
     actCreateEvent: TAction;
     Event1: TMenuItem;
     tabsetQuery: TTabSet;
-    {BalloonHint1: TBalloonHint;}
+    BalloonHint1: TTrayIcon;
     actDataSetNull: TAction;
     pnlPreview: TPanel;
     spltPreview: TSplitter;
@@ -546,7 +546,7 @@ type
     Run1: TMenuItem;
     RunSelection1: TMenuItem;
     Runcurrentquery1: TMenuItem;
-    {ApplicationEvents1: TApplicationEvents;}	
+    ApplicationEvents1: TApplicationProperties;
     actDisconnect: TAction;
     Copylinetonewquerytab1: TMenuItem;
     menuLogHorizontalScrollbar: TMenuItem;
@@ -1762,7 +1762,7 @@ begin
   end;
 
   // Enable auto completion in data tab, filter editor
-  {SynCompletionProposal.AddEditor(SynMemoFilter);}
+  SynCompletionProposal.AddEditor(SynMemoFilter);
 
   // Fix node height on Virtual Trees for current DPI settings
   FixVT(DBTree);
@@ -5540,12 +5540,12 @@ end;
 procedure TMainForm.SynCompletionProposalCodeCompletion(Sender: TObject;
   var Value: String; Shift: TShiftState; Index: Integer; EndToken: Char);
 var
-  Proposal: TSynCompletionProposal;
+  Proposal: TSynCompletion{Proposal};
   rx: TRegExpr;
   ImageIndex, f: Integer;
   FunctionDeclaration: String;
 begin
-  Proposal := Sender as TSynCompletionProposal;
+  Proposal := Sender as TSynCompletion{Proposal};
   // Surround identifiers with backticks if it is a column, table, routine, db
   rx := TRegExpr.Create;
   rx.Expression := '\\image\{(\d+)\}';
@@ -5569,12 +5569,12 @@ end;
 procedure TMainForm.SynCompletionProposalAfterCodeCompletion(Sender: TObject;
   const Value: String; Shift: TShiftState; Index: Integer; EndToken: Char);
 var
-  Proposal: TSynCompletionProposal;
+  Proposal: TSynCompletion{Proposal};
 begin
   Proposal := Sender as TSynCompletionProposal;
-  {Proposal.Form.CurrentEditor.UndoList.AddGroupBreak;
+  {Proposal.TheForm.CurrentEditor.UndoList.AddGroupBreak;}
   // Explicitly set focus again to work around a bug in Ultramon, see issue #2396
-  Proposal.Form.CurrentEditor.SetFocus;}
+  Proposal.TheForm.CurrentEditor.SetFocus;
 end;
 
 
@@ -12147,7 +12147,7 @@ begin
   // Prevent completion window from showing up after Alt-Tab. See issue #2640
   // and issue #3342
   // Does not work for some reason in TApplicationEvents.OnDeactivate
-  SynCompletionProposal.Form.Enabled := False;
+  SynCompletionProposal.TheForm.Enabled := False;
   // Gets activated again in SynCompletionProposalExecute
 end;
 
