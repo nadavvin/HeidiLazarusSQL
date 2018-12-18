@@ -363,6 +363,20 @@ object connform: Tconnform
         ScrollBars = ssVertical
         TabOrder = 9
       end
+      object editDatabases: TEditButton
+          Left = 120
+          Top = 213
+          Width = 294
+          Height = 21
+          Anchors = [akLeft, akTop, akRight]
+          Images = MainForm.ImageListMain
+          ImageIndex = 75
+          Visible = True
+          TabOrder = 9
+          TextHint = 'Separated by semicolon'
+          OnChange = Modification
+          OnButtonClick = editDatabasesRightButtonClick
+        end
     end
     object tabSSHtunnel: TTabSheet
       Caption = 'SSH tunnel'
@@ -475,6 +489,22 @@ object connform: Tconnform
         Text = 'editSSHPassword'
         TextHint = 'Your secure shell password'
       end
+      object editSSHPlinkExe: TEditButton
+          Left = 120
+          Top = 9
+          Width = 294
+          Height = 21
+          Anchors = [akLeft, akTop, akRight]
+          Images = MainForm.ImageListMain
+          ImageIndex = 51
+          Visible = True
+          TabOrder = 0
+          Text = 'editSSHPlinkExe'
+          TextHint = 'Doubleclick to select plink.exe ...'
+          OnChange = editSSHPlinkExeChange
+          OnDblClick = PickFile
+          OnButtonClick = PickFile
+        end
       object editSSHhost: TEdit
         Left = 120
         Height = 21
@@ -496,6 +526,22 @@ object connform: Tconnform
         TabOrder = 2
         Text = 'editSSHport'
       end
+      object editSSHPrivateKey: TEditButton
+          Left = 120
+          Top = 160
+          Width = 294
+          Height = 21
+          Anchors = [akLeft, akTop, akRight]
+          Images = MainForm.ImageListMain
+          ImageIndex = 51
+          Visible = True
+          TabOrder = 7
+          Text = 'editSSHPrivateKey'
+          TextHint = 'PuTTY private key (*.ppk)'
+          OnChange = Modification
+          OnDblClick = PickFile
+          OnButtonClick = PickFile
+        end
       object editSSHTimeout: TEdit
         Left = 120
         Height = 21
@@ -578,6 +624,51 @@ object connform: Tconnform
         Caption = 'Ping every X seconds:'
         ParentColor = False
       end
+      object editSSLPrivateKey: TEditButton
+          Left = 120
+          Top = 36
+          Width = 294
+          Height = 21
+          Anchors = [akLeft, akTop, akRight]
+          Images = MainForm.ImageListMain
+          ImageIndex = 51
+          Visible = True
+          TabOrder = 1
+          TextHint = 'Path to key file'
+          OnChange = Modification
+          OnDblClick = PickFile
+          OnButtonClick = PickFile
+        end
+        object editSSLCACertificate: TEditButton
+          Left = 120
+          Top = 65
+          Width = 294
+          Height = 21
+          Anchors = [akLeft, akTop, akRight]
+          Images = MainForm.ImageListMain
+          ImageIndex = 51
+          Visible = True
+          TabOrder = 2
+          TextHint = 'Path to certificate authority file'
+          OnChange = Modification
+          OnDblClick = PickFile
+          OnButtonClick = PickFile
+        end
+        object editSSLCertificate: TEditButton
+          Left = 120
+          Top = 92
+          Width = 294
+          Height = 21
+          Anchors = [akLeft, akTop, akRight]
+          Images = MainForm.ImageListMain
+          ImageIndex = 51
+          Visible = True
+          TabOrder = 3
+          TextHint = 'Path to certificate file'
+          OnChange = Modification
+          OnDblClick = PickFile
+          OnButtonClick = PickFile
+        end
       object chkWantSSL: TCheckBox
         Left = 120
         Height = 17
@@ -599,6 +690,20 @@ object connform: Tconnform
         OnClick = Modification
         TabOrder = 1
       end
+      object editStartupScript: TEditButton
+          Left = 120
+          Top = 165
+          Width = 294
+          Height = 21
+          Anchors = [akLeft, akTop, akRight]
+          Images = MainForm.ImageListMain
+          ImageIndex = 51
+          Visible = True
+          TabOrder = 5
+          OnChange = Modification
+          OnDblClick = PickFile
+          OnButtonClick = PickFile
+        end
       object chkFullTableStatus: TCheckBox
         Left = 120
         Height = 17

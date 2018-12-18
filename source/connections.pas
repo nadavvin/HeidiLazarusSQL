@@ -14,7 +14,6 @@ uses
   dbconnection, gnugettext2, EditBtn;
 
 type
-  TButtonedEdit = TEditButton;
   Tconnform = class(TFormWithSizeGrip)
     btnCancel: TButton;
     btnOpen: TButton;
@@ -44,9 +43,9 @@ type
     lblSSLPrivateKey: TLabel;
     lblSSLCACertificate: TLabel;
     lblSSLCertificate: TLabel;
-    editSSLPrivateKey: TButtonedEdit;
-    editSSLCACertificate: TButtonedEdit;
-    editSSLCertificate: TButtonedEdit;
+    editSSLPrivateKey: TEditButton;
+    editSSLCACertificate: TEditButton;
+    editSSLCertificate: TEditButton;
     tabStatistics: TTabSheet;
     lblLastConnectLeft: TLabel;
     lblCounterLeft: TLabel;
@@ -61,16 +60,16 @@ type
     lblSSHLocalPort: TLabel;
     lblSSHUser: TLabel;
     lblSSHPassword: TLabel;
-    editSSHPlinkExe: TButtonedEdit;
+    editSSHPlinkExe: TEditButton;
     lblSSHPlinkExe: TLabel;
     comboNetType: TComboBox;
     lblSSHhost: TLabel;
     editSSHhost: TEdit;
     editSSHport: TEdit;
-    editSSHPrivateKey: TButtonedEdit;
+    editSSHPrivateKey: TEditButton;
     lblSSHkeyfile: TLabel;
     lblDownloadPlink: TLabel;
-    editDatabases: TButtonedEdit;
+    editDatabases: TEditButton;
     lblDatabase: TLabel;
     chkLoginPrompt: TCheckBox;
     lblPlinkTimeout: TLabel;
@@ -91,7 +90,7 @@ type
     menuNewSessionInFolder: TMenuItem;
     menuNewFolderInFolder: TMenuItem;
     chkLocalTimeZone: TCheckBox;
-    editStartupScript: TButtonedEdit;
+    editStartupScript: TEditButton;
     lblStartupScript: TLabel;
     chkFullTableStatus: TCheckBox;
     btnMore: TButton;
@@ -1217,12 +1216,12 @@ end;
 procedure Tconnform.PickFile(Sender: TObject);
 var
   Selector: TOpenDialog;
-  Edit: TButtonedEdit;
+  Edit: TEditButton;
   i: Integer;
   Control: TControl;
 begin
   // Select startup SQL file, SSL file or whatever button clicked
-  Edit := Sender as TButtonedEdit;
+  Edit := Sender as TEditButton;
   Selector := TOpenDialog.Create(Self);
   Selector.FileName := editStartupScript.Text;
   if Edit = editStartupScript then

@@ -5541,6 +5541,7 @@ var
   Field: PMYSQL_FIELD;
   IsBinary: Boolean;
   LastResult: PMYSQL_RES;
+  s: String;
 begin
   // Execute a query, or just take over one of the last result pointers
   if UseRawResult = -1 then begin
@@ -5610,6 +5611,8 @@ begin
             break;}
           end;
         end;
+        s:='Detected column type for '+FColumnNames[i]+': '+FColumnTypes[i].Name;
+        WriteLn(s);
         FConnection.Log(lcDebug, 'Detected column type for '+FColumnNames[i]+': '+FColumnTypes[i].Name);
       end;
       FRecNo := -1;

@@ -2487,7 +2487,7 @@ begin
       mtConfirmation, mtCustom: begin
         if not Assigned(ConfirmIcon) then begin
           ConfirmIcon := TIcon.Create;
-          ConfirmIcon.LoadFromResourceName(hInstance, 'Z_ICONQUESTION');
+          {ConfirmIcon.LoadFromResourceName(hInstance, 'Z_ICONQUESTION');//Z_ICONQUESTION not found}
         end;
         Dialog.Flags := Dialog.Flags + [tfUseHiconMain];
         {Dialog.CustomMainIcon := ConfirmIcon;}
