@@ -6028,13 +6028,13 @@ begin
         Exit(False);
     end else begin
       // The normal case: Fetch cell from mysql result
-//      pc := FCurrentRow[Column];
-//      SetString(AnsiStr, FCurrentRow[Column], FColumnLengths[Column]);
-//      if Datatype(Column).Category in [dtcBinary, dtcSpatial] then begin
-//        SetLength(baData, Length(AnsiStr));
-//        Move{CopyMemory}(baData, {@}AnsiStr[1], Length(AnsiStr));
-//        Exit(True);
-//      end else
+      pc := FCurrentRow[Column];
+      SetString(AnsiStr, FCurrentRow[Column], FColumnLengths[Column]);
+      if Datatype(Column).Category in [dtcBinary, dtcSpatial] then begin
+        SetLength(baData, Length(AnsiStr));
+        Move{CopyMemory}(baData, {@}AnsiStr[1], Length(AnsiStr));
+        Exit(True);
+      end else
         Exit(False);
     end;
   end;
