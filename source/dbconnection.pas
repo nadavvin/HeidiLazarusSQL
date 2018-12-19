@@ -77,12 +77,12 @@ type
       property OnlyNodeType: TListNodeType read FOnlyNodeType;
   end;
   TDatabaseCache = class(TObjectList<TDBObjectList>); // A list of db object lists, used for caching
-  {TDBObjectComparer = class(TComparer<TDBObject>)
-    function Compare(const Left, Right: TDBObject): Integer; override;
+  TDBObjectComparer = class(TComparer<TDBObject>)
+    function Compare(constref Left, Right: TDBObject): Integer; override;
   end;
   TDBObjectDropComparer = class(TComparer<TDBObject>)
-    function Compare(const Left, Right: TDBObject): Integer; override;
-  end;}
+    function Compare(constref Left, Right: TDBObject): Integer; override;
+  end;
 
   // General purpose editing status flag
   TEditingStatus = (esUntouched, esModified, esDeleted, esAddedUntouched, esAddedModified, esAddedDeleted);
@@ -744,7 +744,8 @@ var
   LibMysqlPath: String;
   LibMysqlHandle: HMODULE; // Shared module handle
 
-  {mysql_affected_rows: function(Handle: PMYSQL): Int64; stdcall;
+  {$IFNDEF FPC}
+  mysql_affected_rows: function(Handle: PMYSQL): Int64; stdcall;
   mysql_character_set_name: function(Handle: PMYSQL): PAnsiChar; stdcall;
   mysql_close: procedure(Handle: PMYSQL); stdcall;
   mysql_data_seek: procedure(Result: PMYSQL_RES; Offset: Int64); stdcall;
@@ -771,7 +772,8 @@ var
   mysql_set_character_set: function(Handle: PMYSQL; csname: PAnsiChar): Integer; stdcall;
   mysql_thread_init: function: Byte; stdcall;
   mysql_thread_end: procedure; stdcall;
-  mysql_warning_count: function(Handle: PMYSQL): Cardinal; stdcall;}
+  mysql_warning_count: function(Handle: PMYSQL): Cardinal; stdcall;
+  {$EndIf}
 
   LibPqPath: String = 'libpq.dll';
   LibPqHandle: HMODULE;
@@ -4429,7 +4431,7 @@ var
   i: Integer;
 begin
   // Cache and return a db's table list
-  {if Refresh then
+  if Refresh then
     ClearDbObjects(db);
 
   // Find list in cache
@@ -4480,7 +4482,7 @@ begin
       if Cache[i].NodeType = OnlyNodeType then
         Result.Add(Cache[i]);
     end;
-  end;}
+  end;
   Result := Nil;
 end;
 
@@ -7051,14 +7053,14 @@ end;
 
 { TDBObjectComparer }
 
-{function TDBObjectComparer.Compare(const Left, Right: TDBObject): Integer;
+function TDBObjectComparer.Compare(constref Left, Right: TDBObject): Integer;
 begin
   // Simple sort method for a TDBObjectList
   Result := CompareAnyNode(Left.Schema+'.'+Left.Name, Right.Schema+'.'+Right.Name);
-end;}
+end;
 
 
-{function TDBObjectDropComparer.Compare(const Left, Right: TDBObject): Integer;
+function TDBObjectDropComparer.Compare(constref Left, Right: TDBObject): Integer;
 begin
   // Sorting a TDBObject items so that dropping them does not trap in SQL errors
   if (Left.NodeType = lntTrigger) and (Right.NodeType <> lntTrigger) then
@@ -7071,7 +7073,7 @@ begin
     Result := 1
   else
     Result := 0;
-end;}
+end;
 
 
 
