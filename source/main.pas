@@ -31,13 +31,13 @@ type
   TBindParam = class(TObjectList<TBindParamItem>)
     private
     public
-      {constructor Create();}
+      constructor Create();
       function FindParameter(Param: String) : Integer;
       procedure CleanToKeep;
   end;
-  {TBindParamItemComparer = class(TComparer<TBindParamItem>)
-    function Compare(const Left, Right: TBindParamItem): Integer; override;
-  end;}
+  TBindParamItemComparer = class(TComparer<TBindParamItem>)
+    function Compare(constref Left, Right: TBindParamItem): Integer; override;
+  end;
   TOpenTextFileDialog = TOpenDialog;
 
   TQueryTab = class;
@@ -115,9 +115,9 @@ type
       constructor Create(SessionPath: String);
       property MaxDuration: Cardinal read FMaxDuration;
   end;
-  {TQueryHistoryItemComparer = class(TComparer<TQueryHistoryItem>)
-    function Compare(const Left, Right: TQueryHistoryItem): Integer; override;
-  end;}
+  TQueryHistoryItemComparer = class(TComparer<TQueryHistoryItem>)
+    function Compare(constref Left, Right: TQueryHistoryItem): Integer; override;
+  end;
 
   TThreeStateBoolean = (nbUnset, nbFalse, nbTrue);
 
@@ -5787,9 +5787,9 @@ begin
     if Token2 = '' then begin
 
       // Column names from selected table
-      {if Editor = SynMemoFilter then begin
+      if Editor = SynMemoFilter then begin
         AddColumns(ActiveDbObj.QuotedName);
-      end;}
+      end;
 
       // All databases
       for i:=0 to Conn.AllDatabases.Count-1 do begin
@@ -12753,7 +12753,7 @@ var
   Raw: String;
   Item: TQueryHistoryItem;
 begin
-  {inherited Create(TQueryHistoryItemComparer.Create, True);}
+  inherited Create(TQueryHistoryItemComparer.Create, True);
   AppSettings.SessionPath := SessionPath + '\' + REGKEY_QUERYHISTORY;
   ValueNames := AppSettings.GetValueNames;
   for i:=0 to ValueNames.Count-1 do begin
@@ -12791,7 +12791,7 @@ begin
 end;
 
 
-{function TQueryHistoryItemComparer.Compare(const Left, Right: TQueryHistoryItem): Integer;
+function TQueryHistoryItemComparer.Compare(constref Left, Right: TQueryHistoryItem): Integer;
 begin
   // Simple sort method for a TDBObjectList
   if Left.Time > Right.Time then
@@ -12800,7 +12800,7 @@ begin
     Result := 0
   else
     Result := 1;
-end;}
+end;
 
 
 { TBindParam }
@@ -12822,10 +12822,10 @@ begin
 end;
 
 
-{constructor TBindParam.Create;
+constructor TBindParam.Create;
 begin
   inherited Create(TBindParamItemComparer.Create);
-end;}
+end;
 
 
 function TBindParam.FindParameter(Param: String): Integer;
@@ -12846,7 +12846,7 @@ end;
 { TBindParamItemComparer }
 
 
-{function TBindParamItemComparer.Compare(const Left,
+function TBindParamItemComparer.Compare(constref Left,
   Right: TBindParamItem): Integer;
 var
   CompResult: Integer;
@@ -12859,7 +12859,7 @@ begin
     Result := 0
   else
     Result := 1;
-end;}
+end;
 
 end.
 

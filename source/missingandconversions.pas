@@ -5,7 +5,7 @@ unit MissingAndConversions;
 interface
 
 uses
-    Classes, SysUtils, SynCompletion, ComCtrls, EditBtn, SynEdit;
+    Classes, SysUtils, SynCompletion, ComCtrls, EditBtn, SynEdit, SynMemo;
 
 type
     TSynCompletionProposalInsertList = class
@@ -17,7 +17,7 @@ type
     TUnicodeStrings = TStrings;
     PInt = ^Int64;
 
-    TCustomSynEdit = class(TSynEdit)
+    TCustomSynEdit = class(TSynMemo)
         public
            PrevWordPos: Int64;
         procedure GetHighlighterAttriAtRowColEx();
