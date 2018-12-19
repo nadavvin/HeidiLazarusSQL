@@ -868,8 +868,8 @@ type
     procedure actBlobAsTextExecute(Sender: TObject);
     procedure SynMemoQueryReplaceText(Sender: TObject; const ASearch,
       AReplace: string; Line, Column: Integer; var Action: TSynReplaceAction);
-    {procedure SynMemoQueryPaintTransient(Sender: TObject; Canvas: TCanvas;
-      TransientType: TTransientType);}
+    {$IFNDEF FPC}procedure SynMemoQueryPaintTransient(Sender: TObject; Canvas: TCanvas;
+      TransientType: TTransientType);{$ENDIF}
     procedure actQueryFindAgainExecute(Sender: TObject);
     procedure AnyGridScroll(Sender: TBaseVirtualTree; DeltaX, DeltaY: Integer);
     procedure lblExplainProcessClick(Sender: TObject);
@@ -6223,8 +6223,8 @@ begin
   end;}
 end;
 
-
-{procedure TMainForm.SynMemoQueryPaintTransient(Sender: TObject; Canvas: TCanvas; TransientType: TTransientType);
+{$ifndef FPC}
+procedure TMainForm.SynMemoQueryPaintTransient(Sender: TObject; Canvas: TCanvas; TransientType: TTransientType);
 var
   Editor : TSynEdit;
   OpenChars: array of Char;
@@ -6240,9 +6240,9 @@ var
   TmpCharA, TmpCharB: Char;
 
   function IsCharBracket(AChar: Char): Boolean;
-  begin}
-    //Result := CharInSet(AChar, ['{','[','(','<','}',']',')','>']);
-  {end;
+  begin
+    Result := CharInSet(AChar, ['{','[','(','<','}',']',')','>']);
+  end;
 
   function CharToPixels(P: TBufferCoord): TPoint;
   begin
@@ -6258,11 +6258,11 @@ begin
   SetLength(CloseChars, ArrayLength);
   for i := 0 to ArrayLength - 1 do
     Case i of}
-      //0: begin OpenChars[i] := '('; CloseChars[i] := ')'; end;
-      //1: begin OpenChars[i] := '{'; CloseChars[i] := '}'; end;
-      //2: begin OpenChars[i] := '['; CloseChars[i] := ']'; end;
-      //3: begin OpenChars[i] := '<'; CloseChars[i] := '>'; end;
-    {end;
+      0: begin OpenChars[i] := '('; CloseChars[i] := ')'; end;
+      1: begin OpenChars[i] := '{'; CloseChars[i] := '}'; end;
+      2: begin OpenChars[i] := '['; CloseChars[i] := ']'; end;
+      3: begin OpenChars[i] := '<'; CloseChars[i] := '>'; end;
+    end;
 
   P := Editor.CaretXY;
   D := Editor.DisplayXY;
@@ -6325,7 +6325,8 @@ begin
     end;
     Editor.Canvas.Brush.Style := bsSolid;
   end;
-end;}
+end;
+{$ENDIF}
 
 
 procedure TMainForm.popupHostPopup(Sender: TObject);
