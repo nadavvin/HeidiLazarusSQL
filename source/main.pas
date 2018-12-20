@@ -1615,11 +1615,11 @@ begin
   {dwInfoSize := GetFileVersionInfoSize(PChar(Application.ExeName), dwWnd);}
   GetMem(ptrVerBuf, dwInfoSize);
   {GetFileVersionInfo(PChar(Application.ExeName), dwWnd, dwInfoSize, ptrVerBuf);
-  VerQueryValue(ptrVerBuf, '\', Pointer(FI), dwVerSize );
-  FAppVerMajor := HiWord(FI.dwFileVersionMS);
-  FAppVerMinor := LoWord(FI.dwFileVersionMS);
-  FAppVerRelease := HiWord(FI.dwFileVersionLS);
-  FAppVerRevision := LoWord(FI.dwFileVersionLS);}
+  VerQueryValue(ptrVerBuf, '\', Pointer(FI), dwVerSize )};
+  FAppVerMajor := 10{HiWord(FI.dwFileVersionMS)};
+  FAppVerMinor := 10{LoWord(FI.dwFileVersionMS)};
+  FAppVerRelease := 10{HiWord(FI.dwFileVersionLS)};
+  FAppVerRevision := 10{LoWord(FI.dwFileVersionLS)};
   FAppVersion := Format('%d.%d.%d.%d', [FAppVerMajor, FAppVerMinor, FAppVerRelease, FAppVerRevision]);
   FreeMem(ptrVerBuf);
 
@@ -1658,7 +1658,11 @@ begin
   // Move files from old default snippets directory, see issue #159
   if not AppSettings.PortableMode then begin
     // This was the default folder up to r5244 / 8b2966c52efb685b00189037a0507157ed03a368
-    {OldSnippetsDir := GetShellFolder(CSIDL_COMMON_APPDATA) + '\' + APPNAME + '\Snippets\';}
+    {$IFNDEF FPC}
+    OldSnippetsDir := GetShellFolder(CSIDL_COMMON_APPDATA) + '\' + APPNAME + '\Snippets\';
+    {$ELSE}
+    OldSnippetsDir := '/tmp/';
+    {$ENDIF}
     CurrentSnippetsDir := DirnameSnippets;
     if not DirectoryExists(CurrentSnippetsDir) then
       ForceDirectories(CurrentSnippetsDir);
@@ -1789,7 +1793,7 @@ begin
   MonitorIndex := Min(Screen.MonitorCount-1, MonitorIndex);
   MakeFullyVisible(Screen.Monitors[MonitorIndex]);
 
-  {actQueryStopOnErrors.Checked := AppSettings.ReadBool(asStopOnErrorsInBatchMode);
+  actQueryStopOnErrors.Checked := AppSettings.ReadBool(asStopOnErrorsInBatchMode);
   actBlobAsText.Checked := AppSettings.ReadBool(asDisplayBLOBsAsText);
   actQueryWordWrap.Checked := AppSettings.ReadBool(asWrapLongLines);
   actSingleQueries.Checked := AppSettings.ReadBool(asSingleQueries);
@@ -1797,7 +1801,7 @@ begin
   actPreferencesLogging.ImageIndex := actPreferences.ImageIndex;
   actPreferencesLogging.OnExecute := actPreferences.OnExecute;
   actPreferencesData.ImageIndex := actPreferences.ImageIndex;
-  actPreferencesData.OnExecute := actPreferences.OnExecute;}
+  actPreferencesData.OnExecute := actPreferences.OnExecute;
 
   pnlQueryMemo.Height := AppSettings.ReadInt(asQuerymemoheight);
   treeQueryHelpers.Width := AppSettings.ReadInt(asQueryhelperswidth);
@@ -1808,8 +1812,8 @@ begin
   SynMemoSQLLog.Height := Max(AppSettings.ReadInt(asLogHeight), spltTopBottom.MinSize);
   // Force status bar position to below log memo
   StatusBar.Top := SynMemoSQLLog.Top + SynMemoSQLLog.Height;
-  {actDataShowNext.Hint := f_('Show next %s rows ...', [FormatNumber(AppSettings.ReadInt(asDatagridRowsPerStep))]);
-  actAboutBox.Caption := f_('About %s', [APPNAME+' '+FAppVersion]);}
+  actDataShowNext.Hint := f_('Show next %s rows ...', [FormatNumber(AppSettings.ReadInt(asDatagridRowsPerStep))]);
+  actAboutBox.Caption := f_('About %s', [APPNAME+' '+FAppVersion]);
   // Activate logging
   LogToFile := AppSettings.ReadBool(asLogToFile);
   if AppSettings.ReadBool(asLogHorizontalScrollbar) then
@@ -1837,13 +1841,13 @@ begin
   DataLocalNumberFormat := AppSettings.ReadBool(asDataLocalNumberFormat);
 
   // Database tree options
-  {actGroupObjects.Checked := AppSettings.ReadBool(asGroupTreeObjects);
+  actGroupObjects.Checked := AppSettings.ReadBool(asGroupTreeObjects);
   if AppSettings.ReadBool(asDisplayObjectSizeColumn) then
     menuShowSizeColumn.Click;
   if AppSettings.ReadBool(asAutoExpand) then
     menuAutoExpand.Click;
   if AppSettings.ReadBool(asDoubleClickInsertsNodeText) then
-    menuDoubleClickInsertsNodeText.Click;}
+    menuDoubleClickInsertsNodeText.Click;
 
   // Restore width of columns of all VirtualTrees
   RestoreListSetup(ListDatabases);
@@ -1854,14 +1858,14 @@ begin
   RestoreListSetup(ListTables);
 
   // Shortcuts
-  {for i:=0 to ActionList1.ActionCount-1 do begin
+  for i:=0 to ActionList1.ActionCount-1 do begin
     Action := TAction(ActionList1.Actions[i]);
     Action.ShortCut := AppSettings.ReadInt(asActionShortcut1, Action.Name, Action.ShortCut);
-  end;}
+  end;
 
   // Size of completion proposal window
-  {SynCompletionProposal.Width := AppSettings.ReadInt(asCompletionProposalWidth);
-  SynCompletionProposal.NbLinesInWindow := AppSettings.ReadInt(asCompletionProposalNbLinesInWindow);}
+  SynCompletionProposal.Width := AppSettings.ReadInt(asCompletionProposalWidth);
+  SynCompletionProposal.NbLinesInWindow := AppSettings.ReadInt(asCompletionProposalNbLinesInWindow);
 
   // Place progressbar on the statusbar
   ProgressBarStatus.Parent := StatusBar;
@@ -1872,7 +1876,8 @@ begin
 
   SetMainTab(tabHost);
   FBtnAddTab := TSpeedButton.Create(PageControlMain);
-  {FBtnAddTab.Parent := PageControlMain;
+  {PageControlMain.ControlStyle:=[csAcceptsControls];
+  FBtnAddTab.Parent := PageControlMain;
   ImageListMain.GetBitmap(actNewQueryTab.ImageIndex, FBtnAddTab.Glyph);
   FBtnAddTab.Height := PageControlMain.TabRect(0).Bottom - PageControlMain.TabRect(0).Top - 2;
   FBtnAddTab.Width := FBtnAddTab.Height;
@@ -5431,7 +5436,7 @@ begin
   inDataOrQueryTabNotEmpty := inDataOrQueryTab and Assigned(Grid) and (Grid.RootNodeCount > 0);
   inGrid := Assigned(Grid) and (ActiveControl = Grid);
 
-  {actFullRefresh.Enabled := PageControlMain.ActivePage = tabDatabase;
+  actFullRefresh.Enabled := PageControlMain.ActivePage = tabDatabase;
   actDataInsert.Enabled := inGrid and Assigned(Results);
   actDataDuplicateRow.Enabled := inGrid and inDataOrQueryTabNotEmpty and Assigned(Grid.FocusedNode);
   actDataDelete.Enabled := inGrid and (Grid.SelectedCount > 0);
@@ -5445,16 +5450,16 @@ begin
   actUnixTimestampColumn.Enabled := inDataTab and EnableTimestamp;
   actUnixTimestampColumn.Checked := inDataTab and HandleUnixTimestampColumn(Grid, Grid.FocusedColumn);
   actPreviousResult.Enabled := inDataOrQueryTabNotEmpty;
-  actNextResult.Enabled := inDataOrQueryTabNotEmpty;}
+  actNextResult.Enabled := inDataOrQueryTabNotEmpty;
 
   // Activate export-options if we're on Data- or Query-tab
-  {actExportData.Enabled := inDataOrQueryTabNotEmpty;
-  actDataSetNull.Enabled := inDataOrQueryTab and Assigned(Results) and Assigned(Grid.FocusedNode);}
+  actExportData.Enabled := inDataOrQueryTabNotEmpty;
+  actDataSetNull.Enabled := inDataOrQueryTab and Assigned(Results) and Assigned(Grid.FocusedNode);
 
   inSynMemo := ActiveSynMemo(True) <> nil;
   inSynMemoEditable := inSynMemo and (not ActiveSynMemo(True).ReadOnly);
-  {actSaveSynMemoToTextfile.Enabled := inSynMemo;
-  actToggleComment.Enabled := inSynMemoEditable;}
+  actSaveSynMemoToTextfile.Enabled := inSynMemo;
+  actToggleComment.Enabled := inSynMemoEditable;
   if inSynMemo then begin
     actCut.Enabled := inSynMemoEditable;
     actPaste.Enabled := inSynMemoEditable;
@@ -5486,7 +5491,7 @@ begin
   Tab := ActiveQueryTab;
   NotEmpty := InQueryTab and (Tab.Memo.GetTextLen > 0);
   HasSelection := InQueryTab and Tab.Memo.SelAvail;
-  {actExecuteQuery.Enabled := InQueryTab and NotEmpty and (not Tab.QueryRunning);
+  actExecuteQuery.Enabled := InQueryTab and NotEmpty and (not Tab.QueryRunning);
   actExecuteSelection.Enabled := InQueryTab and HasSelection and (not Tab.QueryRunning);
   actExecuteCurrentQuery.Enabled := actExecuteQuery.Enabled;
   actExplainAnalyzeCurrentQuery.Enabled := actExecuteQuery.Enabled;
@@ -5497,7 +5502,7 @@ begin
   actSaveSQLSelectionSnippet.Enabled := InQueryTab and HasSelection;
   actClearQueryEditor.Enabled := InQueryTab;
   actSetDelimiter.Enabled := InQueryTab;
-  actCloseQueryTab.Enabled := IsQueryTab(PageControlMain.ActivePageIndex, False);}
+  actCloseQueryTab.Enabled := IsQueryTab(PageControlMain.ActivePageIndex, False);
 end;
 
 
@@ -11908,6 +11913,13 @@ begin
            AppSettings.ResetPath;
            if AppSettings.ReadBool(asQueryHistoryEnabled) then begin
              // Find all unique days in history
+
+             {//my code}
+             if not Assigned(Tab) then begin
+                exit;
+             end;
+             {//end my code}
+
              if not Assigned(Tab.HistoryDays) then
                Tab.HistoryDays := TStringList.Create;
              Tab.HistoryDays.Clear;
