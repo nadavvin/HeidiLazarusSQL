@@ -1143,7 +1143,7 @@ type
     procedure PopupQueryLoadRemoveAllFiles(Sender: TObject);
     procedure SessionConnect(Sender: TObject);
     function InitConnection(Params: TConnectionParameters; ActivateMe: Boolean; var Connection: TDBConnection): Boolean;
-    procedure ConnectionsNotify(Sender: TObject; const Item: TDBConnection; Action: TCollectionNotification);
+    procedure ConnectionsNotify(Sender: TObject; constref Item: TDBConnection; Action: TCollectionNotification);
     function ActiveGrid: TVirtualStringTree;
     function GridResult(Grid: TBaseVirtualTree): TDBQuery;
     property ActiveConnection: TDBConnection read GetActiveConnection;
@@ -1893,7 +1893,7 @@ begin
 
   // Set up connections list
   FConnections := TDBConnectionList.Create;
-  {FConnections.OnNotify := ConnectionsNotify;} //Error: Incompatible types
+  FConnections.OnNotify := ConnectionsNotify; //Error: Incompatible types
 
   FTreeRefreshInProgress := False;
   FGridCopying := False;
@@ -2108,7 +2108,7 @@ begin
 end;
 
 
-procedure TMainForm.ConnectionsNotify(Sender: TObject; const Item: TDBConnection; Action: TCollectionNotification);
+procedure TMainForm.ConnectionsNotify(Sender: TObject; constref Item: TDBConnection; Action: TCollectionNotification);
 var
   Results: TDBQuery;
   Tab: TQueryTab;
