@@ -241,7 +241,7 @@ begin
   ListSessions.OnCompareNodes := MainForm.AnyGridCompareNodes;
   ListSessions.OnHeaderClick := MainForm.AnyGridHeaderClick;
   {ListSessions.OnHeaderDraggedOut := MainForm.AnyGridHeaderDraggedOut;}
-  {btnImportSettings.Caption := MainForm.actImportSettings.Caption;}
+  btnImportSettings.Caption := MainForm.actImportSettings.Caption;
   FLoaded := False;
 
   comboNetType.Clear;
@@ -562,22 +562,22 @@ begin
       Result.Port := updownPort.Position
     else
       Result.Port := 0;
-    {Result.AllDatabasesStr := editDatabases.Text;}
+    Result.AllDatabasesStr := editDatabases.Text;
     Result.Comment := memoComment.Text;
     Result.SSHHost := editSSHHost.Text;
     Result.SSHPort := MakeInt(editSSHPort.Text);
     Result.SSHUser := editSSHuser.Text;
     Result.SSHPassword := editSSHpassword.Text;
     Result.SSHTimeout := updownSSHTimeout.Position;
-    {Result.SSHPrivateKey := editSSHPrivateKey.Text;}
+    Result.SSHPrivateKey := editSSHPrivateKey.Text;
     Result.SSHLocalPort := MakeInt(editSSHlocalport.Text);
-    {Result.SSHPlinkExe := editSSHplinkexe.Text;}
+    Result.SSHPlinkExe := editSSHplinkexe.Text;
     Result.WantSSL := chkWantSSL.Checked;
-    {Result.SSLPrivateKey := editSSLPrivateKey.Text;
+    Result.SSLPrivateKey := editSSLPrivateKey.Text;
     Result.SSLCertificate := editSSLCertificate.Text;
     Result.SSLCACertificate := editSSLCACertificate.Text;
     Result.SSLCipher := editSSLCipher.Text;
-    Result.StartupScriptFilename := editStartupScript.Text;}
+    Result.StartupScriptFilename := editStartupScript.Text;
     Result.Compressed := chkCompressed.Checked;
     Result.QueryTimeout := updownQueryTimeout.Position;
     Result.KeepAlive := updownKeepAlive.Position;
@@ -825,22 +825,22 @@ begin
     updownKeepAlive.Position := Sess.KeepAlive;
     chkLocalTimeZone.Checked := Sess.LocalTimeZone;
     chkFullTableStatus.Checked := Sess.FullTableStatus;
-    {editDatabases.Text := Sess.AllDatabasesStr;}
+    editDatabases.Text := Sess.AllDatabasesStr;
     memoComment.Text := Sess.Comment;
-    {editStartupScript.Text := Sess.StartupScriptFilename;
-    editSSHPlinkExe.Text := Sess.SSHPlinkExe;}
+    editStartupScript.Text := Sess.StartupScriptFilename;
+    editSSHPlinkExe.Text := Sess.SSHPlinkExe;
     editSSHHost.Text := Sess.SSHHost;
     editSSHport.Text := IntToStr(Sess.SSHPort);
     editSSHUser.Text := Sess.SSHUser;
     editSSHPassword.Text := Sess.SSHPassword;
     updownSSHTimeout.Position := Sess.SSHTimeout;
-    {editSSHPrivateKey.Text := Sess.SSHPrivateKey;}
+    editSSHPrivateKey.Text := Sess.SSHPrivateKey;
     editSSHlocalport.Text := IntToStr(Sess.SSHLocalPort);
     chkWantSSL.Checked := Sess.WantSSL;
-    {editSSLPrivateKey.Text := Sess.SSLPrivateKey;
+    editSSLPrivateKey.Text := Sess.SSLPrivateKey;
     editSSLCertificate.Text := Sess.SSLCertificate;
     editSSLCACertificate.Text := Sess.SSLCACertificate;
-    editSSLCipher.Text := Sess.SSLCipher;}
+    editSSLCipher.Text := Sess.SSLCipher;
     FServerVersion := Sess.ServerVersion;
     FSessionColor := Sess.SessionColor;
   end;
@@ -1172,7 +1172,7 @@ begin
         lblDatabase.Caption := _('Databases')+':';
       chkWantSSL.Enabled := Params.NetType = ntMySQL_TCPIP;
       lblSSLPrivateKey.Enabled := Params.WantSSL;
-      {editSSLPrivateKey.Enabled := Params.WantSSL;
+      editSSLPrivateKey.Enabled := Params.WantSSL;
       lblSSLCACertificate.Enabled := Params.WantSSL;
       editSSLCACertificate.Enabled := Params.WantSSL;
       lblSSLCertificate.Enabled := Params.WantSSL;
@@ -1180,7 +1180,7 @@ begin
       lblSSLcipher.Enabled := Params.WantSSL;
       editSSLcipher.Enabled := Params.WantSSL;
       tabSSHtunnel.TabVisible := Params.NetType = ntMySQL_SSHtunnel;
-      lblQueryTimeout.Enabled := Params.NetTypeGroup in [ngMSSQL, ngPgSQL];}
+      lblQueryTimeout.Enabled := Params.NetTypeGroup in [ngMSSQL, ngPgSQL];
       editQueryTimeout.Enabled := lblQueryTimeout.Enabled;
       updownQueryTimeout.Enabled := lblQueryTimeout.Enabled;
       Params.Free;
@@ -1202,14 +1202,13 @@ var
   ButtonWidth: Integer;
 begin
   // Splitter resized - adjust width of buttons
-  {ButtonWidth := Round((ListSessions.Width - 2 * ListSessions.Margins.Left) / 3);}
-  ButtonWidth := Round((ListSessions.Width) / 3);
+  ButtonWidth := Round((ListSessions.Width - 2 * ListSessions.Margin{s.Left}) / 3);
   btnNew.Width := ButtonWidth;
   btnSave.Width := ButtonWidth;
   btnDelete.Width := ButtonWidth;
   btnNew.Left := ListSessions.Left;
-  {btnSave.Left := btnNew.Left + btnNew.Width + ListSessions.Margins.Left;
-  btnDelete.Left := btnSave.Left + btnSave.Width + ListSessions.Margins.Left;}
+  btnSave.Left := btnNew.Left + btnNew.Width + ListSessions.Margin{s.Left};
+  btnDelete.Left := btnSave.Left + btnSave.Width + ListSessions.Margin{s.Left};
 end;
 
 
