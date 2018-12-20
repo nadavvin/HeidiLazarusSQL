@@ -1701,12 +1701,12 @@ begin
           if FParameters.SSLCipher <> '' then
  	          sslcipher := PAnsiChar(AnsiString(FParameters.SSLCipher));
           { TODO : Use Cipher and CAPath parameters }
-          {mysql_ssl_set(FHandle,
+          mysql_ssl_set(FHandle,
             sslkey,
             sslcert,
             sslca,
             nil,
-            sslcipher);}
+            sslcipher);
           Log(lcInfo, _('SSL parameters successfully set.'));
         end;
       end;
@@ -2140,7 +2140,8 @@ var
 begin
   // Init libmysql before actually connecting.
   // Try newer libmariadb version at first, and fall back to libmysql
-  {if LibMysqlHandle = 0 then begin
+  {$IFNDEF FPC}
+  if LibMysqlHandle = 0 then begin
     LibMysqlPath := 'libmariadb.dll';
     Log(lcDebug, f_('Loading library file %s ...', [LibMysqlPath]));
     // Temporarily suppress error popups while loading new library on Windows XP, see #79
@@ -2192,7 +2193,8 @@ begin
       AssignProc(@mysql_warning_count, 'mysql_warning_count');
       Log(lcDebug, LibMysqlPath + ' v' + DecodeApiString(mysql_get_client_info) + ' loaded.');
     end;
-  end;}
+  end;
+  {$ENDIF}
   inherited;
 end;
 
@@ -2203,7 +2205,8 @@ var
 begin
   // Init lib before actually connecting.
   // Each connection has its own library handle
-  {if LibPqHandle = 0 then begin
+  {$IFNDEF FPC}
+  if LibPqHandle = 0 then begin
     Log(lcDebug, f_('Loading library file %s ...', [LibPqPath]));
     LibPqHandle := LoadLibrary(PWideChar(LibPqPath));
     if LibPqHandle = 0 then begin
@@ -2242,7 +2245,8 @@ begin
 
       Log(lcDebug, LibPqPath + ' v' + IntToStr(PQlibVersion) + ' loaded.');
     end;
-  end;}
+  end;
+  {$ENDIF}
   inherited;
 end;
 
@@ -4483,7 +4487,6 @@ begin
         Result.Add(Cache[i]);
     end;
   end;
-  Result := Nil;
 end;
 
 
