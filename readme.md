@@ -5,8 +5,8 @@ Porting of HeidiSQL to Lazarus and linux. it will take time, progress for now is
   <img src="https://imgur.com/2tkSZ9al.png" />
 </a>
 
-<a href="https://i.imgur.com/I6kzUCR.png">
-  <img src="https://imgur.com/I6kzUCRl.png" />
+<a href="https://i.imgur.com/fFl7jA5.png">
+  <img src="https://imgur.com/fFl7jA5l.png" />
 </a>
 
 # HeidiSQL
