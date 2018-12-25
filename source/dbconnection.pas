@@ -667,7 +667,7 @@ type
     private
       FResultList: TMySQLRawResults;
       FCurrentResults: PMYSQL_RES;
-      FCurrentRow: {P}MYSQL_ROW;
+      FCurrentRow: PMYSQL_ROW;
       Row1: MYSQL_ROW;
       procedure SetRecNo(Value: Int64); override;
     public
@@ -1801,6 +1801,7 @@ begin
             Log(lcError, E.Message);
         end;
       end;
+      mysql_query(FHandle, 'SET NAMES utf8');//my code
       Log(lcInfo, _('Characterset')+': '+GetCharacterSet);
       FConnectionStarted := GetTickCount div 1000;
       FServerUptime := -1;
@@ -6017,7 +6018,6 @@ var
   ByteVal: Byte;
   c: Char;
   Field: PMYSQL_FIELD;
-  pc : PChar;
 begin
   if (Column > -1) and (Column < ColumnCount) then begin
     if FEditingPrepared and Assigned(FCurrentUpdateRow) then begin
@@ -6031,8 +6031,7 @@ begin
         Exit(False);
     end else begin
       // The normal case: Fetch cell from mysql result
-      pc := FCurrentRow[Column];
-      SetString(AnsiStr, FCurrentRow[Column], FColumnLengths[Column]);
+      SetString(AnsiStr, FCurrentRow^[Column], FColumnLengths[Column]);
       if Datatype(Column).Category in [dtcBinary, dtcSpatial] then begin
         SetLength(baData, Length(AnsiStr));
         Move{CopyMemory}(baData, {@}AnsiStr[1], Length(AnsiStr));
@@ -6059,7 +6058,7 @@ begin
       Result := FCurrentUpdateRow[Column].NewText;
     end else begin
       // The normal case: Fetch cell from mysql result
-      SetString(AnsiStr, FCurrentRow[Column], FColumnLengths[Column]);
+      SetString(AnsiStr, FCurrentRow^[Column], FColumnLengths[Column]);
       if Datatype(Column).Category in [dtcBinary, dtcSpatial] then
         Result := String(AnsiStr)
       else
