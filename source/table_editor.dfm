@@ -4,18 +4,12 @@ object frmTableEditor: TfrmTableEditor
   Width = 700
   Height = 500
   TabOrder = 0
-  DesignSize = (
-    700
-    500)
   object SplitterTopBottom: TSplitter
-    AlignWithMargins = True
     Left = 3
     Top = 153
     Width = 694
     Height = 8
     Cursor = crSizeNS
-    Margins.Top = 0
-    Margins.Bottom = 0
     Align = alTop
     ResizeStyle = rsUpdate
   end
@@ -51,12 +45,11 @@ object frmTableEditor: TfrmTableEditor
     OnClick = btnHelpClick
   end
   object listColumns: TVirtualStringTree
-    AlignWithMargins = True
     Left = 3
     Top = 186
     Width = 694
     Height = 282
-    Margins.Bottom = 32
+    Margin = 32
     Align = alClient
     Constraints.MinHeight = 70
     DragMode = dmAutomatic
@@ -89,91 +82,89 @@ object frmTableEditor: TfrmTableEditor
     OnKeyPress = listColumnsKeyPress
     OnNewText = listColumnsNewText
     OnNodeMoved = listColumnsNodeMoved
-    Columns = <
+    Header.Columns = <
       item
         Alignment = taRightJustify
         MinWidth = 20
         Options = [coDraggable, coEnabled, coParentBidiMode, coParentColor, coShowDropMark, coVisible, coAllowFocus]
         Position = 0
         Width = 20
-        WideText = '#'
+        Text = '#'
       end
       item
         MinWidth = 50
         Options = [coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
         Position = 1
         Width = 100
-        WideText = 'Name'
+        Text = 'Name'
       end
       item
         Options = [coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
         Position = 2
         Width = 90
-        WideText = 'Datatype'
+        Text = 'Datatype'
       end
       item
         Options = [coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
         Position = 3
         Width = 90
-        WideText = 'Length/Set'
+        Text = 'Length/Set'
       end
       item
         Alignment = taCenter
         Options = [coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
         Position = 4
         Width = 60
-        WideText = 'Unsigned'
+        Text = 'Unsigned'
       end
       item
         Alignment = taCenter
         Options = [coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
         Position = 5
         Width = 65
-        WideText = 'Allow NULL'
+        Text = 'Allow NULL'
       end
       item
         Options = [coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
         Position = 6
-        WideText = 'Zerofill'
+        Text = 'Zerofill'
       end
       item
         Options = [coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
         Position = 7
         Width = 100
-        WideText = 'Default'
+        Text = 'Default'
       end
       item
         Options = [coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
         Position = 8
         Width = 130
-        WideText = 'Comment'
+        Text = 'Comment'
       end
       item
         Options = [coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
         Position = 9
         Width = 100
-        WideText = 'Collation'
+        Text = 'Collation'
       end
       item
         Options = [coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
         Position = 10
         Width = 100
-        WideText = 'Expression'
+        Text = 'Expression'
       end
       item
         Options = [coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
         Position = 11
         Width = 100
-        WideText = 'Virtuality'
+        Text = 'Virtuality'
       end>
   end
   object PageControlMain: TPageControl
-    AlignWithMargins = True
     Left = 3
     Top = 3
     Width = 694
     Height = 150
-    Margins.Bottom = 0
     ActivePage = tabBasic
     Align = alTop
     Images = MainForm.ImageListMain
@@ -182,9 +173,6 @@ object frmTableEditor: TfrmTableEditor
     object tabBasic: TTabSheet
       Caption = 'Basic'
       ImageIndex = 14
-      DesignSize = (
-        686
-        121)
       object lblName: TLabel
         Left = 4
         Top = 6
@@ -227,9 +215,6 @@ object frmTableEditor: TfrmTableEditor
     object tabOptions: TTabSheet
       Caption = 'Options'
       ImageIndex = 39
-      DesignSize = (
-        686
-        121)
       object lblAutoinc: TLabel
         Left = 4
         Top = 6
@@ -387,13 +372,11 @@ object frmTableEditor: TfrmTableEditor
       Caption = 'Indexes'
       ImageIndex = 13
       object treeIndexes: TVirtualStringTree
-        AlignWithMargins = True
         Left = 69
         Top = 0
         Width = 614
         Height = 121
-        Margins.Top = 0
-        Margins.Bottom = 0
+        Margin = 0
         Align = alClient
         DragMode = dmAutomatic
         EditDelay = 0
@@ -419,23 +402,23 @@ object frmTableEditor: TfrmTableEditor
         OnInitChildren = treeIndexesInitChildren
         OnInitNode = treeIndexesInitNode
         OnNewText = treeIndexesNewText
-        Columns = <
+        Header.Columns = <
           item
             Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
             Position = 0
             Width = 430
-            WideText = 'Name'
+            Text = 'Name'
           end
           item
             Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
             Position = 1
             Width = 100
-            WideText = 'Type / Length'
+            Text = 'Type / Length'
           end
           item
             Position = 2
             Width = 80
-            WideText = 'Algorithm'
+            Text = 'Algorithm'
           end>
       end
       object tlbIndexes: TToolBar
@@ -548,15 +531,12 @@ object frmTableEditor: TfrmTableEditor
         BevelOuter = bvNone
         Caption = 'pnlNoForeignKeys'
         TabOrder = 1
-        VerticalAlignment = taAlignBottom
         object listForeignKeys: TVirtualStringTree
-          AlignWithMargins = True
           Left = 3
           Top = 0
           Width = 521
           Height = 121
-          Margins.Top = 0
-          Margins.Bottom = 0
+          Margin = 0
           Align = alClient
           EditDelay = 0
           Header.AutoSizeIndex = 0
@@ -575,42 +555,42 @@ object frmTableEditor: TfrmTableEditor
           OnGetText = listForeignKeysGetText
           OnGetImageIndex = listForeignKeysGetImageIndex
           OnNewText = listForeignKeysNewText
-          Columns = <
+          Header.Columns = <
             item
               Options = [coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
               Position = 0
               Width = 101
-              WideText = 'Key name'
+              Text = 'Key name'
             end
             item
               Options = [coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
               Position = 1
               Width = 80
-              WideText = 'Columns'
+              Text = 'Columns'
             end
             item
               Options = [coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
               Position = 2
               Width = 100
-              WideText = 'Reference table'
+              Text = 'Reference table'
             end
             item
               Options = [coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
               Position = 3
               Width = 80
-              WideText = 'Foreign columns'
+              Text = 'Foreign columns'
             end
             item
               Options = [coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
               Position = 4
               Width = 80
-              WideText = 'On UPDATE'
+              Text = 'On UPDATE'
             end
             item
               Options = [coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
               Position = 5
               Width = 80
-              WideText = 'On DELETE'
+              Text = 'On DELETE'
             end>
         end
       end
@@ -623,7 +603,6 @@ object frmTableEditor: TfrmTableEditor
         Top = 0
         Width = 593
         Height = 121
-        SingleLineMode = False
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -632,20 +611,12 @@ object frmTableEditor: TfrmTableEditor
         Font.Style = []
         TabOrder = 0
         Gutter.AutoSize = True
-        Gutter.DigitCount = 2
-        Gutter.Font.Charset = DEFAULT_CHARSET
-        Gutter.Font.Color = clWindowText
-        Gutter.Font.Height = -11
-        Gutter.Font.Name = 'Courier New'
-        Gutter.Font.Style = []
         Gutter.LeftOffset = 2
-        Gutter.ShowLineNumbers = True
         Highlighter = MainForm.SynSQLSyn1
         Lines.Strings = (
           'SynMemoPartitions')
         Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoHideShowScrollbars, eoKeepCaretX, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces]
         ReadOnly = True
-        FontSmoothing = fsmNone
       end
     end
     object tabCREATEcode: TTabSheet
@@ -656,7 +627,6 @@ object frmTableEditor: TfrmTableEditor
         Top = 0
         Width = 593
         Height = 121
-        SingleLineMode = False
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -665,20 +635,12 @@ object frmTableEditor: TfrmTableEditor
         Font.Style = []
         TabOrder = 0
         Gutter.AutoSize = True
-        Gutter.DigitCount = 2
-        Gutter.Font.Charset = DEFAULT_CHARSET
-        Gutter.Font.Color = clWindowText
-        Gutter.Font.Height = -11
-        Gutter.Font.Name = 'Courier New'
-        Gutter.Font.Style = []
         Gutter.LeftOffset = 2
-        Gutter.ShowLineNumbers = True
         Highlighter = MainForm.SynSQLSyn1
         Lines.Strings = (
           'SynMemoALTERcode')
         Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoHideShowScrollbars, eoKeepCaretX, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces]
         ReadOnly = True
-        FontSmoothing = fsmNone
       end
     end
     object tabALTERCode: TTabSheet
@@ -689,7 +651,6 @@ object frmTableEditor: TfrmTableEditor
         Top = 0
         Width = 593
         Height = 121
-        SingleLineMode = False
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -698,31 +659,20 @@ object frmTableEditor: TfrmTableEditor
         Font.Style = []
         TabOrder = 0
         Gutter.AutoSize = True
-        Gutter.DigitCount = 2
-        Gutter.Font.Charset = DEFAULT_CHARSET
-        Gutter.Font.Color = clWindowText
-        Gutter.Font.Height = -11
-        Gutter.Font.Name = 'Courier New'
-        Gutter.Font.Style = []
         Gutter.LeftOffset = 2
-        Gutter.ShowLineNumbers = True
         Highlighter = MainForm.SynSQLSyn1
         Lines.Strings = (
           'SynMemoALTERcode')
         Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoHideShowScrollbars, eoKeepCaretX, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces]
         ReadOnly = True
-        FontSmoothing = fsmNone
       end
     end
   end
   object pnlColumnsTop: TPanel
-    AlignWithMargins = True
     Left = 3
     Top = 161
     Width = 694
     Height = 22
-    Margins.Top = 0
-    Margins.Bottom = 0
     Align = alTop
     Alignment = taLeftJustify
     AutoSize = True
@@ -730,15 +680,10 @@ object frmTableEditor: TfrmTableEditor
     Caption = 'Columns:'
     TabOrder = 1
     object tlbColumns: TToolBar
-      AlignWithMargins = True
       Left = 100
       Top = 0
       Width = 594
       Height = 22
-      Margins.Left = 100
-      Margins.Top = 0
-      Margins.Right = 0
-      Margins.Bottom = 0
       Align = alClient
       ButtonWidth = 66
       Caption = 'Columns:'
